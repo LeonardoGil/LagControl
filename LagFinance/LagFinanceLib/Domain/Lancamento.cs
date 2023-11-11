@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+﻿ using LagFinanceLib.Domain.Enum;
 
 namespace LagFinanceLib.Domain
 {
@@ -8,10 +8,22 @@ namespace LagFinanceLib.Domain
 
         public string Descricao { get; set; }
 
-        public Guid ContaId { get; set; }
+        public string Observacao { get; set; }
 
         public decimal Valor { get; set; }
 
         public DateOnly Data { get; set; }
+
+        public TipoMovimentacaoEnum TipoMovimentacao { get; set; }
+
+        #region Relacionamentos
+
+        public Guid ContaId { get; set; }
+
+        public Guid? CategoriaId { get; set; }
+
+        public Categoria Categoria { get; set; }
+
+        #endregion
     }
 }
