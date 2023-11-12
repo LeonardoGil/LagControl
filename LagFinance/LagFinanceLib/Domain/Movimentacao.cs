@@ -2,7 +2,7 @@
 
 namespace LagFinanceLib.Domain
 {
-    public class Lancamento
+    public class Movimentacao
     {
         public Guid Id { get; set; }
 
@@ -12,7 +12,7 @@ namespace LagFinanceLib.Domain
 
         public decimal Valor { get; set; }
 
-        public DateOnly Data { get; set; }
+        public DateTime Data { get; set; }
 
         public TipoMovimentacaoEnum TipoMovimentacao { get; set; }
 

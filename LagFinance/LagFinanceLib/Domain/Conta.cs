@@ -6,6 +6,6 @@
 
         public string Descricao { get; set; }
 
-        public virtual List<Lancamento> Lancamentos { get; set; }
+        public virtual List<Movimentacao> Movimentacoes { get; set; }
     }
 }
