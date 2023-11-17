@@ -1,5 +1,4 @@
-﻿using LagFinanceLib.Database.Model;
-using LagFinanceLib.Domain;
+﻿using LagFinanceLib.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace LagFinanceLib.Database
@@ -11,7 +10,10 @@ namespace LagFinanceLib.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            MovimentacaoModel.Create(modelBuilder);
+            modelBuilder.HasDefaultSchema("finance");
+
+            LagFinanceDbConfiguration.SetEntity(modelBuilder);
+            LagFinanceDbConfiguration.Seed(modelBuilder);
         }
 
         public DbSet<Conta> Conta { get; set; }

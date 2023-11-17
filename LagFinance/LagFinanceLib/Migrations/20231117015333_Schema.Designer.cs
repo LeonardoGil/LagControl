@@ -4,6 +4,7 @@ using LagFinanceLib.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LagFinanceLib.Migrations
 {
     [DbContext(typeof(LagFinanceDbContext))]
-    partial class LagFinanceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231117015333_Schema")]
+    partial class Schema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,28 +52,6 @@ namespace LagFinanceLib.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Conta", "finance");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("db99f530-d4e6-429a-a8b4-097a939d5870"),
-                            Descricao = "Bradesco"
-                        },
-                        new
-                        {
-                            Id = new Guid("e389e09e-fb13-4f58-846d-4e9d9fa00813"),
-                            Descricao = "Banco do Brasil"
-                        },
-                        new
-                        {
-                            Id = new Guid("c9977f49-1603-4190-964a-963af2d6ad7c"),
-                            Descricao = "Santander"
-                        },
-                        new
-                        {
-                            Id = new Guid("82396197-0500-4da9-ae7c-924530344a35"),
-                            Descricao = "PicPay"
-                        });
                 });
 
             modelBuilder.Entity("LagFinanceLib.Domain.Movimentacao", b =>
