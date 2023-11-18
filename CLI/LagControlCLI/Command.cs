@@ -1,9 +1,19 @@
-﻿using LagControlCLI.Services;
+﻿using LagControlCLI.Interface;
+using LagControlCLI.Services;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace LagControlCLI
 {
     public class Command
     {
+        private readonly IFinanceServices FinanceServices;
+
+        public Command(IHost host)
+        {
+            FinanceServices = host.Services.GetService<IFinanceServices>();
+        }
+
         public void Exec(string[] args)
         {
             if (args.Any() && !string.IsNullOrEmpty(args[0]))
@@ -15,7 +25,7 @@ namespace LagControlCLI
                     switch (module)
                     {
                         case ModulesEnum.Finance:
-                            new FinanceServices().On(args);
+                            FinanceServices.On(args);
                             break;
                     }
                 }
