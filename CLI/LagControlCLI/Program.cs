@@ -21,8 +21,6 @@ namespace LagControlCLI
 
             var command = new Command(host);
             command.Exec(args);
-
-            //host.Run();
         }
     }
 }

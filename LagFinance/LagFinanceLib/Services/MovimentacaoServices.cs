@@ -8,14 +8,8 @@ namespace LagFinanceLib.Services
 {
     public class MovimentacaoServices : BaseServices, IMovimentacaoServices
     {
-        public void AddTest()
+        public void Add()
         {
-            var categoriaTeste = new Categoria
-            {
-                Descricao = "Teste",
-                Id = Guid.NewGuid()
-            };
-
             var movimentacaoTeste = new Movimentacao
             {
                 Id = Guid.NewGuid(),
@@ -42,18 +36,6 @@ namespace LagFinanceLib.Services
                     Console.WriteLine($"Falha: {e.InnerException}");
                 }
 
-            }
-        }
-
-        public void GetJsonTest()
-        {
-            using (var context = new LagFinanceDbContext())
-            {
-                var movimentacao = context.Movimentacao.First();
-
-                var json = JsonSerializer.Serialize(movimentacao);
-
-                Console.WriteLine(movimentacao);
             }
         }
     }

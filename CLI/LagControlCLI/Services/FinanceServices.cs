@@ -1,26 +1,43 @@
-﻿using LagControlCLI.Interface;
-using LagFinanceLib.Interface;
+﻿using LagControlCLI.Arguments;
+using LagControlCLI.Interface;
 
 namespace LagControlCLI.Services
 {
     public class FinanceServices : IFinanceServices
     {
-        private readonly IMovimentacaoServices MovimentacaoServices;
+        private readonly IFinanceAddServices FinanceAddServices;
 
-        public FinanceServices(IMovimentacaoServices movimentacaoServices)
+        public FinanceServices(IFinanceAddServices financeAddServices)
         {
-            MovimentacaoServices = movimentacaoServices;
+            FinanceAddServices = financeAddServices;
         }
 
         public void On(string[] args)
         {
-            Console.WriteLine("Inserindo Movimentacao");
-            MovimentacaoServices.AddTest();
+            Console.WriteLine("LagControlCLI.Services.FinanceServices.On()");
 
-            Console.WriteLine("Visualizando Movimentacao");
-            MovimentacaoServices.GetJsonTest();
+            if (args.Length < 2 || string.IsNullOrEmpty(args[1]))
+            {
+                Console.WriteLine("FinanceArgument não informado");
+                return;
+            }
 
-            Console.WriteLine($"Module {ModulesEnum.Finance}");
+            var sucess = Enum.TryParse(args[1].ToLower(), out FinanceArgumentsEnum argument);
+
+            if (!sucess)
+            {
+                Console.WriteLine("FinanceArgument invalido");
+                return;
+            }
+
+            var arguments = args.Skip(1).ToArray();
+
+            switch (argument)
+            {
+                case FinanceArgumentsEnum.add:
+                    FinanceAddServices.On(arguments);
+                    break;
+            }
         }
     }
 }

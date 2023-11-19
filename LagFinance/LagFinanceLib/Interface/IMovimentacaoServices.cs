@@ -2,8 +2,6 @@
 {
     public interface IMovimentacaoServices
     {
-        void AddTest();
-
-        void GetJsonTest();
+        void Add();
     }
 }

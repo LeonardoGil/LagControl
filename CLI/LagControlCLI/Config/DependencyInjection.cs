@@ -11,8 +11,14 @@ namespace LagControlCLI.Config
     {
         public static void Inject(HostApplicationBuilder builder)
         {
-            builder.Services.AddSingleton<IMovimentacaoServices, MovimentacaoServices>();
+            #region CLI
             builder.Services.AddSingleton<IFinanceServices, FinanceServices>();
+            builder.Services.AddSingleton<IFinanceAddServices, FinanceAddServices>();
+            #endregion
+
+            #region Finance
+            builder.Services.AddSingleton<IMovimentacaoServices, MovimentacaoServices>();
+            #endregion
         }
     }
 }
