@@ -1,9 +1,10 @@
 ﻿using LagControlCLI.Commands.Enums;
-using LagControlCLI.Interfaces;
+using LagControlCLI.Commands.Interfaces;
+using LagControlCLI.Services.Interfaces;
 
 namespace LagControlCLI.Commands
 {
-    public class FinanceCommand : IFinanceServices
+    public class FinanceCommand : IFinanceCommand
     {
         private readonly IFinanceAddServices FinanceAddServices;
 
@@ -35,7 +36,7 @@ namespace LagControlCLI.Commands
             switch (argument)
             {
                 case FinanceCommandEnum.add:
-                    FinanceAddServices.On(arguments);
+                    FinanceAddServices.Process(arguments);
                     break;
             }
         }

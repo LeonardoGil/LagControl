@@ -1,4 +1,4 @@
-﻿using LagControlCLI.Interfaces;
+﻿using LagControlCLI.Commands.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -6,11 +6,11 @@ namespace LagControlCLI.Commands
 {
     public class Command
     {
-        private readonly IFinanceServices FinanceServices;
+        private readonly IFinanceCommand FinanceServices;
 
         public Command(IHost host)
         {
-            FinanceServices = host.Services.GetService<IFinanceServices>();
+            FinanceServices = host.Services.GetService<IFinanceCommand>();
         }
 
         public void Exec(string[] args)

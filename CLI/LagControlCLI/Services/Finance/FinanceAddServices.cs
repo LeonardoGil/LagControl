@@ -1,5 +1,5 @@
 ﻿using LagControlCLI.Arguments;
-using LagControlCLI.Interfaces;
+using LagControlCLI.Services.Interfaces;
 using LagControlCLI.Utils.Extensions;
 using LagFinanceLib.Domain;
 using LagFinanceLib.Domain.Enum;
@@ -16,7 +16,7 @@ namespace LagControlCLI.Services.Finance
             MovimentacaoServices = movimentacaoServices;
         }
 
-        public void On(string[] args)
+        public void Process(string[] args)
         {
             var arguments = Enum.GetNames(typeof(FinanceAddArgumentsEnum));
 

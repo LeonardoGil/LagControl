@@ -1,6 +1,7 @@
 ﻿using LagControlCLI.Commands;
-using LagControlCLI.Interfaces;
+using LagControlCLI.Commands.Interfaces;
 using LagControlCLI.Services.Finance;
+using LagControlCLI.Services.Interfaces;
 using LagFinanceLib.Interface;
 using LagFinanceLib.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,7 +14,7 @@ namespace LagControlCLI.Configs
         public static void Inject(HostApplicationBuilder builder)
         {
             #region CLI
-            builder.Services.AddSingleton<IFinanceServices, FinanceCommand>();
+            builder.Services.AddSingleton<IFinanceCommand, FinanceCommand>();
             builder.Services.AddSingleton<IFinanceAddServices, FinanceAddServices>();
             #endregion
 
