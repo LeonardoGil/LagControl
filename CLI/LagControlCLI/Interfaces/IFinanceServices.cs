@@ -1,4 +1,4 @@
-﻿namespace LagControlCLI.Interface
+﻿namespace LagControlCLI.Interfaces
 {
     public interface IFinanceServices
     {

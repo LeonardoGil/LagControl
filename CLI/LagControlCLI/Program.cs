@@ -1,5 +1,5 @@
 ﻿using LagControlCLI.Commands;
-using LagControlCLI.Config;
+using LagControlCLI.Configs;
 using Microsoft.Extensions.Hosting;
  
 // Application LAG_CONTROL_CLI

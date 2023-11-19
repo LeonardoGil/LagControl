@@ -1,12 +1,12 @@
 ﻿using LagControlCLI.Commands;
-using LagControlCLI.Interface;
+using LagControlCLI.Interfaces;
 using LagControlCLI.Services.Finance;
 using LagFinanceLib.Interface;
 using LagFinanceLib.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace LagControlCLI.Config
+namespace LagControlCLI.Configs
 {
     public class DependencyInjection
     {

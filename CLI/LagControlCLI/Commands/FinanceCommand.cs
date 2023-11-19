@@ -1,5 +1,5 @@
 ﻿using LagControlCLI.Commands.Enums;
-using LagControlCLI.Interface;
+using LagControlCLI.Interfaces;
 
 namespace LagControlCLI.Commands
 {

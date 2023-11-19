@@ -1,5 +1,5 @@
 ﻿using LagControlCLI.Arguments;
-using LagControlCLI.Interface;
+using LagControlCLI.Interfaces;
 using LagControlCLI.Utils.Extensions;
 using LagFinanceLib.Domain;
 using LagFinanceLib.Domain.Enum;
