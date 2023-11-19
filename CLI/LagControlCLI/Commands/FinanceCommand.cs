@@ -1,13 +1,13 @@
-﻿using LagControlCLI.Arguments;
+﻿using LagControlCLI.Commands.Enums;
 using LagControlCLI.Interface;
 
-namespace LagControlCLI.Services
+namespace LagControlCLI.Commands
 {
-    public class FinanceServices : IFinanceServices
+    public class FinanceCommand : IFinanceServices
     {
         private readonly IFinanceAddServices FinanceAddServices;
 
-        public FinanceServices(IFinanceAddServices financeAddServices)
+        public FinanceCommand(IFinanceAddServices financeAddServices)
         {
             FinanceAddServices = financeAddServices;
         }
@@ -22,7 +22,7 @@ namespace LagControlCLI.Services
                 return;
             }
 
-            var sucess = Enum.TryParse(args[1].ToLower(), out FinanceArgumentsEnum argument);
+            var sucess = Enum.TryParse(args[1].ToLower(), out FinanceCommandEnum argument);
 
             if (!sucess)
             {
@@ -34,7 +34,7 @@ namespace LagControlCLI.Services
 
             switch (argument)
             {
-                case FinanceArgumentsEnum.add:
+                case FinanceCommandEnum.add:
                     FinanceAddServices.On(arguments);
                     break;
             }

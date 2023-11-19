@@ -1,9 +1,8 @@
 ﻿using LagControlCLI.Interface;
-using LagControlCLI.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace LagControlCLI
+namespace LagControlCLI.Commands
 {
     public class Command
     {

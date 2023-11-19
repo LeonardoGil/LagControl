@@ -5,7 +5,7 @@ using LagFinanceLib.Domain;
 using LagFinanceLib.Domain.Enum;
 using LagFinanceLib.Interface;
 
-namespace LagControlCLI.Services
+namespace LagControlCLI.Services.Finance
 {
     public class FinanceAddServices : IFinanceAddServices
     {
