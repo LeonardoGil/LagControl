@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "LagControlCLI": {
+      "commandName": "Project",
+      "commandLineArgs": "Finance add -d -v"
+    }
+  }
+}
