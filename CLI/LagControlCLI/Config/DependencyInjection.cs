@@ -17,7 +17,7 @@ namespace LagControlCLI.Config
             #endregion
 
             #region Finance
-            builder.Services.AddSingleton<IMovimentacaoServices, MovimentacaoServices>();
+            builder.Services.AddSingleton<IMovimentacaoServices, MovimentacaoRepository>();
             #endregion
         }
     }

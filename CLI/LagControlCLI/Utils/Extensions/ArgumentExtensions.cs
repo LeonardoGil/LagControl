@@ -22,9 +22,26 @@
                 return false;
             }
 
-            var argEnumText = arg.Remove(0);
+            var argEnumText = arg.TrimStart(char.Parse("-"));
 
             return Enum.TryParse(argEnumText, out argEnum);
+        }
+
+        public static decimal EnterADecimal(string? info = null)
+        {
+            decimal enter;
+            bool sucess = true;
+
+            do
+            {
+                Console.WriteLine(info ?? "Enter a decimal: ");
+                var read = Console.ReadLine();
+
+                sucess = !decimal.TryParse(read, out enter);
+            }
+            while (sucess);
+
+            return enter;
         }
 
         public static string EnterAText(string? info = null)

@@ -1,7 +1,9 @@
-﻿namespace LagFinanceLib.Interface
+﻿using LagFinanceLib.Domain;
+
+namespace LagFinanceLib.Interface
 {
     public interface IMovimentacaoServices
     {
-        void Add();
+        void Add(Movimentacao movimentacao);
     }
 }

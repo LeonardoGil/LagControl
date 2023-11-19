@@ -30,7 +30,7 @@ namespace LagControlCLI.Services
                 return;
             }
 
-            var arguments = args.Skip(1).ToArray();
+            var arguments = args.Skip(2).ToArray();
 
             switch (argument)
             {

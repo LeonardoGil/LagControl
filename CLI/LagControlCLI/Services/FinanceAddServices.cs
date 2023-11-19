@@ -26,36 +26,11 @@ namespace LagControlCLI.Services
                 return;
             }
 
-            var movimentacao = new Movimentacao
-            {
-                Id = Guid.NewGuid(),
-                Data = DateTime.Now,
-                TipoMovimentacao = TipoMovimentacaoEnum.Despesa
-            };
-
             try
             {
-                for (int i = 0; i < args.Length; i++)
-                {
-                    var sucess = args[i].IsArgument<FinanceAddArgumentsEnum>(out var argument);
+                var movimentacao = BuildMovimentacao(args);
 
-                    if (sucess)
-                    {
-                        switch (argument)
-                        {
-                            case FinanceAddArgumentsEnum.d:
-                                movimentacao.Descricao = DescricaoExec(args, i);
-                                i++;
-                                break;
-
-                            case FinanceAddArgumentsEnum.v:
-                                break;
-
-                            default:
-                                continue;
-                        }
-                    }
-                }
+                MovimentacaoServices.Add(movimentacao);
             }
             catch (Exception e)
             {
@@ -64,7 +39,41 @@ namespace LagControlCLI.Services
             }
         }
 
-        private string DescricaoExec(string[] args, int index)
+        private Movimentacao BuildMovimentacao(string[] args)
+        {
+            var movimentacao = new Movimentacao
+            {
+                Id = Guid.NewGuid(),
+                Data = DateTime.Now,
+                TipoMovimentacao = TipoMovimentacaoEnum.Despesa
+            };
+
+            for (int i = 0; i < args.Length; i++)
+            {
+                var sucess = args[i].IsArgument<FinanceAddArgumentsEnum>(out var argument);
+
+                if (sucess)
+                {
+                    switch (argument)
+                    {
+                        case FinanceAddArgumentsEnum.d:
+                            movimentacao.Descricao = DescricaoProcess(args, ref i);
+                            break;
+
+                        case FinanceAddArgumentsEnum.v:
+                            movimentacao.Valor = ValorProcess(args, ref i);
+                            break;
+
+                        default:
+                            continue;
+                    }
+                }
+            }
+
+            return movimentacao;
+        }
+
+        private string DescricaoProcess(string[] args, ref int index)
         {
             var value = args.GetValueFromArgument<FinanceAddArgumentsEnum>(index);
 
@@ -72,8 +81,30 @@ namespace LagControlCLI.Services
             {
                 value = ArgumentExtensions.EnterAText("Informe uma descrição: ");
             }
+            else
+            {
+                index++;
+            }
 
             return value;
+        }
+
+        private decimal ValorProcess(string[] args, ref int index)
+        {
+            var value = args.GetValueFromArgument<FinanceAddArgumentsEnum>(index);
+
+            var sucess = decimal.TryParse(value, out decimal result);
+
+            if (sucess)
+            {
+                index++;
+            }
+            else
+            {
+                result = ArgumentExtensions.EnterADecimal("Informe um valor: ");
+            }
+
+            return result;
         }
     }
 }
