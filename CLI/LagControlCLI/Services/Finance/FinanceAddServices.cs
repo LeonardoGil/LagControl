@@ -70,7 +70,7 @@ namespace LagControlCLI.Services.Finance
                             break;
 
                         case FinanceAddArgumentsEnum.dt:
-                            movimentacao.Data = DateTime.Now;
+                            movimentacao.Data = args.ProcessDateTimeArgument<FinanceAddArgumentsEnum>(ref i);
                             break;
 
                         default:

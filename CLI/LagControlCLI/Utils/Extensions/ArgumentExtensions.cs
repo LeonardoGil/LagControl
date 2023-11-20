@@ -38,7 +38,7 @@ namespace LagControlCLI.Utils.Extensions
         public static decimal EnterADecimal(string? info = null)
         {
             decimal enter;
-            bool sucess = true;
+            bool sucess;
 
             do
             {
@@ -61,6 +61,23 @@ namespace LagControlCLI.Utils.Extensions
                 enter = Console.ReadLine();
             } 
             while (string.IsNullOrEmpty(enter));
+
+            return enter;
+        }
+
+        public static DateTime EnterADateTime(string? info = null)
+        {
+            DateTime enter;
+            bool sucess;
+
+            do
+            {
+                Console.WriteLine(info ?? "Enter a DateTime: ");
+                var read = Console.ReadLine();
+
+                sucess = !DateTime.TryParse(read, out enter);
+            }
+            while (sucess);
 
             return enter;
         }
@@ -112,6 +129,24 @@ namespace LagControlCLI.Utils.Extensions
             else
             {
                 result = EnterADecimal(text);
+            }
+
+            return result;
+        }
+
+        public static DateTime ProcessDateTimeArgument<TEnum>(this string[] args, ref int index, string text = null)
+        {
+            var value = args.GetValueFromArgument<FinanceAddArgumentsEnum>(index);
+
+            var sucess = DateTime.TryParse(value, out DateTime result);
+
+            if (sucess)
+            {
+                index++;
+            }
+            else
+            {
+                result = EnterADateTime(text);
             }
 
             return result;
