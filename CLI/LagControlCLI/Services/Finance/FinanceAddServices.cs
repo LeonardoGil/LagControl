@@ -11,6 +11,12 @@ namespace LagControlCLI.Services.Finance
     {
         private readonly IMovimentacaoServices MovimentacaoServices;
 
+        private readonly FinanceAddArgumentsEnum[] MandatoryArguments =
+        {
+            FinanceAddArgumentsEnum.d,
+            FinanceAddArgumentsEnum.v
+        };
+
         public FinanceAddServices(IMovimentacaoServices movimentacaoServices)
         {
             MovimentacaoServices = movimentacaoServices;
@@ -18,11 +24,10 @@ namespace LagControlCLI.Services.Finance
 
         public void Process(string[] args)
         {
-            var arguments = Enum.GetNames(typeof(FinanceAddArgumentsEnum));
-
-            if (!arguments.All(argument => args.Contains(argument.Build())))
+            if (!args.CheckMandatoryArguments(MandatoryArguments))
             {
-                Console.WriteLine("Necessario informar todos argumentos (-d -v)");
+                var arguments = MandatoryArguments.Select(arg => arg.ToString().Build());
+                Console.WriteLine($"Necessario informar todos argumentos obrigatórios: {string.Join(" ", arguments)}");
                 return;
             }
 
@@ -57,11 +62,15 @@ namespace LagControlCLI.Services.Finance
                     switch (argument)
                     {
                         case FinanceAddArgumentsEnum.d:
-                            movimentacao.Descricao = DescricaoProcess(args, ref i);
+                            movimentacao.Descricao = args.ProcessStringArgument<FinanceAddArgumentsEnum>(ref i);
                             break;
 
                         case FinanceAddArgumentsEnum.v:
-                            movimentacao.Valor = ValorProcess(args, ref i);
+                            movimentacao.Valor = args.ProcessDecimalArgument<FinanceAddArgumentsEnum>(ref i);
+                            break;
+
+                        case FinanceAddArgumentsEnum.dt:
+                            movimentacao.Data = DateTime.Now;
                             break;
 
                         default:
@@ -71,40 +80,6 @@ namespace LagControlCLI.Services.Finance
             }
 
             return movimentacao;
-        }
-
-        private string DescricaoProcess(string[] args, ref int index)
-        {
-            var value = args.GetValueFromArgument<FinanceAddArgumentsEnum>(index);
-
-            if (value is null)
-            {
-                value = ArgumentExtensions.EnterAText("Informe uma descrição: ");
-            }
-            else
-            {
-                index++;
-            }
-
-            return value;
-        }
-
-        private decimal ValorProcess(string[] args, ref int index)
-        {
-            var value = args.GetValueFromArgument<FinanceAddArgumentsEnum>(index);
-
-            var sucess = decimal.TryParse(value, out decimal result);
-
-            if (sucess)
-            {
-                index++;
-            }
-            else
-            {
-                result = ArgumentExtensions.EnterADecimal("Informe um valor: ");
-            }
-
-            return result;
         }
     }
 }

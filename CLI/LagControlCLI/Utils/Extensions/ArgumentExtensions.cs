@@ -1,8 +1,16 @@
-﻿namespace LagControlCLI.Utils.Extensions
+﻿using LagControlCLI.Arguments;
+
+namespace LagControlCLI.Utils.Extensions
 {
     public static class ArgumentExtensions
     {
         public static string Build(this string arg) => string.Concat("-", arg);
+
+        public static bool CheckMandatoryArguments<TEnum>(this string[] args, TEnum[] mandatoryArray) 
+            where TEnum : struct
+        {
+            return mandatoryArray.All(mandatory => args.Contains(mandatory.ToString().Build()));
+        }
 
         public static bool IsArgument<TEnum>(this string arg) where TEnum : struct
         {
@@ -71,6 +79,42 @@
             {
                 return null;
             }
+        }
+
+        public static string ProcessStringArgument<TEnum>(this string[] args, ref int index, string text = null)
+            where TEnum : struct
+        {
+            var value = args.GetValueFromArgument<FinanceAddArgumentsEnum>(index);
+
+            if (value is null)
+            {
+                value = EnterAText(text);
+            }
+            else
+            {
+                index++;
+            }
+
+            return value;
+        }
+
+        public static decimal ProcessDecimalArgument<TEnum>(this string[] args, ref int index, string text = null)
+            where TEnum : struct
+        {
+            var value = args.GetValueFromArgument<FinanceAddArgumentsEnum>(index);
+
+            var sucess = decimal.TryParse(value, out decimal result);
+
+            if (sucess)
+            {
+                index++;
+            }
+            else
+            {
+                result = EnterADecimal(text);
+            }
+
+            return result;
         }
     }
 }
