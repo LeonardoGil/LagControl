@@ -86,7 +86,7 @@ namespace LagControlCLI.Utils.Extensions
             where TEnum : struct
         {
             var nextIndexArg = index + 1;
-            var existsNextArg = args.Length < nextIndexArg;
+            var existsNextArg = nextIndexArg < args.Length;
             
             if (existsNextArg && !IsArgument<TEnum>(args[nextIndexArg]))
             {

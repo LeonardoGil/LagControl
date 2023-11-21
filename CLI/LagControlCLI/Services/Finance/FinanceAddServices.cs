@@ -77,6 +77,10 @@ namespace LagControlCLI.Services.Finance
                             continue;
                     }
                 }
+                else
+                {
+                    throw new Exception($"Argumento inválido: {args[i]}");
+                }
             }
 
             return movimentacao;
