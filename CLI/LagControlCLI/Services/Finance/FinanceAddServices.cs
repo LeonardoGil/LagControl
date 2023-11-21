@@ -3,13 +3,15 @@ using LagControlCLI.Services.Interfaces;
 using LagControlCLI.Utils.Extensions;
 using LagFinanceLib.Domain;
 using LagFinanceLib.Domain.Enum;
-using LagFinanceLib.Interface;
+using LagFinanceLib.Interfaces;
 
 namespace LagControlCLI.Services.Finance
 {
     public class FinanceAddServices : IFinanceAddServices
     {
-        private readonly IMovimentacaoServices MovimentacaoServices;
+        private readonly IMovimentacaoRepository MovimentacaoRepository;
+
+        private readonly IContaRepository ContaRepository;
 
         private readonly FinanceAddArgumentsEnum[] MandatoryArguments =
         {
@@ -17,9 +19,9 @@ namespace LagControlCLI.Services.Finance
             FinanceAddArgumentsEnum.v
         };
 
-        public FinanceAddServices(IMovimentacaoServices movimentacaoServices)
+        public FinanceAddServices(IMovimentacaoRepository movimentacaoRepository)
         {
-            MovimentacaoServices = movimentacaoServices;
+            MovimentacaoRepository = movimentacaoRepository;
         }
 
         public void Process(string[] args)
@@ -35,7 +37,7 @@ namespace LagControlCLI.Services.Finance
             {
                 var movimentacao = BuildMovimentacao(args);
 
-                MovimentacaoServices.Add(movimentacao);
+                MovimentacaoRepository.Add(movimentacao);
             }
             catch (Exception e)
             {
@@ -72,6 +74,7 @@ namespace LagControlCLI.Services.Finance
                         case FinanceAddArgumentsEnum.dt:
                             movimentacao.Data = args.ProcessDateTimeArgument<FinanceAddArgumentsEnum>(ref i);
                             break;
+
 
                         default:
                             continue;

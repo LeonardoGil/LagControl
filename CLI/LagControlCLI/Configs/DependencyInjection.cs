@@ -2,8 +2,8 @@
 using LagControlCLI.Commands.Interfaces;
 using LagControlCLI.Services.Finance;
 using LagControlCLI.Services.Interfaces;
-using LagFinanceLib.Interface;
-using LagFinanceLib.Services;
+using LagFinanceLib.Interfaces;
+using LagFinanceLib.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -19,7 +19,8 @@ namespace LagControlCLI.Configs
             #endregion
 
             #region Finance
-            builder.Services.AddSingleton<IMovimentacaoServices, MovimentacaoRepository>();
+            builder.Services.AddSingleton<IContaRepository, ContaRepository>();
+            builder.Services.AddSingleton<IMovimentacaoRepository, MovimentacaoRepository>();
             #endregion
         }
     }

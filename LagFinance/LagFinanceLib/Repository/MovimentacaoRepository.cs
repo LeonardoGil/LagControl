@@ -1,22 +1,9 @@
-﻿using LagFinanceLib.Database;
-using LagFinanceLib.Domain;
-using LagFinanceLib.Domain.Enum;
-using LagFinanceLib.Interface;
-using System.Text.Json;
+﻿using LagFinanceLib.Domain;
+using LagFinanceLib.Interfaces;
 
-namespace LagFinanceLib.Services
+namespace LagFinanceLib.Repository
 {
-    public class MovimentacaoRepository : BaseRepository, IMovimentacaoServices
+    public class MovimentacaoRepository : BaseRepository<Movimentacao>, IMovimentacaoRepository
     {
-        public void Add(Movimentacao movimentacao)
-        {
-            using (var context = new LagFinanceDbContext())
-            {
-                movimentacao.ContaId = context.Conta.First(x => x.Descricao == "Bradesco").Id;
-
-                context.Movimentacao.Add(movimentacao);
-                context.SaveChanges();
-            }
-        }
     }
 }
