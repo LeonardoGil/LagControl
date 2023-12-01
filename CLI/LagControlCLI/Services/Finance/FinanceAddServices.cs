@@ -19,9 +19,11 @@ namespace LagControlCLI.Services.Finance
             FinanceAddArgumentsEnum.v
         };
 
-        public FinanceAddServices(IMovimentacaoRepository movimentacaoRepository)
+        public FinanceAddServices(IMovimentacaoRepository movimentacaoRepository, 
+                                  IContaRepository contaRepository)
         {
             MovimentacaoRepository = movimentacaoRepository;
+            ContaRepository = contaRepository;
         }
 
         public void Process(string[] args)
@@ -75,6 +77,13 @@ namespace LagControlCLI.Services.Finance
                             movimentacao.Data = args.ProcessDateTimeArgument<FinanceAddArgumentsEnum>(ref i);
                             break;
 
+                        case FinanceAddArgumentsEnum.c:
+                            var descricaoConta = args.ProcessStringArgument<FinanceAddArgumentsEnum>(ref i);
+
+                            movimentacao.ContaId = ContaRepository.Get()
+                                                                  .FirstOrDefault(x => x.Descricao.ToUpper() == descricaoConta)?
+                                                                  .Id ?? throw new Exception();
+                            break;
 
                         default:
                             continue;

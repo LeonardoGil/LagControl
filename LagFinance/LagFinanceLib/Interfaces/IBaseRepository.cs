@@ -1,13 +1,11 @@
-﻿using LagFinanceLib.Database;
-
-namespace LagFinanceLib.Interfaces
+﻿namespace LagFinanceLib.Interfaces
 {
     public interface IBaseRepository<TEntity>
         where TEntity : class
     {
         void Add(TEntity entity);
 
-        IQueryable<TEntity> List();
+        IQueryable<TEntity> Get();
 
         void Remove(Guid id);
     }

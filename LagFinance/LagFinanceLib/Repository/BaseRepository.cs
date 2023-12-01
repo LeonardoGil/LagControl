@@ -14,7 +14,7 @@ namespace LagFinanceLib.Repository
             _context.SaveChanges();
         }
 
-        public IQueryable<TEntity> List()
+        public IQueryable<TEntity> Get()
         {
             return _context.Set<TEntity>().AsQueryable();
         }
