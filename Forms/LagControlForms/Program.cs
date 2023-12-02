@@ -1,17 +1,30 @@
+using LagControlForms.Configs;
+using LagFinanceLib.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
 namespace LagControlForms
 {
     internal static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
+            var builder = Host.CreateApplicationBuilder().Inject();
+            var host = builder.Build();
+
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new MovimentacaoForm());
+
+            Run(host);
+        }
+
+        static void Run(IHost host)
+        {
+            var form = new MovimentacaoForm(host.Services.GetService<IMovimentacaoRepository>());
+
+            Application.Run(form);
         }
     }
 }
