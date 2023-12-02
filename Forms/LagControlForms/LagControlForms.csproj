@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LagFinance\LagFinanceLib\LagFinanceLib.csproj" />
+    <ProjectReference Include="..\..\LagFinance\LagFinanceLib\LagFinanceLib.csproj" />
   </ItemGroup>
 
   <ItemGroup>
