@@ -1,9 +1,12 @@
 ﻿using LagFinanceLib.Database;
+using LagFinanceLib.Domain;
 using LagFinanceLib.Interfaces;
 using LagFinanceLib.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Reflection;
+using System;
 
 namespace LagControlForms.Configs
 {
