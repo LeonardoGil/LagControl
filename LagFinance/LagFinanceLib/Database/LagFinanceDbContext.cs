@@ -5,6 +5,8 @@ namespace LagFinanceLib.Database
 {
     public class LagFinanceDbContext : DbContext
     {
+        public LagFinanceDbContext() { }
+
         public LagFinanceDbContext(DbContextOptions options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

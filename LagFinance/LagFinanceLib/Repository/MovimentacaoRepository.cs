@@ -6,8 +6,9 @@ namespace LagFinanceLib.Repository
 {
     public class MovimentacaoRepository : BaseRepository<Movimentacao>, IMovimentacaoRepository
     {
-        public MovimentacaoRepository(LagFinanceDbContext context) : base(context)
+        public MovimentacaoRepository(LagFinanceDbContext context)
         {
+            _context = context;
         }
     }
 }

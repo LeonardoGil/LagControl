@@ -6,8 +6,9 @@ namespace LagFinanceLib.Repository
 {
     public class ContaRepository : BaseRepository<Conta>, IContaRepository
     {
-        public ContaRepository(LagFinanceDbContext context) : base(context)
+        public ContaRepository(LagFinanceDbContext context)
         {
+            _context = context;
         }
     }
 }

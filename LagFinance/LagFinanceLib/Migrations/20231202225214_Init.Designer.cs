@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LagFinanceLib.Migrations
 {
     [DbContext(typeof(LagFinanceDbContext))]
-    [Migration("20231117015413_Seed")]
-    partial class Seed
+    [Migration("20231202225214_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,33 @@ namespace LagFinanceLib.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categoria", "finance");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("1f7cce04-9ec5-4f43-bfdb-4ed1e478f1d4"),
+                            Descricao = "Mercado"
+                        },
+                        new
+                        {
+                            Id = new Guid("21bf5615-c004-4a31-99f8-b376afc573bc"),
+                            Descricao = "Contas"
+                        },
+                        new
+                        {
+                            Id = new Guid("88c747e2-45ad-4067-aab8-ab287ceed954"),
+                            Descricao = "Farmacia"
+                        },
+                        new
+                        {
+                            Id = new Guid("42c74818-8ef2-45b9-9ab6-a7dcd6dcc36f"),
+                            Descricao = "Lazer"
+                        },
+                        new
+                        {
+                            Id = new Guid("cf668fda-3d80-47c6-8352-6c04fb28c956"),
+                            Descricao = "Restaurante"
+                        });
                 });
 
             modelBuilder.Entity("LagFinanceLib.Domain.Conta", b =>
@@ -56,22 +83,22 @@ namespace LagFinanceLib.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("db99f530-d4e6-429a-a8b4-097a939d5870"),
+                            Id = new Guid("9ab68e5a-a829-40b9-9d32-b9746d3134f5"),
                             Descricao = "Bradesco"
                         },
                         new
                         {
-                            Id = new Guid("e389e09e-fb13-4f58-846d-4e9d9fa00813"),
+                            Id = new Guid("60b44dcc-950e-45b1-bbb2-32c5deb9ec90"),
                             Descricao = "Banco do Brasil"
                         },
                         new
                         {
-                            Id = new Guid("c9977f49-1603-4190-964a-963af2d6ad7c"),
+                            Id = new Guid("64abc81e-dd01-40b8-983a-3dba10cfb7ab"),
                             Descricao = "Santander"
                         },
                         new
                         {
-                            Id = new Guid("82396197-0500-4da9-ae7c-924530344a35"),
+                            Id = new Guid("0ca05b72-4e7d-4afe-8bc9-c0b8cc860073"),
                             Descricao = "PicPay"
                         });
                 });
@@ -82,7 +109,7 @@ namespace LagFinanceLib.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CategoriaId")
+                    b.Property<Guid>("CategoriaId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ContaId")
@@ -118,15 +145,19 @@ namespace LagFinanceLib.Migrations
                 {
                     b.HasOne("LagFinanceLib.Domain.Categoria", "Categoria")
                         .WithMany()
-                        .HasForeignKey("CategoriaId");
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("LagFinanceLib.Domain.Conta", null)
+                    b.HasOne("LagFinanceLib.Domain.Conta", "Conta")
                         .WithMany("Movimentacoes")
                         .HasForeignKey("ContaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Categoria");
+
+                    b.Navigation("Conta");
                 });
 
             modelBuilder.Entity("LagFinanceLib.Domain.Conta", b =>

@@ -20,9 +20,11 @@ namespace LagFinanceLib.Domain
 
         public Guid ContaId { get; set; }
 
-        public Guid? CategoriaId { get; set; }
+        public virtual Conta Conta { get; set; }
 
-        public Categoria Categoria { get; set; }
+        public Guid CategoriaId { get; set; }
+
+        public virtual Categoria Categoria { get; set; }
 
         #endregion
     }

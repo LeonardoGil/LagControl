@@ -8,11 +8,6 @@ namespace LagFinanceLib.Repository
     {
         protected LagFinanceDbContext _context;
 
-        public BaseRepository(LagFinanceDbContext context)
-        {
-            _context = context;
-        }
-
         public void Add(TEntity entity)
         {
             _context.Add(entity);
