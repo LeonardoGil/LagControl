@@ -16,8 +16,8 @@ namespace LagControlForms
             _mapper = mapper;
             _movimentacaoRepository = movimentacaoRepository;
 
-            LoadDataGrid();
             InitializeComponent();
+            LoadDataGrid();
         }
 
         private async void LoadDataGrid()

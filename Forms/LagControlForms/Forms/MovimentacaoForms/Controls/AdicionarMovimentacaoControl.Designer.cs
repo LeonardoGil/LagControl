@@ -128,6 +128,7 @@
             buttonGravar.TabIndex = 9;
             buttonGravar.Text = "Gravar";
             buttonGravar.UseVisualStyleBackColor = true;
+            buttonGravar.Click += Save_ClickEvent;
             // 
             // maskedTextBoxData
             // 
@@ -186,6 +187,7 @@
             Controls.Add(labelDescricao);
             Name = "AdicionarMovimentacaoControl";
             Size = new Size(240, 320);
+            Load += SetControls_LoadEvent;
             ResumeLayout(false);
             PerformLayout();
         }
