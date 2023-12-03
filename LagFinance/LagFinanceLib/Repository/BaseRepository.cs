@@ -19,9 +19,10 @@ namespace LagFinanceLib.Repository
             return _context.Set<TEntity>().AsQueryable();
         }
 
-        public void Remove(Guid id)
+        public void Remove(TEntity entity)
         {
-            throw new NotImplementedException();
+            _context.Set<TEntity>().Remove(entity);
+            _context.SaveChanges();
         }
     }
 }

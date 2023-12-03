@@ -7,6 +7,6 @@
 
         IQueryable<TEntity> Get();
 
-        void Remove(Guid id);
+        void Remove(TEntity entity);
     }
 }
