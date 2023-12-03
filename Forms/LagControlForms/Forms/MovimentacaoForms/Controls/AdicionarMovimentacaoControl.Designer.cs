@@ -30,9 +30,9 @@
         {
             labelDescricao = new Label();
             textBoxDescricao = new TextBox();
-            textBox1 = new TextBox();
+            textBoxValor = new TextBox();
             labelValor = new Label();
-            checkedListBox1 = new CheckedListBox();
+            checkedListBoxTipoMovimentacao = new CheckedListBox();
             comboBoxCategoria = new ComboBox();
             label1 = new Label();
             labelConta = new Label();
@@ -60,13 +60,13 @@
             textBoxDescricao.Size = new Size(218, 23);
             textBoxDescricao.TabIndex = 1;
             // 
-            // textBox1
+            // textBoxValor
             // 
-            textBox1.Location = new Point(12, 132);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(78, 23);
-            textBox1.TabIndex = 3;
-            textBox1.TextAlign = HorizontalAlignment.Right;
+            textBoxValor.Location = new Point(12, 132);
+            textBoxValor.Name = "textBoxValor";
+            textBoxValor.Size = new Size(78, 23);
+            textBoxValor.TabIndex = 3;
+            textBoxValor.TextAlign = HorizontalAlignment.Right;
             // 
             // labelValor
             // 
@@ -77,14 +77,15 @@
             labelValor.TabIndex = 2;
             labelValor.Text = "Valor";
             // 
-            // checkedListBox1
+            // checkedListBoxTipoMovimentacao
             // 
-            checkedListBox1.FormattingEnabled = true;
-            checkedListBox1.Items.AddRange(new object[] { "Despesa", "Receita", "Transferencia" });
-            checkedListBox1.Location = new Point(12, 168);
-            checkedListBox1.Name = "checkedListBox1";
-            checkedListBox1.Size = new Size(113, 58);
-            checkedListBox1.TabIndex = 4;
+            checkedListBoxTipoMovimentacao.CheckOnClick = true;
+            checkedListBoxTipoMovimentacao.FormattingEnabled = true;
+            checkedListBoxTipoMovimentacao.Location = new Point(12, 168);
+            checkedListBoxTipoMovimentacao.Name = "checkedListBoxTipoMovimentacao";
+            checkedListBoxTipoMovimentacao.Size = new Size(113, 58);
+            checkedListBoxTipoMovimentacao.TabIndex = 4;
+            checkedListBoxTipoMovimentacao.ItemCheck += ResetCheckedList_ItemCheckEvent;
             // 
             // comboBoxCategoria
             // 
@@ -180,8 +181,8 @@
             Controls.Add(comboBoxConta);
             Controls.Add(label1);
             Controls.Add(comboBoxCategoria);
-            Controls.Add(checkedListBox1);
-            Controls.Add(textBox1);
+            Controls.Add(checkedListBoxTipoMovimentacao);
+            Controls.Add(textBoxValor);
             Controls.Add(labelValor);
             Controls.Add(textBoxDescricao);
             Controls.Add(labelDescricao);
@@ -196,9 +197,9 @@
 
         private Label labelDescricao;
         private TextBox textBoxDescricao;
-        private TextBox textBox1;
+        private TextBox textBoxValor;
         private Label labelValor;
-        private CheckedListBox checkedListBox1;
+        private CheckedListBox checkedListBoxTipoMovimentacao;
         private ComboBox comboBoxCategoria;
         private Label label1;
         private Label labelConta;

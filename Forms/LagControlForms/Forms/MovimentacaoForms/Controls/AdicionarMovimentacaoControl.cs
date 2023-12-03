@@ -1,4 +1,5 @@
 ﻿using LagFinanceLib.Domain;
+using LagFinanceLib.Domain.Enum;
 using LagFinanceLib.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -44,12 +45,31 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
             LoadCategoriaList();
             LoadContaList();
 
+            checkedListBoxTipoMovimentacao.Items.AddRange(Enum.GetNames<TipoMovimentacaoEnum>());
             maskedTextBoxData.Text = DateTime.Now.ToString("d");
         }
 
         private void Save_ClickEvent(object sender, EventArgs e)
         {
+            var movimentacao = new Movimentacao
+            {
+                Descricao = textBoxDescricao.Text,
+                Data = DateTime.Parse(maskedTextBoxData.Text),
+                Valor = decimal.Parse(textBoxValor.Text),
+            };
 
+
+
+
+        }
+
+        private void ResetCheckedList_ItemCheckEvent(object sender, ItemCheckEventArgs e)
+        {
+            foreach (int index in checkedListBoxTipoMovimentacao.CheckedIndices)
+            {
+                if (index != e.Index)
+                    checkedListBoxTipoMovimentacao.SetItemChecked(index, false);
+            }
         }
 
         #endregion
