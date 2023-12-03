@@ -2,6 +2,7 @@ using AutoMapper;
 using LagControlForms.Models;
 using LagFinanceLib.Domain;
 using LagFinanceLib.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace LagControlForms
 {
@@ -9,6 +10,8 @@ namespace LagControlForms
     {
         private readonly IMapper _mapper;
         private readonly IMovimentacaoRepository _movimentacaoRepository;
+
+        private List<MovimentacaoModel> MovimentacaoList;
 
         public MovimentacaoForm(IMapper mapper,
                                 IMovimentacaoRepository movimentacaoRepository)
@@ -18,15 +21,31 @@ namespace LagControlForms
 
             InitializeComponent();
             LoadDataGrid();
+
+            adicionarMovimentacaoControl.UpdateMovimentacaoList += UpdateMovimentacaoList_Event;
         }
 
         private async void LoadDataGrid()
         {
-            var movimentacoes = _movimentacaoRepository.Get().ToList();
+            var movimentacoes = _movimentacaoRepository.Get()
+                                                       .Include(x => x.Conta)
+                                                       .Include(x => x.Categoria).ToList();
 
-            var models = _mapper.Map<List<Movimentacao>, List<MovimentacaoModel>>(movimentacoes);
+            MovimentacaoList = _mapper.Map<List<Movimentacao>, List<MovimentacaoModel>>(movimentacoes);
 
-            dataGridViewMovimentacao.DataSource = models;
+            dataGridViewMovimentacao.DataSource = MovimentacaoList;
+        }
+
+        private void UpdateMovimentacaoList_Event(object sender, EventArgs args)
+        {
+            if (sender is Movimentacao movimentacao)
+            {
+                var model = _mapper.Map<Movimentacao, MovimentacaoModel>(movimentacao);
+
+                MovimentacaoList.Add(model);
+
+                dataGridViewMovimentacao.DataSource = MovimentacaoList;
+            }
         }
     }
 }
