@@ -33,10 +33,9 @@ namespace LagControlForms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MovimentacaoForm));
             dataGridViewMovimentacao = new DataGridView();
-            panelLateral = new Panel();
-            adicionarMovimentacaoControl = Program.ServiceProvider.GetRequiredService<AdicionarMovimentacaoControl>();
+            panelSuperior = new Panel();
+            adicionarMovimentacaoControl = new AdicionarMovimentacaoControl();
             ((System.ComponentModel.ISupportInitialize)dataGridViewMovimentacao).BeginInit();
-            panelLateral.SuspendLayout();
             SuspendLayout();
             // 
             // dataGridViewMovimentacao
@@ -51,16 +50,16 @@ namespace LagControlForms
             dataGridViewMovimentacao.ReadOnly = true;
             dataGridViewMovimentacao.RowTemplate.Height = 25;
             // 
-            // panelLateral
+            // panelSuperior
             // 
-            resources.ApplyResources(panelLateral, "panelLateral");
-            panelLateral.BackColor = SystemColors.MenuHighlight;
-            panelLateral.Controls.Add(adicionarMovimentacaoControl);
-            panelLateral.Name = "panelLateral";
+            resources.ApplyResources(panelSuperior, "panelSuperior");
+            panelSuperior.BackColor = SystemColors.ControlDark;
+            panelSuperior.Name = "panelSuperior";
             // 
             // adicionarMovimentacaoControl
             // 
             resources.ApplyResources(adicionarMovimentacaoControl, "adicionarMovimentacaoControl");
+            adicionarMovimentacaoControl.BackColor = SystemColors.ActiveCaption;
             adicionarMovimentacaoControl.Name = "adicionarMovimentacaoControl";
             // 
             // MovimentacaoForm
@@ -68,19 +67,21 @@ namespace LagControlForms
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Desktop;
-            Controls.Add(panelLateral);
+            ControlBox = false;
+            Controls.Add(adicionarMovimentacaoControl);
+            Controls.Add(panelSuperior);
             Controls.Add(dataGridViewMovimentacao);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "MovimentacaoForm";
             ShowIcon = false;
             ((System.ComponentModel.ISupportInitialize)dataGridViewMovimentacao).EndInit();
-            panelLateral.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
         private DataGridView dataGridViewMovimentacao;
-        private Panel panelLateral;
-        private Forms.MovimentacaoForms.Controls.AdicionarMovimentacaoControl adicionarMovimentacaoControl;
+        private Panel panelSuperior;
+        private AdicionarMovimentacaoControl adicionarMovimentacaoControl;
     }
 }

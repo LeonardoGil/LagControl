@@ -18,6 +18,11 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
 
         public event EventHandler UpdateMovimentacaoList;
 
+        public AdicionarMovimentacaoControl()
+        {
+            InitializeComponent();
+        }
+
         public AdicionarMovimentacaoControl(ICategoriaRepository categoriaRepository,
                                             IContaRepository contaRepository,
                                             IMovimentacaoRepository movimentacaoRepository)
@@ -27,6 +32,9 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
             _movimentacaoRepository = movimentacaoRepository;
 
             InitializeComponent();
+
+            LoadCategoriaList();
+            LoadContaList();
         }
 
         private void LoadCategoriaList()
@@ -49,9 +57,6 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
 
         private void SetControls_LoadEvent(object sender, EventArgs e)
         {
-            LoadCategoriaList();
-            LoadContaList();
-
             checkedListBoxTipoMovimentacao.Items.AddRange(Enum.GetNames<TipoMovimentacaoEnum>());
             maskedTextBoxData.Text = DateTime.Now.ToString("d");
         }
