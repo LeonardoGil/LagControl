@@ -35,7 +35,9 @@ namespace LagControlForms
             dataGridViewMovimentacao = new DataGridView();
             panelSuperior = new Panel();
             adicionarMovimentacaoControl = new AdicionarMovimentacaoControl();
+            flowLayoutPanel = new FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)dataGridViewMovimentacao).BeginInit();
+            panelSuperior.SuspendLayout();
             SuspendLayout();
             // 
             // dataGridViewMovimentacao
@@ -48,12 +50,15 @@ namespace LagControlForms
             dataGridViewMovimentacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewMovimentacao.Name = "dataGridViewMovimentacao";
             dataGridViewMovimentacao.ReadOnly = true;
+            dataGridViewMovimentacao.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewMovimentacao.RowHeadersVisible = false;
             dataGridViewMovimentacao.RowTemplate.Height = 25;
             // 
             // panelSuperior
             // 
             resources.ApplyResources(panelSuperior, "panelSuperior");
             panelSuperior.BackColor = SystemColors.ControlDark;
+            panelSuperior.Controls.Add(flowLayoutPanel);
             panelSuperior.Name = "panelSuperior";
             // 
             // adicionarMovimentacaoControl
@@ -61,6 +66,12 @@ namespace LagControlForms
             resources.ApplyResources(adicionarMovimentacaoControl, "adicionarMovimentacaoControl");
             adicionarMovimentacaoControl.BackColor = SystemColors.ActiveCaption;
             adicionarMovimentacaoControl.Name = "adicionarMovimentacaoControl";
+            // 
+            // flowLayoutPanel
+            // 
+            resources.ApplyResources(flowLayoutPanel, "flowLayoutPanel");
+            flowLayoutPanel.BackColor = SystemColors.ControlDarkDark;
+            flowLayoutPanel.Name = "flowLayoutPanel";
             // 
             // MovimentacaoForm
             // 
@@ -75,6 +86,7 @@ namespace LagControlForms
             Name = "MovimentacaoForm";
             ShowIcon = false;
             ((System.ComponentModel.ISupportInitialize)dataGridViewMovimentacao).EndInit();
+            panelSuperior.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -83,5 +95,6 @@ namespace LagControlForms
         private DataGridView dataGridViewMovimentacao;
         private Panel panelSuperior;
         private AdicionarMovimentacaoControl adicionarMovimentacaoControl;
+        private FlowLayoutPanel flowLayoutPanel;
     }
 }

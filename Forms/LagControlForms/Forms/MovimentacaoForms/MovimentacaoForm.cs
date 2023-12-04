@@ -1,4 +1,5 @@
 using AutoMapper;
+using LagControlForms.Forms.MovimentacaoForms.Controls;
 using LagControlForms.Models;
 using LagFinanceLib.Domain;
 using LagFinanceLib.Interfaces;
