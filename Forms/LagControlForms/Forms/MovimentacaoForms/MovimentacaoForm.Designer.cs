@@ -34,7 +34,7 @@ namespace LagControlForms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MovimentacaoForm));
             dataGridViewMovimentacao = new DataGridView();
             panelSuperior = new Panel();
-            adicionarMovimentacaoControl = new AdicionarMovimentacaoControl();
+            adicionarMovimentacaoControl = Program.ServiceProvider.GetRequiredService<AdicionarMovimentacaoControl>();
             flowLayoutPanel = new FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)dataGridViewMovimentacao).BeginInit();
             panelSuperior.SuspendLayout();
