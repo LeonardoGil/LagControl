@@ -13,8 +13,8 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
         private readonly IContaRepository _contaRepository;
         private readonly IMovimentacaoRepository _movimentacaoRepository;
 
-        private List<Categoria> CategoriaSelectList;
-        private List<Conta> ContaSelectList;
+        public List<Categoria> CategoriaSelectList { get; private set; }
+        public List<Conta> ContaSelectList { get; private set; }
 
         public event EventHandler UpdateMovimentacaoList;
 
@@ -37,6 +37,67 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
             LoadContaList();
         }
 
+        private void ResetFields(bool repeat = false)
+        {
+            textBoxDescricao.Text = string.Empty;
+            textBoxValor.Text = string.Empty;
+
+            if (!repeat)
+            {
+                maskedTextBoxData.Text = string.Empty;
+
+                comboBoxCategoria.SelectedItem = CategoriaSelectList.FirstOrDefault();
+                comboBoxConta.SelectedItem = ContaSelectList.FirstOrDefault();
+
+                ResetCheckedList();
+            }
+        }
+
+        private void ResetCheckedList(int index = -1)
+        {
+            foreach (int ind in checkedListBoxTipoMovimentacao.CheckedIndices)
+            {
+                if (ind != index)
+                    checkedListBoxTipoMovimentacao.SetItemChecked(ind, false);
+            }
+        }
+
+        private Movimentacao BuildMovimentacao()
+        {
+            var movimentacao = new Movimentacao
+            {
+                Descricao = textBoxDescricao.Text
+            };
+
+            var dataValid = DateTime.TryParse(maskedTextBoxData.Text, out DateTime data);
+            var valorValid = decimal.TryParse(textBoxValor.Text, out decimal valor);
+
+            if (!dataValid)
+                throw new Exception("Data invalida");
+
+            if (!valorValid)
+                throw new Exception("Valor invalido");
+
+            if (checkedListBoxTipoMovimentacao.CheckedItems.Count == 0)
+                throw new Exception("Informar tipo movimentaçao!");
+
+            var item = (string)checkedListBoxTipoMovimentacao.CheckedItems[0];
+            movimentacao.TipoMovimentacao = Enum.Parse<TipoMovimentacaoEnum>(item);
+
+            movimentacao.Data = data;
+            movimentacao.Valor = valor;
+
+            var categoria = (Categoria)comboBoxCategoria.SelectedItem;
+            var conta = (Conta)comboBoxConta.SelectedItem;
+
+            movimentacao.CategoriaId = categoria.Id;
+            movimentacao.Categoria = categoria;
+            movimentacao.ContaId = conta.Id;
+            movimentacao.Conta = conta;
+
+            return movimentacao;
+        }
+
         private void LoadCategoriaList()
         {
             CategoriaSelectList = _categoriaRepository.Get().ToList();
@@ -45,7 +106,7 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
             comboBoxCategoria.DisplayMember = "Descricao";
         }
 
-        public void LoadContaList()
+        private void LoadContaList()
         {
             ContaSelectList = _contaRepository.Get().ToList();
 
@@ -63,59 +124,23 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
 
         private void Save_ClickEvent(object sender, EventArgs e)
         {
-            var movimentacao = new Movimentacao
+            try
             {
-                Descricao = textBoxDescricao.Text
-            };
+                var movimentacao = BuildMovimentacao();
 
-            if (DateTime.TryParse(maskedTextBoxData.Text, out DateTime data))
-                movimentacao.Data = data;
-            else
-            {
-                MessageBox.Show("Data invalida");
-                return;
+                ResetFields();
+
+                _movimentacaoRepository.Add(movimentacao);
+
+                UpdateMovimentacaoList.Invoke(movimentacao, new EventArgs());
             }
-
-            if (decimal.TryParse(textBoxValor.Text, out decimal valor))
-                movimentacao.Valor = valor;
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Valor invalido");
-                return;
-            }
-
-            if (checkedListBoxTipoMovimentacao.CheckedItems.Count > 0)
-            {
-                var item = (string)checkedListBoxTipoMovimentacao.CheckedItems[0];
-                movimentacao.TipoMovimentacao = Enum.Parse<TipoMovimentacaoEnum>(item);
-            }
-            else
-            {
-                MessageBox.Show("Informar tipo movimentaçao!");
-                return;
-            }
-
-            var categoria = (Categoria)comboBoxCategoria.SelectedItem;
-            var conta = (Conta)comboBoxConta.SelectedItem;
-
-            movimentacao.CategoriaId = categoria.Id;
-            movimentacao.Categoria = categoria;
-            movimentacao.ContaId = conta.Id;
-            movimentacao.Conta = conta;
-
-            _movimentacaoRepository.Add(movimentacao);
-
-            UpdateMovimentacaoList.Invoke(movimentacao, new EventArgs());
-        }
-
-        private void ResetCheckedList_ItemCheckEvent(object sender, ItemCheckEventArgs e)
-        {
-            foreach (int index in checkedListBoxTipoMovimentacao.CheckedIndices)
-            {
-                if (index != e.Index)
-                    checkedListBoxTipoMovimentacao.SetItemChecked(index, false);
+                MessageBox.Show(ex.Message);
             }
         }
+
+        private void ResetCheckedList_ItemCheckEvent(object sender, ItemCheckEventArgs e) => ResetCheckedList(e.Index);
 
         #endregion
     }
