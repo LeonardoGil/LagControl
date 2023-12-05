@@ -44,7 +44,7 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
 
             if (!repeat)
             {
-                maskedTextBoxData.Text = string.Empty;
+                maskedTextBoxData.Text = DateTime.Now.Date.ToString("d");
 
                 comboBoxCategoria.SelectedItem = CategoriaSelectList.FirstOrDefault();
                 comboBoxConta.SelectedItem = ContaSelectList.FirstOrDefault();
@@ -114,6 +114,20 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
             comboBoxConta.DisplayMember = "Descricao";
         }
 
+        private void Save(bool repeat)
+        {
+            try
+            {
+                var movimentacao = BuildMovimentacao();
+
+                ResetFields(repeat);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         #region Events
 
         private void SetControls_LoadEvent(object sender, EventArgs e)
@@ -122,23 +136,9 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
             maskedTextBoxData.Text = DateTime.Now.ToString("d");
         }
 
-        private void Save_ClickEvent(object sender, EventArgs e)
-        {
-            try
-            {
-                var movimentacao = BuildMovimentacao();
+        private void Save_ClickEvent(object sender, EventArgs e) => Save(false);
 
-                ResetFields();
-
-                _movimentacaoRepository.Add(movimentacao);
-
-                UpdateMovimentacaoList.Invoke(movimentacao, new EventArgs());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+        private void SaveAndRepeat_ClickEvent(object sender, EventArgs e) => Save(true);
 
         private void ResetCheckedList_ItemCheckEvent(object sender, ItemCheckEventArgs e) => ResetCheckedList(e.Index);
 

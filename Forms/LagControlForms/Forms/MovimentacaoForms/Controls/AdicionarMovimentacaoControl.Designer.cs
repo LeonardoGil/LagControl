@@ -65,7 +65,7 @@
             textBoxValor.Location = new Point(12, 132);
             textBoxValor.Name = "textBoxValor";
             textBoxValor.Size = new Size(78, 23);
-            textBoxValor.TabIndex = 3;
+            textBoxValor.TabIndex = 7;
             textBoxValor.TextAlign = HorizontalAlignment.Right;
             // 
             // labelValor
@@ -74,7 +74,7 @@
             labelValor.Location = new Point(12, 114);
             labelValor.Name = "labelValor";
             labelValor.Size = new Size(33, 15);
-            labelValor.TabIndex = 2;
+            labelValor.TabIndex = 6;
             labelValor.Text = "Valor";
             // 
             // checkedListBoxTipoMovimentacao
@@ -84,7 +84,7 @@
             checkedListBoxTipoMovimentacao.Location = new Point(12, 168);
             checkedListBoxTipoMovimentacao.Name = "checkedListBoxTipoMovimentacao";
             checkedListBoxTipoMovimentacao.Size = new Size(113, 58);
-            checkedListBoxTipoMovimentacao.TabIndex = 4;
+            checkedListBoxTipoMovimentacao.TabIndex = 10;
             checkedListBoxTipoMovimentacao.ItemCheck += ResetCheckedList_ItemCheckEvent;
             // 
             // comboBoxCategoria
@@ -93,7 +93,7 @@
             comboBoxCategoria.Location = new Point(98, 132);
             comboBoxCategoria.Name = "comboBoxCategoria";
             comboBoxCategoria.Size = new Size(132, 23);
-            comboBoxCategoria.TabIndex = 5;
+            comboBoxCategoria.TabIndex = 9;
             // 
             // label1
             // 
@@ -101,7 +101,7 @@
             label1.Location = new Point(98, 114);
             label1.Name = "label1";
             label1.Size = new Size(58, 15);
-            label1.TabIndex = 6;
+            label1.TabIndex = 8;
             label1.Text = "Categoria";
             // 
             // labelConta
@@ -110,7 +110,7 @@
             labelConta.Location = new Point(98, 64);
             labelConta.Name = "labelConta";
             labelConta.Size = new Size(39, 15);
-            labelConta.TabIndex = 8;
+            labelConta.TabIndex = 4;
             labelConta.Text = "Conta";
             // 
             // comboBoxConta
@@ -119,14 +119,14 @@
             comboBoxConta.Location = new Point(98, 82);
             comboBoxConta.Name = "comboBoxConta";
             comboBoxConta.Size = new Size(132, 23);
-            comboBoxConta.TabIndex = 7;
+            comboBoxConta.TabIndex = 5;
             // 
             // buttonGravar
             // 
             buttonGravar.Location = new Point(12, 272);
             buttonGravar.Name = "buttonGravar";
             buttonGravar.Size = new Size(102, 35);
-            buttonGravar.TabIndex = 9;
+            buttonGravar.TabIndex = 12;
             buttonGravar.Text = "Gravar";
             buttonGravar.UseVisualStyleBackColor = true;
             buttonGravar.Click += Save_ClickEvent;
@@ -137,7 +137,7 @@
             maskedTextBoxData.Mask = "00/00/0000";
             maskedTextBoxData.Name = "maskedTextBoxData";
             maskedTextBoxData.Size = new Size(78, 23);
-            maskedTextBoxData.TabIndex = 10;
+            maskedTextBoxData.TabIndex = 3;
             maskedTextBoxData.TextAlign = HorizontalAlignment.Center;
             maskedTextBoxData.ValidatingType = typeof(DateTime);
             // 
@@ -147,7 +147,7 @@
             labelData.Location = new Point(12, 64);
             labelData.Name = "labelData";
             labelData.Size = new Size(31, 15);
-            labelData.TabIndex = 11;
+            labelData.TabIndex = 2;
             labelData.Text = "Data";
             // 
             // comboBoxContaTransferencia
@@ -156,7 +156,7 @@
             comboBoxContaTransferencia.Location = new Point(12, 239);
             comboBoxContaTransferencia.Name = "comboBoxContaTransferencia";
             comboBoxContaTransferencia.Size = new Size(113, 23);
-            comboBoxContaTransferencia.TabIndex = 12;
+            comboBoxContaTransferencia.TabIndex = 11;
             comboBoxContaTransferencia.Visible = false;
             // 
             // buttonGravarRepetir
@@ -167,6 +167,7 @@
             buttonGravarRepetir.TabIndex = 13;
             buttonGravarRepetir.Text = "Gravar e Repetir";
             buttonGravarRepetir.UseVisualStyleBackColor = true;
+            buttonGravarRepetir.Click += SaveAndRepeat_ClickEvent;
             // 
             // AdicionarMovimentacaoControl
             // 
