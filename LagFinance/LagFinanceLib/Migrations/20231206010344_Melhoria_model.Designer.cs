@@ -4,6 +4,7 @@ using LagFinanceLib.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LagFinanceLib.Migrations
 {
     [DbContext(typeof(LagFinanceDbContext))]
-    partial class LagFinanceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231206010344_Melhoria_model")]
+    partial class Melhoria_model
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -16,11 +16,17 @@ namespace LagFinanceLib.Domain
 
         public TipoMovimentacaoEnum TipoMovimentacao { get; set; }
 
+        public bool Pendente { get; set; }
+
         #region Relacionamentos
 
         public Guid ContaId { get; set; }
 
         public virtual Conta Conta { get; set; }
+
+        public Guid? ContaTransferenciaId { get; set; }
+        
+        public virtual Conta ContaTransferencia { get; set; }
 
         public Guid CategoriaId { get; set; }
 
