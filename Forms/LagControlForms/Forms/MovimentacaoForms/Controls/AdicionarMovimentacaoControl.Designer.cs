@@ -43,6 +43,7 @@
             comboBoxContaTransferencia = new ComboBox();
             buttonGravarRepetir = new Button();
             labelContaTransferencia = new Label();
+            checkBoxPendente = new CheckBox();
             SuspendLayout();
             // 
             // labelDescricao
@@ -80,13 +81,17 @@
             // 
             // checkedListBoxTipoMovimentacao
             // 
+            checkedListBoxTipoMovimentacao.BackColor = SystemColors.ActiveCaption;
+            checkedListBoxTipoMovimentacao.BorderStyle = BorderStyle.None;
             checkedListBoxTipoMovimentacao.CheckOnClick = true;
             checkedListBoxTipoMovimentacao.FormattingEnabled = true;
+            checkedListBoxTipoMovimentacao.ImeMode = ImeMode.NoControl;
             checkedListBoxTipoMovimentacao.Location = new Point(12, 171);
             checkedListBoxTipoMovimentacao.Name = "checkedListBoxTipoMovimentacao";
-            checkedListBoxTipoMovimentacao.Size = new Size(113, 58);
+            checkedListBoxTipoMovimentacao.Size = new Size(113, 54);
             checkedListBoxTipoMovimentacao.TabIndex = 10;
             checkedListBoxTipoMovimentacao.ItemCheck += ResetCheckedList_ItemCheckEvent;
+            checkedListBoxTipoMovimentacao.SelectedIndexChanged += TipoMovimentacao_SelectedChangedEvent;
             // 
             // comboBoxCategoria
             // 
@@ -124,6 +129,7 @@
             // 
             // buttonGravar
             // 
+            buttonGravar.Cursor = Cursors.Hand;
             buttonGravar.Location = new Point(12, 272);
             buttonGravar.Name = "buttonGravar";
             buttonGravar.Size = new Size(102, 35);
@@ -162,6 +168,7 @@
             // 
             // buttonGravarRepetir
             // 
+            buttonGravarRepetir.Cursor = Cursors.Hand;
             buttonGravarRepetir.Location = new Point(126, 272);
             buttonGravarRepetir.Name = "buttonGravarRepetir";
             buttonGravarRepetir.Size = new Size(102, 35);
@@ -180,10 +187,22 @@
             labelContaTransferencia.Text = "Conta \r\nTransferencia";
             labelContaTransferencia.Visible = false;
             // 
+            // checkBoxPendente
+            // 
+            checkBoxPendente.AutoSize = true;
+            checkBoxPendente.Location = new Point(12, 237);
+            checkBoxPendente.Name = "checkBoxPendente";
+            checkBoxPendente.Size = new Size(76, 19);
+            checkBoxPendente.TabIndex = 15;
+            checkBoxPendente.Text = "Pendente";
+            checkBoxPendente.UseVisualStyleBackColor = true;
+            // 
             // AdicionarMovimentacaoControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ActiveCaption;
+            Controls.Add(checkBoxPendente);
             Controls.Add(labelContaTransferencia);
             Controls.Add(buttonGravarRepetir);
             Controls.Add(comboBoxContaTransferencia);
@@ -223,5 +242,6 @@
         private ComboBox comboBoxContaTransferencia;
         private Button buttonGravarRepetir;
         private Label labelContaTransferencia;
+        private CheckBox checkBoxPendente;
     }
 }

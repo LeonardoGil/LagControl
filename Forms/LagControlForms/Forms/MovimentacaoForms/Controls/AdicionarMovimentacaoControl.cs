@@ -15,6 +15,7 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
 
         public List<Categoria> CategoriaSelectList { get; private set; }
         public List<Conta> ContaSelectList { get; private set; }
+        public List<Conta> ContaTransferenciaSelectList { get; private set; }
 
         public event EventHandler UpdateMovimentacaoList;
 
@@ -66,7 +67,8 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
         {
             var movimentacao = new Movimentacao
             {
-                Descricao = textBoxDescricao.Text
+                Descricao = textBoxDescricao.Text,
+                Pendente = checkBoxPendente.Checked
             };
 
             var dataValid = DateTime.TryParse(maskedTextBoxData.Text, out DateTime data);
@@ -95,6 +97,17 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
             movimentacao.ContaId = conta.Id;
             movimentacao.Conta = conta;
 
+            switch (movimentacao.TipoMovimentacao)
+            {
+                case TipoMovimentacaoEnum.Transferencia:
+                    var contaTransferencia = (Conta)comboBoxContaTransferencia.SelectedItem;
+                    
+                    movimentacao.ContaTransferenciaId = contaTransferencia.Id;
+                    movimentacao.ContaTransferencia = contaTransferencia;
+                    break;
+
+            }
+
             return movimentacao;
         }
 
@@ -108,10 +121,15 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
 
         private void LoadContaList()
         {
-            ContaSelectList = _contaRepository.Get().ToList();
+            var contas = _contaRepository.Get().ToList();
 
+            ContaSelectList = contas;
             comboBoxConta.DataSource = ContaSelectList;
             comboBoxConta.DisplayMember = "Descricao";
+
+            ContaTransferenciaSelectList = contas;
+            comboBoxContaTransferencia.DataSource = ContaTransferenciaSelectList;
+            comboBoxContaTransferencia.DisplayMember = "Descricao";
         }
 
         private void Save(bool repeat)
@@ -143,5 +161,16 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
         private void ResetCheckedList_ItemCheckEvent(object sender, ItemCheckEventArgs e) => ResetCheckedList(e.Index);
 
         #endregion
+
+        private void TipoMovimentacao_SelectedChangedEvent(object sender, EventArgs e)
+        {
+            if (sender is CheckedListBox checkedListBox)
+            {
+                var visible = (string)checkedListBox.SelectedItem == TipoMovimentacaoEnum.Transferencia.ToString();
+
+                labelContaTransferencia.Visible = visible;
+                comboBoxContaTransferencia.Visible = visible;
+            }
+        }
     }
 }
