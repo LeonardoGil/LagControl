@@ -12,7 +12,7 @@ namespace LagControlForms
         private readonly IMapper _mapper;
         private readonly IMovimentacaoRepository _movimentacaoRepository;
 
-        private List<MovimentacaoModel> MovimentacaoList;
+        private BindingSource MovimentacaoView = new BindingSource();
 
         public MovimentacaoForm(IMapper mapper,
                                 IMovimentacaoRepository movimentacaoRepository)
@@ -32,9 +32,9 @@ namespace LagControlForms
                                                        .Include(x => x.Conta)
                                                        .Include(x => x.Categoria).ToList();
 
-            MovimentacaoList = _mapper.Map<List<Movimentacao>, List<MovimentacaoModel>>(movimentacoes);
+            MovimentacaoView.DataSource = _mapper.Map<List<Movimentacao>, List<MovimentacaoModel>>(movimentacoes);
 
-            dataGridViewMovimentacao.DataSource = MovimentacaoList;
+            dataGridViewMovimentacao.DataSource = MovimentacaoView;
         }
 
         private void UpdateMovimentacaoList_Event(object sender, EventArgs args)
@@ -43,9 +43,7 @@ namespace LagControlForms
             {
                 var model = _mapper.Map<Movimentacao, MovimentacaoModel>(movimentacao);
 
-                MovimentacaoList.Add(model);
-
-                dataGridViewMovimentacao.DataSource = MovimentacaoList;
+                MovimentacaoView.Add(model);
             }
         }
     }

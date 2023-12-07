@@ -101,7 +101,7 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
             {
                 case TipoMovimentacaoEnum.Transferencia:
                     var contaTransferencia = (Conta)comboBoxContaTransferencia.SelectedItem;
-                    
+
                     movimentacao.ContaTransferenciaId = contaTransferencia.Id;
                     movimentacao.ContaTransferencia = contaTransferencia;
                     break;
@@ -138,7 +138,11 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
             {
                 var movimentacao = BuildMovimentacao();
 
+                _movimentacaoRepository.Add(movimentacao);
+
                 ResetFields(repeat);
+
+                UpdateMovimentacaoList.Invoke(movimentacao, new EventArgs());
             }
             catch (Exception ex)
             {
