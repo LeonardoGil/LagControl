@@ -1,8 +1,8 @@
 ﻿namespace LagControlForms.Forms.MainForms.Controls
 {
-    public partial class MenuLateral : UserControl
+    public partial class MenuLateralControl : UserControl
     {
-        public MenuLateral()
+        public MenuLateralControl()
         {
             InitializeComponent();
         }

@@ -28,19 +28,60 @@
         /// </summary>
         private void InitializeComponent()
         {
+            panelView = new Panel();
+            panelCenter = new Panel();
+            menuLateralControl1 = new Controls.MenuLateralControl();
+            panelCenter.SuspendLayout();
             SuspendLayout();
+            // 
+            // panelView
+            // 
+            panelView.BackColor = Color.FromArgb(46, 46, 46);
+            panelView.Dock = DockStyle.Fill;
+            panelView.Location = new Point(0, 0);
+            panelView.Margin = new Padding(5);
+            panelView.Name = "panelView";
+            panelView.Size = new Size(800, 580);
+            panelView.TabIndex = 1;
+            // 
+            // panelCenter
+            // 
+            panelCenter.BackColor = Color.FromArgb(31, 31, 31);
+            panelCenter.Controls.Add(menuLateralControl1);
+            panelCenter.Controls.Add(panelView);
+            panelCenter.Location = new Point(0, 10);
+            panelCenter.Name = "panelCenter";
+            panelCenter.Size = new Size(800, 580);
+            panelCenter.TabIndex = 2;
+            // 
+            // menuLateralControl1
+            // 
+            menuLateralControl1.BackColor = Color.FromArgb(31, 31, 31);
+            menuLateralControl1.Location = new Point(0, 0);
+            menuLateralControl1.Margin = new Padding(0);
+            menuLateralControl1.Name = "menuLateralControl1";
+            menuLateralControl1.Size = new Size(200, 580);
+            menuLateralControl1.TabIndex = 2;
             // 
             // MainForms
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackColor = Color.FromArgb(14, 14, 14);
+            ClientSize = new Size(800, 600);
+            Controls.Add(panelCenter);
             FormBorderStyle = FormBorderStyle.None;
             Name = "MainForms";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "MainForm";
+            panelCenter.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
+
+        private Controls.MenuLateralControl menuLateralControl1;
+        private Panel panelView;
+        private Panel panelCenter;
     }
 }
