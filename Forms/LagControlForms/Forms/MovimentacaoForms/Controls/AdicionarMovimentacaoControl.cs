@@ -164,8 +164,6 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
 
         private void ResetCheckedList_ItemCheckEvent(object sender, ItemCheckEventArgs e) => ResetCheckedList(e.Index);
 
-        #endregion
-
         private void TipoMovimentacao_SelectedChangedEvent(object sender, EventArgs e)
         {
             if (sender is CheckedListBox checkedListBox)
@@ -176,5 +174,7 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
                 comboBoxContaTransferencia.Visible = visible;
             }
         }
+
+        #endregion
     }
 }
