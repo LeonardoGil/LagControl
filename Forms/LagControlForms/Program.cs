@@ -24,9 +24,9 @@ namespace LagControlForms
             ApplicationConfiguration.Initialize();
 
 
-            Application.Run(new MainForms());
+            Application.Run(ServiceProvider.GetRequiredService<MainForms>());
 
-            Application.Run(ServiceProvider.GetRequiredService<MovimentacaoForm>());
+            //Application.Run(ServiceProvider.GetRequiredService<MovimentacaoForm>());
         }
     }
 }

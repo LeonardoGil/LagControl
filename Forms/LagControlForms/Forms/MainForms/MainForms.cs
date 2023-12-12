@@ -1,20 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using AutoMapper;
+using LagControlForms.Forms.MovimentacaoForms.Controls;
+using LagControlForms.Models;
+using LagFinanceLib.Domain;
+using LagFinanceLib.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace LagControlForms.Forms.MainForms
 {
     public partial class MainForms : Form
     {
-        public MainForms()
+        protected MovimentacaoViewControl movimentacaoViewControl;
+
+        private readonly IMapper _mapper;
+        private readonly IMovimentacaoRepository _movimentacaoRepository;
+
+        public MainForms(IMapper mapper,
+                         IMovimentacaoRepository movimentacaoRepository)
         {
             InitializeComponent();
+
+
+        }
+
+        private async Task Load()
+        {
+            var movimentacoesTask = _movimentacaoRepository.Get()
+                                                           .Include(x => x.Conta)
+                                                           .Include(x => x.Categoria)
+                                                           .ToListAsync();
+
+            movimentacaoViewControl = Program.ServiceProvider.GetRequiredService<MovimentacaoViewControl>();
+
+            var bindingSource = new BindingSource();
+            
+            try
+            {
+                bindingSource.DataSource = _mapper.Map<List<Movimentacao>, List<MovimentacaoModel>>(await movimentacoesTask);
+
+                movimentacaoViewControl.MovimentacaoView = bindingSource;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            panelView.SuspendLayout();
+
+            panelView.Controls.Add(movimentacaoViewControl);
+
+            panelView.ResumeLayout();
         }
     }
 }
