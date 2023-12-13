@@ -37,11 +37,10 @@
             // panelView
             // 
             panelView.BackColor = Color.FromArgb(46, 46, 46);
-            panelView.Dock = DockStyle.Fill;
-            panelView.Location = new Point(0, 0);
+            panelView.Location = new Point(200, 0);
             panelView.Margin = new Padding(5);
             panelView.Name = "panelView";
-            panelView.Size = new Size(800, 580);
+            panelView.Size = new Size(600, 580);
             panelView.TabIndex = 1;
             // 
             // panelCenter

@@ -18,9 +18,12 @@ namespace LagControlForms.Forms.MainForms
         public MainForms(IMapper mapper,
                          IMovimentacaoRepository movimentacaoRepository)
         {
+            _mapper = mapper;
+            _movimentacaoRepository = movimentacaoRepository;
+
             InitializeComponent();
 
-
+            Load();
         }
 
         private async Task Load()
@@ -33,7 +36,7 @@ namespace LagControlForms.Forms.MainForms
             movimentacaoViewControl = Program.ServiceProvider.GetRequiredService<MovimentacaoViewControl>();
 
             var bindingSource = new BindingSource();
-            
+
             try
             {
                 bindingSource.DataSource = _mapper.Map<List<Movimentacao>, List<MovimentacaoModel>>(await movimentacoesTask);
@@ -45,11 +48,8 @@ namespace LagControlForms.Forms.MainForms
                 MessageBox.Show(ex.Message);
             }
 
-            panelView.SuspendLayout();
-
             panelView.Controls.Add(movimentacaoViewControl);
-
-            panelView.ResumeLayout();
+            movimentacaoViewControl.Dock = DockStyle.Fill;
         }
     }
 }
