@@ -7,7 +7,7 @@
         public BindingSource MovimentacaoView
         {
             get => movimentacaoView;
-            
+
             set
             {
                 movimentacaoView = value;
