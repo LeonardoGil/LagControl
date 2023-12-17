@@ -1,4 +1,6 @@
-﻿namespace LagControlForms.Forms.MovimentacaoForms.Controls
+﻿using Microsoft.Extensions.DependencyInjection;
+
+namespace LagControlForms.Forms.MovimentacaoForms.Controls
 {
     partial class MovimentacaoViewControl
     {
@@ -28,11 +30,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             dataGridViewMovimentacao = new DataGridView();
+            panelSuperior = new Panel();
             ((System.ComponentModel.ISupportInitialize)dataGridViewMovimentacao).BeginInit();
             SuspendLayout();
             // 
@@ -45,53 +48,64 @@
             dataGridViewMovimentacao.BorderStyle = BorderStyle.None;
             dataGridViewMovimentacao.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dataGridViewMovimentacao.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(31, 31, 31);
-            dataGridViewCellStyle1.Font = new Font("MesloLGL NF", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(37, 37, 37);
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.MenuHighlight;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridViewMovimentacao.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(31, 31, 31);
+            dataGridViewCellStyle5.Font = new Font("MesloLGL NF", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle5.ForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(37, 37, 37);
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.MenuHighlight;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            dataGridViewMovimentacao.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             dataGridViewMovimentacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dataGridViewMovimentacao.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = SystemColors.Window;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            dataGridViewMovimentacao.DefaultCellStyle = dataGridViewCellStyle6;
             dataGridViewMovimentacao.EnableHeadersVisualStyles = false;
             dataGridViewMovimentacao.GridColor = Color.FromArgb(23, 23, 23);
-            dataGridViewMovimentacao.Location = new Point(0, 100);
+            dataGridViewMovimentacao.Location = new Point(0, 130);
             dataGridViewMovimentacao.Margin = new Padding(0);
             dataGridViewMovimentacao.MultiSelect = false;
             dataGridViewMovimentacao.Name = "dataGridViewMovimentacao";
             dataGridViewMovimentacao.ReadOnly = true;
             dataGridViewMovimentacao.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewMovimentacao.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewMovimentacao.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             dataGridViewMovimentacao.RowHeadersVisible = false;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(46, 46, 46);
-            dataGridViewCellStyle4.Font = new Font("MesloLGL NF", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewMovimentacao.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = Color.FromArgb(46, 46, 46);
+            dataGridViewCellStyle8.Font = new Font("MesloLGL NF", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle8.ForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewMovimentacao.RowsDefaultCellStyle = dataGridViewCellStyle8;
             dataGridViewMovimentacao.RowTemplate.Height = 25;
             dataGridViewMovimentacao.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewMovimentacao.ShowCellErrors = false;
             dataGridViewMovimentacao.ShowCellToolTips = false;
             dataGridViewMovimentacao.ShowRowErrors = false;
-            dataGridViewMovimentacao.Size = new Size(600, 480);
+            dataGridViewMovimentacao.Size = new Size(600, 470);
             dataGridViewMovimentacao.TabIndex = 0;
+            // 
+            // panelSuperior
+            // 
+            panelSuperior.BackColor = Color.FromArgb(31, 31, 31);
+            panelSuperior.Dock = DockStyle.Top;
+            panelSuperior.Location = new Point(0, 0);
+            panelSuperior.Margin = new Padding(0);
+            panelSuperior.Name = "panelSuperior";
+            panelSuperior.Size = new Size(600, 120);
+            panelSuperior.TabIndex = 1;
             // 
             // MovimentacaoViewControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(46, 46, 46);
+            BackColor = Color.FromArgb(14, 14, 14);
+            Controls.Add(panelSuperior);
             Controls.Add(dataGridViewMovimentacao);
             Margin = new Padding(0);
             Name = "MovimentacaoViewControl";
@@ -103,5 +117,6 @@
         #endregion
 
         private DataGridView dataGridViewMovimentacao;
+        private Panel panelSuperior;
     }
 }

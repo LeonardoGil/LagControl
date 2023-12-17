@@ -25,7 +25,7 @@ namespace LagControlForms.Configs
 
             #region Forms
             builder.Services.AddTransient<MainForms>();
-            builder.Services.AddTransient<MovimentacaoForm>();
+
             builder.Services.AddTransient<AdicionarMovimentacaoControl>();
             builder.Services.AddTransient<MovimentacaoViewControl>();
             #endregion

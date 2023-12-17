@@ -55,7 +55,7 @@
             // 
             // menuLateralControl1
             // 
-            menuLateralControl1.BackColor = Color.FromArgb(31, 31, 31);
+            menuLateralControl1.BackColor = Color.FromArgb(14, 14, 14);
             menuLateralControl1.Location = new Point(0, 0);
             menuLateralControl1.Margin = new Padding(0);
             menuLateralControl1.Name = "menuLateralControl1";

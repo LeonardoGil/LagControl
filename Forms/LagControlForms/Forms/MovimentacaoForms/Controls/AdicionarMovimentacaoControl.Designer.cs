@@ -105,7 +105,7 @@
             checkedListBoxTipoMovimentacao.ImeMode = ImeMode.NoControl;
             checkedListBoxTipoMovimentacao.Location = new Point(281, 45);
             checkedListBoxTipoMovimentacao.Name = "checkedListBoxTipoMovimentacao";
-            checkedListBoxTipoMovimentacao.Size = new Size(113, 60);
+            checkedListBoxTipoMovimentacao.Size = new Size(113, 63);
             checkedListBoxTipoMovimentacao.TabIndex = 10;
             checkedListBoxTipoMovimentacao.ItemCheck += ResetCheckedList_ItemCheckEvent;
             checkedListBoxTipoMovimentacao.SelectedIndexChanged += TipoMovimentacao_SelectedChangedEvent;
