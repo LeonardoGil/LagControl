@@ -22,7 +22,7 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
             set
             {
                 movimentacaoView = value;
-                dataGridViewMovimentacao.DataSource = movimentacaoView.DataSource;
+                dataGridViewMovimentacao.DataSource = movimentacaoView;
             }
         }
 
@@ -40,8 +40,6 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
             CarregarGrid();
         }
 
-
-
         private void CarregarGrid()
         {
             try
@@ -51,12 +49,10 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
                                                .Include(x => x.Categoria)
                                                .ToList();
 
-                var bindingSource = new BindingSource();
-
-
-                bindingSource.DataSource = _mapper.Map<List<Movimentacao>, List<MovimentacaoModel>>(movimentacoesTask);
-
-                MovimentacaoView = bindingSource;
+                MovimentacaoView = new BindingSource
+                {
+                    DataSource = _mapper.Map<List<Movimentacao>, List<MovimentacaoModel>>(movimentacoesTask)
+                };
             }
             catch (Exception ex)
             {
@@ -78,7 +74,6 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
             if (sender is Movimentacao movimentacao)
             {
                 var model = _mapper.Map<Movimentacao, MovimentacaoModel>(movimentacao);
-
                 MovimentacaoView.Add(model);
             }
         }
