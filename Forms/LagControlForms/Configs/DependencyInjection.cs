@@ -4,8 +4,9 @@ using LagFinanceLib.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using LagControlForms.Forms.MovimentacaoForms.Controls;
-using LagControlForms.Forms.MainForms;
+using LagControlForms.Controls;
+using LagControlForms.Views;
+using LagControlForms.Forms;
 
 namespace LagControlForms.Configs
 {
@@ -24,10 +25,10 @@ namespace LagControlForms.Configs
             #endregion
 
             #region Forms
-            builder.Services.AddTransient<MainForms>();
+            builder.Services.AddTransient<MainForm>();
 
             builder.Services.AddTransient<AdicionarMovimentacaoControl>();
-            builder.Services.AddTransient<MovimentacaoViewControl>();
+            builder.Services.AddTransient<MovimentacaoView>();
             #endregion
 
             return builder;

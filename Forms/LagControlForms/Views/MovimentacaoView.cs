@@ -1,34 +1,34 @@
 ﻿using AutoMapper;
+using LagControlForms.Controls;
 using LagControlForms.Models;
 using LagFinanceLib.Domain;
 using LagFinanceLib.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System.Windows.Forms;
 
-namespace LagControlForms.Forms.MovimentacaoForms.Controls
+namespace LagControlForms.Views
 {
-    public partial class MovimentacaoViewControl : UserControl
+    public partial class MovimentacaoView : UserControl
     {
         private readonly IMapper _mapper;
         private readonly IMovimentacaoRepository _movimentacaoRepository;
 
-        private BindingSource movimentacaoView { get; set; }
+        private BindingSource bindingSourceMovimentacao { get; set; }
 
-        public BindingSource MovimentacaoView
+        public BindingSource BindingSourceMovimentacao
         {
-            get => movimentacaoView;
+            get => bindingSourceMovimentacao;
 
             set
             {
-                movimentacaoView = value;
-                dataGridViewMovimentacao.DataSource = movimentacaoView;
+                bindingSourceMovimentacao = value;
+                dataGridViewMovimentacao.DataSource = bindingSourceMovimentacao;
             }
         }
 
         protected AdicionarMovimentacaoControl adicionarMovimentacaoControl;
 
-        public MovimentacaoViewControl(IMapper mapper,
+        public MovimentacaoView(IMapper mapper,
                                        IMovimentacaoRepository movimentacaoRepository)
         {
             _mapper = mapper;
@@ -49,7 +49,7 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
                                                .Include(x => x.Categoria)
                                                .ToList();
 
-                MovimentacaoView = new BindingSource
+                BindingSourceMovimentacao = new BindingSource
                 {
                     DataSource = _mapper.Map<List<Movimentacao>, List<MovimentacaoModel>>(movimentacoesTask)
                 };
@@ -74,7 +74,7 @@ namespace LagControlForms.Forms.MovimentacaoForms.Controls
             if (sender is Movimentacao movimentacao)
             {
                 var model = _mapper.Map<Movimentacao, MovimentacaoModel>(movimentacao);
-                MovimentacaoView.Add(model);
+                BindingSourceMovimentacao.Add(model);
             }
         }
     }

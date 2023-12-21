@@ -1,5 +1,5 @@
 using LagControlForms.Configs;
-using LagControlForms.Forms.MainForms;
+using LagControlForms.Forms;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -24,7 +24,7 @@ namespace LagControlForms
             ApplicationConfiguration.Initialize();
 
 
-            Application.Run(ServiceProvider.GetRequiredService<MainForms>());
+            Application.Run(ServiceProvider.GetRequiredService<MainForm>());
 
             //Application.Run(ServiceProvider.GetRequiredService<MovimentacaoForm>());
         }

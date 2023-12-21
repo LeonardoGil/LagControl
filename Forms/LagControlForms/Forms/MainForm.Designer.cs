@@ -1,6 +1,6 @@
-﻿namespace LagControlForms.Forms.MainForms
+﻿namespace LagControlForms.Forms
 {
-    partial class MainForms
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.

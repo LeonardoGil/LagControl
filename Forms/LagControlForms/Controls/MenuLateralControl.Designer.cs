@@ -1,4 +1,4 @@
-﻿namespace LagControlForms.Forms.MainForms.Controls
+﻿namespace LagControlForms.Controls
 {
     partial class MenuLateralControl
     {

@@ -1,11 +1,8 @@
 ﻿using LagFinanceLib.Domain;
 using LagFinanceLib.Domain.Enum;
 using LagFinanceLib.Interfaces;
-using LagFinanceLib.Repository;
-using Microsoft.EntityFrameworkCore;
-using System.Drawing;
 
-namespace LagControlForms.Forms.MovimentacaoForms.Controls
+namespace LagControlForms.Controls
 {
     public partial class AdicionarMovimentacaoControl : UserControl
     {

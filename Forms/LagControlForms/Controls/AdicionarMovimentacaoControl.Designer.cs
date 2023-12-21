@@ -1,4 +1,4 @@
-﻿namespace LagControlForms.Forms.MovimentacaoForms.Controls
+﻿namespace LagControlForms.Controls
 {
     partial class AdicionarMovimentacaoControl
     {
