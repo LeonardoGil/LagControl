@@ -28,26 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            buttonMovimentacoes = new Button();
             panelLogo = new Panel();
+            flowLayoutPanel = new FlowLayoutPanel();
             SuspendLayout();
-            // 
-            // buttonMovimentacoes
-            // 
-            buttonMovimentacoes.BackColor = Color.FromArgb(56, 56, 56);
-            buttonMovimentacoes.Cursor = Cursors.Hand;
-            buttonMovimentacoes.FlatAppearance.BorderSize = 0;
-            buttonMovimentacoes.FlatAppearance.MouseDownBackColor = Color.FromArgb(153, 153, 153);
-            buttonMovimentacoes.FlatStyle = FlatStyle.Flat;
-            buttonMovimentacoes.Font = new Font("MesloLGL Nerd Font Mono", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonMovimentacoes.ForeColor = Color.FromArgb(214, 214, 214);
-            buttonMovimentacoes.Location = new Point(0, 137);
-            buttonMovimentacoes.Margin = new Padding(0);
-            buttonMovimentacoes.Name = "buttonMovimentacoes";
-            buttonMovimentacoes.Size = new Size(200, 60);
-            buttonMovimentacoes.TabIndex = 0;
-            buttonMovimentacoes.Text = "Movimentações";
-            buttonMovimentacoes.UseVisualStyleBackColor = false;
             // 
             // panelLogo
             // 
@@ -59,13 +42,22 @@
             panelLogo.Size = new Size(200, 100);
             panelLogo.TabIndex = 1;
             // 
+            // flowLayoutPanel
+            // 
+            flowLayoutPanel.Dock = DockStyle.Fill;
+            flowLayoutPanel.Location = new Point(0, 100);
+            flowLayoutPanel.Margin = new Padding(0);
+            flowLayoutPanel.Name = "flowLayoutPanel";
+            flowLayoutPanel.Size = new Size(200, 480);
+            flowLayoutPanel.TabIndex = 2;
+            // 
             // MenuLateralControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(31, 31, 31);
+            Controls.Add(flowLayoutPanel);
             Controls.Add(panelLogo);
-            Controls.Add(buttonMovimentacoes);
             Margin = new Padding(0);
             Name = "MenuLateralControl";
             Size = new Size(200, 580);
@@ -73,8 +65,7 @@
         }
 
         #endregion
-
-        private Button buttonMovimentacoes;
         private Panel panelLogo;
+        private FlowLayoutPanel flowLayoutPanel;
     }
 }

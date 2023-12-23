@@ -30,7 +30,7 @@
         {
             panelView = new Panel();
             panelCenter = new Panel();
-            menuLateralControl1 = new Controls.MenuLateralControl();
+            menuLateralControl = new Controls.MenuLateralControl();
             panelCenter.SuspendLayout();
             SuspendLayout();
             // 
@@ -46,7 +46,7 @@
             // panelCenter
             // 
             panelCenter.BackColor = Color.FromArgb(31, 31, 31);
-            panelCenter.Controls.Add(menuLateralControl1);
+            panelCenter.Controls.Add(menuLateralControl);
             panelCenter.Controls.Add(panelView);
             panelCenter.Location = new Point(0, 10);
             panelCenter.Name = "panelCenter";
@@ -55,12 +55,12 @@
             // 
             // menuLateralControl1
             // 
-            menuLateralControl1.BackColor = Color.FromArgb(14, 14, 14);
-            menuLateralControl1.Location = new Point(0, 0);
-            menuLateralControl1.Margin = new Padding(0);
-            menuLateralControl1.Name = "menuLateralControl1";
-            menuLateralControl1.Size = new Size(200, 580);
-            menuLateralControl1.TabIndex = 2;
+            menuLateralControl.BackColor = Color.FromArgb(14, 14, 14);
+            menuLateralControl.Location = new Point(0, 0);
+            menuLateralControl.Margin = new Padding(0);
+            menuLateralControl.Name = "menuLateralControl1";
+            menuLateralControl.Size = new Size(200, 580);
+            menuLateralControl.TabIndex = 2;
             // 
             // MainForms
             // 
@@ -79,7 +79,7 @@
 
         #endregion
 
-        private Controls.MenuLateralControl menuLateralControl1;
+        private Controls.MenuLateralControl menuLateralControl;
         private Panel panelView;
         private Panel panelCenter;
     }
