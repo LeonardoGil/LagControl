@@ -49,6 +49,7 @@
             buttonMenu.TabIndex = 1;
             buttonMenu.Text = "Menu";
             buttonMenu.UseVisualStyleBackColor = false;
+            buttonMenu.Click += Expandir_e_Recolher_ClickEvent;
             // 
             // panel
             // 

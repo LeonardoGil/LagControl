@@ -10,14 +10,16 @@
 
         private List<Button> SubMenus = new();
 
-        public DropDownMenuControl(string MenuDescricao, Dictionary<string, EventHandler> subMenus)
+        public DropDownMenuControl()
         {
             InitializeComponent();
         }
 
-        public DropDownMenuControl()
+        public DropDownMenuControl(string MenuDescricao, Dictionary<string, EventHandler> subMenus)
         {
             InitializeComponent();
+
+            GerarMenu(MenuDescricao, subMenus);
         }
 
         private Button GerarSubMenuButton(string descricao, EventHandler clickEvent)
@@ -72,17 +74,15 @@
                 Size = new Size(LarguraDefault, AlturaDefault);
 
                 panel.Controls.Clear();
-                panel.Controls.AddRange(SubMenus.ToArray());
+                panel.Controls.Add(buttonMenu);
             }
             else if (SubMenus.Any())
             {
-                var largura = Size.Width + (LarguraDefault * SubMenus.Count);
-                var altura = Size.Height + (AlturaDefault * SubMenus.Count);
+                var altura = buttonMenu.Size.Height + (AlturaDefault * SubMenus.Count);
 
-                Size = new Size(largura, altura);
+                Size = new Size(LarguraDefault, altura);
 
-                panel.Controls.Clear();
-                panel.Controls.Add(buttonMenu);
+                panel.Controls.AddRange(SubMenus.ToArray());
             }
 
             Aberto = !Aberto;
