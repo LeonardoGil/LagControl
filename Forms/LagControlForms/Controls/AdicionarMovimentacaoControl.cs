@@ -108,7 +108,7 @@ namespace LagControlForms.Controls
             return movimentacao;
         }
 
-        private void LoadCategoriaList()
+        private async Task LoadCategoriaList()
         {
             CategoriaSelectList = new BindingSource
             {
@@ -119,7 +119,7 @@ namespace LagControlForms.Controls
             comboBoxCategoria.DisplayMember = "Descricao";
         }
 
-        private void LoadContaList()
+        private async Task LoadContaList()
         {
             var contas = _contaRepository.Get().ToList();
 
