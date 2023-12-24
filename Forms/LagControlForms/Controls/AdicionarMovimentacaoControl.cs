@@ -10,9 +10,9 @@ namespace LagControlForms.Controls
         private readonly IContaRepository _contaRepository;
         private readonly IMovimentacaoRepository _movimentacaoRepository;
 
-        public List<Categoria> CategoriaSelectList { get; private set; }
-        public List<Conta> ContaSelectList { get; private set; }
-        public List<Conta> ContaTransferenciaSelectList { get; private set; }
+        public BindingSource CategoriaSelectList { get; private set; }
+        public BindingSource ContaSelectList { get; private set; }
+        public BindingSource ContaTransferenciaSelectList { get; private set; }
 
         public event EventHandler UpdateMovimentacaoList;
 
@@ -44,8 +44,8 @@ namespace LagControlForms.Controls
             {
                 maskedTextBoxData.Text = DateTime.Now.Date.ToString("d");
 
-                comboBoxCategoria.SelectedItem = CategoriaSelectList.FirstOrDefault();
-                comboBoxConta.SelectedItem = ContaSelectList.FirstOrDefault();
+                comboBoxCategoria.SelectedItem = CategoriaSelectList.List.OfType<Categoria>().FirstOrDefault();
+                comboBoxConta.SelectedItem = ContaSelectList.List.OfType<Conta>().FirstOrDefault();
 
                 ResetCheckedList();
             }
@@ -110,7 +110,10 @@ namespace LagControlForms.Controls
 
         private void LoadCategoriaList()
         {
-            CategoriaSelectList = _categoriaRepository.Get().ToList();
+            CategoriaSelectList = new BindingSource
+            {
+                DataSource = _categoriaRepository.Get().ToList()
+            };
 
             comboBoxCategoria.DataSource = CategoriaSelectList;
             comboBoxCategoria.DisplayMember = "Descricao";
@@ -120,12 +123,18 @@ namespace LagControlForms.Controls
         {
             var contas = _contaRepository.Get().ToList();
 
-            ContaSelectList = contas;
-            comboBoxConta.DataSource = ContaSelectList;
+            // Conta
+            comboBoxConta.DataSource = ContaSelectList = new BindingSource
+            {
+                DataSource = contas
+            };
             comboBoxConta.DisplayMember = "Descricao";
 
-            ContaTransferenciaSelectList = contas;
-            comboBoxContaTransferencia.DataSource = ContaTransferenciaSelectList;
+            // Conta Transferencia
+            comboBoxContaTransferencia.DataSource = ContaTransferenciaSelectList = new BindingSource
+            {
+                DataSource = contas
+            };
             comboBoxContaTransferencia.DisplayMember = "Descricao";
         }
 
