@@ -98,7 +98,7 @@
             panelSuperior.Size = new Size(600, 120);
             panelSuperior.TabIndex = 1;
             // 
-            // MovimentacaoViewControl
+            // MovimentacaoView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -106,8 +106,9 @@
             Controls.Add(panelSuperior);
             Controls.Add(dataGridViewMovimentacao);
             Margin = new Padding(0);
-            Name = "MovimentacaoViewControl";
+            Name = "MovimentacaoView";
             Size = new Size(600, 580);
+            Load += MovimentacaoView_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridViewMovimentacao).EndInit();
             ResumeLayout(false);
         }

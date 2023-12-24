@@ -35,12 +35,9 @@ namespace LagControlForms.Views
             _movimentacaoRepository = movimentacaoRepository;
 
             InitializeComponent();
-
-            CarregarControles();
-            CarregarGrid();
         }
 
-        private void CarregarGrid()
+        private async Task CarregarGrid()
         {
             try
             {
@@ -60,13 +57,20 @@ namespace LagControlForms.Views
             }
         }
 
-        private void CarregarControles()
+        private async Task CarregarControles()
         {
-            adicionarMovimentacaoControl = Program.ServiceProvider.GetRequiredService<AdicionarMovimentacaoControl>();
-            adicionarMovimentacaoControl.UpdateMovimentacaoList += UpdateMovimentacaoList_Event;
+            try
+            {
+                adicionarMovimentacaoControl = Program.ServiceProvider.GetRequiredService<AdicionarMovimentacaoControl>();
+                adicionarMovimentacaoControl.UpdateMovimentacaoList += UpdateMovimentacaoList_Event;
 
-            panelSuperior.Controls.Add(adicionarMovimentacaoControl);
-            adicionarMovimentacaoControl.Dock = DockStyle.Fill;
+                panelSuperior.Controls.Add(adicionarMovimentacaoControl);
+                adicionarMovimentacaoControl.Dock = DockStyle.Fill;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         private void UpdateMovimentacaoList_Event(object sender, EventArgs args)
@@ -76,6 +80,12 @@ namespace LagControlForms.Views
                 var model = _mapper.Map<Movimentacao, MovimentacaoModel>(movimentacao);
                 BindingSourceMovimentacao.Add(model);
             }
+        }
+
+        private void MovimentacaoView_Load(object sender, EventArgs e)
+        {
+            CarregarControles();
+            CarregarGrid();
         }
     }
 }
