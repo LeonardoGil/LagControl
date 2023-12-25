@@ -1,14 +1,14 @@
-﻿namespace LagControlForms.Controls//
+﻿namespace LagControlForms.Controls
 {
     public partial class DropDownMenuControl : UserControl
     {
         public bool Aberto { get; set; }
 
-        protected int AlturaDefault = 60;
+        protected int AlturaDefault = 40;
 
         protected int LarguraDefault = 200;
 
-        private List<Button> SubMenus = new();
+        private readonly List<Button> SubMenus = new();
 
         public DropDownMenuControl()
         {
@@ -24,20 +24,21 @@
 
         private Button GerarSubMenuButton(string descricao, EventHandler clickEvent)
         {
-            var button = new Button();
-
-            // Default
-            button.BackColor = Color.FromArgb(56, 56, 56);
-            button.Cursor = Cursors.Hand;
+            var button = new Button
+            {
+                // Default
+                BackColor = Color.FromArgb(56, 56, 56),
+                Cursor = Cursors.Hand,
+                FlatStyle = FlatStyle.Flat,
+                Font = new Font("MesloLGL Nerd Font Mono", 10F, FontStyle.Regular, GraphicsUnit.Point),
+                ForeColor = Color.FromArgb(214, 214, 214),
+                Margin = new Padding(0),
+                Size = new Size(LarguraDefault, AlturaDefault),
+                TabIndex = 0,
+                UseVisualStyleBackColor = false,
+            };
             button.FlatAppearance.BorderSize = 0;
             button.FlatAppearance.MouseDownBackColor = Color.FromArgb(153, 153, 153);
-            button.FlatStyle = FlatStyle.Flat;
-            button.Font = new Font("MesloLGL Nerd Font Mono", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            button.ForeColor = Color.FromArgb(214, 214, 214);
-            button.Margin = new Padding(0);
-            button.Size = new Size(LarguraDefault, AlturaDefault);
-            button.TabIndex = 0;
-            button.UseVisualStyleBackColor = false;
 
             // Personalizado
             button.Name = string.Concat("button", descricao);
@@ -62,7 +63,7 @@
 
         private Point DefinirLocationSubMenu(int index)
         {
-            var y = AlturaDefault * (1 + index);
+            var y = buttonMenu.Height + (AlturaDefault * index);
 
             return new Point(0, y);
         }
@@ -71,7 +72,7 @@
         {
             if (Aberto)
             {
-                Size = new Size(LarguraDefault, AlturaDefault);
+                Size = new Size(buttonMenu.Width, buttonMenu.Height);
 
                 panel.Controls.Clear();
                 panel.Controls.Add(buttonMenu);

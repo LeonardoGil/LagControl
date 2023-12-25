@@ -35,7 +35,7 @@
             // 
             // buttonMenu
             // 
-            buttonMenu.BackColor = Color.FromArgb(56, 56, 56);
+            buttonMenu.BackColor = Color.FromArgb(38, 38, 38);
             buttonMenu.Cursor = Cursors.Hand;
             buttonMenu.FlatAppearance.BorderSize = 0;
             buttonMenu.FlatAppearance.MouseDownBackColor = Color.FromArgb(153, 153, 153);
@@ -45,7 +45,7 @@
             buttonMenu.Location = new Point(0, 0);
             buttonMenu.Margin = new Padding(0);
             buttonMenu.Name = "buttonMenu";
-            buttonMenu.Size = new Size(200, 60);
+            buttonMenu.Size = new Size(200, 50);
             buttonMenu.TabIndex = 1;
             buttonMenu.Text = "Menu";
             buttonMenu.UseVisualStyleBackColor = false;
@@ -58,7 +58,7 @@
             panel.Location = new Point(0, 0);
             panel.Margin = new Padding(0);
             panel.Name = "panel";
-            panel.Size = new Size(200, 60);
+            panel.Size = new Size(200, 50);
             panel.TabIndex = 2;
             // 
             // DropDownMenuControl
@@ -68,7 +68,7 @@
             Controls.Add(panel);
             Margin = new Padding(0);
             Name = "DropDownMenuControl";
-            Size = new Size(200, 60);
+            Size = new Size(200, 50);
             panel.ResumeLayout(false);
             ResumeLayout(false);
         }
