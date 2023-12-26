@@ -8,28 +8,15 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace LagControlForms.Views
 {
-    public partial class MovimentacaoView : UserControl
+    public partial class MovimentacaoView : BaseView
     {
         private readonly IMapper _mapper;
         private readonly IMovimentacaoRepository _movimentacaoRepository;
 
-        private BindingSource bindingSourceMovimentacao { get; set; }
-
-        public BindingSource BindingSourceMovimentacao
-        {
-            get => bindingSourceMovimentacao;
-
-            set
-            {
-                bindingSourceMovimentacao = value;
-                dataGridViewMovimentacao.DataSource = bindingSourceMovimentacao;
-            }
-        }
-
         protected AdicionarMovimentacaoControl adicionarMovimentacaoControl;
 
         public MovimentacaoView(IMapper mapper,
-                                       IMovimentacaoRepository movimentacaoRepository)
+                                IMovimentacaoRepository movimentacaoRepository) : base()
         {
             _mapper = mapper;
             _movimentacaoRepository = movimentacaoRepository;
@@ -41,14 +28,15 @@ namespace LagControlForms.Views
         {
             try
             {
-                var movimentacoesTask = _movimentacaoRepository.Get()
-                                               .Include(x => x.Conta)
-                                               .Include(x => x.Categoria)
-                                               .ToList();
+                var movimentacoes = _movimentacaoRepository.Get()
+                                                           .AsNoTracking()
+                                                           .Include(x => x.Conta)
+                                                           .Include(x => x.Categoria)
+                                                           .ToList();
 
-                BindingSourceMovimentacao = new BindingSource
+                View = new BindingSource
                 {
-                    DataSource = _mapper.Map<List<Movimentacao>, List<MovimentacaoModel>>(movimentacoesTask)
+                    DataSource = _mapper.Map<List<Movimentacao>, List<MovimentacaoModel>>(movimentacoes)
                 };
             }
             catch (Exception ex)
@@ -78,7 +66,7 @@ namespace LagControlForms.Views
             if (sender is Movimentacao movimentacao)
             {
                 var model = _mapper.Map<Movimentacao, MovimentacaoModel>(movimentacao);
-                BindingSourceMovimentacao.Add(model);
+                View.Add(model);
             }
         }
 
