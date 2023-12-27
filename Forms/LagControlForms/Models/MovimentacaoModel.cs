@@ -1,10 +1,11 @@
 ﻿using LagFinanceLib.Domain.Enum;
-using LagFinanceLib.Domain;
 
 namespace LagControlForms.Models
 {
     public class MovimentacaoModel
     {
+        public Guid Id { get; set; }
+
         public string Descricao { get; set; }
 
         public string Observacao { get; set; }

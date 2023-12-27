@@ -35,6 +35,23 @@ namespace LagControlForms.Controls
             LoadContaList();
         }
 
+        public async Task LoadFields(Movimentacao movimentacao)
+        {
+            textBoxDescricao.Text = movimentacao.Descricao;
+            checkBoxPendente.Checked = movimentacao.Pendente;
+
+            maskedTextBoxData.Text = movimentacao.Data.ToString("d");
+            textBoxValor.Text = movimentacao.Valor.ToString();
+
+            checkedListBoxTipoMovimentacao.SetItemChecked((int)movimentacao.TipoMovimentacao, true);
+
+            comboBoxCategoria.SelectedItem = CategoriaSelectList.List.OfType<Categoria>().FirstOrDefault(x => x.Id == movimentacao.CategoriaId);
+            comboBoxConta.SelectedItem = ContaSelectList.List.OfType<Conta>().FirstOrDefault(x => x.Id == movimentacao.ContaId);
+
+            if (movimentacao.TipoMovimentacao == TipoMovimentacaoEnum.Transferencia)
+                comboBoxContaTransferencia.SelectedItem = ContaTransferenciaSelectList.List.OfType<Conta>().FirstOrDefault(x => x.Id == movimentacao.ContaTransferenciaId);
+        }
+
         private void ResetFields(bool repeat = false)
         {
             textBoxDescricao.Text = string.Empty;

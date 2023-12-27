@@ -38,6 +38,8 @@ namespace LagControlForms.Views
                 {
                     DataSource = _mapper.Map<List<Movimentacao>, List<MovimentacaoModel>>(movimentacoes)
                 };
+
+                dataGridView.CellMouseDoubleClick += EditarMovimentacao_DoubleClickEvent;
             }
             catch (Exception ex)
             {
@@ -74,6 +76,21 @@ namespace LagControlForms.Views
         {
             CarregarControles();
             CarregarGrid();
+        }
+
+        private void EditarMovimentacao_DoubleClickEvent(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && sender is DataGridView dataGridView)
+            {
+                var row = dataGridView.SelectedRows[0];
+
+                if (row.DataBoundItem is MovimentacaoModel model)
+                {
+                    var movimentacao = _movimentacaoRepository.Get().First(x => x.Id == model.Id);
+
+                    adicionarMovimentacaoControl.LoadFields(movimentacao);
+                };
+            }
         }
     }
 }
