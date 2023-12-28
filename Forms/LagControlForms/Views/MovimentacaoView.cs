@@ -24,7 +24,7 @@ namespace LagControlForms.Views
             InitializeComponent();
         }
 
-        private async Task CarregarGrid()
+        private async Task LoadGrid()
         {
             try
             {
@@ -39,15 +39,15 @@ namespace LagControlForms.Views
                     DataSource = _mapper.Map<List<Movimentacao>, List<MovimentacaoModel>>(movimentacoes)
                 };
 
-                dataGridView.CellMouseDoubleClick += EditarMovimentacao_DoubleClickEvent;
+                dataGridView.CellMouseDoubleClick += EditMovimentacao_DoubleClickEvent;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private async Task CarregarControles()
+        
+        private async Task LoadControls()
         {
             try
             {
@@ -63,6 +63,7 @@ namespace LagControlForms.Views
             }
         }
 
+        #region Events 
         private void UpdateMovimentacaoList_Event(object sender, EventArgs args)
         {
             if (sender is Movimentacao movimentacao)
@@ -74,11 +75,11 @@ namespace LagControlForms.Views
 
         private void MovimentacaoView_Load(object sender, EventArgs e)
         {
-            CarregarControles();
-            CarregarGrid();
+            LoadControls();
+            LoadGrid();
         }
 
-        private void EditarMovimentacao_DoubleClickEvent(object sender, DataGridViewCellMouseEventArgs e)
+        private void EditMovimentacao_DoubleClickEvent(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left && sender is DataGridView dataGridView)
             {
@@ -92,5 +93,6 @@ namespace LagControlForms.Views
                 };
             }
         }
+        #endregion
     }
 }

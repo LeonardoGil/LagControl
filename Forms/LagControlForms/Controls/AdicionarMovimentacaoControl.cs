@@ -228,10 +228,6 @@ namespace LagControlForms.Controls
         }
         #endregion
 
-
-
-
-
         #region Events
 
         private void SetControls_LoadEvent(object sender, EventArgs e)
