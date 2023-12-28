@@ -5,6 +5,8 @@
     {
         void Add(TEntity entity);
 
+        void Update(TEntity entity);
+
         IQueryable<TEntity> Get();
 
         void Remove(TEntity entity);

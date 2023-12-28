@@ -88,7 +88,7 @@ namespace LagControlForms.Views
                 {
                     var movimentacao = _movimentacaoRepository.Get().First(x => x.Id == model.Id);
 
-                    adicionarMovimentacaoControl.LoadFields(movimentacao);
+                    adicionarMovimentacaoControl.EditMovimentacao(movimentacao);
                 };
             }
         }

@@ -16,6 +16,10 @@ namespace LagControlForms.Controls
 
         public event EventHandler UpdateMovimentacaoList;
 
+        private bool Edit { get; set; }
+
+        private Movimentacao Movimentacao { get; set; }
+
         public AdicionarMovimentacaoControl()
         {
             InitializeComponent();
@@ -35,49 +39,53 @@ namespace LagControlForms.Controls
             LoadContaList();
         }
 
-        public async Task LoadFields(Movimentacao movimentacao)
+        public async Task EditMovimentacao(Movimentacao movimentacao)
         {
-            textBoxDescricao.Text = movimentacao.Descricao;
-            checkBoxPendente.Checked = movimentacao.Pendente;
+            EnableButtons(false);
 
-            maskedTextBoxData.Text = movimentacao.Data.ToString("d");
-            textBoxValor.Text = movimentacao.Valor.ToString();
+            var load = LoadFields(movimentacao);
 
-            checkedListBoxTipoMovimentacao.SetItemChecked((int)movimentacao.TipoMovimentacao, true);
+            var edit = SetEdit(movimentacao);
 
-            comboBoxCategoria.SelectedItem = CategoriaSelectList.List.OfType<Categoria>().FirstOrDefault(x => x.Id == movimentacao.CategoriaId);
-            comboBoxConta.SelectedItem = ContaSelectList.List.OfType<Conta>().FirstOrDefault(x => x.Id == movimentacao.ContaId);
+            Task.WaitAll(load, edit);
 
-            if (movimentacao.TipoMovimentacao == TipoMovimentacaoEnum.Transferencia)
-                comboBoxContaTransferencia.SelectedItem = ContaTransferenciaSelectList.List.OfType<Conta>().FirstOrDefault(x => x.Id == movimentacao.ContaTransferenciaId);
+            EnableButtons();
         }
 
-        private void ResetFields(bool repeat = false)
+
+        #region Private methods
+        private async void Save(bool repeat)
         {
-            textBoxDescricao.Text = string.Empty;
-            textBoxValor.Text = string.Empty;
-
-            if (!repeat)
+            try
             {
-                maskedTextBoxData.Text = DateTime.Now.Date.ToString("d");
+                EnableButtons(false);
 
-                comboBoxCategoria.SelectedItem = CategoriaSelectList.List.OfType<Categoria>().FirstOrDefault();
-                comboBoxConta.SelectedItem = ContaSelectList.List.OfType<Conta>().FirstOrDefault();
+                await BuildMovimentacao();
 
-                ResetCheckedList();
+                if (Edit)
+                {
+                    _movimentacaoRepository.Update(Movimentacao);
+                }
+                else
+                {
+                    _movimentacaoRepository.Add(Movimentacao);
+                }
+
+                Clear(repeat);
+
+                UpdateMovimentacaoList.Invoke(Movimentacao, new EventArgs());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                EnableButtons();
             }
         }
 
-        private void ResetCheckedList(int index = -1)
-        {
-            foreach (int ind in checkedListBoxTipoMovimentacao.CheckedIndices)
-            {
-                if (ind != index)
-                    checkedListBoxTipoMovimentacao.SetItemChecked(ind, false);
-            }
-        }
-
-        private Movimentacao BuildMovimentacao()
+        private async Task<Movimentacao> BuildMovimentacao()
         {
             var movimentacao = new Movimentacao
             {
@@ -122,7 +130,54 @@ namespace LagControlForms.Controls
 
             }
 
+            Movimentacao = movimentacao;
+
             return movimentacao;
+        }
+
+
+        private void EnableButtons(bool enable = true)
+        {
+            buttonGravar.Enabled = enable;
+            buttonGravarRepetir.Enabled = enable;
+            buttonCancelar.Enabled = enable;
+        }
+
+        private void ResetCheckedList(int index = -1)
+        {
+            foreach (int ind in checkedListBoxTipoMovimentacao.CheckedIndices)
+            {
+                if (ind != index)
+                    checkedListBoxTipoMovimentacao.SetItemChecked(ind, false);
+            }
+        }
+
+
+        private async Task Clear(bool repeat = false)
+        {
+            textBoxDescricao.Text = string.Empty;
+            textBoxValor.Text = string.Empty;
+
+            if (!repeat)
+            {
+                maskedTextBoxData.Text = DateTime.Now.Date.ToString("d");
+
+                comboBoxCategoria.SelectedItem = CategoriaSelectList.List.OfType<Categoria>().FirstOrDefault();
+                comboBoxConta.SelectedItem = ContaSelectList.List.OfType<Conta>().FirstOrDefault();
+                comboBoxContaTransferencia.SelectedItem = ContaTransferenciaSelectList.List.OfType<Conta>().FirstOrDefault();
+
+                ResetCheckedList();
+            }
+
+            Movimentacao = default;
+            Edit = false;
+        }
+
+        private async Task SetEdit(Movimentacao movimentacao)
+        {
+            Edit = true;
+            Movimentacao = movimentacao;
+            buttonGravar.Text = "Editar";
         }
 
         private async Task LoadCategoriaList()
@@ -155,23 +210,27 @@ namespace LagControlForms.Controls
             comboBoxContaTransferencia.DisplayMember = "Descricao";
         }
 
-        private void Save(bool repeat)
+        private async Task LoadFields(Movimentacao movimentacao)
         {
-            try
-            {
-                var movimentacao = BuildMovimentacao();
+            textBoxDescricao.Text = movimentacao.Descricao;
+            checkBoxPendente.Checked = movimentacao.Pendente;
 
-                _movimentacaoRepository.Add(movimentacao);
+            maskedTextBoxData.Text = movimentacao.Data.ToString("d");
+            textBoxValor.Text = movimentacao.Valor.ToString();
 
-                ResetFields(repeat);
+            checkedListBoxTipoMovimentacao.SetItemChecked((int)movimentacao.TipoMovimentacao, true);
 
-                UpdateMovimentacaoList.Invoke(movimentacao, new EventArgs());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            comboBoxCategoria.SelectedItem = CategoriaSelectList.List.OfType<Categoria>().FirstOrDefault(x => x.Id == movimentacao.CategoriaId);
+            comboBoxConta.SelectedItem = ContaSelectList.List.OfType<Conta>().FirstOrDefault(x => x.Id == movimentacao.ContaId);
+
+            if (movimentacao.TipoMovimentacao == TipoMovimentacaoEnum.Transferencia)
+                comboBoxContaTransferencia.SelectedItem = ContaTransferenciaSelectList.List.OfType<Conta>().FirstOrDefault(x => x.Id == movimentacao.ContaTransferenciaId);
         }
+        #endregion
+
+
+
+
 
         #region Events
 

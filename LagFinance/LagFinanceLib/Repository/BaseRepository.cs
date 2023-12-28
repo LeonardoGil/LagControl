@@ -14,6 +14,12 @@ namespace LagFinanceLib.Repository
             _context.SaveChanges();
         }
 
+        public void Update(TEntity entity)
+        {
+            _context.Update(entity);
+            _context.SaveChanges();
+        }
+
         public IQueryable<TEntity> Get()
         {
             return _context.Set<TEntity>().AsQueryable();
