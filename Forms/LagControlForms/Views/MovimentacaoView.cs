@@ -68,7 +68,7 @@ namespace LagControlForms.Views
             if (sender is Movimentacao movimentacao)
             {
                 var model = _mapper.Map<Movimentacao, MovimentacaoModel>(movimentacao);
-                View.Add(model);
+                dataGridView.Invoke(() => View.Add(model));
             }
         }
 

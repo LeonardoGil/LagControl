@@ -71,9 +71,9 @@ namespace LagControlForms.Controls
                     _movimentacaoRepository.Add(Movimentacao);
                 }
 
-                Clear(repeat);
+                Task.Run(() => UpdateMovimentacaoList.Invoke(Movimentacao, new EventArgs()));
 
-                UpdateMovimentacaoList.Invoke(Movimentacao, new EventArgs());
+                Clear(repeat);
             }
             catch (Exception ex)
             {
