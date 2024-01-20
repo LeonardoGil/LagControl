@@ -5,8 +5,6 @@
         public MainForm()
         {
             InitializeComponent();
-
-            menuLateralControl.View = panelView;
         }
     }
 }
