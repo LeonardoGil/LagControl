@@ -1,17 +1,19 @@
 ﻿using AutoMapper;
-using LagControlForms.Controls;
+using LagControlForms.Forms.Controls;
 using LagControlForms.Models;
 using LagFinanceLib.Domain;
 using LagFinanceLib.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LagControlForms.Views
+namespace LagControlForms.Forms.Views
 {
     public partial class MovimentacaoView : BaseView
     {
         private readonly IMapper _mapper;
         private readonly IMovimentacaoRepository _movimentacaoRepository;
+
+        private DataGridView dataGridView;
 
         protected AdicionarMovimentacaoControl adicionarMovimentacaoControl;
 
@@ -34,7 +36,7 @@ namespace LagControlForms.Views
                                                            .Include(x => x.Categoria)
                                                            .ToList();
 
-                View = new BindingSource
+                new BindingSource
                 {
                     DataSource = _mapper.Map<List<Movimentacao>, List<MovimentacaoModel>>(movimentacoes)
                 };
@@ -54,7 +56,7 @@ namespace LagControlForms.Views
                 adicionarMovimentacaoControl = Program.ServiceProvider.GetRequiredService<AdicionarMovimentacaoControl>();
                 adicionarMovimentacaoControl.UpdateMovimentacaoList += UpdateMovimentacaoList_Event;
 
-                panelSuperior.Controls.Add(adicionarMovimentacaoControl);
+                //panelSuperior.Controls.Add(adicionarMovimentacaoControl);
                 adicionarMovimentacaoControl.Dock = DockStyle.Fill;
             }
             catch (Exception e)
@@ -69,7 +71,7 @@ namespace LagControlForms.Views
             if (sender is Movimentacao movimentacao)
             {
                 var model = _mapper.Map<Movimentacao, MovimentacaoModel>(movimentacao);
-                dataGridView.Invoke(() => View.Add(model));
+                //dataGridView.Invoke(() => View.Add(model));
             }
         }
 

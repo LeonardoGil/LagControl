@@ -4,8 +4,8 @@ using LagFinanceLib.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using LagControlForms.Controls;
-using LagControlForms.Views;
+using LagControlForms.Forms.Controls;
+using LagControlForms.Forms.Views;
 using LagControlForms.Forms;
 
 namespace LagControlForms.Configs

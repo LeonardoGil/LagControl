@@ -2,7 +2,7 @@
 using LagFinanceLib.Domain.Enum;
 using LagFinanceLib.Interfaces;
 
-namespace LagControlForms.Controls
+namespace LagControlForms.Forms.Controls
 {
     public partial class AdicionarMovimentacaoControl : UserControl
     {
