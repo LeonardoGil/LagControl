@@ -4,9 +4,9 @@
     {
         private BindingSource view;
 
-        protected BindingSource View 
+        protected BindingSource View
         {
-            get => view; 
+            get => view;
             set
             {
                 view = value;

@@ -28,22 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new Panel();
+            panelSuperior = new Panel();
             pictureBoxLogo = new PictureBox();
             panelView = new Panel();
-            panel1.SuspendLayout();
+            panelSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).BeginInit();
             SuspendLayout();
             // 
-            // panel1
+            // panelSuperior
             // 
-            panel1.BackColor = Color.FromArgb(84, 8, 28);
-            panel1.Controls.Add(pictureBoxLogo);
-            panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(984, 130);
-            panel1.TabIndex = 0;
+            panelSuperior.BackColor = Color.FromArgb(84, 8, 28);
+            panelSuperior.Controls.Add(pictureBoxLogo);
+            panelSuperior.Dock = DockStyle.Top;
+            panelSuperior.Location = new Point(0, 0);
+            panelSuperior.Name = "panelSuperior";
+            panelSuperior.Size = new Size(1000, 110);
+            panelSuperior.TabIndex = 0;
             // 
             // pictureBoxLogo
             // 
@@ -52,18 +52,17 @@
             pictureBoxLogo.Dock = DockStyle.Left;
             pictureBoxLogo.Location = new Point(0, 0);
             pictureBoxLogo.Name = "pictureBoxLogo";
-            pictureBoxLogo.Size = new Size(230, 130);
+            pictureBoxLogo.Size = new Size(230, 110);
             pictureBoxLogo.TabIndex = 0;
             pictureBoxLogo.TabStop = false;
             // 
             // panelView
             // 
             panelView.Dock = DockStyle.Fill;
-            panelView.Location = new Point(0, 130);
+            panelView.Location = new Point(0, 110);
             panelView.Margin = new Padding(0);
             panelView.Name = "panelView";
-            panelView.Padding = new Padding(5);
-            panelView.Size = new Size(984, 631);
+            panelView.Size = new Size(1000, 700);
             panelView.TabIndex = 1;
             // 
             // MainForm
@@ -71,9 +70,9 @@
             AutoScaleDimensions = new SizeF(10F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(11, 1, 11);
-            ClientSize = new Size(984, 761);
+            ClientSize = new Size(1000, 810);
             Controls.Add(panelView);
-            Controls.Add(panel1);
+            Controls.Add(panelSuperior);
             Font = new Font("SauceCodePro NF Medium", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             ForeColor = Color.DarkGray;
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -83,14 +82,14 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
-            panel1.ResumeLayout(false);
+            panelSuperior.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Panel panel1;
+        private Panel panelSuperior;
         private PictureBox pictureBoxLogo;
         private Panel panelView;
     }
