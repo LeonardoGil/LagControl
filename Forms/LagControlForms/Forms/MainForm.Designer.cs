@@ -1,4 +1,6 @@
-﻿namespace LagControlForms.Forms
+﻿using LagControlForms.Themes;
+
+namespace LagControlForms.Forms
 {
     partial class MainForm
     {
@@ -37,7 +39,7 @@
             // 
             // panelSuperior
             // 
-            panelSuperior.BackColor = Color.FromArgb(84, 8, 28);
+            panelSuperior.BackColor = DefaultTheme.Primary;
             panelSuperior.Controls.Add(pictureBoxLogo);
             panelSuperior.Dock = DockStyle.Top;
             panelSuperior.Location = new Point(0, 0);
@@ -58,6 +60,7 @@
             // 
             // panelView
             // 
+            panelView.BackColor = DefaultTheme.BackColor;
             panelView.Dock = DockStyle.Fill;
             panelView.Location = new Point(0, 110);
             panelView.Margin = new Padding(0);
@@ -69,7 +72,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(11, 1, 11);
+            BackColor = DefaultTheme.BackColor;
             ClientSize = new Size(1000, 810);
             Controls.Add(panelView);
             Controls.Add(panelSuperior);
@@ -78,7 +81,6 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(4, 3, 4, 3);
             Name = "MainForm";
-            Opacity = 0.98D;
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;

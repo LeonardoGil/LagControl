@@ -1,4 +1,6 @@
-﻿namespace LagControlForms.Forms.Views
+﻿using LagControlForms.Themes;
+
+namespace LagControlForms.Forms.Views
 {
     partial class BaseView
     {
@@ -34,10 +36,10 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(11, 1, 11);
+            BackColor = DefaultTheme.BackColor;
             Font = new Font("SauceCodePro NF", 12F, FontStyle.Regular, GraphicsUnit.Point);
             ForeColor = Color.FromArgb(125, 113, 93);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "BaseView";
             Padding = new Padding(8, 11, 8, 11);
             Size = new Size(1000, 700);

@@ -48,7 +48,7 @@ namespace LagControlForms.Forms.Views
                 MessageBox.Show(ex.Message);
             }
         }
-        
+
         private async Task LoadControls()
         {
             try

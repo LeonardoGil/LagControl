@@ -32,12 +32,13 @@
             // 
             // MovimentacaoView
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(14, 14, 14);
             Margin = new Padding(0);
             Name = "MovimentacaoView";
-            Size = new Size(600, 580);
+            Padding = new Padding(11, 15, 11, 15);
+            Size = new Size(857, 773);
             Load += MovimentacaoView_Load;
             ResumeLayout(false);
         }
