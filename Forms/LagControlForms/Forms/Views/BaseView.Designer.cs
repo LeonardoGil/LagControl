@@ -1,6 +1,8 @@
-﻿namespace LagControlForms.Views
+﻿using LagControlForms.Themes;
+
+namespace LagControlForms.Forms.Views
 {
-    partial class MovimentacaoView
+    partial class BaseView
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,15 +32,16 @@
         {
             SuspendLayout();
             // 
-            // MovimentacaoView
+            // BaseView
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(14, 14, 14);
+            BackColor = DefaultTheme.BackgroundColorPrimary;
+            Font = new Font("SauceCodePro NF", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            ForeColor = DefaultTheme.TextColorPrimary;
             Margin = new Padding(0);
-            Name = "MovimentacaoView";
-            Size = new Size(600, 580);
-            Load += MovimentacaoView_Load;
+            Name = "BaseView";
+            Size = new Size(784, 471);
             ResumeLayout(false);
         }
 

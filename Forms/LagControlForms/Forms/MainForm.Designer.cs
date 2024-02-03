@@ -1,4 +1,6 @@
-﻿namespace LagControlForms.Forms
+﻿using LagControlForms.Themes;
+
+namespace LagControlForms.Forms
 {
     partial class MainForm
     {
@@ -28,59 +30,70 @@
         /// </summary>
         private void InitializeComponent()
         {
+            panelSuperior = new Panel();
+            pictureBoxLogo = new PictureBox();
             panelView = new Panel();
-            panelCenter = new Panel();
-            menuLateralControl = new Controls.MenuLateralControl();
-            panelCenter.SuspendLayout();
+            panelSuperior.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).BeginInit();
             SuspendLayout();
+            // 
+            // panelSuperior
+            // 
+            panelSuperior.BackColor = Color.FromArgb(0, 31, 63);
+            panelSuperior.Controls.Add(pictureBoxLogo);
+            panelSuperior.Dock = DockStyle.Top;
+            panelSuperior.Location = new Point(0, 0);
+            panelSuperior.Name = "panelSuperior";
+            panelSuperior.Size = new Size(784, 90);
+            panelSuperior.TabIndex = 0;
+            // 
+            // pictureBoxLogo
+            // 
+            pictureBoxLogo.BackgroundImage = Properties.Resources.Lag_removebg_preview;
+            pictureBoxLogo.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBoxLogo.Dock = DockStyle.Left;
+            pictureBoxLogo.Location = new Point(0, 0);
+            pictureBoxLogo.Name = "pictureBoxLogo";
+            pictureBoxLogo.Size = new Size(230, 90);
+            pictureBoxLogo.TabIndex = 0;
+            pictureBoxLogo.TabStop = false;
             // 
             // panelView
             // 
-            panelView.BackColor = Color.FromArgb(46, 46, 46);
-            panelView.Location = new Point(200, 0);
-            panelView.Margin = new Padding(5);
+            panelView.BackColor = Color.FromArgb(30, 30, 30);
+            panelView.Dock = DockStyle.Fill;
+            panelView.ForeColor = Color.DarkBlue;
+            panelView.Location = new Point(0, 90);
+            panelView.Margin = new Padding(0);
             panelView.Name = "panelView";
-            panelView.Size = new Size(600, 580);
+            panelView.Size = new Size(784, 471);
             panelView.TabIndex = 1;
             // 
-            // panelCenter
+            // MainForm
             // 
-            panelCenter.BackColor = Color.FromArgb(31, 31, 31);
-            panelCenter.Controls.Add(menuLateralControl);
-            panelCenter.Controls.Add(panelView);
-            panelCenter.Location = new Point(0, 10);
-            panelCenter.Name = "panelCenter";
-            panelCenter.Size = new Size(800, 580);
-            panelCenter.TabIndex = 2;
-            // 
-            // menuLateralControl1
-            // 
-            menuLateralControl.BackColor = Color.FromArgb(14, 14, 14);
-            menuLateralControl.Location = new Point(0, 0);
-            menuLateralControl.Margin = new Padding(0);
-            menuLateralControl.Name = "menuLateralControl1";
-            menuLateralControl.Size = new Size(200, 580);
-            menuLateralControl.TabIndex = 2;
-            // 
-            // MainForms
-            // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(14, 14, 14);
-            ClientSize = new Size(800, 600);
-            Controls.Add(panelCenter);
-            FormBorderStyle = FormBorderStyle.None;
-            Name = "MainForms";
+            BackColor = Color.FromArgb(39, 39, 39);
+            ClientSize = new Size(784, 561);
+            Controls.Add(panelView);
+            Controls.Add(panelSuperior);
+            Font = new Font("JetBrainsMono NF Medium", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            ForeColor = Color.White;
+            Margin = new Padding(4, 3, 4, 3);
+            MinimumSize = new Size(800, 600);
+            Name = "MainForm";
+            ShowIcon = false;
+            ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "MainForm";
-            panelCenter.ResumeLayout(false);
+            panelSuperior.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Controls.MenuLateralControl menuLateralControl;
+        private Panel panelSuperior;
+        private PictureBox pictureBoxLogo;
         private Panel panelView;
-        private Panel panelCenter;
     }
 }

@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "LagControlCLI": {
-      "commandName": "Project",
-      "commandLineArgs": "Finance add -d \"Descrição teste\" -v \"35,50\" -dt \"20/11/2023\""
-    }
-  }
-}
