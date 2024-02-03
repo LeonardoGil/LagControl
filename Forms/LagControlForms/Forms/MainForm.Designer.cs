@@ -39,7 +39,7 @@ namespace LagControlForms.Forms
             // 
             // panelSuperior
             // 
-            panelSuperior.BackColor = DefaultTheme.Primary;
+            panelSuperior.BackColor = Color.FromArgb(0, 31, 63);
             panelSuperior.Controls.Add(pictureBoxLogo);
             panelSuperior.Dock = DockStyle.Top;
             panelSuperior.Location = new Point(0, 0);
@@ -60,8 +60,9 @@ namespace LagControlForms.Forms
             // 
             // panelView
             // 
-            panelView.BackColor = DefaultTheme.BackColor;
+            panelView.BackColor = Color.FromArgb(30, 30, 30);
             panelView.Dock = DockStyle.Fill;
+            panelView.ForeColor = Color.DarkBlue;
             panelView.Location = new Point(0, 110);
             panelView.Margin = new Padding(0);
             panelView.Name = "panelView";
@@ -72,12 +73,12 @@ namespace LagControlForms.Forms
             // 
             AutoScaleDimensions = new SizeF(10F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = DefaultTheme.BackColor;
+            BackColor = Color.FromArgb(39, 39, 39);
             ClientSize = new Size(1000, 810);
             Controls.Add(panelView);
             Controls.Add(panelSuperior);
-            Font = new Font("SauceCodePro NF Medium", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            ForeColor = Color.DarkGray;
+            Font = new Font("JetBrainsMono NF Medium", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(4, 3, 4, 3);
             Name = "MainForm";
