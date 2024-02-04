@@ -63,6 +63,26 @@ namespace LagControlForms.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap dinheiro_32 {
+            get {
+                object obj = ResourceManager.GetObject("dinheiro_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap dinheiro_64 {
+            get {
+                object obj = ResourceManager.GetObject("dinheiro_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Lag_removebg_preview {
             get {
                 object obj = ResourceManager.GetObject("Lag-removebg-preview", resourceCulture);
