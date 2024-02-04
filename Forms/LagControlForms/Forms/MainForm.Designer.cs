@@ -30,22 +30,22 @@ namespace LagControlForms.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            panelSuperior = new Panel();
+            panelHeader = new Panel();
             pictureBoxLogo = new PictureBox();
             panelView = new Panel();
-            panelSuperior.SuspendLayout();
+            panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).BeginInit();
             SuspendLayout();
             // 
-            // panelSuperior
+            // panelHeader
             // 
-            panelSuperior.BackColor = Color.FromArgb(0, 31, 63);
-            panelSuperior.Controls.Add(pictureBoxLogo);
-            panelSuperior.Dock = DockStyle.Top;
-            panelSuperior.Location = new Point(0, 0);
-            panelSuperior.Name = "panelSuperior";
-            panelSuperior.Size = new Size(784, 90);
-            panelSuperior.TabIndex = 0;
+            panelHeader.BackColor = Color.FromArgb(0, 31, 63);
+            panelHeader.Controls.Add(pictureBoxLogo);
+            panelHeader.Dock = DockStyle.Top;
+            panelHeader.Location = new Point(0, 0);
+            panelHeader.Name = "panelHeader";
+            panelHeader.Size = new Size(784, 90);
+            panelHeader.TabIndex = 0;
             // 
             // pictureBoxLogo
             // 
@@ -62,7 +62,7 @@ namespace LagControlForms.Forms
             // 
             panelView.BackColor = Color.FromArgb(30, 30, 30);
             panelView.Dock = DockStyle.Fill;
-            panelView.ForeColor = Color.DarkBlue;
+            panelView.ForeColor = Color.White;
             panelView.Location = new Point(0, 90);
             panelView.Margin = new Padding(0);
             panelView.Name = "panelView";
@@ -73,10 +73,10 @@ namespace LagControlForms.Forms
             // 
             AutoScaleDimensions = new SizeF(10F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(39, 39, 39);
+            BackColor = Color.FromArgb(30, 30, 30);
             ClientSize = new Size(784, 561);
             Controls.Add(panelView);
-            Controls.Add(panelSuperior);
+            Controls.Add(panelHeader);
             Font = new Font("JetBrainsMono NF Medium", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             ForeColor = Color.White;
             Margin = new Padding(4, 3, 4, 3);
@@ -85,14 +85,15 @@ namespace LagControlForms.Forms
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
-            panelSuperior.ResumeLayout(false);
+            Load += MainForm_Load;
+            panelHeader.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Panel panelSuperior;
+        private Panel panelHeader;
         private PictureBox pictureBoxLogo;
         private Panel panelView;
     }
