@@ -48,10 +48,10 @@
             // labelServices
             // 
             labelServices.AutoSize = true;
-            labelServices.Font = new Font("SauceCodePro NF SemiBold", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            labelServices.Location = new Point(25, 25);
+            labelServices.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            labelServices.Location = new Point(22, 26);
             labelServices.Name = "labelServices";
-            labelServices.Size = new Size(98, 24);
+            labelServices.Size = new Size(83, 25);
             labelServices.TabIndex = 0;
             labelServices.Text = "Serviços";
             // 
@@ -68,10 +68,11 @@
             // 
             // InicioView
             // 
-            AutoScaleDimensions = new SizeF(10F, 20F);
+            AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(flowPanelServices);
             Controls.Add(panelHeader);
+            Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             Name = "InicioView";
             Load += View_LoadEvent;
             panelHeader.ResumeLayout(false);

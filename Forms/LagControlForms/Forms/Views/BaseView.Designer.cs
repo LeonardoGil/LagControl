@@ -34,12 +34,13 @@ namespace LagControlForms.Forms.Views
             // 
             // BaseView
             // 
-            AutoScaleDimensions = new SizeF(10F, 20F);
+            AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = DefaultTheme.BackgroundColorPrimary;
-            Font = new Font("SauceCodePro NF", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            ForeColor = DefaultTheme.TextColorPrimary;
+            BackColor = Color.FromArgb(30, 30, 30);
+            Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            ForeColor = Color.White;
             Margin = new Padding(0);
+            MinimumSize = new Size(784, 471);
             Name = "BaseView";
             Size = new Size(784, 471);
             ResumeLayout(false);
