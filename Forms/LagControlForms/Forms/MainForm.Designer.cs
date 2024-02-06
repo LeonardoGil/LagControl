@@ -33,6 +33,7 @@ namespace LagControlForms.Forms
             panelHeader = new Panel();
             pictureBoxLogo = new PictureBox();
             panelView = new Panel();
+            panelLineBlue = new Panel();
             panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).BeginInit();
             SuspendLayout();
@@ -62,6 +63,7 @@ namespace LagControlForms.Forms
             // 
             panelView.BackColor = Color.FromArgb(30, 30, 30);
             panelView.Dock = DockStyle.Fill;
+            panelView.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             panelView.ForeColor = Color.White;
             panelView.Location = new Point(0, 90);
             panelView.Margin = new Padding(0);
@@ -69,12 +71,22 @@ namespace LagControlForms.Forms
             panelView.Size = new Size(784, 471);
             panelView.TabIndex = 1;
             // 
+            // panelLineBlue
+            // 
+            panelLineBlue.BackColor = Color.FromArgb(56, 199, 221);
+            panelLineBlue.Dock = DockStyle.Top;
+            panelLineBlue.Location = new Point(0, 90);
+            panelLineBlue.Name = "panelLineBlue";
+            panelLineBlue.Size = new Size(784, 1);
+            panelLineBlue.TabIndex = 2;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(10F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(30, 30, 30);
             ClientSize = new Size(784, 561);
+            Controls.Add(panelLineBlue);
             Controls.Add(panelView);
             Controls.Add(panelHeader);
             Font = new Font("JetBrainsMono NF Medium", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
@@ -96,5 +108,6 @@ namespace LagControlForms.Forms
         private Panel panelHeader;
         private PictureBox pictureBoxLogo;
         private Panel panelView;
+        private Panel panelLineBlue;
     }
 }
