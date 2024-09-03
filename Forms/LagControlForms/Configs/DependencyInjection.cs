@@ -4,7 +4,6 @@ using LagFinanceLib.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using LagControlForms.Forms.Views;
 using LagControlForms.Forms;
 
 namespace LagControlForms.Configs
@@ -24,7 +23,7 @@ namespace LagControlForms.Configs
             #endregion
 
             #region Forms
-            builder.Services.AddTransient<MainForm>();
+            builder.Services.AddSingleton<MainForm>();
             #endregion
 
             return builder;
