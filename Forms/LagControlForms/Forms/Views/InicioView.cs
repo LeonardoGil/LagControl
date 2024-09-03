@@ -17,6 +17,11 @@ namespace LagControlForms.Forms.Views
                 Text = "Finanças"
             };
 
+            if (ParentForm is MainForm mainForm)
+            {
+                finance.Click += mainForm.LoadFinanceView_Clicled;
+            }
+
             flowPanelServices.Controls.Add(finance);
         }
 
