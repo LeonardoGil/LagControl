@@ -1,28 +1,10 @@
-﻿using LagControlForms.Forms.Controls.Buttons;
-
-namespace LagControlForms.Forms.Views
+﻿namespace LagControlForms.Forms.Views
 {
     public partial class InicioView : BaseView
     {
         public InicioView()
         {
             InitializeComponent();
-        }
-
-        private void View_LoadEvent(object sender, EventArgs e)
-        {
-            var finance = new DisplayButton
-            {
-                Resource = "dinheiro",
-                Text = "Finanças"
-            };
-
-            if (ParentForm is MainForm mainForm)
-            {
-                finance.Click += mainForm.LoadFinanceView_Clicled;
-            }
-
-            flowPanelServices.Controls.Add(finance);
         }
 
         private void FlowPanelServices_ResizeEvent(object sender, EventArgs e)
