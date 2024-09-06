@@ -74,7 +74,6 @@
             Controls.Add(panelHeader);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             Name = "InicioView";
-            Load += View_LoadEvent;
             panelHeader.ResumeLayout(false);
             panelHeader.PerformLayout();
             ResumeLayout(false);
