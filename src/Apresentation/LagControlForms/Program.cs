@@ -13,7 +13,6 @@ namespace LagControlForms
         static void Main()
         {
             var builder = Host.CreateApplicationBuilder()
-                              .Profiles()
                               .Inject();
 
             var host = builder.Build();
