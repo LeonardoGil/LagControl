@@ -1,7 +1,7 @@
-﻿using LagFinanceLib.Database;
-using LagFinanceLib.Interfaces;
+﻿using LagFinanceInfra.Database;
+using LagFinanceInfra.Interfaces;
 
-namespace LagFinanceLib.Repository
+namespace LagFinanceInfra.Repository
 {
     public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity>
         where TEntity : class

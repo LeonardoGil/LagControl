@@ -1,4 +1,4 @@
-﻿using LagFinanceLib.Domain;
+﻿using LagFinanceDomain.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace LagFinanceLib.Database.Configurations

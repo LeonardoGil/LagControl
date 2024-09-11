@@ -1,8 +1,9 @@
-﻿using LagFinanceLib.Database.Configurations;
-using LagFinanceLib.Domain;
+﻿using LagFinanceInfra.Database.Configurations;
+using LagFinanceLib.Database.Configurations;
+using LagFinanceDomain.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace LagFinanceLib.Database
+namespace LagFinanceInfra.Database
 {
     public class LagFinanceDbContext : DbContext
     {

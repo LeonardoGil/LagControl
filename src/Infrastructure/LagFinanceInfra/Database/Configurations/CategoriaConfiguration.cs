@@ -1,7 +1,7 @@
-﻿using LagFinanceLib.Domain;
+﻿using LagFinanceDomain.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace LagFinanceLib.Database.Configurations
+namespace LagFinanceInfra.Database.Configurations
 {
     public static class CategoriaConfiguration
     {

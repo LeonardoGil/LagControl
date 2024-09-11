@@ -1,8 +1,8 @@
-﻿using LagFinanceLib.Database;
-using LagFinanceLib.Domain;
-using LagFinanceLib.Interfaces;
+﻿using LagFinanceDomain.Domain;
+using LagFinanceInfra.Database;
+using LagFinanceInfra.Interfaces;
 
-namespace LagFinanceLib.Repository
+namespace LagFinanceInfra.Repository
 {
     public class CategoriaRepository : BaseRepository<Categoria>, ICategoriaRepository
     {
