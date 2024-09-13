@@ -10,5 +10,7 @@
         IQueryable<TEntity> Get();
 
         void Remove(TEntity entity);
+
+        void SaveChanges();
     }
 }

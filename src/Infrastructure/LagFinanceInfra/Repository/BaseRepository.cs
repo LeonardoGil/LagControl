@@ -8,16 +8,19 @@ namespace LagFinanceInfra.Repository
     {
         protected LagFinanceDbContext _context;
 
+        protected BaseRepository(LagFinanceDbContext context)
+        {
+            _context = context;
+        }
+
         public void Add(TEntity entity)
         {
             _context.Add(entity);
-            _context.SaveChanges();
         }
 
         public void Update(TEntity entity)
         {
             _context.Update(entity);
-            _context.SaveChanges();
         }
 
         public IQueryable<TEntity> Get()
@@ -28,6 +31,10 @@ namespace LagFinanceInfra.Repository
         public void Remove(TEntity entity)
         {
             _context.Set<TEntity>().Remove(entity);
+        }
+
+        public void SaveChanges()
+        {
             _context.SaveChanges();
         }
     }
