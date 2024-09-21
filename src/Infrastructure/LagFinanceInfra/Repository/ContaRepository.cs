@@ -6,9 +6,8 @@ namespace LagFinanceInfra.Repository
 {
     public class ContaRepository : BaseRepository<Conta>, IContaRepository
     {
-        public ContaRepository(LagFinanceDbContext context)
+        public ContaRepository(LagFinanceDbContext context) : base(context)
         {
-            _context = context;
         }
     }
 }

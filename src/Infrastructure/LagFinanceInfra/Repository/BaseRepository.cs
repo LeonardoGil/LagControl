@@ -8,7 +8,7 @@ namespace LagFinanceInfra.Repository
     {
         protected LagFinanceDbContext _context;
 
-        protected BaseRepository(LagFinanceDbContext context)
+        public BaseRepository(LagFinanceDbContext context)
         {
             _context = context;
         }

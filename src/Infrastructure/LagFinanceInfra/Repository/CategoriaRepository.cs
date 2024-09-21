@@ -6,9 +6,8 @@ namespace LagFinanceInfra.Repository
 {
     public class CategoriaRepository : BaseRepository<Categoria>, ICategoriaRepository
     {
-        public CategoriaRepository(LagFinanceDbContext context)
+        public CategoriaRepository(LagFinanceDbContext context) : base(context)
         {
-            _context = context;
         }
     }
 }
