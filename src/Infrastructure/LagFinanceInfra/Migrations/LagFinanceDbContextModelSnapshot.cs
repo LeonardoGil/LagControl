@@ -41,27 +41,37 @@ namespace LagFinanceInfra.Migrations
                         new
                         {
                             Id = new Guid("1f7cce04-9ec5-4f43-bfdb-4ed1e478f1d4"),
-                            Descricao = "Mercado"
+                            Descricao = "Alimentação"
                         },
                         new
                         {
                             Id = new Guid("21bf5615-c004-4a31-99f8-b376afc573bc"),
-                            Descricao = "Contas"
+                            Descricao = "Habitação"
                         },
                         new
                         {
                             Id = new Guid("88c747e2-45ad-4067-aab8-ab287ceed954"),
-                            Descricao = "Farmacia"
+                            Descricao = "Transporte"
                         },
                         new
                         {
                             Id = new Guid("42c74818-8ef2-45b9-9ab6-a7dcd6dcc36f"),
-                            Descricao = "Lazer"
+                            Descricao = "Educação"
                         },
                         new
                         {
                             Id = new Guid("cf668fda-3d80-47c6-8352-6c04fb28c956"),
-                            Descricao = "Restaurante"
+                            Descricao = "Saúde"
+                        },
+                        new
+                        {
+                            Id = new Guid("7e17e895-1f93-4dd7-8c55-cc1941999e30"),
+                            Descricao = "Vestuário"
+                        },
+                        new
+                        {
+                            Id = new Guid("8afb4bec-0b6d-479c-bdd6-7ba7880ebb38"),
+                            Descricao = "Taxas"
                         });
                 });
 

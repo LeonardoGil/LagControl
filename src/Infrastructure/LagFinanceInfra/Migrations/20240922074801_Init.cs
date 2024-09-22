@@ -89,11 +89,13 @@ namespace LagFinanceInfra.Migrations
                 columns: new[] { "Id", "Descricao" },
                 values: new object[,]
                 {
-                    { new Guid("1f7cce04-9ec5-4f43-bfdb-4ed1e478f1d4"), "Mercado" },
-                    { new Guid("21bf5615-c004-4a31-99f8-b376afc573bc"), "Contas" },
-                    { new Guid("42c74818-8ef2-45b9-9ab6-a7dcd6dcc36f"), "Lazer" },
-                    { new Guid("88c747e2-45ad-4067-aab8-ab287ceed954"), "Farmacia" },
-                    { new Guid("cf668fda-3d80-47c6-8352-6c04fb28c956"), "Restaurante" }
+                    { new Guid("1f7cce04-9ec5-4f43-bfdb-4ed1e478f1d4"), "Alimentação" },
+                    { new Guid("21bf5615-c004-4a31-99f8-b376afc573bc"), "Habitação" },
+                    { new Guid("42c74818-8ef2-45b9-9ab6-a7dcd6dcc36f"), "Educação" },
+                    { new Guid("7e17e895-1f93-4dd7-8c55-cc1941999e30"), "Vestuário" },
+                    { new Guid("88c747e2-45ad-4067-aab8-ab287ceed954"), "Transporte" },
+                    { new Guid("8afb4bec-0b6d-479c-bdd6-7ba7880ebb38"), "Taxas" },
+                    { new Guid("cf668fda-3d80-47c6-8352-6c04fb28c956"), "Saúde" }
                 });
 
             migrationBuilder.InsertData(
