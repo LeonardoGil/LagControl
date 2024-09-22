@@ -1,8 +1,9 @@
-﻿using LagFinanceLib.Database.Configurations;
-using LagFinanceLib.Domain;
+﻿using LagFinanceInfra.Database.Configurations;
+using LagFinanceLib.Database.Configurations;
+using LagFinanceDomain.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace LagFinanceLib.Database
+namespace LagFinanceInfra.Database
 {
     public class LagFinanceDbContext : DbContext
     {
@@ -11,7 +12,7 @@ namespace LagFinanceLib.Database
         public LagFinanceDbContext(DbContextOptions options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseSqlServer(@"Data Source=localhost;Initial Catalog=LagControl;Persist Security Info=True;User ID=sa;Password=P@ssw0rd!;Connect Timeout=900;TrustServerCertificate=true");
+            => optionsBuilder.UseSqlServer(@"Data Source=host.docker.internal;Initial Catalog=LagControl;Persist Security Info=True;User ID=sa;Password=P@ssw0rd123;Connect Timeout=900;TrustServerCertificate=true");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,23 +1,26 @@
-﻿using LagFinanceLib.Database;
-using LagFinanceLib.Interfaces;
+﻿using LagFinanceInfra.Database;
+using LagFinanceInfra.Interfaces;
 
-namespace LagFinanceLib.Repository
+namespace LagFinanceInfra.Repositories
 {
     public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity>
         where TEntity : class
     {
         protected LagFinanceDbContext _context;
 
+        public BaseRepository(LagFinanceDbContext context)
+        {
+            _context = context;
+        }
+
         public void Add(TEntity entity)
         {
             _context.Add(entity);
-            _context.SaveChanges();
         }
 
         public void Update(TEntity entity)
         {
             _context.Update(entity);
-            _context.SaveChanges();
         }
 
         public IQueryable<TEntity> Get()
@@ -28,6 +31,10 @@ namespace LagFinanceLib.Repository
         public void Remove(TEntity entity)
         {
             _context.Set<TEntity>().Remove(entity);
+        }
+
+        public void SaveChanges()
+        {
             _context.SaveChanges();
         }
     }

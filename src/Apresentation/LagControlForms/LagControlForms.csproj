@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Domain\LagFinanceLib\LagFinanceLib.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\LagFinanceInfra\LagFinanceInfra.csproj" />
   </ItemGroup>
 
   <ItemGroup>

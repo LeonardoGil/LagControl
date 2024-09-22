@@ -1,4 +1,4 @@
-﻿namespace LagFinanceLib.Interfaces
+﻿namespace LagFinanceInfra.Interfaces
 {
     public interface IBaseRepository<TEntity>
         where TEntity : class
@@ -10,5 +10,7 @@
         IQueryable<TEntity> Get();
 
         void Remove(TEntity entity);
+
+        void SaveChanges();
     }
 }

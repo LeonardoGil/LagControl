@@ -1,6 +1,6 @@
-﻿using LagFinanceLib.Domain;
+﻿using LagFinanceDomain.Domain;
 
-namespace LagFinanceLib.Interfaces
+namespace LagFinanceInfra.Interfaces
 {
     public interface ICategoriaRepository : IBaseRepository<Categoria>
     {
