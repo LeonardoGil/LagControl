@@ -2,7 +2,7 @@
 using LagFinanceInfra.Database;
 using LagFinanceInfra.Interfaces;
 
-namespace LagFinanceInfra.Repository
+namespace LagFinanceInfra.Repositories
 {
     public class MovimentacaoRepository : BaseRepository<Movimentacao>, IMovimentacaoRepository
     {

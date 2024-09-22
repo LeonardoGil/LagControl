@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using LagControlForms.Forms;
-using LagFinanceInfra.Repository;
+using LagFinanceInfra.Repositories;
 using LagFinanceInfra.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using LagFinanceInfra.Database;
