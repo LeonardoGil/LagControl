@@ -1,0 +1,6 @@
+@LagControlAPI_HostAddress = http://localhost:5188
+
+GET {{LagControlAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
