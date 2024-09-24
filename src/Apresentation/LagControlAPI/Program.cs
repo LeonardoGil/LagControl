@@ -46,7 +46,7 @@ namespace LagControlAPI
         {
             builder.Services.AddDbContext<LagFinanceDbContext>(opt => opt.UseSqlServer(@"Data Source=localhost;Initial Catalog=LagControl;Persist Security Info=True;User ID=sa;Password=P@ssw0rd!;Connect Timeout=900;TrustServerCertificate=true"));
 
-            builder.Services.AddScoped<IFinanceService, FinanceService>();
+            builder.Services.AddScoped<IMovimentacaoService, MovimentacaoService>();
 
             builder.Services.AddScoped<IContaRepository, ContaRepository>();
             builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();

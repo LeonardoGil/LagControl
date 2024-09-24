@@ -1,6 +1,6 @@
 ﻿namespace LagFinanceApplication.Models
 {
-    public class AddMovimentacaoModel
+    public class AdicionarMovimentacaoModel
     {
         public string Descricao { get; set; }
 
