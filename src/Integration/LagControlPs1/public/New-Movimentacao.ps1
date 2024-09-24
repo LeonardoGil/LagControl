@@ -1,3 +1,5 @@
+using namespace System.Management.Automation.Host
+
 function New-Movimentacao {
 
     [CmdletBinding()]
@@ -19,24 +21,33 @@ function New-Movimentacao {
         $data = (Get-Date),
 
         [Parameter(Mandatory)]
-        [guid]
-        $ContaId,
+        [Guid]
+        $contaId,
 
-        [Parameter(Mandatory)]
-        [guid]
-        $CategoriaId
+        [Parameter()]
+        [Guid]
+        $categoriaId
     )
+
+    if ($null -eq $categoriaId -or $categoriaId -eq [Guid]::Empty) {
+
+        $categorias = Invoke-RestMethod -Uri 'https://localhost:7081/Categoria/Listar' -Method 'Get'
+        
+        $choices = $categorias | ForEach-Object { [ChoiceDescription]::new("&$([Array]::IndexOf($categorias, $_)) $($_.descricao)" , $_.descricao ) }
+
+        $categoriaIndex = $host.UI.PromptForChoice("Informe a Categoria", "", $choices, 0)
+
+        $categoriaId = $categorias[$categoriaIndex].Id
+    }
 
     $body = [PSCustomObject]@{
         Descricao = $descricao
         Observacao = $observacao
         Valor = $valor
         Data = $data.ToString("o")
-        ContaId = $ContaId
-        CategoriaId = $CategoriaId
+        ContaId = $contaId
+        CategoriaId = $categoriaId
     } | ConvertTo-Json
-
-    Write-Output $body
 
     Invoke-RestMethod -Uri 'https://localhost:7081/Movimentacao/Adicionar' `
                       -Method 'Post' `
