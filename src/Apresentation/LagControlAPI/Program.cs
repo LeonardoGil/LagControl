@@ -1,5 +1,6 @@
 
 using LagFinanceApplication.Interfaces;
+using LagFinanceApplication.Queries;
 using LagFinanceApplication.Services;
 using LagFinanceInfra.Database;
 using LagFinanceInfra.Interfaces;
@@ -51,6 +52,8 @@ namespace LagControlAPI
             builder.Services.AddScoped<IContaRepository, ContaRepository>();
             builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
             builder.Services.AddScoped<IMovimentacaoRepository, MovimentacaoRepository>();
+
+            builder.Services.AddScoped<ICategoriaQuery, CategoriaQuery>();
         }
     }
 }

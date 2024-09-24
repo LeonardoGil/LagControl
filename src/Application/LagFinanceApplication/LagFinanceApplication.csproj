@@ -10,8 +10,4 @@
     <ProjectReference Include="..\..\Infrastructure\LagFinanceInfra\LagFinanceInfra.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Queries\" />
-  </ItemGroup>
-
 </Project>
