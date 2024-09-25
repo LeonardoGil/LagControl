@@ -20,7 +20,7 @@ function New-Movimentacao {
         [datetime]
         $data = (Get-Date),
 
-        [Parameter(Mandatory)]
+        [Parameter()]
         [Guid]
         $contaId,
 
@@ -28,6 +28,17 @@ function New-Movimentacao {
         [Guid]
         $categoriaId
     )
+
+    if ($null -eq $contaId -or $contaId -eq [Guid]::Empty) {
+
+        $contas = Invoke-RestMethod -Uri 'https://localhost:7081/Conta/Listar' -Method 'Get'
+        
+        $choices = $contas | ForEach-Object { [ChoiceDescription]::new("&$([Array]::IndexOf($contas, $_)) $($_.descricao)" , $_.descricao ) }
+
+        $contaIndex = $host.UI.PromptForChoice("Informe a Conta", "", $choices, 0)
+
+        $contaId = $contas[$contaIndex].Id
+    }
 
     if ($null -eq $categoriaId -or $categoriaId -eq [Guid]::Empty) {
 
