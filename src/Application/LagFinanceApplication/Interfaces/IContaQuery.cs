@@ -5,5 +5,7 @@ namespace LagFinanceApplication.Interfaces
     public interface IContaQuery
     {
         IList<ContaListaModel> Listar();
+
+        ContaSaldoModel ConsultarSaldo(Guid contaId);
     }
 }

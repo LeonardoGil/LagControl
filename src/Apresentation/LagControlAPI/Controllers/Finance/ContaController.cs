@@ -26,5 +26,19 @@ namespace LagControlAPI.Controllers.Finance
                 return BadRequest(ex);
             }
         }
+
+        [HttpGet]
+        [Route("Saldo/{contaId}")]
+        public IActionResult Saldo([FromRoute] Guid contaId)
+        {
+            try
+            {
+                return Ok(_contaQuery.ConsultarSaldo(contaId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
     }
 }

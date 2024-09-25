@@ -14,6 +14,19 @@ namespace LagFinanceApplication.Queries
             _contaRepository = contaRepository;
         }
 
+        public ContaSaldoModel ConsultarSaldo(Guid contaId)
+        {
+            var conta = _contaRepository.Get().AsNoTracking()
+                                              .Include(x => x.Movimentacoes)
+                                              .FirstOrDefault(x => x.Id == contaId) ?? throw new Exception("Conta não encontrada");
+
+            return new ContaSaldoModel
+            {
+                Descricao = conta.Descricao,
+                Saldo = conta.Saldo()
+            };
+        }
+
         public IList<ContaListaModel> Listar()
         {
             var conta = _contaRepository.Get().AsNoTracking();
