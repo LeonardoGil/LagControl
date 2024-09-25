@@ -6,16 +6,16 @@ using LagFinanceInfra.Interfaces;
 
 namespace LagFinanceApplication.Services
 {
-    public class FinanceService : IFinanceService
+    public class MovimentacaoService : IMovimentacaoService
     {
         private readonly IMovimentacaoRepository _movimentacaoRepository;
 
-        public FinanceService(IMovimentacaoRepository movimentacaoRepository)
+        public MovimentacaoService(IMovimentacaoRepository movimentacaoRepository)
         {
             _movimentacaoRepository = movimentacaoRepository;
         }
 
-        public void AddMovimentacao(AddMovimentacaoModel model)
+        public void AdicionarDespesa(AdicionarMovimentacaoModel model)
         {
             var movimentacao = new Movimentacao
             {

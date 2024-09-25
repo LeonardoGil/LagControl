@@ -2,8 +2,8 @@
 
 namespace LagFinanceApplication.Interfaces
 {
-    public interface IFinanceService
+    public interface IContaQuery
     {
-        void AddMovimentacao(AddMovimentacaoModel model);
+        IList<ContaListaModel> Listar();
     }
 }
