@@ -8,10 +8,28 @@ namespace LagControlAPI.Controllers.Finance
     public class CategoriaController : Controller
     {
         private readonly ICategoriaQuery _categoriaQuery;
+        private readonly ICategoriaService _categoriaService;
 
-        public CategoriaController(ICategoriaQuery categoriaQuery)
+        public CategoriaController(ICategoriaQuery categoriaQuery, 
+                                   ICategoriaService categoriaService)
         {
             _categoriaQuery = categoriaQuery;
+            _categoriaService = categoriaService;
+        }
+
+        [HttpPost]
+        [Route("Adicionar")]
+        public IActionResult Adicionar([FromBody] AdicionarCategoriaModel model)
+        {
+            try
+            {
+                _categoriaService.Adicionar(model);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         [HttpGet]
