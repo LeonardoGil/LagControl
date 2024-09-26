@@ -3,10 +3,20 @@ function New-Categoria {
     param (
         [Parameter(Mandatory, Position=0)]
         [string]
-        $descricao
+        $descricao,
+
+        [Parameter()]
+        [switch]
+        $despesa
     )
 
-    $body = [PSCustomObject]@{ Descricao = $descricao } | ConvertTo-Json
+    $tipo = 0 # Receita
+    if ($despesa) { $tipo = 1 } # Despesa 
+
+    $body = [PSCustomObject]@{ 
+        Descricao = $descricao 
+        Tipo = $tipo
+    } | ConvertTo-Json
 
     Invoke-RestMethod -Uri 'https://localhost:7081/Categoria/Adicionar' `
                       -Method 'Post' `
