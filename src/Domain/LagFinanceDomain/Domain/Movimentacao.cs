@@ -1,11 +1,10 @@
-﻿using LagFinanceDomain.Enum;
+﻿using LagBaseDomain;
+using LagFinanceDomain.Enum;
 
 namespace LagFinanceDomain.Domain
 {
-    public class Movimentacao
+    public class Movimentacao : Entity
     {
-        public Guid Id { get; set; }
-
         public string Descricao { get; set; }
 
         public string Observacao { get; set; }

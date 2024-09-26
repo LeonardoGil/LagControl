@@ -1,11 +1,10 @@
-﻿using LagFinanceDomain.Enum;
+﻿using LagBaseDomain;
+using LagFinanceDomain.Enum;
 
 namespace LagFinanceDomain.Domain
 {
-    public class Categoria
+    public class Categoria : Entity
     {
-        public Guid Id { get; set; }
-
         public string Descricao { get; set; }
 
         public TipoCategoriaEnum Tipo { get; set; }

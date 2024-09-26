@@ -1,11 +1,10 @@
-﻿using LagFinanceDomain.Enum;
+﻿using LagBaseDomain;
+using LagFinanceDomain.Enum;
 
 namespace LagFinanceDomain.Domain
 {
-    public class Conta
+    public class Conta : Entity
     {
-        public Guid Id { get; set; }
-
         public string Descricao { get; set; }
 
         public virtual List<Movimentacao> Movimentacoes { get; set; }

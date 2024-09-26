@@ -1,4 +1,5 @@
-﻿using LagFinanceInfra.Database;
+﻿using LagBaseDomain;
+using LagFinanceInfra.Database;
 using LagFinanceInfra.Interfaces;
 
 namespace LagFinanceInfra.Repositories
@@ -15,11 +16,17 @@ namespace LagFinanceInfra.Repositories
 
         public void Add(TEntity entity)
         {
+            if (entity is Entity baseEntity)
+                baseEntity.DataCriacao = DateTime.Now;
+
             _context.Add(entity);
         }
 
         public void Update(TEntity entity)
         {
+            if (entity is Entity baseEntity)
+                baseEntity.DataAtualizacao = DateTime.Now;
+
             _context.Update(entity);
         }
 
