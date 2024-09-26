@@ -14,17 +14,19 @@ namespace LagFinanceApplication.Queries
             _contaRepository = contaRepository;
         }
 
-        public ContaSaldoModel ConsultarSaldo(Guid contaId)
+        public IList<ContaSaldoModel> ConsultarSaldo(ConsultarSaldoQueryModel model)
         {
-            var conta = _contaRepository.Get().AsNoTracking()
-                                              .Include(x => x.Movimentacoes)
-                                              .FirstOrDefault(x => x.Id == contaId) ?? throw new Exception("Conta não encontrada");
+            var contas = _contaRepository.Get().AsNoTracking();
 
-            return new ContaSaldoModel
-            {
-                Descricao = conta.Descricao,
-                Saldo = conta.Saldo()
-            };
+            if (model.ContaIds is not null && model.ContaIds.Any())
+                contas = contas.Where(x => model.ContaIds.Contains(x.Id));
+
+            return [.. contas.Include(x => x.Movimentacoes)
+                             .Select(conta => new ContaSaldoModel
+                             {
+                                 Descricao = conta.Descricao,
+                                 Saldo = conta.Saldo()
+                             })];
         }
 
         public IList<ContaListaModel> Listar()

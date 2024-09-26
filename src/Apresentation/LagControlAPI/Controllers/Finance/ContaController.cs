@@ -1,4 +1,5 @@
 ﻿using LagFinanceApplication.Interfaces;
+using LagFinanceApplication.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LagControlAPI.Controllers.Finance
@@ -28,12 +29,12 @@ namespace LagControlAPI.Controllers.Finance
         }
 
         [HttpGet]
-        [Route("Saldo/{contaId}")]
-        public IActionResult Saldo([FromRoute] Guid contaId)
+        [Route("Saldos")]
+        public IActionResult Saldos([FromQuery] ConsultarSaldoQueryModel query)
         {
             try
             {
-                return Ok(_contaQuery.ConsultarSaldo(contaId));
+                return Ok(_contaQuery.ConsultarSaldo(query));
             }
             catch (Exception ex)
             {
