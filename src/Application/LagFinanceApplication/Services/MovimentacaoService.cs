@@ -15,7 +15,7 @@ namespace LagFinanceApplication.Services
             _movimentacaoRepository = movimentacaoRepository;
         }
 
-        public void AdicionarDespesa(AdicionarMovimentacaoModel model)
+        public void Adicionar(AdicionarMovimentacaoModel model)
         {
             var movimentacao = new Movimentacao
             {
@@ -27,7 +27,7 @@ namespace LagFinanceApplication.Services
                 Observacao = model.Observacao,
                 Data = model.Data,
 
-                TipoMovimentacao = TipoMovimentacaoEnum.Despesa
+                TipoMovimentacao = model.Tipo
             };
 
             _movimentacaoRepository.Add(movimentacao);

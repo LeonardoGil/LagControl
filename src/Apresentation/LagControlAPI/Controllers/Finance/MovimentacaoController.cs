@@ -20,7 +20,7 @@ namespace LagControlAPI.Controllers.Finance
         {
             try
             {
-                _financeService.AdicionarDespesa(request);
+                _financeService.Adicionar(request);
 
                 return Ok();
             }

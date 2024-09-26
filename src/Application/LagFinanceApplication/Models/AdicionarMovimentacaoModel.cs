@@ -1,4 +1,6 @@
-﻿namespace LagFinanceApplication.Models
+﻿using LagFinanceDomain.Enum;
+
+namespace LagFinanceApplication.Models
 {
     public class AdicionarMovimentacaoModel
     {
@@ -13,5 +15,7 @@
         public Guid ContaId { get; set; }
 
         public Guid CategoriaId { get; set; }
+
+        public TipoMovimentacaoEnum Tipo { get; set; }
     }
 }

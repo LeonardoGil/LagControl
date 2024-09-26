@@ -4,6 +4,6 @@ namespace LagFinanceApplication.Interfaces
 {
     public interface IMovimentacaoService
     {
-        void AdicionarDespesa(AdicionarMovimentacaoModel model);
+        void Adicionar(AdicionarMovimentacaoModel model);
     }
 }
