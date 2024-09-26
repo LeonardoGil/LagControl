@@ -4,6 +4,6 @@ namespace LagFinanceApplication.Interfaces
 {
     public interface ICategoriaQuery
     {
-        IList<CategoriaListaModel> Listar();
+        IList<CategoriaListarModel> Listar(CategoriaListarQueryModel query);
     }
 }

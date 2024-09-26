@@ -34,11 +34,11 @@ namespace LagControlAPI.Controllers.Finance
 
         [HttpGet]
         [Route("Listar")]
-        public IActionResult Listar()
+        public IActionResult Listar([FromQuery] CategoriaListarQueryModel query)
         {
             try
             {
-                return Ok(_categoriaQuery.Listar());
+                return Ok(_categoriaQuery.Listar(query));
             }
             catch (Exception ex)
             {

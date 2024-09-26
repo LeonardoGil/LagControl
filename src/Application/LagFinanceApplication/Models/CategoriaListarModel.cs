@@ -1,6 +1,6 @@
 ﻿namespace LagFinanceApplication.Models
 {
-    public class CategoriaListaModel
+    public class CategoriaListarModel
     {
         public Guid Id { get; set; }
 

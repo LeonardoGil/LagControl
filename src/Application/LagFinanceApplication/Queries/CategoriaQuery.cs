@@ -14,11 +14,14 @@ namespace LagFinanceApplication.Queries
             _categoriaRepository = categoriaRepository;
         }
 
-        public IList<CategoriaListaModel> Listar()
+        public IList<CategoriaListarModel> Listar(CategoriaListarQueryModel query)
         {
             var categorias = _categoriaRepository.Get().AsNoTracking();
 
-            return [.. categorias.Select(categoria => new CategoriaListaModel
+            if (query.Tipo.HasValue)
+                categorias = categorias.Where(x => x.Tipo == query.Tipo.Value);
+
+            return [.. categorias.Select(categoria => new CategoriaListarModel
             {
                 Id = categoria.Id,
                 Descricao = categoria.Descricao
