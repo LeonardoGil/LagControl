@@ -8,8 +8,9 @@ Get-ChildItem -Path $scriptsPath -Filter '*.ps1' -Recurse |
         ForEach-Object { Import-Module -Name $_ }
 
 $functionsToExport = @(
-    "New-Movimentacao",
-    "New-Categoria"
+    'Show-Extrato'
+    'New-Movimentacao',
+    'New-Categoria'
 )
 
 $variablesToExport = @()
