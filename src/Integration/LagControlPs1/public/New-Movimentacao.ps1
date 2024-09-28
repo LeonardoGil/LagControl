@@ -33,8 +33,12 @@ function New-Movimentacao {
         $receita
     )
 
+    $ErrorActionPreference = 'Break'
+
     $tipo = 1 # Despesa
-    if ($receita) { $tipo = 0 } # Receita 
+    if ($receita) {
+        $tipo = 0 
+    } # Receita 
 
     if ($null -eq $contaId -or $contaId -eq [Guid]::Empty) {
 
@@ -58,23 +62,24 @@ function New-Movimentacao {
         $categoriaId = $categorias[$categoriaIndex].Id
     }
 
-    
-
     $body = [PSCustomObject]@{
-        Descricao = $descricao
-        Observacao = $observacao
-        Valor = $valor
-        Data = $data.ToString("o")
-        ContaId = $contaId
+        Descricao   = $descricao
+        Observacao  = $observacao
+        Valor       = $valor
+        Data        = $data.ToString("o")
+        ContaId     = $contaId
         CategoriaId = $categoriaId
-        Tipo = $tipo
+        Tipo        = $tipo
     } | ConvertTo-Json
+
+    Write-Verbose $body
 
     Invoke-RestMethod -Uri 'https://localhost:7081/Movimentacao/Adicionar' `
                       -Method 'Post' `
                       -Body $body `
-                      -ContentType "application/json" `
+                      -ContentType "application/json; charset=utf-8" `
                       -Headers @{ "Accept" = "application/json" }
+    
 
     Write-Host 'Movimentação adicionada' -ForegroundColor DarkGreen
 }
