@@ -6,6 +6,8 @@ namespace LagFinanceApplication.Interfaces
     {
         IList<ContaListaModel> Listar();
 
-        IList<ContaSaldoModel> ConsultarSaldo(ConsultarSaldoQueryModel query);
+        IList<ContaSaldoModel> ListarSaldo(ListarSaldoQueryModel query);
+
+        ExtratoModel Extrato(ExtratoQueryModel query);
     }
 }

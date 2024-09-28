@@ -2,7 +2,7 @@
 
 namespace LagFinanceApplication.Models
 {
-    public class ConsultarSaldoQueryModel
+    public class ListarSaldoQueryModel
     {
         public IEnumerable<Guid>? ContaIds { get; set; }
     }
