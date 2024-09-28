@@ -86,6 +86,8 @@ namespace LagFinanceApplication.Queries
                 movimentacaoDia.ValorTotal = valorTotal;
                 movimentacaoDia.ValorInicialDia = valorInicial;
                 movimentacaoDia.ValorFinalDia = valorFinal;
+
+                valorInicial = valorFinal;
             }
 
             return new ExtratoModel
