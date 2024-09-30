@@ -1,4 +1,4 @@
-﻿namespace LagFinanceApplication.Models
+﻿namespace LagFinanceApplication.Models.Contas
 {
     public class ContaSaldoModel
     {

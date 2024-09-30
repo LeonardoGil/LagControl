@@ -1,5 +1,6 @@
 ﻿using LagFinanceApplication.Interfaces;
-using LagFinanceApplication.Models;
+using LagFinanceApplication.Models.Contas;
+using LagFinanceApplication.Models.Movimentacoes;
 using LagFinanceDomain.Enum;
 using LagFinanceInfra.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,7 @@ namespace LagFinanceApplication.Queries
             _movimentacaoRepository = movimentacaoRepository;
         }
 
-        public IList<ContaSaldoModel> ListarSaldo(ListarSaldoQueryModel model)
+        public IList<ContaSaldoModel> ListarSaldo(ContaSaldoQueryModel model)
         {
             var contas = _contaRepository.Get().AsNoTracking();
 

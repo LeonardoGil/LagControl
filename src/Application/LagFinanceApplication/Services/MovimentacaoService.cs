@@ -1,5 +1,5 @@
 ﻿using LagFinanceApplication.Interfaces;
-using LagFinanceApplication.Models;
+using LagFinanceApplication.Models.Movimentacoes;
 using LagFinanceDomain.Domain;
 using LagFinanceDomain.Enum;
 using LagFinanceInfra.Interfaces;

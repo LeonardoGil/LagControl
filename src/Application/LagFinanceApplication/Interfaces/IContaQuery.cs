@@ -1,4 +1,4 @@
-﻿using LagFinanceApplication.Models;
+﻿using LagFinanceApplication.Models.Contas;
 
 namespace LagFinanceApplication.Interfaces
 {
@@ -6,7 +6,7 @@ namespace LagFinanceApplication.Interfaces
     {
         IList<ContaListaModel> Listar();
 
-        IList<ContaSaldoModel> ListarSaldo(ListarSaldoQueryModel query);
+        IList<ContaSaldoModel> ListarSaldo(ContaSaldoQueryModel query);
 
         ExtratoModel Extrato(ExtratoQueryModel query);
     }

@@ -1,5 +1,5 @@
 ﻿using LagFinanceApplication.Interfaces;
-using LagFinanceApplication.Models;
+using LagFinanceApplication.Models.Categorias;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LagControlAPI.Controllers.Finance

@@ -1,4 +1,6 @@
-﻿namespace LagFinanceApplication.Models
+﻿using LagFinanceApplication.Models.Movimentacoes;
+
+namespace LagFinanceApplication.Models.Contas
 {
     public class ExtratoModel
     {

@@ -1,4 +1,4 @@
-﻿using LagFinanceApplication.Models;
+﻿using LagFinanceApplication.Models.Categorias;
 
 namespace LagFinanceApplication.Interfaces
 {

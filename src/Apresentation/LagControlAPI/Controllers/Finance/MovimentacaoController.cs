@@ -1,5 +1,5 @@
 ﻿using LagFinanceApplication.Interfaces;
-using LagFinanceApplication.Models;
+using LagFinanceApplication.Models.Movimentacoes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LagControlAPI.Controllers.Finance
@@ -16,7 +16,7 @@ namespace LagControlAPI.Controllers.Finance
 
         [HttpPost]
         [Route("Adicionar")]
-        public IActionResult Add([FromBody] AdicionarMovimentacaoModel request)
+        public IActionResult Adicionar([FromBody] AdicionarMovimentacaoModel request)
         {
             try
             {

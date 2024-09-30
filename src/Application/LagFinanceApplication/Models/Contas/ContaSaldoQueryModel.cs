@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 
-namespace LagFinanceApplication.Models
+namespace LagFinanceApplication.Models.Contas
 {
-    public class ListarSaldoQueryModel
+    public class ContaSaldoQueryModel
     {
         public IEnumerable<Guid>? ContaIds { get; set; }
     }

@@ -1,6 +1,6 @@
 ﻿using LagFinanceDomain.Enum;
 
-namespace LagFinanceApplication.Models
+namespace LagFinanceApplication.Models.Movimentacoes
 {
     public class MovimentacaoModel
     {

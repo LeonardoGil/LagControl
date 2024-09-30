@@ -1,9 +1,8 @@
-﻿namespace LagFinanceApplication.Models
+﻿namespace LagFinanceApplication.Models.Contas
 {
-    public class CategoriaListarModel
+    public class ContaListaModel
     {
         public Guid Id { get; set; }
-
         public string Descricao { get; set; }
     }
 }

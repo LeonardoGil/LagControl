@@ -1,5 +1,5 @@
 ﻿using LagFinanceApplication.Interfaces;
-using LagFinanceApplication.Models;
+using LagFinanceApplication.Models.Contas;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
@@ -31,7 +31,7 @@ namespace LagControlAPI.Controllers.Finance
 
         [HttpGet]
         [Route("Listar/Saldo")]
-        public IActionResult Saldo([FromQuery] ListarSaldoQueryModel query)
+        public IActionResult Saldo([FromQuery] ContaSaldoQueryModel query)
         {
             try
             {

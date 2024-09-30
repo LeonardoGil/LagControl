@@ -1,4 +1,4 @@
-﻿using LagFinanceApplication.Models;
+﻿using LagFinanceApplication.Models.Movimentacoes;
 
 namespace LagFinanceApplication.Interfaces
 {
