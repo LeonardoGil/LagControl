@@ -29,5 +29,21 @@ namespace LagControlAPI.Controllers.Finance
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPut]
+        [Route("Editar")]
+        public IActionResult Editar([FromBody] EditarMovimentaoModel request)
+        {
+            try
+            {
+                _financeService.Editar(request);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

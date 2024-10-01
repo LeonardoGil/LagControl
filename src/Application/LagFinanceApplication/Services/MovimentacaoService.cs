@@ -1,7 +1,6 @@
 ﻿using LagFinanceApplication.Interfaces;
 using LagFinanceApplication.Models.Movimentacoes;
 using LagFinanceDomain.Domain;
-using LagFinanceDomain.Enum;
 using LagFinanceInfra.Interfaces;
 
 namespace LagFinanceApplication.Services
@@ -31,6 +30,21 @@ namespace LagFinanceApplication.Services
             };
 
             _movimentacaoRepository.Add(movimentacao);
+            _movimentacaoRepository.SaveChanges();
+        }
+
+        public void Editar(EditarMovimentaoModel model)
+        {
+            var movimentacao = _movimentacaoRepository.Get().FirstOrDefault(x => x.Id == model.Id) ?? throw new Exception("Movimentação não encontrada");
+
+            movimentacao.Descricao = model.Descricao;
+            movimentacao.Observacao = model.Observacao;
+            movimentacao.Valor = model.Valor;
+            movimentacao.Data = model.Data;
+            movimentacao.Pendente = model.Pendente;
+            movimentacao.ContaId = model.ContaId;
+            movimentacao.CategoriaId = model.CategoriaId;
+
             _movimentacaoRepository.SaveChanges();
         }
     }
