@@ -30,13 +30,17 @@ function New-Movimentacao {
 
         [Parameter()]
         [switch]
-        $receita
+        $receita,
+
+        [Parameter()]
+        [switch]
+        $pendente
     )
 
     $ErrorActionPreference = 'Break'
 
     $tipo = 1 # Despesa
-    if ($receita) {
+    if ($receita.IsPresent) {
         $tipo = 0 
     } # Receita 
 
@@ -70,13 +74,24 @@ function New-Movimentacao {
         ContaId     = $contaId
         CategoriaId = $categoriaId
         Tipo        = $tipo
-    } | ConvertTo-Json
+        Pendente    = $pendente.IsPresent
+    }
+
+    if (-not $pendente.IsPresent -and (Get-Date).Date -lt $data.Date) {
+
+        $choices = [ChoiceDescription[]]@(
+            [ChoiceDescription]::new("&Sim" , "Sim" )
+            [ChoiceDescription]::new("&Nao" , "Nao" )
+        ) 
+
+        $body.Pendente = ($host.UI.PromptForChoice("Data Futura", "Deseja marcar como Pendente?", $choices, 0) -eq 0)
+    }
 
     Write-Verbose $body
 
     Invoke-RestMethod -Uri 'https://localhost:7081/Movimentacao/Adicionar' `
                       -Method 'Post' `
-                      -Body $body `
+                      -Body ($body | ConvertTo-Json) `
                       -ContentType "application/json; charset=utf-8" `
                       -Headers @{ "Accept" = "application/json" }
     

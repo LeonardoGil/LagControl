@@ -17,5 +17,7 @@ namespace LagFinanceApplication.Models.Movimentacoes
         public Guid CategoriaId { get; set; }
 
         public TipoMovimentacaoEnum Tipo { get; set; }
+
+        public bool Pendente { get; set; }
     }
 }

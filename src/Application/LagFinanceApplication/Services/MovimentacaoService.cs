@@ -26,7 +26,8 @@ namespace LagFinanceApplication.Services
                 Observacao = model.Observacao,
                 Data = model.Data,
 
-                TipoMovimentacao = model.Tipo
+                TipoMovimentacao = model.Tipo,
+                Pendente = model.Pendente
             };
 
             _movimentacaoRepository.Add(movimentacao);
