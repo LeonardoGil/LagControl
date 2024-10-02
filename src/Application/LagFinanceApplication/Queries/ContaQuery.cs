@@ -54,54 +54,9 @@ namespace LagFinanceApplication.Queries
             if (!conta.Movimentacoes.Any())
                 throw new Exception("Conta não possui Movimentações");
 
-            var movimentacoesDia = conta.Movimentacoes.GroupBy(x => x.Data.Date)
-                                                      .Select(x => new ExtratoGroupModel
-                                                      {
-                                                          Dia = DateOnly.FromDateTime(x.Key),
-                                                          Movimentacoes = x.Select(mov => new MovimentacaoModel
-                                                          {
-                                                              Conta = mov.Conta.Descricao,
-                                                              Categoria = mov.Categoria.Descricao,
-                                                              ContaTransferencia = mov.ContaTransferencia?.Descricao,
-                                                              Data = mov.Data,
-                                                              Descricao = mov.Descricao,
-                                                              Observacao = mov.Observacao,
-                                                              Pendente = mov.Pendente,
-                                                              TipoMovimentacao = mov.TipoMovimentacao,
-                                                              Valor = mov.Valor
-                                                          }).ToList(),
-                                                      })
-                                                      .OrderBy(x => x.Dia)
-                                                      .ToArray();
+            var extrato = new ExtratoModel(conta);
 
-            var valorInicial = decimal.Zero;
-
-            foreach (var movimentacaoDia in movimentacoesDia)
-            {
-                var despesas = movimentacaoDia.Movimentacoes.Where(x => x.TipoMovimentacao == TipoMovimentacaoEnum.Despesa).Sum(x => x.Valor);
-                var receitas = movimentacaoDia.Movimentacoes.Where(x => x.TipoMovimentacao == TipoMovimentacaoEnum.Receita).Sum(x => x.Valor);
-
-                var valorTotal = receitas - despesas;
-                var valorFinal = valorInicial + valorTotal;
-
-                movimentacaoDia.ValorTotal = valorTotal;
-                movimentacaoDia.ValorInicialDia = valorInicial;
-                movimentacaoDia.ValorFinalDia = valorFinal;
-
-                valorInicial = valorFinal;
-            }
-
-            return new ExtratoModel
-            {
-                Conta = conta.Descricao,
-                DataInicio = movimentacoesDia.First().Dia,
-                DataFim = movimentacoesDia.Last().Dia,
-
-                ValorInicial = movimentacoesDia.First().ValorInicialDia,
-                ValorFinal = movimentacoesDia.Last().ValorFinalDia,
-
-                ExtratosDia = movimentacoesDia
-            };
+            return extrato;
         }
     }
 }
