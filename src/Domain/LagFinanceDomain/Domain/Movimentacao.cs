@@ -25,7 +25,7 @@ namespace LagFinanceDomain.Domain
 
         public Guid? ContaTransferenciaId { get; set; }
 
-        public virtual Conta ContaTransferencia { get; set; }
+        public virtual Conta? ContaTransferencia { get; set; }
 
         public Guid CategoriaId { get; set; }
 

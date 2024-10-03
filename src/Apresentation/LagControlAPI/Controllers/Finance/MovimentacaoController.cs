@@ -8,10 +8,12 @@ namespace LagControlAPI.Controllers.Finance
     public class MovimentacaoController : Controller
     {
         private readonly IMovimentacaoService _financeService;
+        private readonly IMovimentacaoQuery _movimentacaoQuery;
 
-        public MovimentacaoController(IMovimentacaoService financeService)
+        public MovimentacaoController(IMovimentacaoService financeService, IMovimentacaoQuery movimentacaoQuery)
         {
             _financeService = financeService;
+            _movimentacaoQuery = movimentacaoQuery;
         }
 
         [HttpPost]
@@ -43,6 +45,20 @@ namespace LagControlAPI.Controllers.Finance
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("Listar/Ultimas-Movimentacoes")]
+        public IActionResult Listar([FromQuery] ListarUltimasMovimentacoesQueryModel query)
+        {
+            try
+            {
+                return Ok(_movimentacaoQuery.ListarUltimasMovimentacoes(query));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
             }
         }
     }

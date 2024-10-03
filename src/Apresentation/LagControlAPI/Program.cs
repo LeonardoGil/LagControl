@@ -55,6 +55,7 @@ namespace LagControlAPI
 
             builder.Services.AddScoped<ICategoriaQuery, CategoriaQuery>();
             builder.Services.AddScoped<IContaQuery, ContaQuery>();
+            builder.Services.AddScoped<IMovimentacaoQuery, MovimentacaoQuery>();
         }
     }
 }
