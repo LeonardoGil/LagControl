@@ -4,6 +4,8 @@ namespace LagFinanceApplication.Models.Movimentacoes
 {
     public class MovimentacaoModel
     {
+        public Guid Id { get; set; }
+
         public string Descricao { get; set; }
 
         public string Observacao { get; set; }

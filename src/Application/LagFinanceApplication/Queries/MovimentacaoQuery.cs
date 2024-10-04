@@ -29,6 +29,7 @@ namespace LagFinanceApplication.Queries
                                      .Take(query.Total)
                                      .Select(mov => new MovimentacaoModel
                                      {
+                                         Id = mov.Id,
                                          Conta = mov.Conta.Descricao,
                                          Categoria = mov.Categoria.Descricao,
                                          ContaTransferencia = mov.ContaTransferencia.Descricao,

@@ -48,6 +48,7 @@ namespace LagFinanceApplication.Models.Contas
             {
                 Movimentacoes = movimentacoesPendentes.Select(mov => new MovimentacaoModel
                 {
+                    Id = mov.Id,
                     Conta = mov.Conta.Descricao,
                     Categoria = mov.Categoria.Descricao,
                     ContaTransferencia = mov.ContaTransferencia?.Descricao,
@@ -74,6 +75,7 @@ namespace LagFinanceApplication.Models.Contas
                                                     Dia = DateOnly.FromDateTime(x.Key),
                                                     Movimentacoes = x.Select(mov => new MovimentacaoModel
                                                     {
+                                                        Id = mov.Id,
                                                         Conta = mov.Conta.Descricao,
                                                         Categoria = mov.Categoria.Descricao,
                                                         ContaTransferencia = mov.ContaTransferencia?.Descricao,
