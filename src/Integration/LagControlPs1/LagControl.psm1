@@ -10,7 +10,8 @@ Get-ChildItem -Path $scriptsPath -Filter '*.ps1' -Recurse |
 $functionsToExport = @(
     'Show-Extrato'
     'New-Movimentacao',
-    'New-Categoria'
+    'New-Categoria',
+    "Remove-Movimentacao"
 )
 
 $variablesToExport = @()
