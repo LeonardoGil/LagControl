@@ -7,5 +7,7 @@ namespace LagFinanceApplication.Interfaces
         void Adicionar(AdicionarMovimentacaoModel model);
 
         void Editar(EditarMovimentaoModel model);
+
+        void Excluir(Guid movimentacaoId);
     }
 }

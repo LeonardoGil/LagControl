@@ -48,6 +48,21 @@ namespace LagControlAPI.Controllers.Finance
             }
         }
 
+        [HttpDelete]
+        [Route("Excluir/{movimentacaoId}")]
+        public IActionResult Excluir([FromRoute] Guid movimentacaoId)
+        {
+            try
+            {
+                _financeService.Excluir(movimentacaoId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         [HttpGet]
         [Route("Listar/Ultimas-Movimentacoes")]
         public IActionResult Listar([FromQuery] ListarUltimasMovimentacoesQueryModel query)

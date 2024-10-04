@@ -48,5 +48,13 @@ namespace LagFinanceApplication.Services
 
             _movimentacaoRepository.SaveChanges();
         }
+
+        public void Excluir(Guid movimentacaoId)
+        {
+            var movimentacao = _movimentacaoRepository.Get().FirstOrDefault(x => x.Id == movimentacaoId) ?? throw new Exception("Movimentação não encontrada");
+
+            _movimentacaoRepository.Remove(movimentacao);
+            _movimentacaoRepository.SaveChanges();
+        }
     }
 }
