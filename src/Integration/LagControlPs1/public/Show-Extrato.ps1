@@ -31,10 +31,7 @@ function Show-Extrato {
         Write-Host " === Dia $dia/$mes === "  -ForegroundColor DarkYellow
         Write-Host "Valor Inicial: $($extratoDia.ValorInicialDia)"
 
-        foreach ($mov in $extratoDia.Movimentacoes) {
-            Show-ExtratoMovimentacao $mov
-            Write-Host ""
-        }
+        $extratoDia.Movimentacoes | ForEach-Object { Show-ExtratoMovimentacao $_ }
 
         Write-Host "Valor Final: $($extratoDia.ValorFinalDia)"
         Write-Host ""
@@ -44,10 +41,7 @@ function Show-Extrato {
         Write-Host ""
         Write-Host " === Pendencias === " -ForegroundColor DarkYellow
 
-        foreach ($mov in $extrato.ExtratoPendente.Movimentacoes) {
-            Show-ExtratoMovimentacao $mov -showData
-            Write-Host ""
-        }
+        $extrato.ExtratoPendente.Movimentacoes | Sort-Object -Property Data | ForEach-Object { Show-ExtratoMovimentacaoPendente $_ }
 
         Write-Host "Valor Total: $($extrato.ExtratoPendente.ValorTotal)"
         Write-Host "Valor Final: $($extrato.ExtratoPendente.ValorFinal)"
@@ -61,11 +55,7 @@ function Show-ExtratoMovimentacao {
     param (
         [Parameter(Position=0)]
         [PSCustomObject]
-        $mov,
-
-        [Parameter()]
-        [switch]
-        $showData
+        $mov
     )    
 
     $sinal = '+'
@@ -77,11 +67,44 @@ function Show-ExtratoMovimentacao {
     }
 
     Write-Host "$sinal $($mov.Valor)" -ForegroundColor $color  -NoNewline
+    Write-Host " - $($mov.Descricao) | Conta: $($mov.Conta) | Categoria: $($mov.Categoria)" -NoNewline
+    Write-Host ""
 
-    if ($showData) {
-        Write-Host " - $($mov.Descricao) | Data: $(Get-Date $mov.Data -Format 'dd/MM') | Conta: $($mov.Conta) | Categoria: $($mov.Categoria)" -NoNewline
+}
+
+function Show-ExtratoMovimentacaoPendente {
+    
+    [CmdletBinding()]
+    param (
+        [Parameter(Position=0)]
+        [PSCustomObject]
+        $mov
+    )    
+
+    $date = (Get-Date -Date $mov.Data).Date
+
+    if ($date -lt (Get-Date).Date) {
+        Write-Host "$(Get-Date $mov.Data -Format 'dd/MM') " -ForegroundColor DarkRed -NoNewline
+    }
+    elseif ($date -eq (Get-Date).Date -or $date -eq (Get-Date).AddDays(1).Date) {
+        Write-Host "$(Get-Date $mov.Data -Format 'dd/MM') " -ForegroundColor DarkYellow -NoNewline
     }
     else {
-        Write-Host " - $($mov.Descricao) | Conta: $($mov.Conta) | Categoria: $($mov.Categoria)" -NoNewline
+        Write-Host "$(Get-Date $mov.Data -Format 'dd/MM') " -NoNewline
     }
+
+    $sinal = '+'
+    $sinalColor = 'Green'
+
+    if ($mov.tipoMovimentacao -eq 1) { 
+        $sinal = '-' 
+        $sinalColor = 'Red'
+    }
+
+    Write-Host "$sinal$($mov.Valor)" -ForegroundColor $sinalColor -NoNewline
+    Write-Host " - $($mov.Descricao) " -NoNewline
+
+    Write-Host "| Conta: $($mov.Conta) | Categoria: $($mov.Categoria)" -NoNewline
+    Write-Host ""
+
 }
