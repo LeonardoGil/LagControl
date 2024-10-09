@@ -79,8 +79,22 @@ namespace LagControlAPI.Controllers.Finance
         }
 
         [HttpGet]
+        [Route("Listar")]
+        public IActionResult Listar([FromQuery] ListarMovimentacaoQueryModel query)
+        {
+            try
+            {
+                return Ok(_movimentacaoQuery.ListarMovimentacao(query));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpGet]
         [Route("Listar/Ultimas-Movimentacoes")]
-        public IActionResult Listar([FromQuery] ListarUltimasMovimentacoesQueryModel query)
+        public IActionResult ListarUltimasMovimentacoes([FromQuery] ListarUltimasMovimentacoesQueryModel query)
         {
             try
             {

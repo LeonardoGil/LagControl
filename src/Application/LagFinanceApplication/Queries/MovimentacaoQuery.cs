@@ -1,7 +1,9 @@
 ﻿using LagFinanceApplication.Interfaces;
 using LagFinanceApplication.Models.Movimentacoes;
+using LagFinanceDomain.Domain;
 using LagFinanceInfra.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace LagFinanceApplication.Queries
 {
@@ -12,6 +14,17 @@ namespace LagFinanceApplication.Queries
         public MovimentacaoQuery(IMovimentacaoRepository movimentacaoRepository)
         {
             _movimentacaoRepository = movimentacaoRepository;
+        }
+
+        public IList<MovimentacaoModel> ListarMovimentacao(ListarMovimentacaoQueryModel query)
+        {
+            var movimentacoesQuery = _movimentacaoRepository.Get().AsNoTracking();
+
+            return movimentacoesQuery.Include(x => x.Conta)
+                                     .Include(x => x.ContaTransferencia)
+                                     .Include(x => x.Categoria)
+                                     .Select(MapearMovimentacao)
+                                     .ToList();
         }
 
         public IList<MovimentacaoModel> ListarUltimasMovimentacoes(ListarUltimasMovimentacoesQueryModel query)
@@ -25,21 +38,26 @@ namespace LagFinanceApplication.Queries
 
             return movimentacoesQuery.Include(x => x.Conta)
                                      .Include(x => x.ContaTransferencia)
+                                     .Include(x => x.Categoria)
                                      .OrderByDescending(x => x.DataCriacao)
                                      .Take(query.Total)
-                                     .Select(mov => new MovimentacaoModel
-                                     {
-                                         Id = mov.Id,
-                                         Conta = mov.Conta.Descricao,
-                                         Categoria = mov.Categoria.Descricao,
-                                         ContaTransferencia = mov.ContaTransferencia.Descricao,
-                                         Data = mov.Data,
-                                         Descricao = mov.Descricao,
-                                         Observacao = mov.Observacao,
-                                         Pendente = mov.Pendente,
-                                         TipoMovimentacao = mov.TipoMovimentacao,
-                                         Valor = mov.Valor
-                                     }).ToList();
+                                     .Select(MapearMovimentacao)
+                                     .ToList();
         }
+
+        private Func<Movimentacao, MovimentacaoModel> MapearMovimentacao = movimentacao =>
+            new MovimentacaoModel
+            {
+                Id = movimentacao.Id,
+                Conta = movimentacao.Conta.Descricao,
+                Categoria = movimentacao.Categoria.Descricao,
+                ContaTransferencia = movimentacao.ContaTransferencia?.Descricao ?? string.Empty,
+                Data = movimentacao.Data,
+                Descricao = movimentacao.Descricao,
+                Observacao = movimentacao.Observacao,
+                Pendente = movimentacao.Pendente,
+                TipoMovimentacao = movimentacao.TipoMovimentacao,
+                Valor = movimentacao.Valor
+            };
     }
 }
