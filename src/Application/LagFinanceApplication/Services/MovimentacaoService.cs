@@ -34,6 +34,20 @@ namespace LagFinanceApplication.Services
             _movimentacaoRepository.SaveChanges();
         }
 
+        public void ConfirmarPendente(ConfirmarMovimentacaoPendenteModel model)
+        {
+            var movimentacao = _movimentacaoRepository.Get().FirstOrDefault(x => x.Id == model.Id) ?? throw new Exception("Movimentação não encontrada");
+
+            movimentacao.Descricao = model.Descricao ?? movimentacao.Descricao;
+            movimentacao.Observacao = model.Observacao ?? movimentacao.Observacao;
+            movimentacao.Valor = model.Valor ?? movimentacao.Valor;
+            movimentacao.Data = model.Data ?? movimentacao.Data;
+            movimentacao.ContaId = model.ContaId ?? movimentacao.ContaId;
+            movimentacao.CategoriaId = model.CategoriaId ?? movimentacao.CategoriaId;
+
+            _movimentacaoRepository.SaveChanges();
+        }
+
         public void Editar(EditarMovimentaoModel model)
         {
             var movimentacao = _movimentacaoRepository.Get().FirstOrDefault(x => x.Id == model.Id) ?? throw new Exception("Movimentação não encontrada");

@@ -7,12 +7,12 @@ namespace LagControlAPI.Controllers.Finance
     [Route("Movimentacao")]
     public class MovimentacaoController : Controller
     {
-        private readonly IMovimentacaoService _financeService;
+        private readonly IMovimentacaoService _movimentacaoService;
         private readonly IMovimentacaoQuery _movimentacaoQuery;
 
         public MovimentacaoController(IMovimentacaoService financeService, IMovimentacaoQuery movimentacaoQuery)
         {
-            _financeService = financeService;
+            _movimentacaoService = financeService;
             _movimentacaoQuery = movimentacaoQuery;
         }
 
@@ -22,7 +22,7 @@ namespace LagControlAPI.Controllers.Finance
         {
             try
             {
-                _financeService.Adicionar(request);
+                _movimentacaoService.Adicionar(request);
 
                 return Ok();
             }
@@ -32,13 +32,28 @@ namespace LagControlAPI.Controllers.Finance
             }
         }
 
+        [HttpPost]
+        [Route("Confirmar-Pendente")]
+        public IActionResult ConfirmarPendente([FromBody] ConfirmarMovimentacaoPendenteModel request)
+        {
+            try
+            {
+                _movimentacaoService.ConfirmarPendente(request);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         [HttpPut]
         [Route("Editar")]
         public IActionResult Editar([FromBody] EditarMovimentaoModel request)
         {
             try
             {
-                _financeService.Editar(request);
+                _movimentacaoService.Editar(request);
 
                 return Ok();
             }
@@ -54,7 +69,7 @@ namespace LagControlAPI.Controllers.Finance
         {
             try
             {
-                _financeService.Excluir(movimentacaoId);
+                _movimentacaoService.Excluir(movimentacaoId);
                 return Ok();
             }
             catch (Exception ex)
