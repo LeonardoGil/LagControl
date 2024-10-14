@@ -58,5 +58,17 @@ namespace LagFinanceApplication.Queries
 
             return extrato;
         }
+
+        public DespesasPorCategoriaModel DespesasPorCategoria(DespesasPorCategoriaQueryModel query)
+        {
+            var conta = _contaRepository.Get()
+                                        .Include(x => x.Movimentacoes).ThenInclude(x => x.Categoria)
+                                        .AsNoTracking()
+                                        .FirstOrDefault(x => x.Id == query.ContaId) ?? throw new NotImplementedException($"Conta '{query.ContaId}' não encontrada");
+
+            var despesasPorCategoria = new DespesasPorCategoriaModel(conta);
+
+            return despesasPorCategoria;
+        }
     }
 }

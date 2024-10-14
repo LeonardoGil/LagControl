@@ -9,5 +9,7 @@ namespace LagFinanceApplication.Interfaces
         IList<ContaSaldoModel> ListarSaldo(ContaSaldoQueryModel query);
 
         ExtratoModel Extrato(ExtratoQueryModel query);
+
+        DespesasPorCategoriaModel DespesasPorCategoria(DespesasPorCategoriaQueryModel query);
     }
 }
