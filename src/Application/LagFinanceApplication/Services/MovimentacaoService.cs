@@ -45,6 +45,8 @@ namespace LagFinanceApplication.Services
             movimentacao.ContaId = model.ContaId ?? movimentacao.ContaId;
             movimentacao.CategoriaId = model.CategoriaId ?? movimentacao.CategoriaId;
 
+            movimentacao.Pendente = false;
+
             _movimentacaoRepository.SaveChanges();
         }
 

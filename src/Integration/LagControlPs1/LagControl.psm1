@@ -14,6 +14,7 @@ $functionsToExport = @(
     'New-Movimentacao',
     'New-Categoria',
     
+    'Set-ConfirmarMovimentacaoPendente',
     'Remove-Movimentacao'
 )
 
