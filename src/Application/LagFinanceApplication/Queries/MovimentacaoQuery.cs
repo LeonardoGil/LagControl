@@ -3,22 +3,22 @@ using LagFinanceApplication.Models.Movimentacoes;
 using LagFinanceDomain.Domain;
 using LagFinanceInfra.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace LagFinanceApplication.Queries
 {
-    public class MovimentacaoQuery : IMovimentacaoQuery
+    public class MovimentacaoQuery(IMovimentacaoRepository movimentacaoRepository) : IMovimentacaoQuery
     {
-        private readonly IMovimentacaoRepository _movimentacaoRepository;
-
-        public MovimentacaoQuery(IMovimentacaoRepository movimentacaoRepository)
-        {
-            _movimentacaoRepository = movimentacaoRepository;
-        }
+        private readonly IMovimentacaoRepository _movimentacaoRepository = movimentacaoRepository;
 
         public IList<MovimentacaoModel> ListarMovimentacao(ListarMovimentacaoQueryModel query)
         {
             var movimentacoesQuery = _movimentacaoRepository.Get().AsNoTracking();
+
+            if (query.ContaIds is not null)
+                movimentacoesQuery = movimentacoesQuery.Where(x => query.ContaIds.Contains(x.ContaId));
+
+            if (query.ApenasPendentes)
+                movimentacoesQuery = movimentacoesQuery.Where(x => x.Pendente);
 
             return movimentacoesQuery.Include(x => x.Conta)
                                      .Include(x => x.ContaTransferencia)
