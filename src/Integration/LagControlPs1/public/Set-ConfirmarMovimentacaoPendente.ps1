@@ -11,11 +11,11 @@ function Set-ConfirmarMovimentacaoPendente {
         $Observacao,
 
         [Parameter()]
-        [decimal]
+        [Nullable[decimal]]
         $Valor,
 
         [Parameter()]
-        [datetime]
+        [Nullable[datetime]]
         $Data
     )
 
@@ -25,27 +25,20 @@ function Set-ConfirmarMovimentacaoPendente {
 
     $movimentacao = Show-ConfirmarMovimentacaoPendenteOptions $movimentacoes 
 
-    $body = New-ConfirmarMovimentacaoPendenteObject $movimentacao
-
-    Invoke-RestMethod -Method 'Post' -Uri 'https://localhost:7081/Movimentacao/Confirmar-Pendente' -Body ($body | ConvertTo-Json) -ContentType "application/json; charset=utf-8" -Headers @{ "Accept" = "application/json" }
-}
-
-function New-ConfirmarMovimentacaoPendenteObject {
-
-    [CmdletBinding()]
-    param (
-        [Parameter(Mandatory, ValueFromPipeline)]
-        [PSCustomObject]
-        $movimentacao
-    )
-
     $body = [PSCustomObject]@{
         Id = $movimentacao.Id
     }
-    
-    return $body
-}
 
+    if ($null -ne $Valor) {
+        $body | Add-Member -MemberType NoteProperty -Name "Valor" -Value $Valor
+    }
+
+    if ($null -ne $Data) {
+        $body | Add-Member -MemberType NoteProperty -Name "Data" -Value $Data.ToString("o")
+    }
+
+    Invoke-RestMethod -Method 'Post' -Uri 'https://localhost:7081/Movimentacao/Confirmar-Pendente' -Body ($body | ConvertTo-Json) -ContentType "application/json; charset=utf-8" -Headers @{ "Accept" = "application/json" }
+}
 
 function Show-ConfirmarMovimentacaoPendenteOptions {
 
