@@ -18,21 +18,18 @@ namespace LagFinanceApplication.Models.Contas
 
         public IList<ExtratoGroupModel> ExtratosDia { get; set; }
 
-        public ExtratoModel(Conta conta)
+        public ExtratoModel(string conta, IList<Movimentacao> movimentacoes, DateOnly dataInicio, DateOnly dataFim, decimal valorAnterior = decimal.Zero)
         {
-            Conta = conta.Descricao;
-            ExtratosDia = DefinirExtratoGroup(conta.Movimentacoes);
+            Conta = conta;
+            ExtratosDia = DefinirExtratoGroup(movimentacoes);
 
-            if (ExtratosDia.Any())
-            {
-                DataInicio = ExtratosDia.First().Dia;
-                DataFim = ExtratosDia.Last().Dia;
+            DataInicio = dataInicio;
+            DataFim = dataFim;
 
-                ValorInicial = ExtratosDia.First().ValorInicialDia;
-                ValorFinal = ExtratosDia.Last().ValorFinalDia;
-            }
+            ValorInicial = valorAnterior;
+            ValorFinal = ExtratosDia.Last().ValorFinalDia;
 
-            ExtratoPendente = DefinirExtratoPendente(conta.Movimentacoes);
+            ExtratoPendente = DefinirExtratoPendente(movimentacoes);
         }
 
         private ExtratoPendenteModel DefinirExtratoPendente(IList<Movimentacao> movimentacoes)
@@ -78,7 +75,7 @@ namespace LagFinanceApplication.Models.Contas
                                                         Id = mov.Id,
                                                         Conta = mov.Conta.Descricao,
                                                         Categoria = mov.Categoria.Descricao,
-                                                        ContaTransferencia = mov.ContaTransferencia?.Descricao,
+                                                        ContaTransferencia = mov.ContaTransferencia?.Descricao ?? string.Empty,
                                                         Data = mov.Data,
                                                         Descricao = mov.Descricao,
                                                         Observacao = mov.Observacao,

@@ -54,9 +54,17 @@ namespace LagFinanceApplication.Queries
             if (!conta.Movimentacoes.Any())
                 throw new Exception("Conta não possui Movimentações");
 
-            var extrato = new ExtratoModel(conta);
+            var dataInicio = query.DataInicio ?? new DateOnly(2024, 01, 01);
+            var dataFim = query.DataFim ?? DateOnly.FromDateTime(DateTime.Now);
 
-            return extrato;
+            var valorAnterior = conta.Movimentacoes.Where(x => DateOnly.FromDateTime(x.Data) < dataInicio)  
+                                                   .Where(x => !x.Pendente)
+                                                   .Sum(x => x.Valor);
+
+            var movimentacoes = conta.Movimentacoes.Where(x => DateOnly.FromDateTime(x.Data) >= dataInicio)
+                                                   .Where(x => DateOnly.FromDateTime(x.Data) <= dataFim);
+
+            return new ExtratoModel(conta.Descricao, conta.Movimentacoes, dataInicio, dataFim, valorAnterior);
         }
 
         public DespesasPorCategoriaModel DespesasPorCategoria(DespesasPorCategoriaQueryModel query)
