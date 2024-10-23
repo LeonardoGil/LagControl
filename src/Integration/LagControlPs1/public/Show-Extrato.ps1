@@ -4,10 +4,18 @@ function Show-Extrato {
     param (
         [Parameter()]
         [Guid]
-        $contaId
+        $contaId,
+
+        [Parameter()]
+        [Nullable[DateTime]]
+        $dataInicio,
+
+        [Parameter()]
+        [Nullable[DateTime]]
+        $dataFim
     )
     
-    $ErrorActionPreference = 'Break'
+    $ErrorActionPreference = 'Stop'
 
     if ($null -eq $contaId -or 
         $contaId -eq [Guid]::Empty) {
@@ -18,7 +26,22 @@ function Show-Extrato {
         $contaId = $contas[$contaIndex].Id
     }
 
-    $extrato = Invoke-RestMethod -Uri "https://localhost:7081/conta/extrato/$contaId" -Method 'Get'
+    if ($null -eq $dataInicio) {
+        $dataInicio = Get-Date -Day 1
+    }
+
+    if ($null -eq $dataFim) {
+        $dataFim = (Get-Date -Day 1).AddMonths(1).AddDays(-1)
+    }
+
+    if ($dataInicio -gt $dataFim) {
+        Write-Host 'DataInicio não pode ser maior de DataFim' -ForegroundColor DarkYellow
+        return
+    }
+
+    $url = Get-ExtratoUrl -dataInicio $dataInicio -dataFim $dataFim -contaId $contaId
+
+    $extrato = Invoke-RestMethod -Uri $url -Method 'Get'
 
     Write-Host "Extrato do Banco $($extrato.Conta.ToUpper()). Periodo: $($extrato.DataInicio) a $($extrato.DataFim)" 
     Write-Host ""
@@ -107,4 +130,31 @@ function Show-ExtratoMovimentacaoPendente {
     Write-Host "| Conta: $($mov.Conta) | Categoria: $($mov.Categoria)" -NoNewline
     Write-Host ""
 
+}
+
+function Get-ExtratoUrl {
+    [CmdletBinding()]
+    param (
+        [Parameter()]
+        [Guid]
+        $contaId,
+
+        [Parameter()]
+        [DateTime]
+        $dataInicio,
+
+        [Parameter()]
+        [DateTime]
+        $dataFim
+    )
+
+    $dataFormat = 'yyyy-MM-dd'
+
+    $dataInicioFormatada = $dataInicio.ToString($dataFormat)
+    $dataFimFormatada = $dataFim.ToString($dataFormat)
+    
+    $baseUri = "https://localhost:7081/conta/extrato"
+    $queryParams = "?dataInicio=$dataInicioFormatada&dataFim=$dataFimFormatada"
+    
+    return "$baseUri/$contaId" + $queryParams
 }
