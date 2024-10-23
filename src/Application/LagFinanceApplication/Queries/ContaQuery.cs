@@ -57,14 +57,15 @@ namespace LagFinanceApplication.Queries
             var dataInicio = query.DataInicio ?? new DateOnly(2024, 01, 01);
             var dataFim = query.DataFim ?? DateOnly.FromDateTime(DateTime.Now);
 
-            var valorAnterior = conta.Movimentacoes.Where(x => DateOnly.FromDateTime(x.Data) < dataInicio)  
+            var valorSaldoAnterior = conta.Movimentacoes.Where(x => DateOnly.FromDateTime(x.Data) < dataInicio)  
                                                    .Where(x => !x.Pendente)
-                                                   .Sum(x => x.Valor);
+                                                   .Sum(x => x.ValorSaldo());
 
             var movimentacoes = conta.Movimentacoes.Where(x => DateOnly.FromDateTime(x.Data) >= dataInicio)
-                                                   .Where(x => DateOnly.FromDateTime(x.Data) <= dataFim);
+                                                   .Where(x => DateOnly.FromDateTime(x.Data) <= dataFim)
+                                                   .ToList();
 
-            return new ExtratoModel(conta.Descricao, conta.Movimentacoes, dataInicio, dataFim, valorAnterior);
+            return new ExtratoModel(conta.Descricao, movimentacoes, dataInicio, dataFim, valorSaldoAnterior);
         }
 
         public DespesasPorCategoriaModel DespesasPorCategoria(DespesasPorCategoriaQueryModel query)

@@ -12,6 +12,8 @@ namespace LagFinanceApplication.Models.Movimentacoes
 
         public decimal Valor { get; set; }
 
+        public decimal ValorSaldo { get; set; }
+
         public DateTime Data { get; set; }
 
         public TipoMovimentacaoEnum TipoMovimentacao { get; set; }

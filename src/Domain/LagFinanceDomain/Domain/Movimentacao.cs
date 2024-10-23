@@ -32,5 +32,21 @@ namespace LagFinanceDomain.Domain
         public virtual Categoria Categoria { get; set; }
 
         #endregion
+
+        public decimal ValorSaldo()
+        {
+            switch (TipoMovimentacao)
+            {
+                case TipoMovimentacaoEnum.Receita:
+                    return Valor;
+                
+                case TipoMovimentacaoEnum.Despesa:
+                case TipoMovimentacaoEnum.Transferencia:
+                    return -Math.Abs(Valor);
+
+                default:
+                    throw new NotImplementedException();
+            }
+        }
     }
 }

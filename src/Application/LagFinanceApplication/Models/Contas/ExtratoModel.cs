@@ -11,23 +11,23 @@ namespace LagFinanceApplication.Models.Contas
         public DateOnly DataInicio { get; set; }
         public DateOnly DataFim { get; set; }
 
-        public decimal ValorInicial { get; set; }
-        public decimal ValorFinal { get; set; }
+        public decimal SaldoInicial { get; set; }
+        public decimal SaldoFinal { get; set; }
 
         public ExtratoPendenteModel ExtratoPendente { get; set; }
 
         public IList<ExtratoGroupModel> ExtratosDia { get; set; }
 
-        public ExtratoModel(string conta, IList<Movimentacao> movimentacoes, DateOnly dataInicio, DateOnly dataFim, decimal valorAnterior = decimal.Zero)
+        public ExtratoModel(string conta, IList<Movimentacao> movimentacoes, DateOnly dataInicio, DateOnly dataFim, decimal valorSaldoAnterior = decimal.Zero)
         {
             Conta = conta;
-            ExtratosDia = DefinirExtratoGroup(movimentacoes);
+            ExtratosDia = DefinirExtratoGroup(movimentacoes, valorSaldoAnterior);
 
             DataInicio = dataInicio;
             DataFim = dataFim;
 
-            ValorInicial = valorAnterior;
-            ValorFinal = ExtratosDia.Last().ValorFinalDia;
+            SaldoInicial = valorSaldoAnterior;
+            SaldoFinal = ExtratosDia.Last().ValorFinalDia;
 
             ExtratoPendente = DefinirExtratoPendente(movimentacoes);
         }
@@ -59,11 +59,11 @@ namespace LagFinanceApplication.Models.Contas
                 .ToList(),
 
                 ValorTotal = valorTotal,
-                ValorFinal = ValorFinal - valorTotal
+                ValorFinal = SaldoFinal - valorTotal
             };
         }
 
-        public IList<ExtratoGroupModel> DefinirExtratoGroup(IList<Movimentacao> movimentacoes)
+        public IList<ExtratoGroupModel> DefinirExtratoGroup(IList<Movimentacao> movimentacoes, decimal saldoAnterior = 0)
         {
             var movimentacoesDia = movimentacoes.Where(x => !x.Pendente)
                                                 .GroupBy(x => x.Data.Date)
@@ -81,19 +81,18 @@ namespace LagFinanceApplication.Models.Contas
                                                         Observacao = mov.Observacao,
                                                         Pendente = mov.Pendente,
                                                         TipoMovimentacao = mov.TipoMovimentacao,
-                                                        Valor = mov.Valor
+                                                        Valor = mov.Valor,
+                                                        ValorSaldo = mov.ValorSaldo()
                                                     }).ToList(),
                                                 })
                                                 .OrderBy(x => x.Dia)
                                                 .ToArray();
 
-            var valorInicial = decimal.Zero;
+            var valorInicial = saldoAnterior;
+            
             foreach (var movimentacaoDia in movimentacoesDia)
             {
-                var despesas = movimentacaoDia.Movimentacoes.Where(x => x.TipoMovimentacao == TipoMovimentacaoEnum.Despesa).Sum(x => x.Valor);
-                var receitas = movimentacaoDia.Movimentacoes.Where(x => x.TipoMovimentacao == TipoMovimentacaoEnum.Receita).Sum(x => x.Valor);
-
-                var valorTotal = receitas - despesas;
+                var valorTotal = movimentacaoDia.Movimentacoes.Sum(x => x.ValorSaldo);
                 var valorFinal = valorInicial + valorTotal;
 
                 movimentacaoDia.ValorTotal = valorTotal;
