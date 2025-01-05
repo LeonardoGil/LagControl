@@ -1,6 +1,5 @@
 ﻿using LagFinanceApplication.Models.Movimentacoes;
 using LagFinanceDomain.Domain;
-using LagFinanceDomain.Enum;
 
 namespace LagFinanceApplication.Models.Contas
 {
@@ -27,7 +26,7 @@ namespace LagFinanceApplication.Models.Contas
             DataFim = dataFim;
 
             SaldoInicial = valorSaldoAnterior;
-            SaldoFinal = ExtratosDia.Last().ValorFinalDia;
+            SaldoFinal = ExtratosDia.LastOrDefault()?.ValorFinalDia ?? valorSaldoAnterior;
 
             ExtratoPendente = DefinirExtratoPendente(movimentacoes);
         }
@@ -48,7 +47,7 @@ namespace LagFinanceApplication.Models.Contas
                     Id = mov.Id,
                     Conta = mov.Conta.Descricao,
                     Categoria = mov.Categoria.Descricao,
-                    ContaTransferencia = mov.ContaTransferencia?.Descricao,
+                    ContaTransferencia = mov.ContaTransferencia?.Descricao ?? string.Empty,
                     Data = mov.Data,
                     Descricao = mov.Descricao,
                     Observacao = mov.Observacao,
@@ -89,12 +88,11 @@ namespace LagFinanceApplication.Models.Contas
                                                 .ToArray();
 
             var valorInicial = saldoAnterior;
-            
+
             foreach (var movimentacaoDia in movimentacoesDia)
             {
                 var valorTotal = movimentacaoDia.Movimentacoes.Sum(x => x.ValorSaldo);
                 var valorFinal = valorInicial + valorTotal;
-
                 movimentacaoDia.ValorTotal = valorTotal;
                 movimentacaoDia.ValorInicialDia = valorInicial;
                 movimentacaoDia.ValorFinalDia = valorFinal;
