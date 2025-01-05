@@ -41,8 +41,8 @@ function Show-Extrato {
 
     $url = Get-ExtratoUrl -dataInicio $dataInicio -dataFim $dataFim -contaId $contaId
 
-    $extrato = Invoke-RestMethod -Uri $url -Method 'Get'
-
+    $extrato = Invoke-RestMethod -Uri $url -Method 'Get'    
+    
     Write-Host "Extrato do Banco $($extrato.Conta.ToUpper()). Periodo: $($extrato.DataInicio) a $($extrato.DataFim)" 
     Write-Host ""
 
@@ -148,13 +148,17 @@ function Get-ExtratoUrl {
         $dataFim
     )
 
+
     $dataFormat = 'yyyy-MM-dd'
 
     $dataInicioFormatada = $dataInicio.ToString($dataFormat)
     $dataFimFormatada = $dataFim.ToString($dataFormat)
     
-    $baseUri = "https://localhost:7081/conta/extrato"
+    $baseUri = "https://localhost:7081/conta/extrato/$contaId"
     $queryParams = "?dataInicio=$dataInicioFormatada&dataFim=$dataFimFormatada"
-    
-    return "$baseUri/$contaId" + $queryParams
+ 
+    $url = $baseUri + $queryParams
+    Write-Verbose "Url: $url"
+
+    return $url
 }
