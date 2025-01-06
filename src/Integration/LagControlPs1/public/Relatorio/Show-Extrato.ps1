@@ -154,8 +154,8 @@ function Get-ExtratoUrl {
     $dataInicioFormatada = $dataInicio.ToString($dataFormat)
     $dataFimFormatada = $dataFim.ToString($dataFormat)
     
-    $baseUri = "https://localhost:7081/conta/extrato/$contaId"
-    $queryParams = "?dataInicio=$dataInicioFormatada&dataFim=$dataFimFormatada"
+    $baseUri = "https://localhost:7081/Relatorio/Extrato"
+    $queryParams = "?contaId=$contaId&dataInicio=$dataInicioFormatada&dataFim=$dataFimFormatada"
  
     $url = $baseUri + $queryParams
     Write-Verbose "Url: $url"

@@ -4,12 +4,7 @@ function Show-DespesasPorCategoria() {
     param (
         [Parameter()]
         [Guid]
-        $ContaId,
-
-        [Alias('i')]
-        [Parameter()]
-        [switch]
-        $interactive
+        $ContaId
     )
     
     $ErrorActionPreference = 'Stop'
@@ -22,7 +17,7 @@ function Show-DespesasPorCategoria() {
         $contaId = $contas[$contaIndex].Id
     }
 
-    $relatorio = Invoke-RestMethod -Uri "https://localhost:7081/conta/Despesas-por-Categoria/$contaId" -Method 'Get'
+    $relatorio = Invoke-RestMethod -Uri "https://localhost:7081/Relatorio/Despesas-por-Categoria?ContaId=$contaId" -Method 'Get'
 
     Write-Host "Conta: $($relatorio.Conta)"
 

@@ -42,36 +42,5 @@ namespace LagControlAPI.Controllers.Finance
                 return BadRequest(ex);
             }
         }
-
-        [HttpGet]
-        [Route("Extrato/{contaId}")]
-        public IActionResult Extrato([FromRoute] Guid contaId, [FromQuery] ExtratoQueryModel query)
-        {
-            try
-            {
-                query.ContaId = contaId;
-
-                return Ok(_contaQuery.Extrato(query));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
-        }
-
-        [HttpGet]
-        [Route("Despesas-por-categoria/{contaId}")]
-        public IActionResult DespesasPorCategoria([FromRoute] Guid contaId, [FromQuery] DespesasPorCategoriaQueryModel query)
-        {
-            try
-            {
-                var despesasPorCategoria = _contaQuery.DespesasPorCategoria(new DespesasPorCategoriaQueryModel { ContaId = contaId });
-                return Ok(despesasPorCategoria);
-            }
-            catch (Exception ex) 
-            {
-                return BadRequest(ex);
-            }
-        }
     }
 }
