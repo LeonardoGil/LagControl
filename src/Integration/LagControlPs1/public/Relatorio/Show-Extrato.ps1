@@ -26,13 +26,8 @@ function Show-Extrato {
         $contaId = $contas[$contaIndex].Id
     }
 
-    if ($null -eq $dataInicio) {
-        $dataInicio = Get-Date -Day 1
-    }
-
-    if ($null -eq $dataFim) {
-        $dataFim = (Get-Date -Day 1).AddMonths(1).AddDays(-1)
-    }
+    $dataInicio = Get-DatePrimeiroDiaSeForNull $dataInicio
+    $dataFim = Get-DateUltimoDiaSeForNull $dataFim
 
     if ($dataInicio -gt $dataFim) {
         Write-Host 'DataInicio não pode ser maior de DataFim' -ForegroundColor DarkYellow
