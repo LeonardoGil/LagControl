@@ -1,6 +1,7 @@
 ﻿using LagFinanceApplication.Interfaces;
 using LagFinanceApplication.Models.Contas;
 using LagFinanceApplication.Models.Movimentacoes;
+using LagFinanceDomain.Domain;
 using LagFinanceDomain.Enum;
 using LagFinanceInfra.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -57,9 +58,12 @@ namespace LagFinanceApplication.Queries
             var valorSaldoAnterior = conta.Movimentacoes.Where(x => DateOnly.FromDateTime(x.Data) < query.DataInicio)  
                                                         .Where(x => !x.Pendente)
                                                         .Sum(x => x.ValorSaldo());
+            
+            Func<Movimentacao, bool> filtroPorPeriodo = x => DateOnly.FromDateTime(x.Data) >= query.DataInicio && DateOnly.FromDateTime(x.Data) <= query.DataFim;
+            Func<Movimentacao, bool> filtroPendentesAntesDoPeriodo = x => DateOnly.FromDateTime(x.Data) < query.DataInicio && x.Pendente;
 
-            var movimentacoes = conta.Movimentacoes.Where(x => DateOnly.FromDateTime(x.Data) >= query.DataInicio)
-                                                   .Where(x => DateOnly.FromDateTime(x.Data) <= query.DataFim)
+            var movimentacoes = conta.Movimentacoes.Where(x => filtroPorPeriodo.Invoke(x) || 
+                                                               filtroPendentesAntesDoPeriodo.Invoke(x))
                                                    .ToList();
 
             return new ExtratoModel(conta.Descricao, movimentacoes, query.DataInicio, query.DataFim, valorSaldoAnterior);
