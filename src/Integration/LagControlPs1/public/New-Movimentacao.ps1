@@ -39,31 +39,16 @@ function New-Movimentacao {
 
     $ErrorActionPreference = 'Break'
 
-    $tipo = 1 # Despesa
-    if ($receita.IsPresent) {
-        $tipo = 0 
-    } # Receita 
+    $tipo = [int](-not $receita.IsPresent)
 
     if ($null -eq $contaId -or $contaId -eq [Guid]::Empty) {
 
-        $contas = Invoke-RestMethod -Uri 'https://localhost:7081/Conta/Listar' -Method 'Get'
-        
-        $choices = $contas | ForEach-Object { [ChoiceDescription]::new("&$([Array]::IndexOf($contas, $_)) $($_.descricao)" , $_.descricao ) }
-
-        $contaIndex = $host.UI.PromptForChoice("Informe a Conta", "", $choices, 0)
-
-        $contaId = $contas[$contaIndex].Id
+        $contaId = (Select-Conta).Id
     }
 
     if ($null -eq $categoriaId -or $categoriaId -eq [Guid]::Empty) {
 
-        $categorias = Invoke-RestMethod -Uri "https://localhost:7081/Categoria/Listar?Tipo=$tipo" -Method 'Get'
-            
-        $choices = $categorias | ForEach-Object { [ChoiceDescription]::new("&$([Array]::IndexOf($categorias, $_)) $($_.descricao)" , $_.descricao ) }
-
-        $categoriaIndex = $host.UI.PromptForChoice("Informe a Categoria", "", $choices, 0)
-
-        $categoriaId = $categorias[$categoriaIndex].Id
+        $categoriaId = (Select-Categoria -tipo $tipo).Id
     }
 
     $body = [PSCustomObject]@{
