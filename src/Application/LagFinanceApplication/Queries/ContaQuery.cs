@@ -55,14 +55,14 @@ namespace LagFinanceApplication.Queries
             if (!conta.Movimentacoes.Any())
                 throw new Exception("Conta não possui Movimentações");
 
-            var valorSaldoAnterior = conta.Movimentacoes.Where(x => DateOnly.FromDateTime(x.Data) < query.DataInicio)  
+            var valorSaldoAnterior = conta.Movimentacoes.Where(x => DateOnly.FromDateTime(x.Data) < query.DataInicio)
                                                         .Where(x => !x.Pendente)
                                                         .Sum(x => x.ValorSaldo());
-            
+
             Func<Movimentacao, bool> filtroPorPeriodo = x => DateOnly.FromDateTime(x.Data) >= query.DataInicio && DateOnly.FromDateTime(x.Data) <= query.DataFim;
             Func<Movimentacao, bool> filtroPendentesAntesDoPeriodo = x => DateOnly.FromDateTime(x.Data) < query.DataInicio && x.Pendente;
 
-            var movimentacoes = conta.Movimentacoes.Where(x => filtroPorPeriodo.Invoke(x) || 
+            var movimentacoes = conta.Movimentacoes.Where(x => filtroPorPeriodo.Invoke(x) ||
                                                                filtroPendentesAntesDoPeriodo.Invoke(x))
                                                    .ToList();
 
@@ -72,7 +72,8 @@ namespace LagFinanceApplication.Queries
         public DespesasPorCategoriaModel DespesasPorCategoria(DespesasPorCategoriaQueryModel query)
         {
             var conta = _contaRepository.Get()
-                                        .Include(x => x.Movimentacoes).ThenInclude(x => x.Categoria)
+                                        .Include(x => x.Movimentacoes.Where(x => DateOnly.FromDateTime(x.Data) >= query.DataInicio && DateOnly.FromDateTime(x.Data) <= query.DataFim))
+                                        .ThenInclude(x => x.Categoria)
                                         .AsNoTracking()
                                         .FirstOrDefault(x => x.Id == query.ContaId) ?? throw new NotImplementedException($"Conta '{query.ContaId}' não encontrada");
 
