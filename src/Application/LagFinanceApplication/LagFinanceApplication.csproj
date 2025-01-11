@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\LagFinanceInfra\LagFinanceInfra.csproj" />
+    <ProjectReference Include="..\..\Utilities\LagControlUtil\LagControlUtil.csproj" />
   </ItemGroup>
 
 </Project>

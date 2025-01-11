@@ -19,7 +19,8 @@ namespace LagFinanceApplication.Services
             var categoria = new Categoria
             {
                 Descricao = categoriaModel.Descricao,
-                Tipo = categoriaModel.Tipo
+                Tipo = categoriaModel.Tipo,
+                CategoriaPaiId = categoriaModel.CategoriaPaiId
             };
 
             _categoriaRepository.Add(categoria);

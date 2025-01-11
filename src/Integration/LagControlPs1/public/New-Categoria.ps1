@@ -7,16 +7,24 @@ function New-Categoria {
 
         [Parameter()]
         [switch]
-        $despesa
+        $despesa,
+
+        [Parameter()]
+        [switch]
+        $categoriaFilha
     )
 
-    $tipo = 0 # Receita
-    if ($despesa) { $tipo = 1 } # Despesa 
+    $tipo = [int]$despesa.IsPresent
 
-    $body = [PSCustomObject]@{ 
+    $categoria = [PSCustomObject]@{ 
         Descricao = $descricao 
         Tipo = $tipo
-    } | ConvertTo-Json
+        categoriaPaiId = $null
+    } 
+
+    if ($categoriaFilha.IsPresent) { $categoria.categoriaPaiId = (Select-Categoria -tipo $tipo).Id }
+
+    $body = $categoria | ConvertTo-Json
 
     Invoke-RestMethod -Uri 'https://localhost:7081/Categoria/Adicionar' `
                       -Method 'Post' `
