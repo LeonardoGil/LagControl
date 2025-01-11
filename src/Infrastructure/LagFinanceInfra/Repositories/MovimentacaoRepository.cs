@@ -1,4 +1,4 @@
-﻿using LagFinanceDomain.Domain;
+﻿using LagFinanceDomain.Entities;
 using LagFinanceInfra.Database;
 using LagFinanceInfra.Interfaces;
 

@@ -1,4 +1,4 @@
-﻿namespace LagFinanceDomain.Enum
+﻿namespace LagFinanceDomain.Enums
 {
     public enum TipoMovimentacaoEnum
     {

@@ -1,6 +1,6 @@
 ﻿using LagFinanceApplication.Interfaces;
 using LagFinanceApplication.Models.Movimentacoes;
-using LagFinanceDomain.Domain;
+using LagFinanceDomain.Entities;
 using LagFinanceInfra.Interfaces;
 
 namespace LagFinanceApplication.Services

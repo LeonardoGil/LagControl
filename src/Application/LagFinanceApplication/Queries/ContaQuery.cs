@@ -1,8 +1,8 @@
 ﻿using LagFinanceApplication.Interfaces;
 using LagFinanceApplication.Models.Contas;
 using LagFinanceApplication.Models.Movimentacoes;
-using LagFinanceDomain.Domain;
-using LagFinanceDomain.Enum;
+using LagFinanceDomain.Entities;
+using LagFinanceDomain.Enums;
 using LagFinanceInfra.Interfaces;
 using Microsoft.EntityFrameworkCore;
 

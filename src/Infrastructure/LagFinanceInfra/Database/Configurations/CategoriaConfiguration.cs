@@ -1,5 +1,5 @@
-﻿using LagFinanceDomain.Domain;
-using LagFinanceDomain.Enum;
+﻿using LagFinanceDomain.Entities;
+using LagFinanceDomain.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace LagFinanceInfra.Database.Configurations

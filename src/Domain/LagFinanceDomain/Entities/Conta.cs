@@ -1,7 +1,7 @@
 ﻿using LagBaseDomain;
-using LagFinanceDomain.Enum;
+using LagFinanceDomain.Enums;
 
-namespace LagFinanceDomain.Domain
+namespace LagFinanceDomain.Entities
 {
     public class Conta : Entity
     {

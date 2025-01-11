@@ -1,4 +1,4 @@
-﻿using LagFinanceDomain.Enum;
+﻿using LagFinanceDomain.Enums;
 
 namespace LagFinanceApplication.Models.Categorias
 {

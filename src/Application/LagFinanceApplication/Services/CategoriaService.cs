@@ -1,6 +1,6 @@
 ﻿using LagFinanceApplication.Interfaces;
 using LagFinanceApplication.Models.Categorias;
-using LagFinanceDomain.Domain;
+using LagFinanceDomain.Entities;
 using LagFinanceInfra.Interfaces;
 
 namespace LagFinanceApplication.Services

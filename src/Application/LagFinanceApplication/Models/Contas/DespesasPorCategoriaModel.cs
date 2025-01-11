@@ -1,6 +1,6 @@
 ﻿using LagFinanceApplication.Models.Movimentacoes;
-using LagFinanceDomain.Domain;
-using LagFinanceDomain.Enum;
+using LagFinanceDomain.Entities;
+using LagFinanceDomain.Enums;
 
 namespace LagFinanceApplication.Models.Contas
 {

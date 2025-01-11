@@ -1,6 +1,6 @@
 ﻿using LagFinanceInfra.Database.Configurations;
 using LagFinanceLib.Database.Configurations;
-using LagFinanceDomain.Domain;
+using LagFinanceDomain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace LagFinanceInfra.Database
