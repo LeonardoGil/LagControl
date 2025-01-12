@@ -1,18 +1,13 @@
 ﻿using LagBaseDomain;
-using LagFinanceInfra.Database;
-using LagFinanceInfra.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
-namespace LagFinanceInfra.Repositories
+namespace LagBaseInfra
 {
-    public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity>
+    public abstract class BaseRepository<TContext, TEntity>(TContext context) : IBaseRepository<TEntity>
+        where TContext : DbContext
         where TEntity : class
     {
-        protected LagFinanceDbContext _context;
-
-        public BaseRepository(LagFinanceDbContext context)
-        {
-            _context = context;
-        }
+        protected TContext _context = context;
 
         public void Add(TEntity entity)
         {

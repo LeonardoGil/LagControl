@@ -25,7 +25,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LagBaseDomain", "src\Domain
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{D1197F30-C1C3-472A-A427-CCF92891441D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LagControlUtil", "src\Utilities\LagControlUtil\LagControlUtil.csproj", "{4441BBC6-A4FB-433C-9745-C8EA3FC8E914}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LagControlUtil", "src\Utilities\LagControlUtil\LagControlUtil.csproj", "{4441BBC6-A4FB-433C-9745-C8EA3FC8E914}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LagBaseInfra", "src\Infrastructure\LagBaseInfra\LagBaseInfra\LagBaseInfra.csproj", "{6248EA4E-CAD4-49C3-8866-2FC5CEA6D441}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{4441BBC6-A4FB-433C-9745-C8EA3FC8E914}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4441BBC6-A4FB-433C-9745-C8EA3FC8E914}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4441BBC6-A4FB-433C-9745-C8EA3FC8E914}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6248EA4E-CAD4-49C3-8866-2FC5CEA6D441}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6248EA4E-CAD4-49C3-8866-2FC5CEA6D441}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6248EA4E-CAD4-49C3-8866-2FC5CEA6D441}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6248EA4E-CAD4-49C3-8866-2FC5CEA6D441}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +79,7 @@ Global
 		{147597E6-46B1-428A-BECF-A622B627AA2F} = {A532C5A7-EBE2-47F9-A02B-16E4663C4781}
 		{D5717BCD-67B3-4430-B8AF-CE4AB598FBBA} = {77B70209-E723-4968-A399-E6F65CE3975F}
 		{4441BBC6-A4FB-433C-9745-C8EA3FC8E914} = {D1197F30-C1C3-472A-A427-CCF92891441D}
+		{6248EA4E-CAD4-49C3-8866-2FC5CEA6D441} = {DB392C41-DB65-4B10-BC07-2F56CE5F07B4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9559EC51-72A2-4F47-82D7-73D37864121E}
