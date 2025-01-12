@@ -46,6 +46,7 @@ namespace LagControlAPI
         {
             var connectionString = builder.Configuration.GetConnectionString("DbContext") ?? throw new Exception("ConnectionString não localizada");
             builder.Services.AddDbContext<LagFinanceDbContext>(opt => opt.UseSqlServer(connectionString));
+            builder.Services.AddDbContext<LagDietDbContext>(opt => opt.UseSqlServer(connectionString));
 
             builder.Services.AddScoped<IMovimentacaoService, MovimentacaoService>();
             builder.Services.AddScoped<ICategoriaService, CategoriaService>();
