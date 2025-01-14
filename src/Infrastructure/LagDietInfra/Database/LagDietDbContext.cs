@@ -3,10 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LagFinanceInfra.Database
 {
-    public class LagDietDbContext : DbContext
+    public class LagDietDbContext(DbContextOptions<LagDietDbContext> options) : DbContext(options)
     {
-        public LagDietDbContext(DbContextOptions options) : base(options) { }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("diet");
