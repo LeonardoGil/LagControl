@@ -45,8 +45,8 @@ namespace LagControlAPI
         public static void DependencyInjection(WebApplicationBuilder builder)
         {
             var connectionString = builder.Configuration.GetConnectionString("DbContext") ?? throw new Exception("ConnectionString não localizada");
-            builder.Services.AddDbContext<LagFinanceDbContext>(opt => opt.UseSqlServer(connectionString));
-            builder.Services.AddDbContext<LagDietDbContext>(opt => opt.UseSqlServer(connectionString));
+            builder.Services.AddDbContext<LagFinanceDbContext>(opt => opt.UseSqlServer(connectionString, options => options.MigrationsHistoryTable("__MigrationsHistory", "Finance")));
+            builder.Services.AddDbContext<LagDietDbContext>(opt => opt.UseSqlServer(connectionString, options => options.MigrationsHistoryTable("__MigrationsHistory", "diet")));
 
             builder.Services.AddScoped<IMovimentacaoService, MovimentacaoService>();
             builder.Services.AddScoped<ICategoriaService, CategoriaService>();
