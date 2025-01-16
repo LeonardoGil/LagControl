@@ -11,5 +11,9 @@ namespace LagFinanceInfra.Database
         }
 
         public DbSet<Alimento> Alimento { get; set; }
+        
+        public DbSet<Refeicao> Refeicao { get; set; }
+        
+        public DbSet<RefeicaoAlimento> RefeicaoAlimento { get; set; }
     }
 }

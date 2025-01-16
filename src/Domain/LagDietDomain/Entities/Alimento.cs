@@ -1,10 +1,15 @@
 ﻿using LagBaseDomain;
+using LagDietDomain.Enums;
 
 namespace LagDietDomain.Entities
 {
     public class Alimento : Entity
     {
         public string Descricao { get; set; }
+
+        public UnidadeMedidaEnum UnidadeMedida { get; set; }
+
+        public double Porcao { get; set; }
 
         public int Kcal { get; set; }
 
