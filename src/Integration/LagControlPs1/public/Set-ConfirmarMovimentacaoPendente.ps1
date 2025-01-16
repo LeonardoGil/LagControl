@@ -21,9 +21,12 @@ function Set-ConfirmarMovimentacaoPendente {
 
     $movimentacoes = Invoke-RestMethod -Method 'Get' -Uri 'https://localhost:7081/Movimentacao/Listar?ApenasPendentes=true'
 
-    Write-Output $movimentacoes.GetType()
-
     $movimentacao = Show-ConfirmarMovimentacaoPendenteOptions $movimentacoes 
+
+    if ($null -eq $movimentacao) {
+        Write-Host 'Movimentação inválida' -ForegroundColor DarkYellow
+        return
+    }
 
     $body = [PSCustomObject]@{
         Id = $movimentacao.Id
@@ -49,13 +52,22 @@ function Show-ConfirmarMovimentacaoPendenteOptions {
         $movimentacoes
     )
 
-    $choices = $movimentacoes | ForEach-Object { 
-        $message = "&$([Array]::IndexOf($movimentacoes, $_)) $($_.descricao)"
-        $helpMessage = "$(Get-Date $_.Data -Format 'dd/MM/yyyy') R$ $($_.Valor) $($_.descricao)"
-        return [ChoiceDescription]::new($message , $helpMessage) 
+    foreach ($movimentacao in $movimentacoes) {
+        
+        $index = [Array]::IndexOf($movimentacoes, $movimentacao)
+        
+        $data = Get-Date $movimentacao.Data -Format 'dd/MM/yyyy'
+
+        Write-Host "$index - $data R$ $($movimentacao.Valor) $($movimentacao.descricao)"
     }
 
-    $movimentacao = $host.UI.PromptForChoice("Escolha uma movimentação", "", $choices, 0)
+    Write-Host
 
-    return $movimentacoes[$movimentacao]
+    $movimentacaoIndex = Read-Host 'Selecione uma movimentação:'
+
+    if ($movimentacaoIndex -as [int] -and 
+        $movimentacaoIndex -ge 0 -and 
+        $movimentacaoIndex -lt $movimentacoes.Count) { return $movimentacoes[$movimentacaoIndex] }
+
+    return $null
 }
