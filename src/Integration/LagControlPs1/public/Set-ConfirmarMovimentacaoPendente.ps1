@@ -23,11 +23,6 @@ function Set-ConfirmarMovimentacaoPendente {
 
     $movimentacao = Show-ConfirmarMovimentacaoPendenteOptions $movimentacoes 
 
-    if ($null -eq $movimentacao) {
-        Write-Host 'Movimentação inválida' -ForegroundColor DarkYellow
-        return
-    }
-
     $body = [PSCustomObject]@{
         Id = $movimentacao.Id
     }
@@ -52,22 +47,47 @@ function Show-ConfirmarMovimentacaoPendenteOptions {
         $movimentacoes
     )
 
-    foreach ($movimentacao in $movimentacoes) {
+    $skip = 0
+    $take = 9
+    $next = [ChoiceDescription]::new('&+ Proximo', 'Proximo') 
+    $back = [ChoiceDescription]::new('&- Voltar', 'Voltar') 
+
+    do {
         
-        $index = [Array]::IndexOf($movimentacoes, $movimentacao)
-        
-        $data = Get-Date $movimentacao.Data -Format 'dd/MM/yyyy'
+        $selectedMovimentacoes = $movimentacoes | Select-Object -Skip $skip -First $take
 
-        Write-Host "$index - $data R$ $($movimentacao.Valor) $($movimentacao.descricao)"
-    }
+        $choices = $selectedMovimentacoes | ForEach-Object { 
+            $message = "&$([Array]::IndexOf($movimentacoes, $_)) $($_.descricao)"
+            
+            $helpMessage = "$(Get-Date $_.Data -Format 'dd/MM/yyyy') R$ $($_.Valor) $($_.descricao)"
+            
+            return [ChoiceDescription]::new($message, $helpMessage) 
+        }
 
-    Write-Host
+        if (($skip + $take) -lt $movimentacoes.Count) {
+            $choices += $next
+        }
+   
+        if ($skip -gt 0) {
+            $choices += $back
+        } 
 
-    $movimentacaoIndex = Read-Host 'Selecione uma movimentação:'
 
-    if ($movimentacaoIndex -as [int] -and 
-        $movimentacaoIndex -ge 0 -and 
-        $movimentacaoIndex -lt $movimentacoes.Count) { return $movimentacoes[$movimentacaoIndex] }
+        $selected = $host.UI.PromptForChoice("Escolha uma movimentação", "", $choices, '0')
 
-    return $null
+        switch ($selected) {
+            {[Array]::IndexOf($choices, $next) -eq $_} {  
+                $skip += $take
+            }
+
+            {[Array]::IndexOf($choices, $back) -eq $_} {  
+                $skip -= $take
+            }
+            
+            Default {
+                return $selectedMovimentacoes[$selected]
+            }
+        }
+
+    } while ($true)
 }
