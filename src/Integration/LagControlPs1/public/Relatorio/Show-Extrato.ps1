@@ -53,13 +53,19 @@ function Show-Extrato {
     }
 
     if ($null -ne $extrato.ExtratoPendente) {
-        Write-Host ""
-        Write-Host " === Pendencias === " -ForegroundColor DarkYellow
+        Write-Host ''
+        Write-Host ' === Pendencias === ' -ForegroundColor DarkYellow
 
         $extrato.ExtratoPendente.Movimentacoes | Sort-Object -Property Data | ForEach-Object { Show-ExtratoMovimentacaoPendente $_ }
 
-        Write-Host "Valor Total: $($extrato.ExtratoPendente.ValorTotal)"
-        Write-Host "Valor Final: $($extrato.ExtratoPendente.ValorFinal)"
+        Write-Host ''
+        Write-Host 'Valor Total Receita: ' -NoNewline
+        Write-Host "$($extrato.ExtratoPendente.ValorTotalReceita)" -ForegroundColor Green
+
+        Write-Host 'Valor Total Despesa: ' -NoNewline
+        Write-Host "$($extrato.ExtratoPendente.ValorTotalDespesa)" -ForegroundColor Red
+
+        Write-Host "Saldo Previsto: $($extrato.ExtratoPendente.SaldoPrevisto)"
     }
 
 }
