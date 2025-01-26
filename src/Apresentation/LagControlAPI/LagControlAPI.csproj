@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Application\LagFinanceApplication\LagFinanceApplication.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\LagDietInfra\LagDietInfra.csproj" />
     <ProjectReference Include="..\..\Infrastructure\LagFinanceInfra\LagFinanceInfra.csproj" />
   </ItemGroup>
 

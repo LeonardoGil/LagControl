@@ -12,8 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Domain\LagBaseDomain\LagBaseDomain.csproj" />
-    <ProjectReference Include="..\..\Domain\LagFinanceDomain\LagFinanceDomain.csproj" />
+    <ProjectReference Include="..\..\Domain\LagDietDomain\LagDietDomain.csproj" />
     <ProjectReference Include="..\LagBaseInfra\LagBaseInfra\LagBaseInfra.csproj" />
   </ItemGroup>
 

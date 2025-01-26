@@ -1,4 +1,5 @@
-﻿using LagFinanceDomain.Entities;
+﻿using LagBaseInfra;
+using LagFinanceDomain.Entities;
 
 namespace LagFinanceInfra.Interfaces
 {

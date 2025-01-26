@@ -1,5 +1,6 @@
 ﻿using LagFinanceApplication.Models.Movimentacoes;
 using LagFinanceDomain.Entities;
+using LagFinanceDomain.Enums;
 
 namespace LagFinanceApplication.Models.Contas
 {
@@ -13,7 +14,7 @@ namespace LagFinanceApplication.Models.Contas
         public decimal SaldoInicial { get; set; }
         public decimal SaldoFinal { get; set; }
 
-        public ExtratoPendenteModel ExtratoPendente { get; set; }
+        public ExtratoPendenteModel? ExtratoPendente { get; set; }
 
         public IList<ExtratoGroupModel> ExtratosDia { get; set; }
 
@@ -31,14 +32,16 @@ namespace LagFinanceApplication.Models.Contas
             ExtratoPendente = DefinirExtratoPendente(movimentacoes);
         }
 
-        private ExtratoPendenteModel DefinirExtratoPendente(IList<Movimentacao> movimentacoes)
+        private ExtratoPendenteModel? DefinirExtratoPendente(IList<Movimentacao> movimentacoes)
         {
             var movimentacoesPendentes = movimentacoes.Where(x => x.Pendente);
 
             if (!movimentacoesPendentes.Any())
                 return null;
 
-            var valorTotal = movimentacoesPendentes.Sum(x => x.Valor);
+            var receitas = movimentacoesPendentes.Where(x => x.TipoMovimentacao == TipoMovimentacaoEnum.Receita).Sum(x => x.Valor);
+            var despesas = movimentacoesPendentes.Where(x => x.TipoMovimentacao == TipoMovimentacaoEnum.Despesa).Sum(x => x.Valor);
+            var valorTotal = receitas - despesas;
 
             return new ExtratoPendenteModel
             {
@@ -57,8 +60,10 @@ namespace LagFinanceApplication.Models.Contas
                 })
                 .ToList(),
 
-                ValorTotal = valorTotal,
-                ValorFinal = SaldoFinal - valorTotal
+                ValorTotalDespesa = despesas,
+                ValorTotalReceita = receitas,
+
+                SaldoPrevisto = SaldoFinal + valorTotal
             };
         }
 
@@ -108,7 +113,7 @@ namespace LagFinanceApplication.Models.Contas
     {
         public DateOnly Dia { get; set; }
 
-        public IList<MovimentacaoModel> Movimentacoes { get; set; }
+        public required IList<MovimentacaoModel> Movimentacoes { get; set; }
 
         public decimal ValorTotal { get; set; }
 
@@ -118,9 +123,11 @@ namespace LagFinanceApplication.Models.Contas
 
     public class ExtratoPendenteModel
     {
-        public IList<MovimentacaoModel> Movimentacoes { get; set; }
+        public required IList<MovimentacaoModel> Movimentacoes { get; set; }
 
-        public decimal ValorTotal { get; set; }
-        public decimal ValorFinal { get; set; }
+        public decimal ValorTotalDespesa { get; set; }
+        public decimal ValorTotalReceita { get; set; }
+
+        public decimal SaldoPrevisto { get; set; }
     }
 }

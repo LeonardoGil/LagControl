@@ -21,8 +21,6 @@ function Set-ConfirmarMovimentacaoPendente {
 
     $movimentacoes = Invoke-RestMethod -Method 'Get' -Uri 'https://localhost:7081/Movimentacao/Listar?ApenasPendentes=true'
 
-    Write-Output $movimentacoes.GetType()
-
     $movimentacao = Show-ConfirmarMovimentacaoPendenteOptions $movimentacoes 
 
     $body = [PSCustomObject]@{
@@ -49,13 +47,47 @@ function Show-ConfirmarMovimentacaoPendenteOptions {
         $movimentacoes
     )
 
-    $choices = $movimentacoes | ForEach-Object { 
-        $message = "&$([Array]::IndexOf($movimentacoes, $_)) $($_.descricao)"
-        $helpMessage = "$(Get-Date $_.Data -Format 'dd/MM/yyyy') R$ $($_.Valor) $($_.descricao)"
-        return [ChoiceDescription]::new($message , $helpMessage) 
-    }
+    $skip = 0
+    $take = 9
+    $next = [ChoiceDescription]::new('&+ Proximo', 'Proximo') 
+    $back = [ChoiceDescription]::new('&- Voltar', 'Voltar') 
 
-    $movimentacao = $host.UI.PromptForChoice("Escolha uma movimentação", "", $choices, 0)
+    do {
+        
+        $selectedMovimentacoes = $movimentacoes | Select-Object -Skip $skip -First $take
 
-    return $movimentacoes[$movimentacao]
+        $choices = $selectedMovimentacoes | ForEach-Object { 
+            $message = "&$([Array]::IndexOf($movimentacoes, $_)) $($_.descricao)"
+            
+            $helpMessage = "$(Get-Date $_.Data -Format 'dd/MM/yyyy') R$ $($_.Valor) $($_.descricao)"
+            
+            return [ChoiceDescription]::new($message, $helpMessage) 
+        }
+
+        if (($skip + $take) -lt $movimentacoes.Count) {
+            $choices += $next
+        }
+   
+        if ($skip -gt 0) {
+            $choices += $back
+        } 
+
+
+        $selected = $host.UI.PromptForChoice("Escolha uma movimentação", "", $choices, '0')
+
+        switch ($selected) {
+            {[Array]::IndexOf($choices, $next) -eq $_} {  
+                $skip += $take
+            }
+
+            {[Array]::IndexOf($choices, $back) -eq $_} {  
+                $skip -= $take
+            }
+            
+            Default {
+                return $selectedMovimentacoes[$selected]
+            }
+        }
+
+    } while ($true)
 }

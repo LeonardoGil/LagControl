@@ -1,4 +1,4 @@
-﻿namespace LagFinanceInfra.Interfaces
+﻿namespace LagBaseInfra
 {
     public interface IBaseRepository<TEntity>
         where TEntity : class
