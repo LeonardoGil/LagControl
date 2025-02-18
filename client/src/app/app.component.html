@@ -1,10 +1,38 @@
-<main class="main">
-  <div class="content">
-    <h2>Hello World</h2>
-    <mat-sidenav-container>
-      <mat-sidenav>Start</mat-sidenav>
-      <mat-sidenav-content><a href="/Movimentacao">Finanças</a></mat-sidenav-content>
-    </mat-sidenav-container>
-  </div>
-</main>
+  <div class="flex flex-col w-full h-full">
+
+    <!-- Menu -->
+    <mat-toolbar>
+      <button class="text-xl" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Home</span>
+    </mat-toolbar>
+
+    <!-- Main -->
+    <div class="flex flex-row h-3/4">
+      
+      <mat-drawer-container>
+        <mat-drawer #drawer mode="side">
+          <div class="p-10 h-full justify-items-center">
+            <button mat-button class="text-center text-lg" routerLink="/Movimentacao">
+              <mat-icon fontIcon="payment"/>
+              <a>Finanças</a>
+            </button>
+          </div>
+        </mat-drawer>
+
+      </mat-drawer-container>
+
+      <div class="bg-blue-500 h-full w-full">
+        <h1>Teste</h1>
+      </div>
+
+    </div>
+
+
+    <div class="bg-red-500 w-full h-1/4">
+      <h1>Footer</h1>
+    </div>
+
+  </div>  
 <router-outlet />
