@@ -2,6 +2,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import {MatTableModule} from '@angular/material/table';
 import { Observable } from 'rxjs';
+import { MovimentacaoGrid } from '../models/movimentacao.model';
 
 @Component({
   selector: 'app-movimentacao',
@@ -14,7 +15,15 @@ import { Observable } from 'rxjs';
 })
 export class MovimentacaoComponent {
   protected Movimentacoes: MovimentacaoGrid[] = []
-  protected Colunas: string[] = ['descricao']
+  protected Colunas: string[] = ['descricao',
+                                  'observacao',
+                                  'valor',
+                                  'data',
+                                  'tipo',
+                                  'pendente',
+                                  'conta',
+                                  'categoria'
+  ]
 
   constructor(private httpClient: HttpClient) {
     this.ObterDadosGrid().subscribe(
@@ -30,6 +39,3 @@ export class MovimentacaoComponent {
   }
 }
 
-export interface MovimentacaoGrid {
-  descricao: string
-}
