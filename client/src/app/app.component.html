@@ -20,7 +20,7 @@
           </div>
         </mat-drawer>
         <mat-drawer-content>
-          <div class="pt-10 h-full justify-items-center">
+          <div class="pt-10 h-full">
             <button mat-button class="text-center text-lg" (click)="drawer.toggle()">
               <mat-icon fontIcon="payment"/>
             </button>
@@ -29,13 +29,8 @@
   
       </mat-drawer-container>  
 
-      <div class="h-full w-full">
+      <div class="bg-red-500 h-full w-full">
         <router-outlet />
       </div>
     </div>
-
-    <div class="w-full h-2/10">
-      <a class="text-lg text-center">LagControl</a>
-    </div>
-
   </div>  
