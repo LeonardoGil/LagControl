@@ -1,36 +1,41 @@
-  <div class="flex flex-col w-full h-full">
+  <div class="flex flex-col h-full">
 
     <!-- Menu -->
     <mat-toolbar>
-      <button class="text-xl" mat-icon-button (click)="drawer.toggle()">
-        <mat-icon>menu</mat-icon>
+      <button class="m-3" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon fontIcon="menu" />
       </button>
-      <span>Home</span>
+      <span>LagControl</span>
     </mat-toolbar>
 
     <!-- Main -->
-    <div class="flex flex-row h-full">
-      <mat-drawer-container>
-        <mat-drawer #drawer mode="side">
-          <div class="p-10 h-full justify-items-center">
-            <button mat-button class="text-center text-lg" routerLink="/Movimentacao">
-              <mat-icon fontIcon="payment"/>
-              <a>Finanças</a>
-            </button>
-          </div>
-        </mat-drawer>
-        <mat-drawer-content>
-          <div class="pt-10 h-full">
-            <button mat-button class="text-center text-lg" (click)="drawer.toggle()">
-              <mat-icon fontIcon="payment"/>
-            </button>
-          </div>
-        </mat-drawer-content>
-  
-      </mat-drawer-container>  
+    <div>
 
-      <div class="bg-red-500 h-full w-full">
-        <router-outlet />
-      </div>
+      <mat-sidenav-container>
+        <mat-sidenav #drawer mode="side" class="max-w-min">
+
+          <mat-list>
+            <mat-list-item>
+              <button mat-button routerLink="/Movimentacao">
+                <mat-icon fontIcon="payment"/>
+                <a>Finanças</a>
+              </button>
+            </mat-list-item>
+            <mat-list-item>
+              <button mat-button routerLink="/Movimentacao">
+                <mat-icon fontIcon="payment"/>
+                <a>teste</a>
+              </button>
+            </mat-list-item>
+          </mat-list>
+            
+        </mat-sidenav>
+
+        <mat-sidenav-content class="p-5 h-full">
+          <router-outlet />
+        </mat-sidenav-content>
+  
+      </mat-sidenav-container>  
     </div>
+
   </div>  
