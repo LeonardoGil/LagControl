@@ -1,12 +1,29 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
-import {MatTableModule} from '@angular/material/table';
 import { Observable } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+
+import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
 import { MovimentacaoGrid } from '../models/movimentacao.model';
+import { TipoMovimentacaoEnum } from '../models/tipoMovimentacao.model';
 
 @Component({
   selector: 'app-movimentacao',
   imports: [MatTableModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatSlideToggleModule,
+    
+    FormsModule,
+
     HttpClientModule
   ],
   standalone: true,
@@ -25,11 +42,17 @@ export class MovimentacaoComponent {
                                   'categoria'
   ]
 
+  protected TipoMovimentacaoOptions = Object.keys(TipoMovimentacaoEnum)
+                                            .filter(key => isNaN(Number(key)))
+                                            .map(key => ({
+                                                label: key,
+                                                value: TipoMovimentacaoEnum[key as keyof typeof TipoMovimentacaoEnum]
+                                            }))
+
   constructor(private httpClient: HttpClient) {
     this.ObterDadosGrid().subscribe(
       (result) => {
         this.Movimentacoes = result
-        console.log(this.Movimentacoes)
       }
     )
   }
