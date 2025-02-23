@@ -2,29 +2,27 @@
     <mat-card appearance="outlined" class="flex flex-col min-w-min">
         <mat-card-content class="text-2xl">Movimentações</mat-card-content>
 
-        <div class="flex gap-8 p-3 h-auto ">
+        <div class="flex gap-8 p-3 h-auto">
             
-            <div class="flex flex-col justify-center">
-                <mat-form-field appearance="outline" class="w-auto h-12">
-                    <mat-label>Tipo Movimentação</mat-label>
-                    <mat-select class="w-auto">
-                      @for (tipo of TipoMovimentacaoOptions; track tipo) {
-                        <mat-option [value]="tipo.value">{{tipo.label}}</mat-option>
-                      }
-                    </mat-select>
-                </mat-form-field>
-            </div>
+            <mat-form-field appearance="outline">
+                <mat-label>Tipo Movimentação</mat-label>
+                <mat-select>
+                  @for (tipo of TipoMovimentacaoOptions; track tipo) {
+                    <mat-option [value]="tipo.value">{{tipo.label}}</mat-option>
+                  }
+                </mat-select>
+            </mat-form-field>
 
             <div class="flex flex-col justify-center">
-                <mat-label>Pendente</mat-label>
+                <mat-label>Pendente</mat-label> 
                 <mat-slide-toggle class="p-2"></mat-slide-toggle>
             </div>
             
         </div>       
     </mat-card>
 
-    <mat-card appearance="outlined" class="flex p-5">
-        <table mat-table [dataSource]="movimentacoesDataSource" class="flex-1">
+    <mat-card appearance="outlined" class="flex p-5 overflow-x-auto">
+        <table mat-table [dataSource]="movimentacoesDataSource" class="">
         
             <ng-container matColumnDef="descricao">
                 <th mat-header-cell *matHeaderCellDef>Descrição</th>
@@ -38,7 +36,7 @@
     
             <ng-container matColumnDef="valor">
                 <th mat-header-cell *matHeaderCellDef>Valor</th>
-                <td mat-cell *matCellDef="let mov"> {{mov.valor}} </td>
+                <td mat-cell *matCellDef="let mov"> {{mov.valor.toFixed(2)}} </td>
             </ng-container>
     
             <ng-container matColumnDef="data">
@@ -48,7 +46,9 @@
     
             <ng-container matColumnDef="tipo">
                 <th mat-header-cell *matHeaderCellDef>Tipo</th>
-                <td mat-cell *matCellDef="let mov"> {{mov.tipoMovimentacao}} </td>
+                <td mat-cell *matCellDef="let mov">
+                    <tipo-movimentacao-column-template [tipoMovimentacao]="mov.tipoMovimentacao"/>
+                </td>
             </ng-container>
     
             <ng-container matColumnDef="pendente">

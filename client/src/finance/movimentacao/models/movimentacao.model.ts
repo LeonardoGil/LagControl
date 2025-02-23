@@ -1,3 +1,5 @@
+import { TipoMovimentacaoEnum } from "./tipoMovimentacao.model"
+
 export interface MovimentacaoGrid {
     Id: String
 
@@ -9,7 +11,7 @@ export interface MovimentacaoGrid {
 
     Data: String
 
-    TipoMovimentacao: Number
+    TipoMovimentacao: TipoMovimentacaoEnum
 
     Pendente: Boolean
 

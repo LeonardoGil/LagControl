@@ -1,6 +1,5 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { MovimentacaoGrid } from './../models/movimentacao.model';
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -11,8 +10,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
-import { MovimentacaoGrid } from '../models/movimentacao.model';
 import { TipoMovimentacaoEnum } from '../models/tipoMovimentacao.model';
+import { MovimentacaoService } from '../services/movimentacao.service';
+import { TipoMovimentacaoColumnTemplateTsComponent } from "../../../share/templates/TipoMovimentacao/TipoMovimentacao.Column.Template.component";
 
 @Component({
   selector: 'app-movimentacao',
@@ -23,14 +23,12 @@ import { TipoMovimentacaoEnum } from '../models/tipoMovimentacao.model';
     MatSelectModule,
     MatInputModule,
     MatSlideToggleModule,
+    FormsModule, 
     
-    FormsModule,
-
-    HttpClientModule
-  ],
+    TipoMovimentacaoColumnTemplateTsComponent],
   standalone: true,
   templateUrl: './movimentacao.component.html',
-  styleUrl: './movimentacao.component.css'
+  styleUrl: './movimentacao.component.scss'
 })
 export class MovimentacaoComponent implements AfterViewInit {
   
@@ -48,21 +46,21 @@ export class MovimentacaoComponent implements AfterViewInit {
                                                 value: TipoMovimentacaoEnum[key as keyof typeof TipoMovimentacaoEnum]
                                             }))
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private movimentacaoService: MovimentacaoService) {
 
   }
   
   ngAfterViewInit(): void {
-    this.ObterDadosGrid().subscribe(
+
+    let query = '?ContaIds=9ab68e5a-a829-40b9-9d32-b9746d3134f5'
+
+    this.movimentacaoService.Listar(query).subscribe(
       (result) => {
         this.movimentacoesDataSource = new MatTableDataSource<MovimentacaoGrid>(result)
         this.movimentacoesDataSource.paginator = this.paginator
       }
     )
-  }
+  } 
 
-  ObterDadosGrid() : Observable<MovimentacaoGrid[]> {
-    return this.httpClient.get<MovimentacaoGrid[]>('https://localhost:7081/Movimentacao/Listar?ContaIds=9ab68e5a-a829-40b9-9d32-b9746d3134f5');
-  }
 }
 
