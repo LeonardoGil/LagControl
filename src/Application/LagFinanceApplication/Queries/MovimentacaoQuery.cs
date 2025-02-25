@@ -20,6 +20,12 @@ namespace LagFinanceApplication.Queries
             if (query.ContaIds is not null)
                 movimentacoesQuery = movimentacoesQuery.Where(x => query.ContaIds.Contains(x.ContaId));
 
+            if (query.CategoriaIds is not null)
+                movimentacoesQuery = movimentacoesQuery.Where(x => query.CategoriaIds.Contains(x.CategoriaId));
+
+            if (query.Tipo.HasValue)
+                movimentacoesQuery = movimentacoesQuery.Where(x => x.TipoMovimentacao == query.Tipo.Value);
+
             if (query.ApenasPendentes)
                 movimentacoesQuery = movimentacoesQuery.Where(x => x.Pendente);
 
