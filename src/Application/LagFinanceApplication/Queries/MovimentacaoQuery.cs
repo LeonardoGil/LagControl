@@ -14,11 +14,17 @@ namespace LagFinanceApplication.Queries
         {
             var movimentacoesQuery = _movimentacaoRepository.Get().AsNoTracking();
 
+            if (!string.IsNullOrEmpty(query.Descricao))
+                movimentacoesQuery = movimentacoesQuery.Where(x => x.Descricao.ToUpper().Contains(query.Descricao.ToUpper()));
+
             if (query.ContaIds is not null)
                 movimentacoesQuery = movimentacoesQuery.Where(x => query.ContaIds.Contains(x.ContaId));
 
             if (query.ApenasPendentes)
                 movimentacoesQuery = movimentacoesQuery.Where(x => x.Pendente);
+
+            if (query.DataInicial.HasValue && query.DataFinal.HasValue)
+                movimentacoesQuery = movimentacoesQuery.Where(x => x.Data >= query.DataInicial.Value && x.Data <= query.DataFinal.Value);
 
             return movimentacoesQuery.Include(x => x.Conta)
                                      .Include(x => x.ContaTransferencia)

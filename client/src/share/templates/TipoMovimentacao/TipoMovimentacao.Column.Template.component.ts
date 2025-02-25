@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common'
   imports: [
     CommonModule
   ],
-  // styleUrl: './TipoMovimentacao.Column.Template.component.scss',
+  styleUrl: './TipoMovimentacao.Column.Template.component.scss',
   templateUrl: './TipoMovimentacao.Column.Template.component.html',
 })
 export class TipoMovimentacaoColumnTemplateTsComponent { 
