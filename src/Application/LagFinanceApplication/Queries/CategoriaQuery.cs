@@ -10,7 +10,7 @@ namespace LagFinanceApplication.Queries
     {
         public IList<CategoriaListarModel> Listar(CategoriaListarQueryModel query)
         {
-            var categorias = _categoriaRepository.Get().Where(x => query.Tipo.HasValue && x.Tipo == query.Tipo.Value)
+            var categorias = _categoriaRepository.Get().Where(x => !query.Tipo.HasValue || x.Tipo == query.Tipo.Value)
                                                        .Include(x => x.CategoriaPai)
                                                        .Select(categoria => new CategoriaListarModel
                                                        {

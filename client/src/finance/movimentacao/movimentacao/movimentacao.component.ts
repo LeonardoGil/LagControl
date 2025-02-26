@@ -1,7 +1,9 @@
-import { MovimentacaoGrid } from './../models/movimentacao.model';
-import { ChangeDetectionStrategy, Component, ViewChild, AfterViewInit, NgModule } from '@angular/core';
+import { inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, AfterViewInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpParams } from '@angular/common/http';
+
+import { format } from 'date-fns';
 
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -14,10 +16,13 @@ import { MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/cor
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { TipoMovimentacaoEnum } from '../models/tipoMovimentacao.model';
-import { MovimentacaoService } from '../services/movimentacao.service';
 import { TipoMovimentacaoColumnTemplateTsComponent } from "../../../share/templates/TipoMovimentacao/TipoMovimentacao.Column.Template.component";
 
-import { format } from 'date-fns';
+import { CategoriaService } from './../../categoria/services/categoria.service';
+import { MovimentacaoService } from './../services/movimentacao.service';
+
+import { Categoria } from '../../categoria/models/categoria.model';
+import { MovimentacaoGrid } from './../models/movimentacao.model';
 
 @Component({
   selector: 'app-movimentacao',
@@ -47,7 +52,20 @@ import { format } from 'date-fns';
 })
 export class MovimentacaoComponent implements AfterViewInit {
   
+  private movimentacaoService: MovimentacaoService = inject(MovimentacaoService)
+  private CategoriaService: CategoriaService = inject(CategoriaService)
+  
+  ngAfterViewInit(): void {
+    this.CategoriaService.Listar(new HttpParams()).subscribe((categorias: Categoria[]) => this.categorias = categorias)
+    
+    this.filterModel.DataInicial = new Date(2025, 2, 1)
+    this.filterModel.DataFinal = new Date(2025, 2, 28)
+
+    this.filterMovimentacoes(undefined)
+  }
+  
   movimentacoesDataSource: MatTableDataSource<MovimentacaoGrid> = new MatTableDataSource<MovimentacaoGrid>()
+  categorias: Categoria[] = []
   colunas: string[] = ['descricao', 'observacao', 'valor', 'data', 'tipo', 'pendente', 'conta', 'categoria']
 
   @ViewChild(MatPaginator)
@@ -61,19 +79,7 @@ export class MovimentacaoComponent implements AfterViewInit {
                                                 label: key,
                                                 value: TipoMovimentacaoEnum[key as keyof typeof TipoMovimentacaoEnum]
                                             }))
-
-  constructor(private movimentacaoService: MovimentacaoService) {
-
-  }
-  
-  ngAfterViewInit(): void {
-
-    this.filterModel.DataInicial = new Date(2025, 2, 1)
-    this.filterModel.DataFinal = new Date(2025, 2, 28)
-
-    this.filterMovimentacoes(undefined)
-  } 
-
+ 
   filterMovimentacoes(teste: any) {
     let params = new HttpParams()
 
@@ -83,6 +89,10 @@ export class MovimentacaoComponent implements AfterViewInit {
     if (this.filterModel.Descricao !== undefined && this.filterModel.Descricao != '') {
         params = params.set('Descricao', this.filterModel.Descricao)
     }
+
+    if (this.filterModel.CategoriaId !== undefined && this.filterModel.CategoriaId != '') {
+      params = params.set('CategoriaIds', this.filterModel.CategoriaId)
+    } 
 
     if (this.filterModel.Tipo !== undefined) {
       params = params.set('Tipo', this.filterModel.Tipo)
@@ -110,7 +120,10 @@ export class MovimentacaoComponent implements AfterViewInit {
 export class MovimentacaoFilter {
   Descricao!: string
   Tipo!: TipoMovimentacaoEnum
-  Pendente: Boolean = false
+  Pendente: boolean = false
+
+  CategoriaId!: string
+  ContaId!: string
 
   DataInicial!: Date
   DataFinal!: Date
