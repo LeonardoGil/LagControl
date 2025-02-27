@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatIconModule } from '@angular/material/icon';
 
 import { TipoMovimentacaoEnum } from '../models/tipoMovimentacao.model';
 import { TipoMovimentacaoColumnTemplateTsComponent } from "../../../share/templates/TipoMovimentacao/TipoMovimentacao.Column.Template.component";
@@ -23,6 +24,7 @@ import { MovimentacaoService } from './../services/movimentacao.service';
 
 import { Categoria } from '../../categoria/models/categoria.model';
 import { MovimentacaoGrid } from './../models/movimentacao.model';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-movimentacao',
@@ -35,6 +37,8 @@ import { MovimentacaoGrid } from './../models/movimentacao.model';
     MatSlideToggleModule,
     FormsModule, 
     MatDatepickerModule,
+    MatButtonModule,
+    MatIconModule,
     
     
     TipoMovimentacaoColumnTemplateTsComponent],

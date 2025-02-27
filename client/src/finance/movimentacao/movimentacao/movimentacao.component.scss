@@ -1,3 +1,28 @@
+.action-fields-container {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    gap: .25rem;
+}
+
+.button-delete {
+    @apply bg-red-500
+} 
+
+.button-add {
+    @apply bg-green-500
+}
+
+.button-delete .mat-mdc-button-base {
+    @apply bg-red-500
+}
+
+.button-add .mat-mdc-button-base {
+    @apply bg-green-500
+}
+
+
+
 .form-input {
     display: flex;
     flex-direction: column;
