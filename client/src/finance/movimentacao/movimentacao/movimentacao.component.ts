@@ -1,47 +1,25 @@
 import { inject } from '@angular/core';
 import { ChangeDetectionStrategy, Component, ViewChild, AfterViewInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpParams } from '@angular/common/http';
-
 import { format } from 'date-fns';
 
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatCardModule } from '@angular/material/card';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatIconModule } from '@angular/material/icon';
+import { commonProviders } from './../../../share/providers/common.provider';
 
-import { TipoMovimentacaoEnum } from '../models/tipoMovimentacao.model';
-import { TipoMovimentacaoColumnTemplateTsComponent } from "../../../share/templates/TipoMovimentacao/TipoMovimentacao.Column.Template.component";
+import { MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
 
 import { CategoriaService } from './../../categoria/services/categoria.service';
 import { MovimentacaoService } from './../services/movimentacao.service';
 
 import { Categoria } from '../../categoria/models/categoria.model';
-import { MovimentacaoGrid } from './../models/movimentacao.model';
-import { MatButtonModule } from '@angular/material/button';
+import { TipoMovimentacaoEnum } from '../models/tipoMovimentacao.model';
+import { MovimentacaoGridComponent } from "./movimentacao-grid/movimentacao-grid.component";
 
 @Component({
-  selector: 'app-movimentacao',
-  imports: [MatTableModule,
-    MatPaginatorModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatInputModule,
-    MatSlideToggleModule,
-    FormsModule, 
-    MatDatepickerModule,
-    MatButtonModule,
-    MatIconModule,
+  imports: [
+    ...commonProviders,
     
-    
-    TipoMovimentacaoColumnTemplateTsComponent],
+    MovimentacaoGridComponent
+],
   providers: [
     provideNativeDateAdapter(),
     {
@@ -68,13 +46,7 @@ export class MovimentacaoComponent implements AfterViewInit {
     this.filterMovimentacoes(undefined)
   }
   
-  movimentacoesDataSource: MatTableDataSource<MovimentacaoGrid> = new MatTableDataSource<MovimentacaoGrid>()
   categorias: Categoria[] = []
-  colunas: string[] = ['descricao', 'observacao', 'valor', 'data', 'tipo', 'pendente', 'conta', 'categoria']
-
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator
-
   filterModel = new MovimentacaoFilter()
 
   protected TipoMovimentacaoOptions = Object.keys(TipoMovimentacaoEnum)
@@ -112,12 +84,7 @@ export class MovimentacaoComponent implements AfterViewInit {
         params = params.set('DataFinal', format(this.filterModel.DataFinal, 'yyyy-MM-dd\'T\'HH:mm:ss'))
     }
     
-    this.movimentacaoService.Listar(params).subscribe(
-      (result) => {
-        this.movimentacoesDataSource = new MatTableDataSource<MovimentacaoGrid>(result)
-        this.movimentacoesDataSource.paginator = this.paginator
-      }
-    )
+    this.movimentacaoService.Listar(params).subscribe()
   }
 }
 
