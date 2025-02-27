@@ -1,7 +1,6 @@
 .action-fields-container {
   display: flex;
   flex-direction: row-reverse;
-  flex-wrap: wrap;
   gap: .25rem;
 }
 

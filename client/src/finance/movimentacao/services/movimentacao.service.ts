@@ -15,7 +15,7 @@ export class MovimentacaoService {
 
   Listar(params: HttpParams) : Observable<MovimentacaoGrid[]> {
     
-    if (!params) {
+    if (params) {
       this.params = params
     }
     
