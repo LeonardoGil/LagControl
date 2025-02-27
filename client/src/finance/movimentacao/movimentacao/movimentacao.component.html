@@ -8,52 +8,7 @@
         </mat-card-header>
         
         <mat-card-content>
-            <div class="grid grid-cols-3 grid-rows-2 gap-6 p-3 overflow-x-auto">
-
-                <div class="form-input mt-3" style="flex-grow: 2;">
-                    <mat-form-field class="w-full">
-                        <mat-label>Descrição</mat-label>
-                        <input matInput (blur)="filterMovimentacoes($event)" [(ngModel)]="filterModel.Descricao" />
-                    </mat-form-field>
-                </div>
-
-                <div class="form-input mt-3">
-                    <mat-form-field class="w-full">
-                        <mat-label>Tipo Movimentação</mat-label>
-                        <mat-select [(ngModel)]="filterModel.Tipo">
-                            @for (tipo of TipoMovimentacaoOptions; track tipo) {
-                                <mat-option (click)="filterMovimentacoes($event)" [value]="tipo.value">{{tipo.label}}</mat-option>
-                            }
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                    
-                <div class="form-input">
-                    <mat-label class="flex-none">Pendente</mat-label> 
-                    <mat-slide-toggle (click)="filterMovimentacoes($event)" [(ngModel)]="filterModel.Pendente" class="p-2 flex-1"></mat-slide-toggle>
-                </div>
-
-                <div class="form-input mt-3">
-                    <mat-form-field class="w-full">
-                        <mat-label>Categoria</mat-label>
-                        <mat-select [(ngModel)]="filterModel.CategoriaId">
-                            @for (categoria of categorias; track categoria) {
-                                <mat-option (click)="filterMovimentacoes($event)" [value]="categoria.id">{{categoria.descricao}}</mat-option>
-                            }
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-
-                <mat-form-field class="form-input mt-3">
-                    <mat-label>Periodo</mat-label>
-                    <mat-date-range-input (blur)="filterMovimentacoes($event)" [rangePicker]="picker">
-                      <input matStartDate [(ngModel)]="filterModel.DataInicial" placeholder="Data Inicial">
-                      <input matEndDate [(ngModel)]="filterModel.DataFinal" placeholder="Data Final">
-                    </mat-date-range-input>
-                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-date-range-picker #picker></mat-date-range-picker>
-                  </mat-form-field>
-            </div>
+            <app-movimentacao-filter></app-movimentacao-filter>
         </mat-card-content>
     </mat-card>
 
