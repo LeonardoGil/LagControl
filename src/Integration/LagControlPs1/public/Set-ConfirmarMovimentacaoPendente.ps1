@@ -57,7 +57,7 @@ function Show-ConfirmarMovimentacaoPendenteOptions {
         $selectedMovimentacoes = $movimentacoes | Select-Object -Skip $skip -First $take
 
         $choices = $selectedMovimentacoes | ForEach-Object { 
-            $message = "&$([Array]::IndexOf($movimentacoes, $_)) $($_.descricao)"
+            $message = "&$([Array]::IndexOf($selectedMovimentacoes, $_)) $($_.descricao)"
             
             $helpMessage = "$(Get-Date $_.Data -Format 'dd/MM/yyyy') R$ $($_.Valor) $($_.descricao)"
             
