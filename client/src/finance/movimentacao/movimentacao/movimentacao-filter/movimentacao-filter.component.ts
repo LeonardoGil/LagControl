@@ -45,7 +45,7 @@ export class MovimentacaoFilterComponent implements OnInit, OnDestroy {
     this.filterModel.DataInicial = new Date(2025, 2, 1)
     this.filterModel.DataFinal = new Date(2025, 2, 28)
 
-    this.filterMovimentacoes(undefined)
+    this.filterMovimentacoes()
   }
   
   ngOnDestroy(): void {
@@ -71,7 +71,7 @@ export class MovimentacaoFilterComponent implements OnInit, OnDestroy {
     }
   ]
  
-  filterMovimentacoes(teste: any) {
+  filterMovimentacoes() {
     let params = new HttpParams()
 
     params = params.set('ContaIds', '9ab68e5a-a829-40b9-9d32-b9746d3134f5')

@@ -1,4 +1,15 @@
 <mat-card appearance="outlined" class="flex p-5 overflow-x-auto">
+
+    <div class="action-fields-container">
+        <button mat-fab class="button button-delete">
+            <mat-icon>delete</mat-icon>
+        </button>
+        
+        <button (click)="adicionarClick()" mat-fab class="button button-add">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+
     <table mat-table [dataSource]="movimentacoesDataSource" class="">
     
         <ng-container matColumnDef="descricao">

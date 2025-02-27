@@ -1,0 +1,52 @@
+<h2 mat-dialog-title>Adicionar</h2>
+<mat-dialog-content>
+  
+  <div class="flex flex-row flex-wrap gap-2 flex-grow">
+  
+    <mat-form-field class="flex-grow">
+      <mat-label>Descrição</mat-label>
+      <input matInput [(ngModel)]="movimentacao.Descricao" />
+    </mat-form-field>
+  
+    <mat-form-field class="flex-grow">
+      <mat-label>Observacao</mat-label>
+      <input matInput [(ngModel)]="movimentacao.Observacao" />
+    </mat-form-field>
+  
+    <mat-form-field class="flex-grow">
+      <mat-label>Valor</mat-label>
+      <input matInput [(ngModel)]="movimentacao.Valor" />
+    </mat-form-field>
+  
+    <mat-form-field class="flex-grow">
+      <mat-label>Data</mat-label>
+      <input matInput />
+    </mat-form-field>
+  
+    <mat-form-field class="flex-grow">
+      <mat-label>Conta</mat-label>
+      <input matInput [(ngModel)]="movimentacao.ContaId" />
+    </mat-form-field>
+    
+    <mat-form-field class="flex-grow">
+      <mat-label>Categoria</mat-label>
+      <input matInput [(ngModel)]="movimentacao.CategoriaId" />
+    </mat-form-field>
+  
+    <mat-form-field class="flex-grow">
+      <mat-label>Tipo</mat-label>
+      <input matInput [(ngModel)]="movimentacao.Tipo" />
+    </mat-form-field>
+  
+    <mat-form-field class="flex-grow">
+      <mat-label>Pendente</mat-label>
+      <input matInput [(ngModel)]="movimentacao.Pendente" />
+    </mat-form-field>
+
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="fechar()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Salvar</button>
+</mat-dialog-actions>

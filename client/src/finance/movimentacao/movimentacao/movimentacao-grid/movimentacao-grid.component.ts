@@ -8,8 +8,10 @@ import { gridProviders } from '../../../../share/providers/grid.provider';
 import { TipoMovimentacaoColumnTemplateTsComponent } from '../../../../share/templates/TipoMovimentacao/TipoMovimentacao.Column.Template.component';
 
 import { MovimentacaoService } from '../../services/movimentacao.service';
-import { MovimentacaoGrid } from '../../models/movimentacao.model';
+import { MovimentacaoGrid } from '../../models/movimentacao-grid.model';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { MovimentacaoAdicionarDialogComponent } from '../movimentacao-adicionar-dialog/movimentacao-adicionar-dialog.component';
 
 @Component({
   selector: 'app-movimentacao-grid',
@@ -25,7 +27,9 @@ import { MatTableDataSource } from '@angular/material/table';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MovimentacaoGridComponent implements OnInit, OnDestroy {
-  
+
+  readonly dialog = inject(MatDialog);
+
   movimentacoesDataSource: MatTableDataSource<MovimentacaoGrid> = new MatTableDataSource<MovimentacaoGrid>()
   private movimentacaoService: MovimentacaoService = inject(MovimentacaoService)
   private subscription!: Subscription
@@ -35,11 +39,25 @@ export class MovimentacaoGridComponent implements OnInit, OnDestroy {
   colunas: string[] = ['descricao', 'observacao', 'valor', 'data', 'tipo', 'pendente', 'conta', 'categoria']
 
   ngOnInit(): void {
-    this.subscription = this.movimentacaoService.movimentacoes$.subscribe(data => this.movimentacoesDataSource.data = data)
-    this.movimentacoesDataSource.paginator = this.paginator
+    this.subscription = this.movimentacaoService.movimentacoes$.subscribe(data => {
+      this.movimentacoesDataSource.data = data
+      this.movimentacoesDataSource.paginator = this.paginator
+    })
   }
   
   ngOnDestroy(): void {
     this.subscription.unsubscribe()
   } 
+
+  adicionarClick(): void {
+    const dialogRef = this.dialog.open(MovimentacaoAdicionarDialogComponent, {
+      height: '40rem',
+      width: '60rem',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      
+    });
+  }
 }
