@@ -1,4 +1,3 @@
-import { DateUtilsService } from './../../../../share/services/date-utils.service';
 import { ChangeDetectionStrategy, Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
 import { Subscription } from 'rxjs';
@@ -8,11 +7,12 @@ import { MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/cor
 
 import { commonProviders } from './../../../../share/providers/common.provider';
 
-import { Categoria } from '../../../categoria/models/categoria.model';
-import { TipoMovimentacaoEnum } from '../../models/tipoMovimentacao.model';
+import { TipoMovimentacaoEnum, TipoMovimentacaoOptions } from '../../models/tipoMovimentacao.model';
 
 import { CategoriaService } from './../../../categoria/services/categoria.service';
 import { MovimentacaoService } from '../../services/movimentacao.service';
+import { DateUtilsService } from './../../../../share/services/date-utils.service';
+import { ContaService } from '../../../conta/services/conta.service';
 
 @Component({
   selector: 'app-movimentacao-filter',
@@ -34,17 +34,15 @@ import { MovimentacaoService } from '../../services/movimentacao.service';
 export class MovimentacaoFilterComponent implements OnInit, OnDestroy {
 
   private dateUtilsService: DateUtilsService = inject(DateUtilsService)
-
   private movimentacaoService: MovimentacaoService = inject(MovimentacaoService)
-  private categoriaService: CategoriaService = inject(CategoriaService)
+  protected categoriaService: CategoriaService = inject(CategoriaService)
+  protected contaService: ContaService = inject(ContaService)
   private subscription!: Subscription
+
+  protected tipoMovimentacaoOptions = TipoMovimentacaoOptions
+  protected filterModel = new MovimentacaoFilter()
   
-  categorias: Categoria[] = []
-  filterModel = new MovimentacaoFilter()
-  
-  ngOnInit(): void {
-    this.categoriaService.Listar(new HttpParams()).subscribe((categorias: Categoria[]) => this.categorias = categorias)
-    
+  ngOnInit(): void { 
     const periodo = this.dateUtilsService.obterPeriodoMes();
 
     this.filterModel.DataInicial = periodo.dataInicial
@@ -56,25 +54,6 @@ export class MovimentacaoFilterComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe()
   } 
-
-  protected TipoMovimentacaoOptions = [
-    { 
-      label: '',
-      value: null
-    },
-    { 
-      label: 'Receita',
-      value: 0 as TipoMovimentacaoEnum
-    },
-    {
-      label: 'Despesa',
-      value: 1  as TipoMovimentacaoEnum
-    },
-    {
-      label: 'Transferencia',
-      value: 2 as TipoMovimentacaoEnum
-    }
-  ]
  
   filterMovimentacoes() {
     let params = new HttpParams()

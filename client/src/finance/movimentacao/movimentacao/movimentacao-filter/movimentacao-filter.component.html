@@ -11,7 +11,7 @@
         <mat-form-field class="w-full">
             <mat-label>Tipo Movimentação</mat-label>
             <mat-select [(ngModel)]="filterModel.Tipo">
-                @for (tipo of TipoMovimentacaoOptions; track tipo) {
+                @for (tipo of tipoMovimentacaoOptions; track tipo) {
                     <mat-option (click)="filterMovimentacoes()" [value]="tipo.value">{{tipo.label}}</mat-option>
                 }
             </mat-select>
@@ -27,8 +27,19 @@
         <mat-form-field class="w-full">
             <mat-label>Categoria</mat-label>
             <mat-select [(ngModel)]="filterModel.CategoriaId">
-                @for (categoria of categorias; track categoria) {
+                @for (categoria of categoriaService.Listar() | async ; track categoria) {
                     <mat-option (click)="filterMovimentacoes()" [value]="categoria.Id">{{categoria.Descricao}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="form-input mt-3">
+        <mat-form-field class="w-full">
+            <mat-label>Conta</mat-label>
+            <mat-select [(ngModel)]="filterModel.CategoriaId">
+                @for (conta of contaService.Listar() | async; track conta) {
+                    <mat-option (click)="filterMovimentacoes()" [value]="conta.Id">{{conta.Descricao}}</mat-option>
                 }
             </mat-select>
         </mat-form-field>

@@ -8,7 +8,7 @@ export class CategoriaService {
 
   private httpClient = inject(HttpClient)
 
-  Listar(params: HttpParams) : Observable<Categoria[]> {
-    return this.httpClient.get<Categoria[]>('https://localhost:7081/Categoria/Listar', { params: params })
+  Listar(params?: HttpParams) : Observable<Categoria[]> {
+    return this.httpClient.get<Categoria[]>('https://localhost:7081/Categoria/Listar', { params: params ?? undefined })
   }
 }
