@@ -1,18 +1,23 @@
 import { ChangeDetectionStrategy, Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
-import { Subscription } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { format } from 'date-fns';
 
 import { MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
 
 import { commonProviders } from './../../../../share/providers/common.provider';
 
+import { Conta } from '../../../conta/models/conta.model';
+import { Categoria } from './../../../categoria/models/categoria.model';
 import { TipoMovimentacaoEnum, TipoMovimentacaoOptions } from '../../models/tipoMovimentacao.model';
 
 import { CategoriaService } from './../../../categoria/services/categoria.service';
 import { MovimentacaoService } from '../../services/movimentacao.service';
 import { DateUtilsService } from './../../../../share/services/date-utils.service';
 import { ContaService } from '../../../conta/services/conta.service';
+
+
+
 
 @Component({
   selector: 'app-movimentacao-filter',
@@ -37,25 +42,44 @@ export class MovimentacaoFilterComponent implements OnInit, OnDestroy {
   private movimentacaoService: MovimentacaoService = inject(MovimentacaoService)
   protected categoriaService: CategoriaService = inject(CategoriaService)
   protected contaService: ContaService = inject(ContaService)
-  private subscription!: Subscription
+  
+  private destroy$: Subject<void> = new Subject();
 
+  protected categorias: Categoria[] = []
+  protected contas: Conta[] = []
   protected tipoMovimentacaoOptions = TipoMovimentacaoOptions
   protected filterModel = new MovimentacaoFilter()
   
   ngOnInit(): void { 
+    this.carregarConta()
+    this.carregarCategoria()
+
     const periodo = this.dateUtilsService.obterPeriodoMes();
 
     this.filterModel.DataInicial = periodo.dataInicial
     this.filterModel.DataFinal = periodo.dataFinal
 
-    this.filterMovimentacoes()
+    this.filtrarMovimentacoes()
   }
   
   ngOnDestroy(): void {
-    this.subscription.unsubscribe()
+    this.destroy$.next();
+    this.destroy$.complete();
   } 
+
+  private carregarConta(): void {
+    this.contaService.Listar()
+                     .pipe(takeUntil(this.destroy$))
+                     .subscribe((contas: Conta[]) => this.contas = contas)
+  }
+
+  private carregarCategoria(): void {
+    this.categoriaService.Listar()
+                         .pipe(takeUntil(this.destroy$))
+                         .subscribe((categorias: Categoria[]) => this.categorias = categorias)
+  }
  
-  filterMovimentacoes() {
+  protected filtrarMovimentacoes(): void {
     let params = new HttpParams()
 
     params = params.set('ContaIds', '9ab68e5a-a829-40b9-9d32-b9746d3134f5')
@@ -83,7 +107,9 @@ export class MovimentacaoFilterComponent implements OnInit, OnDestroy {
         params = params.set('DataFinal', format(this.filterModel.DataFinal, 'yyyy-MM-dd\'T\'HH:mm:ss'))
     }
     
-    this.subscription = this.movimentacaoService.Listar(params).subscribe()
+    this.movimentacaoService.Listar(params)
+                            .pipe(takeUntil(this.destroy$))
+                            .subscribe()
   }
 }
 
