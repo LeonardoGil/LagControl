@@ -15,9 +15,7 @@ namespace LagControlAPI
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
             DependencyInjection(builder);
-            builder.Services.AddControllers();
             
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -33,6 +31,12 @@ namespace LagControlAPI
                               .AllowAnyMethod();
                     });
             });
+
+            builder.Services.AddControllers()
+                            .AddJsonOptions(options =>
+                            {
+                                options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                            });
 
             var app = builder.Build();
 

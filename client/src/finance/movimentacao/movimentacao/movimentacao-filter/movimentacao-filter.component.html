@@ -28,7 +28,7 @@
             <mat-label>Categoria</mat-label>
             <mat-select [(ngModel)]="filterModel.CategoriaId">
                 @for (categoria of categorias; track categoria) {
-                    <mat-option (click)="filterMovimentacoes()" [value]="categoria.id">{{categoria.descricao}}</mat-option>
+                    <mat-option (click)="filterMovimentacoes()" [value]="categoria.Id">{{categoria.Descricao}}</mat-option>
                 }
             </mat-select>
         </mat-form-field>
