@@ -1,3 +1,4 @@
+import { DateUtilsService } from './../../../../share/services/date-utils.service';
 import { ChangeDetectionStrategy, Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
 import { Subscription } from 'rxjs';
@@ -32,6 +33,8 @@ import { MovimentacaoService } from '../../services/movimentacao.service';
 })
 export class MovimentacaoFilterComponent implements OnInit, OnDestroy {
 
+  private dateUtilsService: DateUtilsService = inject(DateUtilsService)
+
   private movimentacaoService: MovimentacaoService = inject(MovimentacaoService)
   private categoriaService: CategoriaService = inject(CategoriaService)
   private subscription!: Subscription
@@ -42,8 +45,10 @@ export class MovimentacaoFilterComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.categoriaService.Listar(new HttpParams()).subscribe((categorias: Categoria[]) => this.categorias = categorias)
     
-    this.filterModel.DataInicial = new Date(2025, 2, 1)
-    this.filterModel.DataFinal = new Date(2025, 2, 28)
+    const periodo = this.dateUtilsService.obterPeriodoMes();
+
+    this.filterModel.DataInicial = periodo.dataInicial
+    this.filterModel.DataFinal = periodo.dataFinal
 
     this.filterMovimentacoes()
   }
