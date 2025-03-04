@@ -23,7 +23,7 @@ import { MovimentacaoAdicionarDialogComponent } from '../movimentacao-adicionar-
     TipoMovimentacaoColumnTemplateTsComponent
   ],
   templateUrl: './movimentacao-grid.component.html',
-  styleUrl: './movimentacao-grid.component.css',
+  styleUrl: './movimentacao-grid.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MovimentacaoGridComponent implements OnInit, OnDestroy {

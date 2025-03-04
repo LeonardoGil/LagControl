@@ -5,15 +5,17 @@
       <button class="m-3" mat-icon-button (click)="drawer.toggle()">
         <mat-icon fontIcon="menu" />
       </button>
-      <span>LagControl</span>
+      <div class="flex-grow items-center">
+        <span>LagControl</span>
+      </div>
     </mat-toolbar>
 
     <!-- Main -->
     <div>
 
       <mat-sidenav-container>
+       
         <mat-sidenav #drawer mode="side" class="max-w-min">
-
           <mat-list>
             <mat-list-item>
               <button mat-button routerLink="/Movimentacao">
@@ -28,11 +30,10 @@
               </button>
             </mat-list-item>
           </mat-list>
-            
         </mat-sidenav>
 
-        <mat-sidenav-content class="p-5 flex flex-1 overflow-auto">
-          <router-outlet class="min-w-600px" />
+        <mat-sidenav-content class="p-5">
+          <router-outlet/>
         </mat-sidenav-content>
   
       </mat-sidenav-container>  

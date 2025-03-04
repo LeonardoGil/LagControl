@@ -1,16 +1,15 @@
-<mat-card appearance="outlined" class="flex p-5 overflow-x-auto">
+<mat-card appearance="outlined" class="mat-card-principal">
 
     <div class="action-fields-container">
-        <button mat-fab class="button button-delete">
+        <button mat-fab class="!bg-red-500">
             <mat-icon>delete</mat-icon>
         </button>
-        
-        <button (click)="adicionarClick()" mat-fab class="button button-add">
+        <button mat-fab class="!bg-green-500" (click)="adicionarClick()">
             <mat-icon>add</mat-icon>
         </button>
     </div>
 
-    <table mat-table [dataSource]="movimentacoesDataSource" class="">
+    <table mat-table [dataSource]="movimentacoesDataSource" class="mat-table-grid">
     
         <ng-container matColumnDef="descricao">
             <th mat-header-cell *matHeaderCellDef>Descrição</th>
