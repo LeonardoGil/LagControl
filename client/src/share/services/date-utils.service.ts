@@ -16,8 +16,6 @@ export class DateUtilsService {
     // Último dia do mês atual
     const dataFinal = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
 
-    console.log(dataInicial, dataFinal)
-
     return { dataInicial, dataFinal };
   }
 }

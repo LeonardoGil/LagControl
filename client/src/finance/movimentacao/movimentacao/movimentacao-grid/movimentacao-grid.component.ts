@@ -60,4 +60,10 @@ export class MovimentacaoGridComponent implements OnInit, OnDestroy {
       
     });
   }
+
+  protected formatarData(dataString: string): string {
+    const data = new Date(dataString);
+    
+    return data.toLocaleDateString('pt-BR');
+  }
 }
