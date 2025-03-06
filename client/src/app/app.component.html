@@ -1,42 +1,36 @@
-  <div class="flex flex-col h-full">
-
-    <!-- Menu -->
-    <mat-toolbar>
-      <button class="m-3" mat-icon-button (click)="drawer.toggle()">
-        <mat-icon fontIcon="menu" />
-      </button>
-      <div class="flex-grow items-center">
-        <span>LagControl</span>
-      </div>
-    </mat-toolbar>
-
-    <!-- Main -->
-    <div>
-
-      <mat-sidenav-container>
-       
-        <mat-sidenav #drawer mode="side" class="max-w-min">
-          <mat-list>
-            <mat-list-item>
-              <button mat-button routerLink="/Movimentacao">
-                <mat-icon fontIcon="payment"/>
-                <a>Finanças</a>
-              </button>
-            </mat-list-item>
-            <mat-list-item>
-              <button mat-button routerLink="/Movimentacao">
-                <mat-icon fontIcon="payment"/>
-                <a>teste</a>
-              </button>
-            </mat-list-item>
-          </mat-list>
-        </mat-sidenav>
-
-        <mat-sidenav-content class="p-5">
-          <router-outlet/>
-        </mat-sidenav-content>
-  
-      </mat-sidenav-container>  
+<div class="flex flex-col h-full">
+  <!-- Menu -->
+  <mat-toolbar>
+    <button class="m-3" mat-icon-button (click)="drawer.toggle()">
+      <mat-icon fontIcon="menu" />
+    </button>
+    <div class="flex-grow items-center">
+      <span>LagControl</span>
     </div>
+  </mat-toolbar>
 
-  </div>  
+  <!-- Main -->
+
+  <mat-sidenav-container class="h-full flex-grow">
+    <mat-sidenav #drawer mode="side" class="max-w-min">
+      <mat-list>
+        <mat-list-item>
+          <button mat-button routerLink="/Movimentacao">
+            <mat-icon fontIcon="payment" />
+            <a>Finanças</a>
+          </button>
+        </mat-list-item>
+        <mat-list-item>
+          <button mat-button routerLink="/Movimentacao">
+            <mat-icon fontIcon="payment" />
+            <a>teste</a>
+          </button>
+        </mat-list-item>
+      </mat-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="p-5">
+      <router-outlet />
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

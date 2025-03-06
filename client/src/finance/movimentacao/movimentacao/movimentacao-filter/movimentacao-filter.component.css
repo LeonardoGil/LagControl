@@ -1,12 +1,17 @@
-:host {
-  display: block;
+:root {
+  display: flex;
+  flex-grow: 1;
 }
 
 .form-input {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   flex-grow: 1;
   flex-shrink: 1;
+}
+
+.form-input mat-form-field {
+  width: 100%;
+  margin-top: 0.75rem;
 }
