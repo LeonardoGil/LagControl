@@ -79,18 +79,27 @@ export class MovimentacaoFilterComponent implements OnInit, OnDestroy {
                          .subscribe((categorias: Categoria[]) => this.categorias = categorias)
   }
  
+  protected verificarData(): void {
+    if (this.filterModel.DataInicial && this.filterModel.DataFinal) {
+      this.filtrarMovimentacoes();
+    }
+  }
+
   protected filtrarMovimentacoes(): void {
     let params = new HttpParams()
 
-    params = params.set('ContaIds', '9ab68e5a-a829-40b9-9d32-b9746d3134f5')
     params = params.set('ApenasPendentes', this.filterModel.Pendente.toString())
 
     if (this.filterModel.Descricao !== undefined && this.filterModel.Descricao != '') {
         params = params.set('Descricao', this.filterModel.Descricao)
     }
 
-    if (this.filterModel.CategoriaId !== undefined && this.filterModel.CategoriaId != '') {
-      params = params.set('CategoriaIds', this.filterModel.CategoriaId)
+    if (this.filterModel.CategoriaId !== undefined && this.filterModel.CategoriaId.length > 0) {
+      params = params.set('CategoriaIds', this.filterModel.CategoriaId.join(','))
+    } 
+
+    if (this.filterModel.ContaId !== undefined && this.filterModel.ContaId.length > 0) {
+      params = params.set('ContaIds', this.filterModel.ContaId.join(','))
     } 
 
     if (this.filterModel.Tipo !== undefined) {
@@ -118,8 +127,8 @@ export class MovimentacaoFilter {
   Tipo!: TipoMovimentacaoEnum
   Pendente: boolean = false
 
-  CategoriaId!: string
-  ContaId!: string
+  CategoriaId!: string[]
+  ContaId!: string[]
 
   DataInicial!: Date
   DataFinal!: Date

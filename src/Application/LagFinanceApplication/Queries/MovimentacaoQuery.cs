@@ -17,10 +17,10 @@ namespace LagFinanceApplication.Queries
             if (!string.IsNullOrEmpty(query.Descricao))
                 movimentacoesQuery = movimentacoesQuery.Where(x => x.Descricao.ToUpper().Contains(query.Descricao.ToUpper()));
 
-            if (query.ContaIds is not null)
+            if (query.ContaIds is not null && query.ContaIds.Any())
                 movimentacoesQuery = movimentacoesQuery.Where(x => query.ContaIds.Contains(x.ContaId));
 
-            if (query.CategoriaIds is not null)
+            if (query.CategoriaIds is not null && query.CategoriaIds.Any())
                 movimentacoesQuery = movimentacoesQuery.Where(x => query.CategoriaIds.Contains(x.CategoriaId));
 
             if (query.Tipo.HasValue)

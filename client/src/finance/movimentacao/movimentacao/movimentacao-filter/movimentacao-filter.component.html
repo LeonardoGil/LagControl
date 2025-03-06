@@ -26,7 +26,7 @@
     <div class="form-input">
         <mat-form-field appearance="fill">
             <mat-label>Categoria</mat-label>
-            <mat-select [(ngModel)]="filterModel.CategoriaId">
+            <mat-select [(ngModel)]="filterModel.CategoriaId" multiple>
                 @for (categoria of categorias; track categoria) {
                     <mat-option (click)="filtrarMovimentacoes()" [value]="categoria.Id">{{categoria.Descricao}}</mat-option>
                 }
@@ -37,7 +37,7 @@
     <div class="form-input">
         <mat-form-field appearance="fill">
             <mat-label>Conta</mat-label>
-            <mat-select [(ngModel)]="filterModel.CategoriaId">
+            <mat-select [(ngModel)]="filterModel.ContaId" multiple>
                 @for (conta of contas; track conta) {
                     <mat-option (click)="filtrarMovimentacoes()" [value]="conta.Id">{{conta.Descricao}}</mat-option>
                 }
@@ -48,12 +48,12 @@
     <div class="form-input">
         <mat-form-field appearance="fill" class="form-input">
             <mat-label>Periodo</mat-label>
-            <mat-date-range-input (blur)="filtrarMovimentacoes()" [rangePicker]="picker">
-              <input matStartDate [(ngModel)]="filterModel.DataInicial" placeholder="Data Inicial">
-              <input matEndDate [(ngModel)]="filterModel.DataFinal" placeholder="Data Final">
+            <mat-date-range-input  [rangePicker]="picker">
+              <input matStartDate (ngModelChange)="verificarData()" [(ngModel)]="filterModel.DataInicial" placeholder="Data Inicial">
+              <input matEndDate (ngModelChange)="verificarData()" [(ngModel)]="filterModel.DataFinal" placeholder="Data Final">
             </mat-date-range-input>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-date-range-picker #picker></mat-date-range-picker>
+            <mat-date-range-picker #picker ></mat-date-range-picker>
         </mat-form-field>
     </div>
 </div>
