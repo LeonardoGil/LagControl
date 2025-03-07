@@ -6,12 +6,7 @@ import { Movimentacao } from './../../models/movimentacao.model';
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { commonProviders } from '../../../../share/providers/common.provider';
 
-import {
-  MatDialogActions,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle,
-} from '@angular/material/dialog';
+import { MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
 import { Subject, takeUntil } from 'rxjs';
 import { Conta } from '../../../conta/models/conta.model';
@@ -58,12 +53,9 @@ export class MovimentacaoAdicionarDialogComponent implements OnInit {
     this.carregarCategoria();
   }
 
-  ClickAdicionar(): void  {
-    if (this.movimentacao.Descricao == '' ||
-        this.movimentacao.ContaId == '' ||
-        this.movimentacao.CategoriaId == '' ||
-        this.movimentacao.Valor == 0) {
-      return
+  clickAdicionar(): void {
+    if (!this.validar()) {
+      return;
     }
 
     this.movimentacaoService.Adicionar(this.movimentacao).subscribe(() => {
@@ -71,8 +63,29 @@ export class MovimentacaoAdicionarDialogComponent implements OnInit {
     })
   }
 
-  Fechar(): void {
+  clickAdicionarENovo(): void {
+    if (!this.validar()) {
+      return;
+    }
+
+    this.movimentacaoService.Adicionar(this.movimentacao).subscribe(() => {
+      this.movimentacao.Descricao = '';
+      this.movimentacao.Observacao = '';
+      this.movimentacao.Valor = 0;
+    })
+  }
+  
+  clickFechar(): void {
     this.dialogRef.close(false);
+  }
+
+  private validar(): boolean {
+    return !(
+      this.movimentacao.Descricao == '' ||
+      this.movimentacao.ContaId == '' ||
+      this.movimentacao.CategoriaId == '' ||
+      this.movimentacao.Valor == 0
+    )
   }
 
   private carregarConta(): void {
