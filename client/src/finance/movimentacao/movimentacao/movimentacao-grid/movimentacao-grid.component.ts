@@ -50,14 +50,12 @@ export class MovimentacaoGridComponent implements OnInit, OnDestroy {
   } 
 
   adicionarClick(): void {
-    const dialogRef = this.dialog.open(MovimentacaoAdicionarDialogComponent, {
-      height: '40rem',
-      width: '60rem',
-    });
+    const dialogRef = this.dialog.open(MovimentacaoAdicionarDialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      
+      if (result) {
+        this.movimentacaoService.Listar().subscribe();
+      }
     });
   }
 

@@ -1,50 +1,67 @@
 <h2 mat-dialog-title>Adicionar</h2>
-<mat-dialog-content>
-  
-  <div class="flex flex-row flex-wrap gap-2 flex-grow">
-  
-    <mat-form-field class="flex-grow">
+<mat-dialog-content class="flex flex-col">
+  <div class="box-form-fields">
+    <mat-form-field>
       <mat-label>Descrição</mat-label>
       <input matInput [(ngModel)]="movimentacao.Descricao" />
     </mat-form-field>
-  
-    <mat-form-field class="flex-grow">
+
+    <mat-form-field>
       <mat-label>Observacao</mat-label>
       <input matInput [(ngModel)]="movimentacao.Observacao" />
     </mat-form-field>
-  
-    <mat-form-field class="flex-grow">
-      <mat-label>Valor</mat-label>
-      <input matInput [(ngModel)]="movimentacao.Valor" />
-    </mat-form-field>
-  
-    <mat-form-field class="flex-grow">
+
+    <mat-form-field>
       <mat-label>Data</mat-label>
-      <input matInput />
-    </mat-form-field>
-  
-    <mat-form-field class="flex-grow">
-      <mat-label>Conta</mat-label>
-      <input matInput [(ngModel)]="movimentacao.ContaId" />
-    </mat-form-field>
-    
-    <mat-form-field class="flex-grow">
-      <mat-label>Categoria</mat-label>
-      <input matInput [(ngModel)]="movimentacao.CategoriaId" />
-    </mat-form-field>
-  
-    <mat-form-field class="flex-grow">
-      <mat-label>Tipo</mat-label>
-      <input matInput [(ngModel)]="movimentacao.Tipo" />
-    </mat-form-field>
-  
-    <mat-form-field class="flex-grow">
-      <mat-label>Pendente</mat-label>
-      <input matInput [(ngModel)]="movimentacao.Pendente" />
+      <input matInput [matDatepicker]="picker" [(ngModel)]="movimentacao.Data" />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
+    <div class="mt-1 flex flex-col items-center">
+      <mat-label>Pendente </mat-label>
+      <mat-slide-toggle [(ngModel)]="movimentacao.Pendente"></mat-slide-toggle>
+    </div>
   </div>
 
+  <div class="box-form-fields">
+    <mat-form-field>
+      <mat-label>Valor</mat-label>
+      <input matInput type="number" [(ngModel)]="movimentacao.Valor" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Tipo</mat-label>
+      <mat-select [(ngModel)]="movimentacao.Tipo">
+        @for (tipo of tipoMovimentacaoOptions; track tipo) {
+        <mat-option [value]="tipo.value">{{ tipo.label }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Conta</mat-label>
+      <mat-select [(ngModel)]="movimentacao.ContaId">
+        @for (conta of contas; track conta) {
+        <mat-option [value]="conta.Id">{{ conta.Descricao }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Categoria</mat-label>
+      <mat-select [(ngModel)]="movimentacao.CategoriaId">
+        @for (categoria of categorias; track categoria) {
+        <mat-option [value]="categoria.Id">{{
+          categoria.Descricao
+        }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button (click)="Fechar()">Cancelar</button>
