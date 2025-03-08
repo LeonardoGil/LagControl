@@ -25,7 +25,6 @@
   flex-direction: row-reverse;
   flex-grow: 1;
   gap: .25rem;
-  
 }
 
 .action-fields-container button {
@@ -33,14 +32,22 @@
   height: 3rem;
 }
 
-span.tag-pendente {
-  padding: .25rem;
-  border-radius: 1rem;
-
-  max-width: min-content;
+.action-fields-column-container {
   display: flex;
+  flex-direction: row-reverse;
+  flex-grow: 1;
+  gap: .5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
 
-  @apply shadow-lg text-white bg-yellow-500 hover:text-yellow-500 hover:bg-white;
+.action-fields-column-container button {
+  width: 2rem;
+  height: 2rem;
+}
+
+.tag-pendente {
+  @apply text-yellow-500 hover:text-white 
 }
 
 span.tag-pendente mat-icon {
