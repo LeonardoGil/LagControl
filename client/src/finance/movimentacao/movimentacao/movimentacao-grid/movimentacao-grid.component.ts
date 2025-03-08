@@ -36,7 +36,7 @@ export class MovimentacaoGridComponent implements OnInit, OnDestroy {
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator
-  colunas: string[] = ['descricao', 'observacao', 'valor', 'data', 'tipo', 'pendente', 'conta', 'categoria', 'actions']
+  colunas: string[] = ['descricao', 'observacao', 'valor', 'data', 'tipo', 'conta', 'categoria', 'actions']
 
   ngOnInit(): void {
     this.subscription = this.movimentacaoService.movimentacoes$.subscribe(data => {
