@@ -16,6 +16,10 @@
   width: 100%;
 }
 
+.mat-table-grid p {
+  text-align: center;
+}
+
 .action-fields-container {
   display: flex;
   flex-direction: row-reverse;
@@ -27,4 +31,20 @@
 .action-fields-container button {
   width: 3rem;
   height: 3rem;
+}
+
+span.tag-pendente {
+  padding: .25rem;
+  border-radius: 1rem;
+
+  max-width: min-content;
+  display: flex;
+
+  @apply shadow-lg text-white bg-yellow-500 hover:text-yellow-500 hover:bg-white;
+}
+
+span.tag-pendente mat-icon {
+  padding: .05rem;
+  font-size: 1.2rem;
+  text-align: center;
 }

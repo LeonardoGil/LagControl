@@ -17,15 +17,11 @@ export class TipoMovimentacaoColumnTemplateTsComponent {
     return this.style
   }
 
-  private _tipoMovimentacao!: TipoMovimentacaoEnum
   protected style: string = ''
   protected texto: string = ''
 
   @Input() 
   set tipoMovimentacao(value: TipoMovimentacaoEnum) {
-    
-    this._tipoMovimentacao = value
-
     switch (value) {
       case TipoMovimentacaoEnum.Despesa:
         this.style = 'tag-despesa'
@@ -45,7 +41,5 @@ export class TipoMovimentacaoColumnTemplateTsComponent {
       default:
         break
     }
-
-    console.log(`${this.texto}: ${this.style}`)
   }
 }

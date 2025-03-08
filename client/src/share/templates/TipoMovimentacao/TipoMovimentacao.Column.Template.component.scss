@@ -1,3 +1,6 @@
+:root {
+    display: flex;
+}
 
 .tag-despesa {
     @apply p-2 rounded-lg shadow-lg text-white bg-red-500 hover:text-red-500 hover:bg-white;
