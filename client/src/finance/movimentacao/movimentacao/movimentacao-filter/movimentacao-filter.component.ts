@@ -18,7 +18,6 @@ import { ContaService } from '../../../conta/services/conta.service';
 
 
 
-
 @Component({
   selector: 'app-movimentacao-filter',
   standalone: true,
@@ -79,12 +78,6 @@ export class MovimentacaoFilterComponent implements OnInit, OnDestroy {
                          .subscribe((categorias: Categoria[]) => this.categorias = categorias)
   }
  
-  protected verificarData(): void {
-    if (this.filterModel.DataInicial && this.filterModel.DataFinal) {
-      this.filtrarMovimentacoes();
-    }
-  }
-
   protected filtrarMovimentacoes(): void {
     let params = new HttpParams()
 
@@ -106,12 +99,12 @@ export class MovimentacaoFilterComponent implements OnInit, OnDestroy {
       params = params.set('Tipo', this.filterModel.Tipo)
     }
 
-    if (this.filterModel.DataInicial !== undefined && this.filterModel.DataInicial != null 
-      && this.filterModel.DataFinal !== undefined && this.filterModel.DataFinal != null) {
-
-        this.filterModel.DataFinal.setHours(0, 0, 0)
+    if (this.filterModel.DataInicial !== undefined && this.filterModel.DataInicial != null) {
+        this.filterModel.DataInicial.setHours(0, 0, 0)
         params = params.set('DataInicial', format(this.filterModel.DataInicial, 'yyyy-MM-dd\'T\'HH:mm:ss'))
-      
+    }
+
+    if (this.filterModel.DataFinal !== undefined && this.filterModel.DataFinal != null) {
         this.filterModel.DataFinal.setHours(23, 59, 59)  
         params = params.set('DataFinal', format(this.filterModel.DataFinal, 'yyyy-MM-dd\'T\'HH:mm:ss'))
     }

@@ -1,59 +1,88 @@
 <div class="grid grid-cols-3 grid-rows-2 gap-6 p-3 overflow-x-auto">
+  <div class="form-input">
+    <mat-form-field appearance="fill">
+      <mat-label>Descrição</mat-label>
+      <input
+        matInput
+        (blur)="filtrarMovimentacoes()"
+        [(ngModel)]="filterModel.Descricao"
+      />
+    </mat-form-field>
+  </div>
 
-    <div class="form-input" style="flex-grow: 2;">
-        <mat-form-field appearance="fill">
-            <mat-label>Descrição</mat-label>
-            <input matInput (blur)="filtrarMovimentacoes()" [(ngModel)]="filterModel.Descricao" />
-        </mat-form-field>
-    </div>
+  <div class="form-input">
+    <mat-form-field appearance="fill">
+      <mat-label>Tipo Movimentação</mat-label>
+      <mat-select [(ngModel)]="filterModel.Tipo">
+        @for (tipo of tipoMovimentacaoOptions; track tipo) {
+        <mat-option (click)="filtrarMovimentacoes()" [value]="tipo.value">{{
+          tipo.label
+        }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
 
-    <div class="form-input">
-        <mat-form-field appearance="fill">
-            <mat-label>Tipo Movimentação</mat-label>
-            <mat-select [(ngModel)]="filterModel.Tipo">
-                @for (tipo of tipoMovimentacaoOptions; track tipo) {
-                    <mat-option (click)="filtrarMovimentacoes()" [value]="tipo.value">{{tipo.label}}</mat-option>
-                }
-            </mat-select>
-        </mat-form-field>
-    </div>
-        
-    <div class="form-input">
-        <mat-label class="flex-none">Pendente</mat-label> 
-        <mat-slide-toggle (click)="filtrarMovimentacoes()" [(ngModel)]="filterModel.Pendente" class="p-2 flex-1"></mat-slide-toggle>
-    </div>
+  <div class="form-input">
+    <mat-label class="flex-none">Pendente</mat-label>
+    <mat-slide-toggle
+      (click)="filtrarMovimentacoes()"
+      [(ngModel)]="filterModel.Pendente"
+      class="p-2 flex-1"
+    ></mat-slide-toggle>
+  </div>
 
-    <div class="form-input">
-        <mat-form-field appearance="fill">
-            <mat-label>Categoria</mat-label>
-            <mat-select [(ngModel)]="filterModel.CategoriaId" multiple>
-                @for (categoria of categorias; track categoria) {
-                    <mat-option (click)="filtrarMovimentacoes()" [value]="categoria.Id">{{categoria.Descricao}}</mat-option>
-                }
-            </mat-select>
-        </mat-form-field>
-    </div>
+  <div class="form-input">
+    <mat-form-field appearance="fill">
+      <mat-label>Categoria</mat-label>
+      <mat-select [(ngModel)]="filterModel.CategoriaId" multiple>
+        @for (categoria of categorias; track categoria) {
+        <mat-option (click)="filtrarMovimentacoes()" [value]="categoria.Id">{{
+          categoria.Descricao
+        }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
 
-    <div class="form-input">
-        <mat-form-field appearance="fill">
-            <mat-label>Conta</mat-label>
-            <mat-select [(ngModel)]="filterModel.ContaId" multiple>
-                @for (conta of contas; track conta) {
-                    <mat-option (click)="filtrarMovimentacoes()" [value]="conta.Id">{{conta.Descricao}}</mat-option>
-                }
-            </mat-select>
-        </mat-form-field>
-    </div>
+  <div class="form-input">
+    <mat-form-field appearance="fill">
+      <mat-label>Conta</mat-label>
+      <mat-select [(ngModel)]="filterModel.ContaId" multiple>
+        @for (conta of contas; track conta) {
+        <mat-option (click)="filtrarMovimentacoes()" [value]="conta.Id">{{
+          conta.Descricao
+        }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
 
-    <div class="form-input">
-        <mat-form-field appearance="fill" class="form-input">
-            <mat-label>Periodo</mat-label>
-            <mat-date-range-input  [rangePicker]="picker">
-              <input matStartDate (ngModelChange)="verificarData()" [(ngModel)]="filterModel.DataInicial" placeholder="Data Inicial">
-              <input matEndDate (ngModelChange)="verificarData()" [(ngModel)]="filterModel.DataFinal" placeholder="Data Final">
-            </mat-date-range-input>
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-date-range-picker #picker ></mat-date-range-picker>
-        </mat-form-field>
-    </div>
+  <div class="form-input">
+    <mat-form-field appearance="fill" class="form-input">
+      <mat-label>Periodo</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input
+          matStartDate
+          (blur)="filtrarMovimentacoes()"
+          [(ngModel)]="filterModel.DataInicial"
+          placeholder="Data Inicial"
+        />
+        <input
+          matEndDate
+          (blur)="filtrarMovimentacoes()"
+          [(ngModel)]="filterModel.DataFinal"
+          placeholder="Data Final"
+        />
+      </mat-date-range-input>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-date-range-picker
+        #picker
+        (closed)="filtrarMovimentacoes()"
+      ></mat-date-range-picker>
+    </mat-form-field>
+  </div>
 </div>
