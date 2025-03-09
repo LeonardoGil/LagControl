@@ -11,7 +11,7 @@ import { MovimentacaoService } from '../../services/movimentacao.service';
 import { MovimentacaoGrid } from '../../models/movimentacao-grid.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { MovimentacaoAdicionarDialogComponent } from '../movimentacao-adicionar-dialog/movimentacao-adicionar-dialog.component';
+import { MovimentacaoAdicionarDialogComponent } from '../dialogs/movimentacao-adicionar-dialog/movimentacao-adicionar-dialog.component';
 
 @Component({
   selector: 'app-movimentacao-grid',

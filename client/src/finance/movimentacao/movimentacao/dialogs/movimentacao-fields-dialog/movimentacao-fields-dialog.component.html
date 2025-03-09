@@ -1,6 +1,4 @@
-<h2 mat-dialog-title>Adicionar</h2>
-<mat-dialog-content class="flex flex-col">
-  <div class="box-form-fields">
+<div class="box-form-fields">
     <mat-form-field>
       <mat-label>Descrição</mat-label>
       <input matInput [(ngModel)]="movimentacao.Descricao" />
@@ -62,9 +60,3 @@
       </mat-select>
     </mat-form-field>
   </div>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button (click)="clickFechar()">Cancelar</button>
-  <button mat-button (click)="clickAdicionarENovo()">Salvar e novo</button>
-  <button mat-button (click)="clickAdicionar()" cdkFocusInitial>Salvar</button>
-</mat-dialog-actions>
