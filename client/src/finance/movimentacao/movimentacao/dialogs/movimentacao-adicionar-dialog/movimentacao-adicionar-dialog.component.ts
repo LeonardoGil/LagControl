@@ -4,6 +4,7 @@ import { commonProviders } from '../../../../../share/providers/common.provider'
 
 import { MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { Subject, takeUntil } from 'rxjs';
 import { MovimentacaoFieldsDialogComponent } from "../movimentacao-fields-dialog/movimentacao-fields-dialog.component";
 
@@ -28,7 +29,7 @@ import { MovimentacaoFieldsDialogComponent } from "../movimentacao-fields-dialog
   styleUrl: './movimentacao-adicionar-dialog.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MovimentacaoAdicionarDialogComponent implements AfterViewInit {
+export class MovimentacaoAdicionarDialogComponent {
   
   @ViewChild(MovimentacaoFieldsDialogComponent) fieldsComponent!: MovimentacaoFieldsDialogComponent;
 
@@ -36,36 +37,39 @@ export class MovimentacaoAdicionarDialogComponent implements AfterViewInit {
 
   protected movimentacaoService: MovimentacaoService = inject(MovimentacaoService)
 
+  private snackBar: MatSnackBar = inject(MatSnackBar)
   private destroy$: Subject<void> = new Subject();
 
-  
-  ngAfterViewInit(): void {
-  }
-
   clickAdicionar(): void {
-    if (!this.validar()) {
-      return;
+    let actionFechar = () => {
+      this.dialogRef.close(true);
     }
 
-    this.movimentacaoService.Adicionar(this.fieldsComponent.movimentacao).pipe(takeUntil(this.destroy$)).subscribe(() => {
-      this.dialogRef.close(true);  
-    })
+    this.salvar(actionFechar);
   }
 
   clickAdicionarENovo(): void {
-    if (!this.validar()) {
-      return;
-    }
-
-    this.movimentacaoService.Adicionar(this.fieldsComponent.movimentacao).pipe(takeUntil(this.destroy$)).subscribe(() => {
+    let actionLimparCampos = () => {
       this.fieldsComponent.movimentacao.Descricao = '';
       this.fieldsComponent.movimentacao.Observacao = '';
       this.fieldsComponent.movimentacao.Valor = 0;
-    })
+    };
+
+    this.salvar(actionLimparCampos)
   }
   
   clickFechar(): void {
     this.dialogRef.close(false);
+  }
+
+  private salvar(action: () => void) {
+    if (!this.validar()) {
+      this.snackBar.open('Movimentação inválida!')
+      return;
+    }
+
+    this.movimentacaoService.Adicionar(this.fieldsComponent.movimentacao).pipe(takeUntil(this.destroy$)).subscribe(action);
+    this.snackBar.open('Movimentação adicionada!')
   }
 
   private validar(): boolean {
