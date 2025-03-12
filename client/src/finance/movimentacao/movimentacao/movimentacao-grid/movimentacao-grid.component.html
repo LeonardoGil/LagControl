@@ -5,13 +5,9 @@
     </button>
   </div>
 
-  <table
-    mat-table
-    [dataSource]="movimentacoesDataSource"
-    class="mat-table-grid"
-  >
-    <ng-container matColumnDef="descricao">
-      <th mat-header-cell *matHeaderCellDef>Descrição</th>
+  <table mat-table matSort [dataSource]="movimentacoesDataSource" class="mat-table-grid">
+    <ng-container matColumnDef="Descricao">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>Descrição</th>
       <td mat-cell *matCellDef="let mov">
         <div class="column-descricao">
           @if (mov.Pendente) {
@@ -22,27 +18,27 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="observacao">
-      <th mat-header-cell *matHeaderCellDef>Observação</th>
+    <ng-container matColumnDef="Observacao">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>Observação</th>
       <td mat-cell *matCellDef="let mov">{{ mov.Observacao }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="valor">
-      <th mat-header-cell *matHeaderCellDef><p>Valor</p></th>
+    <ng-container matColumnDef="Valor">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef><p>Valor</p></th>
       <td mat-cell *matCellDef="let mov">
         <p>{{ mov.Valor.toFixed(2) }}</p>
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="data">
-      <th mat-header-cell *matHeaderCellDef><p>Data</p></th>
+    <ng-container matColumnDef="Data">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef><p>Data</p></th>
       <td mat-cell *matCellDef="let mov">
         <p>{{ formatarData(mov.Data) }}</p>
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="tipo">
-      <th mat-header-cell *matHeaderCellDef><p>Tipo</p></th>
+    <ng-container matColumnDef="TipoMovimentacao">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef><p>Tipo</p></th>
       <td mat-cell *matCellDef="let mov">
         <div class="flex justify-center">
           <tipo-movimentacao-column-template
@@ -52,21 +48,21 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="conta">
-      <th mat-header-cell *matHeaderCellDef><p>Conta</p></th>
+    <ng-container matColumnDef="Conta">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef><p>Conta</p></th>
       <td mat-cell *matCellDef="let mov">
         <p>{{ mov.Conta }}</p>
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="categoria">
-      <th mat-header-cell *matHeaderCellDef><p>Categoria</p></th>
+    <ng-container matColumnDef="Categoria">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef><p>Categoria</p></th>
       <td mat-cell *matCellDef="let mov">
         <p>{{ mov.Categoria }}</p>
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="actions">
+    <ng-container matColumnDef="Actions">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let mov">
         <div class="action-fields-column-container">

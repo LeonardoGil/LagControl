@@ -1,9 +1,10 @@
 import { ConfirmarDialogModel } from './../../../../share/dialogs/confirmar-dialog.component';
 import { Movimentacao } from './../../models/movimentacao.model';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, ViewChild, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 import { commonProviders } from '../../../../share/providers/common.provider';
 import { gridProviders } from '../../../../share/providers/grid.provider';
@@ -29,33 +30,35 @@ import { ConfirmarDialogComponent } from '../../../../share/dialogs/confirmar-di
   styleUrl: './movimentacao-grid.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MovimentacaoGridComponent implements OnInit, OnDestroy {
+export class MovimentacaoGridComponent implements AfterViewInit, OnDestroy {
   
   private readonly dialog = inject(MatDialog);
   protected movimentacoesDataSource: MatTableDataSource<MovimentacaoGrid> = new MatTableDataSource<MovimentacaoGrid>();
   private movimentacaoService: MovimentacaoService = inject(MovimentacaoService);
   private subscription!: Subscription;
 
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  
   colunas: string[] = [
-    'descricao',
-    'observacao',
-    'valor',
-    'data',
-    'tipo',
-    'conta',
-    'categoria',
-    'actions',
+    'Descricao',
+    'Observacao',
+    'Valor',
+    'Data',
+    'TipoMovimentacao',
+    'Conta',
+    'Categoria',
+    'Actions',
   ];
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.subscription = this.movimentacaoService.movimentacoes$.subscribe(
       (data) => {
         this.movimentacoesDataSource.data = data;
         this.movimentacoesDataSource.paginator = this.paginator;
+        this.movimentacoesDataSource.sort = this.sort;
       }
-    );
+    )
   }
 
   ngOnDestroy(): void {
