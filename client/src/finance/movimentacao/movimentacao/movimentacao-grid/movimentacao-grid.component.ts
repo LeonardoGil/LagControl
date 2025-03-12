@@ -1,3 +1,5 @@
+import { ConfirmarDialogModel } from './../../../../share/dialogs/confirmar-dialog.component';
+import { Movimentacao } from './../../models/movimentacao.model';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 
@@ -12,6 +14,7 @@ import { MovimentacaoGrid } from '../../models/movimentacao-grid.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MovimentacaoAdicionarDialogComponent } from '../dialogs/movimentacao-adicionar-dialog/movimentacao-adicionar-dialog.component';
+import { ConfirmarDialogComponent } from '../../../../share/dialogs/confirmar-dialog.component';
 
 @Component({
   selector: 'app-movimentacao-grid',
@@ -20,48 +23,66 @@ import { MovimentacaoAdicionarDialogComponent } from '../dialogs/movimentacao-ad
     ...commonProviders,
     ...gridProviders,
 
-    TipoMovimentacaoColumnTemplateTsComponent
+    TipoMovimentacaoColumnTemplateTsComponent,
   ],
   templateUrl: './movimentacao-grid.component.html',
   styleUrl: './movimentacao-grid.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MovimentacaoGridComponent implements OnInit, OnDestroy {
-
-  readonly dialog = inject(MatDialog);
-
-  movimentacoesDataSource: MatTableDataSource<MovimentacaoGrid> = new MatTableDataSource<MovimentacaoGrid>()
-  private movimentacaoService: MovimentacaoService = inject(MovimentacaoService)
-  private subscription!: Subscription
+  
+  private readonly dialog = inject(MatDialog);
+  protected movimentacoesDataSource: MatTableDataSource<MovimentacaoGrid> = new MatTableDataSource<MovimentacaoGrid>();
+  private movimentacaoService: MovimentacaoService = inject(MovimentacaoService);
+  private subscription!: Subscription;
 
   @ViewChild(MatPaginator)
-  paginator!: MatPaginator
-  colunas: string[] = ['descricao', 'observacao', 'valor', 'data', 'tipo', 'conta', 'categoria', 'actions']
+  paginator!: MatPaginator;
+  colunas: string[] = [
+    'descricao',
+    'observacao',
+    'valor',
+    'data',
+    'tipo',
+    'conta',
+    'categoria',
+    'actions',
+  ];
 
   ngOnInit(): void {
-    this.subscription = this.movimentacaoService.movimentacoes$.subscribe(data => {
-      this.movimentacoesDataSource.data = data
-      this.movimentacoesDataSource.paginator = this.paginator
-    })
+    this.subscription = this.movimentacaoService.movimentacoes$.subscribe(
+      (data) => {
+        this.movimentacoesDataSource.data = data;
+        this.movimentacoesDataSource.paginator = this.paginator;
+      }
+    );
   }
-  
+
   ngOnDestroy(): void {
-    this.subscription.unsubscribe()
-  } 
+    this.subscription.unsubscribe();
+  }
 
-  adicionarClick(): void {
-    const dialogRef = this.dialog.open(MovimentacaoAdicionarDialogComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
+  protected clickAdicionar(): void {
+    
+    this.dialog.open(MovimentacaoAdicionarDialogComponent).afterClosed().subscribe((result) => {
       if (result) {
         this.movimentacaoService.Listar().subscribe();
       }
     });
   }
 
+  protected clickExcluir(movimentacao: Movimentacao): void {
+    const data: ConfirmarDialogModel = {
+      Mensagem: `Gostaria de excluir a movimentação: ${movimentacao.Descricao}`
+    }
+
+    this.dialog.open(ConfirmarDialogComponent, { data: data }).afterClosed().subscribe((result) => {
+      console.log('Excluixao');
+    });
+  }
+
   protected formatarData(dataString: string): string {
-    const data = new Date(dataString);
-    
-    return data.toLocaleDateString('pt-BR');
+    return (new Date(dataString)).toLocaleDateString('pt-BR');
   }
 }
+

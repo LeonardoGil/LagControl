@@ -1,6 +1,6 @@
 <mat-card appearance="outlined" class="mat-card-principal">
   <div class="action-fields-container">
-    <button mat-fab class="!bg-green-500" (click)="adicionarClick()">
+    <button mat-fab class="!bg-green-500" (click)="clickAdicionar()">
       <mat-icon>add</mat-icon>
     </button>
   </div>
@@ -70,7 +70,7 @@
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let mov">
         <div class="action-fields-column-container">
-          <button mat-fab class="!bg-red-500">
+          <button mat-fab (click)="clickExcluir(mov)" class="!bg-red-500">
             <mat-icon fontIcon="delete" />
           </button>
 

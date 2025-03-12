@@ -12,7 +12,7 @@ import { MovimentacaoFieldsDialogComponent } from "../movimentacao-fields-dialog
   selector: 'app-movimentacao-adicionar-dialog',
   standalone: true,
   imports: [
-    commonProviders,
+    ...commonProviders,
     MatDialogActions,
     MatDialogContent,
     MatDialogTitle,
