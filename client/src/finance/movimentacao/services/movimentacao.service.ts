@@ -28,4 +28,8 @@ export class MovimentacaoService {
   Adicionar(movimentacao: Movimentacao): Observable<any> {
     return this.httpClient.post('https://localhost:7081/Movimentacao/Adicionar', movimentacao).pipe()
   }
+
+  excluir(id: string): Observable<any> {
+    return this.httpClient.delete('https://localhost:7081/Movimentacao/Excluir/' + id).pipe()
+  }
 }

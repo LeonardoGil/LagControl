@@ -77,7 +77,9 @@ export class MovimentacaoGridComponent implements OnInit, OnDestroy {
     }
 
     this.dialog.open(ConfirmarDialogComponent, { data: data }).afterClosed().subscribe((result) => {
-      console.log('Excluixao');
+      if (result) {
+        this.movimentacaoService.excluir(movimentacao.Id).subscribe(() => this.movimentacaoService.Listar().subscribe())
+      }
     });
   }
 
