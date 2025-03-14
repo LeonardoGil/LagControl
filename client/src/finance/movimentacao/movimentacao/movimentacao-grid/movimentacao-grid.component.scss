@@ -16,8 +16,13 @@
   width: 100%;
 }
 
-.mat-table-grid p {
+.mat-table-grid td {
   text-align: center;
+}
+
+// Alinha as colunas no centro
+::ng-deep .mat-sort-header-container  {
+  justify-content: center;
 }
 
 .action-fields-container {
@@ -35,7 +40,6 @@
 .action-fields-column-container {
   display: flex;
   flex-direction: row-reverse;
-  flex-grow: 1;
   gap: .5rem;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
