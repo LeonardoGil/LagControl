@@ -22,7 +22,7 @@ import { ContaService } from '../../../conta/services/conta.service';
   selector: 'app-movimentacao-filter',
   standalone: true,
   imports: [
-    commonProviders
+    ...commonProviders
   ],
   providers: [
     provideNativeDateAdapter(),
