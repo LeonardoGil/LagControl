@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, inject, input } from '@angular/core';
 import { commonProviders } from '../../../../../share/providers/common.provider';
 import { Movimentacao } from '../../../models/movimentacao.model';
 import { ContaService } from '../../../../conta/services/conta.service';
@@ -21,7 +21,10 @@ import { TipoMovimentacaoOptions } from '../../../models/tipoMovimentacao.model'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MovimentacaoFieldsDialogComponent implements OnInit {
-  public movimentacao: Movimentacao = new Movimentacao();
+
+  @Input() tipoDisable: boolean = false
+  @Input() pendenteDisable: boolean = false
+  @Input() movimentacao: Movimentacao = new Movimentacao();
 
   protected contaService: ContaService = inject(ContaService)
   protected categoriaService: CategoriaService = inject(CategoriaService)
@@ -31,9 +34,6 @@ export class MovimentacaoFieldsDialogComponent implements OnInit {
   protected contas: Conta[] = [];
 
   private destroy$: Subject<void> = new Subject();
-
-  constructor() {
-  }
 
   ngOnInit(): void {
     this.carregarConta();

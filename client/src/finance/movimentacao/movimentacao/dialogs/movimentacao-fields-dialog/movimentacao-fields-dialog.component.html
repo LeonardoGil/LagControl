@@ -21,7 +21,7 @@
 
     <div class="mt-1 flex flex-col items-center">
       <mat-label>Pendente </mat-label>
-      <mat-slide-toggle [(ngModel)]="movimentacao.Pendente"></mat-slide-toggle>
+      <mat-slide-toggle [(ngModel)]="movimentacao.Pendente" [disabled]="pendenteDisable"></mat-slide-toggle>
     </div>
   </div>
 
@@ -33,7 +33,7 @@
 
     <mat-form-field>
       <mat-label>Tipo</mat-label>
-      <mat-select [(ngModel)]="movimentacao.Tipo">
+      <mat-select [(ngModel)]="movimentacao.Tipo" [disabled]="tipoDisable">
         @for (tipo of tipoMovimentacaoOptions; track tipo) {
         <mat-option [value]="tipo.value">{{ tipo.label }}</mat-option>
         }

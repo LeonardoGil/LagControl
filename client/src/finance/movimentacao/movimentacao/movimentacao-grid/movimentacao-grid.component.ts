@@ -16,6 +16,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MovimentacaoAdicionarDialogComponent } from '../dialogs/movimentacao-adicionar-dialog/movimentacao-adicionar-dialog.component';
 import { ConfirmarDialogComponent } from '../../../../share/dialogs/confirmar-dialog.component';
+import { MovimentacaoConfirmarPendenteDialogComponent } from '../dialogs/movimentacao-confirmar-pendente-dialog/movimentacao-confirmar-pendente-dialog.component';
 
 @Component({
   selector: 'app-movimentacao-grid',
@@ -83,6 +84,11 @@ export class MovimentacaoGridComponent implements AfterViewInit, OnDestroy {
       if (result) {
         this.movimentacaoService.excluir(movimentacao.Id).subscribe(() => this.movimentacaoService.Listar().subscribe())
       }
+    });
+  }
+
+  protected clickConfirmarPendente(movimentacao: Movimentacao): void {
+    this.dialog.open(MovimentacaoConfirmarPendenteDialogComponent, { data: movimentacao }).afterClosed().subscribe((result) => {
     });
   }
 

@@ -65,7 +65,7 @@
         </button>
         
         @if (mov.Pendente) {
-        <button mat-fab class="!bg-yellow-500">
+        <button mat-fab (click)="clickConfirmarPendente(mov)" class="!bg-yellow-500">
           <mat-icon fontIcon="edit_calendar" />
         </button>
         }

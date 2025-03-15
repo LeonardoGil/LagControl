@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Confirmar Movimentação</h2>
+<mat-dialog-content>
+  <app-movimentacao-fields-dialog [tipoDisable]="true"
+                                  [pendenteDisable]="true"
+                                  [movimentacao]="movimentacao"/>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="clickFechar()">Cancelar</button>
+  <button mat-button (click)="clickAdicionar()" cdkFocusInitial>Salvar</button>
+</mat-dialog-actions>
