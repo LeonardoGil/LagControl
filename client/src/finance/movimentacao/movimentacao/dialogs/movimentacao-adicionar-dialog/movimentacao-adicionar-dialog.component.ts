@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component, inject, AfterViewInit, ViewChild } 
 import { commonProviders } from '../../../../../share/providers/common.provider';
 
 import { MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
-import { MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Subject, takeUntil } from 'rxjs';
 import { MovimentacaoFieldsDialogComponent } from "../movimentacao-fields-dialog/movimentacao-fields-dialog.component";
@@ -17,13 +16,6 @@ import { MovimentacaoFieldsDialogComponent } from "../movimentacao-fields-dialog
     MatDialogContent,
     MatDialogTitle,
     MovimentacaoFieldsDialogComponent
-],
-  providers: [
-    provideNativeDateAdapter(),
-    {
-      provide: MAT_DATE_LOCALE, 
-      useValue: 'pt-br'
-    }
   ],
   templateUrl: './movimentacao-adicionar-dialog.component.html',
   styleUrl: './movimentacao-adicionar-dialog.component.css',

@@ -6,12 +6,19 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient } from '@angular/common/http';
 
+import { MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
 
-export const appConfig: ApplicationConfig = {
+export const appConfig: any = {
   providers: [
     provideHttpClient(),
     provideAnimations(),
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes), 
-    provideClientHydration(withEventReplay())]
+    provideClientHydration(withEventReplay()),
+    provideNativeDateAdapter(),    
+    {
+      provide: MAT_DATE_LOCALE, 
+      useValue: 'pt-br'
+    }
+  ]
 };
