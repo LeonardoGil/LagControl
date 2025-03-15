@@ -68,7 +68,7 @@ namespace LagFinanceApplication.Queries
                 Descricao = movimentacao.Descricao,
                 Observacao = movimentacao.Observacao,
                 Pendente = movimentacao.Pendente,
-                TipoMovimentacao = movimentacao.TipoMovimentacao,
+                Tipo = movimentacao.TipoMovimentacao,
                 Valor = movimentacao.Valor
             };
     }

@@ -55,7 +55,7 @@ namespace LagFinanceApplication.Models.Contas
                     Descricao = mov.Descricao,
                     Observacao = mov.Observacao,
                     Pendente = mov.Pendente,
-                    TipoMovimentacao = mov.TipoMovimentacao,
+                    Tipo = mov.TipoMovimentacao,
                     Valor = mov.Valor
                 })
                 .ToList(),
@@ -84,7 +84,7 @@ namespace LagFinanceApplication.Models.Contas
                                                         Descricao = mov.Descricao,
                                                         Observacao = mov.Observacao,
                                                         Pendente = mov.Pendente,
-                                                        TipoMovimentacao = mov.TipoMovimentacao,
+                                                        Tipo = mov.TipoMovimentacao,
                                                         Valor = mov.Valor,
                                                         ValorSaldo = mov.ValorSaldo()
                                                     }).ToList(),

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, OnInit, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, ViewChild, inject, input } from '@angular/core';
 import { commonProviders } from '../../../../../share/providers/common.provider';
 import { Movimentacao } from '../../../models/movimentacao.model';
 import { ContaService } from '../../../../conta/services/conta.service';
@@ -8,20 +8,21 @@ import { Categoria } from '../../../../categoria/models/categoria.model';
 import { CategoriaService } from '../../../../categoria/services/categoria.service';
 import { Conta } from '../../../../conta/models/conta.model';
 import { TipoMovimentacaoOptions } from '../../../models/tipoMovimentacao.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-movimentacao-fields-dialog',
   standalone: true,
   imports: [
-    CommonModule,
-    commonProviders
+    ...commonProviders
   ],
   templateUrl: './movimentacao-fields-dialog.component.html',
   styleUrl: './movimentacao-fields-dialog.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MovimentacaoFieldsDialogComponent implements OnInit {
-
+  @ViewChild(NgForm) form!: NgForm;
+  
   @Input() tipoDisable: boolean = false
   @Input() pendenteDisable: boolean = false
   @Input() movimentacao: Movimentacao = new Movimentacao();
@@ -50,5 +51,10 @@ export class MovimentacaoFieldsDialogComponent implements OnInit {
     this.categoriaService.Listar()
                          .pipe(takeUntil(this.destroy$))
                          .subscribe((categorias: Categoria[]) => this.categorias = categorias)
+  }
+
+  public validarCampos(): boolean {
+    Object.values(this.form.controls).forEach((control) => control.markAsTouched({ onlySelf: true }))
+    return !this.form.invalid
   }
 }

@@ -30,7 +30,7 @@ namespace LagFinanceApplication.Models.Contas
                                                              Data = mov.Data,
                                                              Descricao = mov.Descricao,
                                                              Observacao = mov.Observacao,
-                                                             TipoMovimentacao = mov.TipoMovimentacao,
+                                                             Tipo = mov.TipoMovimentacao,
                                                              Valor = mov.Valor
                                                          })
                                                          .ToList()

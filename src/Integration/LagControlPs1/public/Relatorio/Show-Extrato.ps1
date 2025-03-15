@@ -82,7 +82,7 @@ function Show-ExtratoMovimentacao {
     $sinal = '+'
     $color = 'Green'
 
-    if ($mov.tipoMovimentacao -eq 1) { 
+    if ($mov.tipo -eq 1) { 
         $sinal = '-' 
         $color = 'Red'
     }
@@ -117,7 +117,7 @@ function Show-ExtratoMovimentacaoPendente {
     $sinal = '+'
     $sinalColor = 'Green'
 
-    if ($mov.tipoMovimentacao -eq 1) { 
+    if ($mov.tipo -eq 1) { 
         $sinal = '-' 
         $sinalColor = 'Red'
     }

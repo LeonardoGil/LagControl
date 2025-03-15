@@ -55,21 +55,12 @@ export class MovimentacaoAdicionarDialogComponent {
   }
 
   private salvar(action: () => void) {
-    if (!this.validar()) {
-      this.snackBar.open('Movimentação inválida!')
-      return;
-    }
+    if (!this.fieldsComponent.validarCampos()) { return; }
 
-    this.movimentacaoService.Adicionar(this.fieldsComponent.movimentacao).pipe(takeUntil(this.destroy$)).subscribe(action);
-    this.snackBar.open('Movimentação adicionada!')
-  }
-
-  private validar(): boolean {
-    return !(
-      this.fieldsComponent.movimentacao.Descricao == '' ||
-      this.fieldsComponent.movimentacao.ContaId == '' ||
-      this.fieldsComponent.movimentacao.CategoriaId == '' ||
-      this.fieldsComponent.movimentacao.Valor == 0
-    )
+    this.movimentacaoService.Adicionar(this.fieldsComponent.movimentacao).pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.snackBar.open('Movimentação adicionada!');
+      action();
+    });
+    
   }
 }

@@ -1,7 +1,9 @@
-<div class="box-form-fields">
+<form #form="ngForm">
+  <div class="box-form-fields">
     <mat-form-field>
       <mat-label>Descrição</mat-label>
-      <input matInput [(ngModel)]="movimentacao.Descricao" />
+      <input matInput required name="descricao" [(ngModel)]="movimentacao.Descricao" #descricao="ngModel" />
+      <mat-error *ngIf="descricao.invalid">Campo Obrigatório</mat-error>
     </mat-form-field>
 
     <mat-form-field>
@@ -11,12 +13,10 @@
 
     <mat-form-field>
       <mat-label>Data</mat-label>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="movimentacao.Data" />
-      <mat-datepicker-toggle
-        matIconSuffix
-        [for]="picker"
-      ></mat-datepicker-toggle>
+      <input matInput required name="data" [matDatepicker]="picker" [(ngModel)]="movimentacao.Data" #data="ngModel" />
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="data.invalid">Campo Obrigatório</mat-error>
     </mat-form-field>
 
     <div class="mt-1 flex flex-col items-center">
@@ -28,7 +28,8 @@
   <div class="box-form-fields">
     <mat-form-field>
       <mat-label>Valor</mat-label>
-      <input matInput type="number" [(ngModel)]="movimentacao.Valor" />
+      <input matInput required name="valor" type="number" [(ngModel)]="movimentacao.Valor" #valor="ngModel" />
+      <mat-error *ngIf="data.invalid">Campo Obrigatório</mat-error>
     </mat-form-field>
 
     <mat-form-field>
@@ -42,21 +43,18 @@
 
     <mat-form-field>
       <mat-label>Conta</mat-label>
-      <mat-select [(ngModel)]="movimentacao.ContaId">
-        @for (conta of contas; track conta) {
-        <mat-option [value]="conta.Id">{{ conta.Descricao }}</mat-option>
-        }
+      <mat-select required name="conta" [(ngModel)]="movimentacao.ContaId" #contaId="ngModel">
+        <mat-option *ngFor="let conta of contas" [value]="conta.Id">{{ conta.Descricao }}</mat-option>
       </mat-select>
+      <mat-error *ngIf="contaId.invalid">Campo Obrigatório</mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Categoria</mat-label>
-      <mat-select [(ngModel)]="movimentacao.CategoriaId">
-        @for (categoria of categorias; track categoria) {
-        <mat-option [value]="categoria.Id">{{
-          categoria.Descricao
-        }}</mat-option>
-        }
+      <mat-select required name="categoria" [(ngModel)]="movimentacao.CategoriaId" #categoriaId="ngModel">
+        <mat-option *ngFor="let categoria of categorias" [value]="categoria.Id">{{ categoria.Descricao }}</mat-option>
       </mat-select>
+      <mat-error *ngIf="categoriaId.invalid">Campo Obrigatório</mat-error>
     </mat-form-field>
   </div>
+</form>

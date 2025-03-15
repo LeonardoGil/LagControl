@@ -11,7 +11,7 @@ export interface MovimentacaoGrid {
 
     Data: string
 
-    TipoMovimentacao: TipoMovimentacaoEnum
+    Tipo: TipoMovimentacaoEnum
 
     Pendente: boolean
 

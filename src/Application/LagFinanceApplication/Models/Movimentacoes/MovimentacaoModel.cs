@@ -16,7 +16,7 @@ namespace LagFinanceApplication.Models.Movimentacoes
 
         public DateTime Data { get; set; }
 
-        public TipoMovimentacaoEnum TipoMovimentacao { get; set; }
+        public TipoMovimentacaoEnum Tipo { get; set; }
 
         public bool Pendente { get; set; }
 
