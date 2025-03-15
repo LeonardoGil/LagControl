@@ -57,7 +57,7 @@ export class MovimentacaoAdicionarDialogComponent {
   private salvar(action: () => void) {
     if (!this.fieldsComponent.validarCampos()) { return; }
 
-    this.movimentacaoService.Adicionar(this.fieldsComponent.movimentacao).pipe(takeUntil(this.destroy$)).subscribe(() => {
+    this.movimentacaoService.adicionar(this.fieldsComponent.movimentacao).pipe(takeUntil(this.destroy$)).subscribe(() => {
       this.snackBar.open('Movimentação adicionada!');
       action();
     });

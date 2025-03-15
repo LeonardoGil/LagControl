@@ -42,13 +42,13 @@ export class MovimentacaoFieldsDialogComponent implements OnInit {
   } 
 
   private carregarConta(): void {
-    this.contaService.Listar()
+    this.contaService.contas$
                      .pipe(takeUntil(this.destroy$))
                      .subscribe((contas: Conta[]) => this.contas = contas)
   }
 
   private carregarCategoria(): void {
-    this.categoriaService.Listar()
+    this.categoriaService.categorias$
                          .pipe(takeUntil(this.destroy$))
                          .subscribe((categorias: Categoria[]) => this.categorias = categorias)
   }

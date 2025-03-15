@@ -14,22 +14,26 @@ export class MovimentacaoService {
   
   movimentacoes$ = this.movimentacaoSubject.asObservable()
 
-  Listar(params?: HttpParams) : Observable<MovimentacaoGrid[]> {
+  listar(params?: HttpParams) : Observable<MovimentacaoGrid[]> {
     
     if (params) {
       this.params = params
     }
     
     return this.httpClient.get<MovimentacaoGrid[]>('https://localhost:7081/Movimentacao/Listar', { params: this.params }).pipe(
-      tap(data => this.movimentacaoSubject.next(data))
+      tap(data => { this.movimentacaoSubject.next(data)})
     )
   }
 
-  Adicionar(movimentacao: Movimentacao): Observable<any> {
-    return this.httpClient.post('https://localhost:7081/Movimentacao/Adicionar', movimentacao).pipe()
+  adicionar(movimentacao: Movimentacao): Observable<any> {
+    return this.httpClient.post('https://localhost:7081/Movimentacao/Adicionar', movimentacao).pipe();
+  }
+
+  confirmarPendente(movimentacao: Movimentacao): Observable<any> {
+    return this.httpClient.post('https://localhost:7081/Movimentacao/Confirmar-Pendente', movimentacao).pipe();
   }
 
   excluir(id: string): Observable<any> {
-    return this.httpClient.delete('https://localhost:7081/Movimentacao/Excluir/' + id).pipe()
+    return this.httpClient.delete('https://localhost:7081/Movimentacao/Excluir/' + id).pipe();
   }
 }

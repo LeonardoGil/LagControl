@@ -70,7 +70,7 @@ export class MovimentacaoGridComponent implements AfterViewInit, OnDestroy {
     
     this.dialog.open(MovimentacaoAdicionarDialogComponent).afterClosed().subscribe((result) => {
       if (result) {
-        this.movimentacaoService.Listar().subscribe();
+        this.movimentacaoService.listar().subscribe();
       }
     });
   }
@@ -82,7 +82,7 @@ export class MovimentacaoGridComponent implements AfterViewInit, OnDestroy {
 
     this.dialog.open(ConfirmarDialogComponent, { data: data }).afterClosed().subscribe((result) => {
       if (result) {
-        this.movimentacaoService.excluir(movimentacao.Id).subscribe(() => this.movimentacaoService.Listar().subscribe())
+        this.movimentacaoService.excluir(movimentacao.Id).subscribe(() => this.movimentacaoService.listar().subscribe())
       }
     });
   }

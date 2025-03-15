@@ -3,8 +3,6 @@ import { HttpParams } from '@angular/common/http';
 import { Subject, takeUntil } from 'rxjs';
 import { format } from 'date-fns';
 
-import { MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
-
 import { commonProviders } from './../../../../share/providers/common.provider';
 
 import { Conta } from '../../../conta/models/conta.model';
@@ -16,20 +14,11 @@ import { MovimentacaoService } from '../../services/movimentacao.service';
 import { DateUtilsService } from './../../../../share/services/date-utils.service';
 import { ContaService } from '../../../conta/services/conta.service';
 
-
-
 @Component({
   selector: 'app-movimentacao-filter',
   standalone: true,
   imports: [
     ...commonProviders
-  ],
-  providers: [
-    provideNativeDateAdapter(),
-    {
-      provide: MAT_DATE_LOCALE, 
-      useValue: 'pt-br'
-    }
   ],
   templateUrl: './movimentacao-filter.component.html',
   styleUrl: './movimentacao-filter.component.css',
@@ -67,15 +56,13 @@ export class MovimentacaoFilterComponent implements OnInit, OnDestroy {
   } 
 
   private carregarConta(): void {
-    this.contaService.Listar()
-                     .pipe(takeUntil(this.destroy$))
-                     .subscribe((contas: Conta[]) => this.contas = contas)
+    this.contaService.contas$.pipe(takeUntil(this.destroy$)).subscribe((contas: Conta[]) => this.contas = contas);
+    this.contaService.listar().subscribe();
   }
 
   private carregarCategoria(): void {
-    this.categoriaService.Listar()
-                         .pipe(takeUntil(this.destroy$))
-                         .subscribe((categorias: Categoria[]) => this.categorias = categorias)
+    this.categoriaService.categorias$.pipe(takeUntil(this.destroy$)).subscribe((categorias) => this.categorias = categorias);
+    this.categoriaService.listar().subscribe();
   }
  
   protected filtrarMovimentacoes(): void {
@@ -109,9 +96,7 @@ export class MovimentacaoFilterComponent implements OnInit, OnDestroy {
         params = params.set('DataFinal', format(this.filterModel.DataFinal, 'yyyy-MM-dd\'T\'HH:mm:ss'))
     }
     
-    this.movimentacaoService.Listar(params)
-                            .pipe(takeUntil(this.destroy$))
-                            .subscribe()
+    this.movimentacaoService.listar(params).pipe(takeUntil(this.destroy$)).subscribe()
   }
 }
 
