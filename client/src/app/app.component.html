@@ -13,20 +13,7 @@
 
   <mat-sidenav-container class="h-full flex-grow">
     <mat-sidenav #drawer mode="side" class="max-w-min">
-      <mat-list>
-        <mat-list-item>
-          <button mat-button routerLink="/Movimentacao">
-            <mat-icon fontIcon="payment" />
-            <a>Finanças</a>
-          </button>
-        </mat-list-item>
-        <mat-list-item>
-          <button mat-button routerLink="/Movimentacao">
-            <mat-icon fontIcon="payment" />
-            <a>teste</a>
-          </button>
-        </mat-list-item>
-      </mat-list>
+      <app-menu></app-menu>
     </mat-sidenav>
 
     <mat-sidenav-content class="p-5">

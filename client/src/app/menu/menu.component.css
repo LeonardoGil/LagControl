@@ -1,0 +1,14 @@
+::ng-deep .mat-mdc-button {
+  --mdc-text-button-container-shape: 0px !important
+}
+
+::ng-deep .mat-expansion-panel-body {
+  padding: 0rem;
+  display: flex;
+  flex-direction: column;
+}
+
+::ng-deep .mat-button {
+  width: full;
+  padding: 0rem;
+}
