@@ -10,5 +10,6 @@
 
 ::ng-deep .mat-button {
   width: full;
+  flex-grow: 1;
   padding: 0rem;
 }

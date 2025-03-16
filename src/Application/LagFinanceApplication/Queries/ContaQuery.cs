@@ -21,17 +21,18 @@ namespace LagFinanceApplication.Queries
 
         public IList<ContaSaldoModel> ListarSaldo(ContaSaldoQueryModel model)
         {
-            var contas = _contaRepository.Get().AsNoTracking();
+            var contas = _contaRepository.Get().Where(x => model.ContaIds == null || model.ContaIds.Contains(x.Id)).AsNoTracking();
 
-            if (model.ContaIds is not null && model.ContaIds.Any())
-                contas = contas.Where(x => model.ContaIds.Contains(x.Id));
+            var models = contas.Include(x => x.Movimentacoes).Select(conta => new ContaSaldoModel
+            {
+                Id = conta.Id,
+                Descricao = conta.Descricao,
+                Saldo = conta.Movimentacoes.Where(x => !x.Pendente).Sum(x => x.TipoMovimentacao == TipoMovimentacaoEnum.Receita ? x.Valor : x.Valor * -1),
+                SaldoPrevisto = conta.Movimentacoes.Sum(x => x.TipoMovimentacao == TipoMovimentacaoEnum.Receita ? x.Valor : x.Valor * -1),
+                DataUltimaMovimentacao = conta.Movimentacoes.OrderByDescending(x => x.Data).Select(x => (DateTime?)x.Data).LastOrDefault() 
+            });
 
-            return [.. contas.Include(x => x.Movimentacoes)
-                             .Select(conta => new ContaSaldoModel
-                             {
-                                 Descricao = conta.Descricao,
-                                 Saldo = conta.Saldo()
-                             })];
+            return [.. models];
         }
 
         public IList<ContaListaModel> Listar()

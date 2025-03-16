@@ -1,0 +1,12 @@
+:root {
+  gap: 2rem;
+}
+
+mat-card-content p {
+  font-size: 1.2rem;
+}
+
+::ng-deep .mat-mdc-card-header-text {
+  display: flex;
+  align-items: center;
+}
