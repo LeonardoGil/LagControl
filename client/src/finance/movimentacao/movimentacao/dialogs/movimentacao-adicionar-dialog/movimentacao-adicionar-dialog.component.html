@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Adicionar Movimentação</h2>
 <mat-dialog-content>
-  <app-movimentacao-fields-dialog />
+  <app-movimentacao-fields-dialog [movimentacao]="movimentacao" />
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button (click)="clickFechar()">Cancelar</button>

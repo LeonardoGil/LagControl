@@ -16,11 +16,13 @@ namespace LagFinanceApplication.Queries
                                                        {
                                                            Id = categoria.Id,
                                                            Descricao = categoria.Descricao,
+                                                           Tipo = categoria.Tipo,
 
                                                            CategoriaPai = !categoria.CategoriaPai.ENull() ? new CategoriaListarModel
                                                            {
                                                                Descricao = categoria.CategoriaPai.Descricao,
                                                                Id = categoria.CategoriaPai.Id,
+                                                               Tipo = categoria.CategoriaPai.Tipo
                                                            } 
                                                            : default
                                                        })

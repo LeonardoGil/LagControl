@@ -1,5 +1,4 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, OnInit, ViewChild, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, ViewChild, inject } from '@angular/core';
 import { commonProviders } from '../../../../../share/providers/common.provider';
 import { Movimentacao } from '../../../models/movimentacao.model';
 import { ContaService } from '../../../../conta/services/conta.service';
@@ -25,12 +24,13 @@ export class MovimentacaoFieldsDialogComponent implements OnInit {
   
   @Input() tipoDisable: boolean = false
   @Input() pendenteDisable: boolean = false
-  @Input() movimentacao: Movimentacao = new Movimentacao();
+  @Input({ required: true }) movimentacao!: Movimentacao
 
   protected contaService: ContaService = inject(ContaService)
   protected categoriaService: CategoriaService = inject(CategoriaService)
 
   protected tipoMovimentacaoOptions = TipoMovimentacaoOptions.filter(x => x.value != null)
+
   protected categorias: Categoria[] = [];
   protected contas: Conta[] = [];
 
@@ -38,7 +38,7 @@ export class MovimentacaoFieldsDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.carregarConta();
-    this.carregarCategoria();
+    this.filtrarCategoria();
   } 
 
   private carregarConta(): void {
@@ -47,10 +47,14 @@ export class MovimentacaoFieldsDialogComponent implements OnInit {
                      .subscribe((contas: Conta[]) => this.contas = contas)
   }
 
-  private carregarCategoria(): void {
-    this.categoriaService.categorias$
-                         .pipe(takeUntil(this.destroy$))
-                         .subscribe((categorias: Categoria[]) => this.categorias = categorias)
+  private filtrarCategoria(): void {
+    const tipo = this.movimentacao.Tipo as number;
+    this.categorias = this.categoriaService.categorias.filter(x => (x.Tipo as number) == tipo)
+  }
+
+  protected changeTipo(): void {
+    this.movimentacao.CategoriaId = '';
+    this.filtrarCategoria();
   }
 
   public validarCampos(): boolean {

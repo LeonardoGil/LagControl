@@ -8,7 +8,7 @@
 
     <mat-form-field>
       <mat-label>Observacao</mat-label>
-      <input matInput [(ngModel)]="movimentacao.Observacao" />
+      <input name="Observacao" matInput [(ngModel)]="movimentacao.Observacao" />
     </mat-form-field>
 
     <mat-form-field>
@@ -21,7 +21,7 @@
 
     <div class="mt-1 flex flex-col items-center">
       <mat-label>Pendente </mat-label>
-      <mat-slide-toggle [(ngModel)]="movimentacao.Pendente" [disabled]="pendenteDisable"></mat-slide-toggle>
+      <mat-slide-toggle name="pendente" [(ngModel)]="movimentacao.Pendente" [disabled]="pendenteDisable"></mat-slide-toggle>
     </div>
   </div>
 
@@ -29,15 +29,13 @@
     <mat-form-field>
       <mat-label>Valor</mat-label>
       <input matInput required name="valor" type="number" [(ngModel)]="movimentacao.Valor" #valor="ngModel" />
-      <mat-error *ngIf="data.invalid">Campo Obrigatório</mat-error>
+      <mat-error *ngIf="valor.invalid">Campo Obrigatório</mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Tipo</mat-label>
-      <mat-select [(ngModel)]="movimentacao.Tipo" [disabled]="tipoDisable">
-        @for (tipo of tipoMovimentacaoOptions; track tipo) {
-        <mat-option [value]="tipo.value">{{ tipo.label }}</mat-option>
-        }
+      <mat-select name="tipo" [(ngModel)]="movimentacao.Tipo" (selectionChange)="changeTipo()" [disabled]="tipoDisable">
+        <mat-option *ngFor="let tipo of tipoMovimentacaoOptions" [value]="tipo.value" >{{ tipo.label }}</mat-option>
       </mat-select>
     </mat-form-field>
 

@@ -1,7 +1,7 @@
 export enum TipoMovimentacaoEnum {
-    Receita,
-    Despesa,
-    Transferencia
+    Receita = 0,
+    Despesa = 1,
+    Transferencia = 2
 }
 
 export const TipoMovimentacaoOptions = [
@@ -11,14 +11,14 @@ export const TipoMovimentacaoOptions = [
     },
     { 
       label: 'Receita',
-      value: 0 as TipoMovimentacaoEnum
+      value: TipoMovimentacaoEnum.Receita
     },
     {
       label: 'Despesa',
-      value: 1  as TipoMovimentacaoEnum
+      value: TipoMovimentacaoEnum.Despesa
     },
     {
       label: 'Transferencia',
-      value: 2 as TipoMovimentacaoEnum
+      value: TipoMovimentacaoEnum.Transferencia
     }
   ]

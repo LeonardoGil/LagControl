@@ -6,6 +6,7 @@ import { MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle } from
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Subject, takeUntil } from 'rxjs';
 import { MovimentacaoFieldsDialogComponent } from "../movimentacao-fields-dialog/movimentacao-fields-dialog.component";
+import { Movimentacao } from '../../../models/movimentacao.model';
 
 @Component({
   selector: 'app-movimentacao-adicionar-dialog',
@@ -27,7 +28,8 @@ export class MovimentacaoAdicionarDialogComponent {
 
   readonly dialogRef = inject(MatDialogRef<MovimentacaoAdicionarDialogComponent>);
 
-  protected movimentacaoService: MovimentacaoService = inject(MovimentacaoService)
+  private movimentacaoService: MovimentacaoService = inject(MovimentacaoService)
+  protected movimentacao: Movimentacao = new Movimentacao();
 
   private snackBar: MatSnackBar = inject(MatSnackBar)
   private destroy$: Subject<void> = new Subject();
@@ -42,9 +44,9 @@ export class MovimentacaoAdicionarDialogComponent {
 
   clickAdicionarENovo(): void {
     let actionLimparCampos = () => {
-      this.fieldsComponent.movimentacao.Descricao = '';
-      this.fieldsComponent.movimentacao.Observacao = '';
-      this.fieldsComponent.movimentacao.Valor = 0;
+      this.movimentacao.Descricao = '';
+      this.movimentacao.Observacao = '';
+      this.movimentacao.Valor = 0;
     };
 
     this.salvar(actionLimparCampos)
@@ -57,7 +59,7 @@ export class MovimentacaoAdicionarDialogComponent {
   private salvar(action: () => void) {
     if (!this.fieldsComponent.validarCampos()) { return; }
 
-    this.movimentacaoService.adicionar(this.fieldsComponent.movimentacao).pipe(takeUntil(this.destroy$)).subscribe(() => {
+    this.movimentacaoService.adicionar(this.movimentacao).pipe(takeUntil(this.destroy$)).subscribe(() => {
       this.snackBar.open('Movimentação adicionada!');
       action();
     });
