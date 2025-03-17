@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, ViewChild } from '@angular/core';
 import { MovimentacaoFieldsDialogComponent } from "../movimentacao-fields-dialog/movimentacao-fields-dialog.component";
 import { commonProviders } from '../../../../../share/providers/common.provider';
 import { dialogProvider } from '../../../../../share/providers/dialog.provider';
 import { MovimentacaoService } from '../../../services/movimentacao.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Movimentacao } from '../../../models/movimentacao.model';
 
@@ -29,12 +29,22 @@ export class MovimentacaoConfirmarPendenteDialogComponent implements OnInit {
 
   protected movimentacao: Movimentacao = inject(MAT_DIALOG_DATA);
 
+  @ViewChild(MovimentacaoFieldsDialogComponent) fieldsComponent!: MovimentacaoFieldsDialogComponent;
+
   ngOnInit(): void {
-    
   } 
 
-  clickAdicionar(): void {
-    console.log(this.movimentacao)
+  clickSalvar(): void {
+    
+    if (!this.fieldsComponent.validarCampos()) { return }    
+
+    this.movimentacao.Pendente = false
+
+    this.movimentacaoService.confirmarPendente(this.movimentacao).pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.snackBar.open('Movimentação confirmada!', 'Ok')
+    });
+    
+
     this.dialogRef.close(true);
   }
 
