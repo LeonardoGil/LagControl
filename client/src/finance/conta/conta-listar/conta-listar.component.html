@@ -7,36 +7,46 @@
             Resumo
           </mat-panel-title>
         </mat-expansion-panel-header>
-      </mat-expansion-panel>
+        <div class="p-3 mt-3 flex justify-between items-center gap-4">
+            <div class="flex flex-col text-center">
+                <p>Saldo Total: {{saldoTotal()}}</p>
+            </div>
+            <div class="flex flex-col text-center">                
+                <p>Saldo Previsto {{saldoPrevistoTotal()}}</p>
+            </div>
+            <div class="flex flex-col text-center">
+                <p>Ultima Movimentação {{ultimaMovimentacao()}}</p>
+            </div>
+        </div>
+    </mat-expansion-panel>
 
-    <mat-card *ngFor="let conta of contas" appearance="outlined" class="flex flex-col gap-2">
-        <mat-card-header class="flex justify-between">
-            <mat-card-title class="!flex items-center gap-2">
+    <mat-expansion-panel *ngFor="let conta of contas" appearance="outlined" class="card-conta">
+        <mat-expansion-panel-header>
+            <mat-panel-title class="!flex items-center gap-2">
                 <span class="size-10 rounded-full" style="background-color: #212121;"></span>
                 {{conta.Descricao}}
-            </mat-card-title>
+            </mat-panel-title>
             <div>
                 <button mat-icon-button>
                     <mat-icon>edit</mat-icon>
                 </button>
             </div>
-        </mat-card-header>
-        <mat-card-content>
-            <div class="p-3 mt-3 flex justify-between items-center gap-4">
-                <div class="flex flex-col text-center">
-                    <p>Saldo</p>
-                    <p>{{conta.Saldo.toFixed(2)}}</p>
-                </div>
-                <div class="flex flex-col text-center">                
-                    <p>Saldo Previsto</p>
-                    <p>{{conta.SaldoPrevisto.toFixed(2)}}</p>
-                </div>
-                <div class="flex flex-col text-center">
-                    <p>Ultima Movimentação</p>
-                    <p>{{visualizarUltimaMovimentacao(conta)}}</p>
-                </div>
+        </mat-expansion-panel-header>
+        
+        <div class="p-3 mt-3 flex justify-between items-center gap-4">
+            <div class="flex flex-col text-center">
+                <p>Saldo</p>
+                <p>{{conta.Saldo.toFixed(2)}}</p>
             </div>
-        </mat-card-content>
-    </mat-card>
+            <div class="flex flex-col text-center">                
+                <p>Saldo Previsto</p>
+                <p>{{conta.SaldoPrevisto.toFixed(2)}}</p>
+            </div>
+            <div class="flex flex-col text-center">
+                <p>Ultima Movimentação</p>
+                <p>{{visualizarUltimaMovimentacao(conta.DataUltimaMovimentacao)}}</p>
+            </div>
+        </div>
+    </mat-expansion-panel>
 
 </div>

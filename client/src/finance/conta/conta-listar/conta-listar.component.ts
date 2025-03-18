@@ -26,11 +26,29 @@ export class ContaListarComponent {
     this.contaService.listarSaldo().pipe(takeUntil(this.destroy$)).subscribe(contas => this.contas = contas);
   }
 
-  protected visualizarUltimaMovimentacao(conta: ContaSaldo): string {
-    if (!conta.DataUltimaMovimentacao) {
+  protected visualizarUltimaMovimentacao(dataUltimaMovimentacao: Date | null): string {
+    if (!dataUltimaMovimentacao) {
       return '-'
     }
 
-    return new Date(conta.DataUltimaMovimentacao).toLocaleDateString('pt-BR')
+    return new Date(dataUltimaMovimentacao).toLocaleDateString('pt-BR')
+  }
+
+  protected ultimaMovimentacao(): string {
+    const contasSort = this.contas.sort((a, b) => {
+      const dataA = a.DataUltimaMovimentacao ? new Date(a.DataUltimaMovimentacao).getTime() : 0;
+      const dataB = b.DataUltimaMovimentacao ? new Date(b.DataUltimaMovimentacao).getTime() : 0
+      return dataB - dataA;
+    });
+      
+    return this.visualizarUltimaMovimentacao(contasSort[0]?.DataUltimaMovimentacao ?? null);
+  }
+
+  protected saldoTotal(): number {
+    return this.contas.reduce((acc, conta) => acc + conta.Saldo, 0)
+  }
+  
+  protected saldoPrevistoTotal(): number {
+    return this.contas.reduce((acc, conta) => acc + conta.SaldoPrevisto, 0)
   }
 }

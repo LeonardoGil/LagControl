@@ -2,11 +2,13 @@
   gap: 2rem;
 }
 
-mat-card-content p {
-  font-size: 1.2rem;
+.card-conta {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
 }
 
-::ng-deep .mat-mdc-card-header-text {
-  display: flex;
-  align-items: center;
+::ng-deep .card-conta .mat-expansion-panel-header {
+  font-size: 1rem;
+  justify-content: space-between;
 }
