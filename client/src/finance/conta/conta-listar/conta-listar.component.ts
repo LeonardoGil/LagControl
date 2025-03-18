@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { commonProviders } from '../../../share/providers/common.provider';
 import { MatExpansionModule, MatAccordion } from '@angular/material/expansion';
 import { ContaService } from '../services/conta.service';
@@ -16,14 +16,17 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrl: './conta-listar.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ContaListarComponent { 
+export class ContaListarComponent implements OnInit { 
   protected contas: ContaSaldo[] = []
   private contaService: ContaService = inject(ContaService)
-  
+  private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
   private destroy$: Subject<void> = new Subject();
 
-  constructor() {
-    this.contaService.listarSaldo().pipe(takeUntil(this.destroy$)).subscribe(contas => this.contas = contas);
+  ngOnInit(): void {
+    this.contaService.listarSaldo().pipe(takeUntil(this.destroy$)).subscribe(contas => {
+      this.contas = contas
+      this.cdr.detectChanges()
+    });
   }
 
   protected visualizarUltimaMovimentacao(dataUltimaMovimentacao: Date | null): string {
