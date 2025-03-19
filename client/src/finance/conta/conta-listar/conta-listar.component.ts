@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { commonProviders } from '../../../share/providers/common.provider';
 import { MatExpansionModule, MatAccordion } from '@angular/material/expansion';
 import { ContaService } from '../services/conta.service';
@@ -14,23 +14,45 @@ import { Subject, takeUntil } from 'rxjs';
   ],
   templateUrl: './conta-listar.component.html',
   styleUrl: './conta-listar.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ContaListarComponent implements OnInit { 
+export class ContaListarComponent implements OnInit, OnDestroy, AfterViewInit {
+  
+  @ViewChild(MatAccordion) accordion!: MatAccordion
+
   protected contas: ContaSaldo[] = []
+  protected mostrar: boolean = false
+  
   private contaService: ContaService = inject(ContaService)
-  private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
   private destroy$: Subject<void> = new Subject();
 
   ngOnInit(): void {
     this.contaService.listarSaldo().pipe(takeUntil(this.destroy$)).subscribe(contas => {
       this.contas = contas
-      this.cdr.detectChanges()
     });
   }
 
+  ngAfterViewInit(): void {
+    this.accordion.closeAll();
+  } 
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
+  }
+
+  protected clickVisualizar(): void {
+    this.mostrar = !this.mostrar
+
+    if (this.mostrar) {
+      this.accordion.openAll();
+    }
+    else {
+      this.accordion.closeAll();
+    }
+  }
+
   protected visualizarUltimaMovimentacao(dataUltimaMovimentacao: Date | null): string {
-    if (!dataUltimaMovimentacao) {
+    if (!this.mostrar || !dataUltimaMovimentacao) {
       return '-'
     }
 
@@ -44,14 +66,26 @@ export class ContaListarComponent implements OnInit {
       return dataB - dataA;
     });
       
+    if (!this.mostrar) {
+      return ' - '
+    }
+
     return this.visualizarUltimaMovimentacao(contasSort[0]?.DataUltimaMovimentacao ?? null);
   }
 
   protected saldoTotal(): number {
+    if (!this.mostrar) {
+      return 0
+    }
+
     return this.contas.reduce((acc, conta) => acc + conta.Saldo, 0)
   }
   
   protected saldoPrevistoTotal(): number {
+    if (!this.mostrar) {
+      return 0
+    }
+
     return this.contas.reduce((acc, conta) => acc + conta.SaldoPrevisto, 0)
   }
 }
