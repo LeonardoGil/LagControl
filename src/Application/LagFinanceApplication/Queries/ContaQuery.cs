@@ -29,7 +29,7 @@ namespace LagFinanceApplication.Queries
                 Descricao = conta.Descricao,
                 Saldo = conta.Movimentacoes.Where(x => !x.Pendente).Sum(x => x.TipoMovimentacao == TipoMovimentacaoEnum.Receita ? x.Valor : x.Valor * -1),
                 SaldoPrevisto = conta.Movimentacoes.Sum(x => x.TipoMovimentacao == TipoMovimentacaoEnum.Receita ? x.Valor : x.Valor * -1),
-                DataUltimaMovimentacao = conta.Movimentacoes.OrderByDescending(x => x.Data).Select(x => (DateTime?)x.Data).LastOrDefault() 
+                DataUltimaMovimentacao = conta.Movimentacoes.Where(x => !x.Pendente).OrderByDescending(x => x.Data).Select(x => (DateTime?)x.Data).FirstOrDefault() 
             });
 
             return [.. models];
