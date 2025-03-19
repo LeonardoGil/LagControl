@@ -1,15 +1,13 @@
-::ng-deep .mat-mdc-button {
-  --mdc-text-button-container-shape: 0px !important
+.menu {
+
 }
 
-::ng-deep .mat-expansion-panel-body {
+::ng-deep .menu .mat-expansion-panel-body {
   padding: 0rem;
   display: flex;
   flex-direction: column;
 }
 
-::ng-deep .mat-button {
-  width: full;
-  flex-grow: 1;
-  padding: 0rem;
+::ng-deep .menu .mat-mdc-button {
+  --mdc-text-button-container-shape: 0px !important
 }
