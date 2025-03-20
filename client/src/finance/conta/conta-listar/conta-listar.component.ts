@@ -73,19 +73,19 @@ export class ContaListarComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.visualizarUltimaMovimentacao(contasSort[0]?.DataUltimaMovimentacao ?? null);
   }
 
-  protected saldoTotal(): number {
+  protected saldoTotal(): string {
     if (!this.mostrar) {
-      return 0
+      return ' - '
     }
 
-    return this.contas.reduce((acc, conta) => acc + conta.Saldo, 0)
+    return this.contas.reduce((acc, conta) => acc + conta.Saldo, 0).toFixed(2)
   }
   
-  protected saldoPrevistoTotal(): number {
+  protected saldoPrevistoTotal(): string {
     if (!this.mostrar) {
-      return 0
+      return ' - '
     }
 
-    return this.contas.reduce((acc, conta) => acc + conta.SaldoPrevisto, 0)
+    return this.contas.reduce((acc, conta) => acc + conta.SaldoPrevisto, 0).toFixed(2)
   }
 }
