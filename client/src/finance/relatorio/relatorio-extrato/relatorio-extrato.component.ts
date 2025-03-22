@@ -1,8 +1,10 @@
+import { TipoCategoriaEnum } from './../../categoria/models/enums/tipo-categoria.model';
 import { HttpParams } from '@angular/common/http';
 import { ExtratoModel } from '../models/extrato.model';
 import { RelatorioService } from '../services/relatorio.service';
 import { commonProviders } from './../../../share/providers/common.provider';
 import { Component, OnInit, inject } from '@angular/core';
+import { TipoMovimentacaoEnum } from '../../movimentacao/models/tipoMovimentacao.model';
 
 @Component({
   selector: 'app-relatorio-extrato',
@@ -42,4 +44,29 @@ export class RelatorioExtratoComponent implements OnInit {
     return obj.Dia; 
   }
 
+  protected obterIconTipoMovimentacao(tipo: TipoMovimentacaoEnum): string {
+    switch (tipo) {
+      case TipoMovimentacaoEnum.Despesa:
+        return 'arrow_drop_down';
+
+      case TipoMovimentacaoEnum.Receita:
+        return 'arrow_drop_up';
+
+      default:
+        return ''
+    }
+  }
+
+  protected getStyleTipoMovimentacao(tipo: TipoMovimentacaoEnum): string {
+    switch (tipo) {
+      case TipoMovimentacaoEnum.Despesa:
+        return 'text-red-500';
+
+      case TipoMovimentacaoEnum.Receita:
+        return 'text-green-500';
+
+      default:
+        return ''
+    }
+  }
 }

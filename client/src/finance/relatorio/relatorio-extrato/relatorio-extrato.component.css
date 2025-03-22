@@ -1,0 +1,27 @@
+.extrato-title {
+    display: flex !important;
+    justify-content: center;
+    margin: .50rem;
+    font-size: x-large;
+}
+
+.extrato-line {
+    display: flex;
+    flex-direction: column;
+}
+
+.extrato-movimentacao {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin: .5rem;
+}
+
+.extrato-movimentacao span:first-child {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* Move o item de volta para o centro exato */
+    text-align: center;
+    white-space: nowrap; /* Evita quebra de linha indesejada */
+}

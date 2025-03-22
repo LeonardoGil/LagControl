@@ -2,20 +2,22 @@
 
 <mat-card>
   <mat-card-content>
-    <mat-list *ngIf="extrato?.ExtratosDia?.length">
-      
-      <mat-list-item *ngFor="let extratoDia of extrato.ExtratosDia; trackExtratoDia" class="!h-auto mt-4 mb-4">
-        <div matListItemTitle class="text-center">{{ extratoDia.Dia }}</div>
-        
-        <div matListItemLine class="flex flex-col"> 
-          <p class="text-center">Saldo Inicial: {{extratoDia.ValorInicialDia}}</p>
-          <p *ngFor="let movimentacao of extratoDia.Movimentacoes" class="text-end">
-            {{ movimentacao.Descricao }}
-          </p>
-          <p class="text-center">Saldo Final: {{extratoDia.ValorFinalDia}}</p>
+    <mat-list *ngIf="extrato?.ExtratosDia?.length" class="!p-0">
+      <mat-divider inset></mat-divider>
+      <mat-list-item *ngFor="let extratoDia of extrato.ExtratosDia; trackExtratoDia" class="!h-auto mt-2">
+        <div matListItemTitle class="extrato-title">{{ formatarDataString(extratoDia.Dia) }}</div>
+        <div matListItemLine class="extrato-line"> 
+          <p class="text-center mb-2">Saldo Inicial: {{extratoDia.ValorInicialDia}}</p>
+          <div *ngFor="let movimentacao of extratoDia.Movimentacoes" class="extrato-movimentacao">
+            <span>{{ movimentacao.Descricao }}</span>
+            <span>{{ movimentacao.Valor.toFixed(2) }}</span>
+            <mat-icon [fontIcon]="obterIconTipoMovimentacao(movimentacao.Tipo)" [class]="getStyleTipoMovimentacao(movimentacao.Tipo)"></mat-icon>            
+          </div>
+          <p class="red text-center">Saldo Final: {{extratoDia.ValorFinalDia}}</p>
         </div>
-      
+        <mat-divider inset></mat-divider>
       </mat-list-item>
+
     </mat-list>
   </mat-card-content>
 </mat-card>

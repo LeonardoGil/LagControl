@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 export const commonProviders = [
@@ -22,6 +23,7 @@ export const commonProviders = [
     MatIconModule,
     MatButtonModule,
     MatListModule, 
+    MatDividerModule,
 
     FormsModule,
     CommonModule
