@@ -15,13 +15,25 @@
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    margin: .5rem;
+    margin: .2rem;
 }
 
 .extrato-movimentacao span:first-child {
     position: absolute;
     left: 50%;
-    transform: translateX(-50%); /* Move o item de volta para o centro exato */
+    transform: translateX(-50%);
     text-align: center;
-    white-space: nowrap; /* Evita quebra de linha indesejada */
+    white-space: nowrap;
+}
+
+.extrato-saldo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: .75rem 0rem;
+    gap: .5rem;
+}
+
+.mat-mdc-list-item-line.mdc-list-item__secondary-text::before {
+    height: 0px;
 }

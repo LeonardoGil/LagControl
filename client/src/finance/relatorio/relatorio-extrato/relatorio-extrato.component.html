@@ -7,13 +7,23 @@
       <mat-list-item *ngFor="let extratoDia of extrato.ExtratosDia; trackExtratoDia" class="!h-auto mt-2">
         <div matListItemTitle class="extrato-title">{{ formatarDataString(extratoDia.Dia) }}</div>
         <div matListItemLine class="extrato-line"> 
-          <p class="text-center mb-2">Saldo Inicial: {{extratoDia.ValorInicialDia}}</p>
+          <p class="extrato-saldo">
+            <b>Saldo Inicial: </b>
+            <span [class]="getStyleSaldoMovimentacao(extratoDia.ValorInicialDia)">
+              {{extratoDia.ValorInicialDia}}
+            </span>
+          </p>
           <div *ngFor="let movimentacao of extratoDia.Movimentacoes" class="extrato-movimentacao">
             <span>{{ movimentacao.Descricao }}</span>
             <span>{{ movimentacao.Valor.toFixed(2) }}</span>
             <mat-icon [fontIcon]="obterIconTipoMovimentacao(movimentacao.Tipo)" [class]="getStyleTipoMovimentacao(movimentacao.Tipo)"></mat-icon>            
           </div>
-          <p class="red text-center">Saldo Final: {{extratoDia.ValorFinalDia}}</p>
+          <p class="extrato-saldo">
+            <b>Saldo Final: </b>
+            <span [class]="getStyleSaldoMovimentacao(extratoDia.ValorFinalDia)">
+              {{extratoDia.ValorFinalDia}}
+            </span>
+          </p>
         </div>
         <mat-divider inset></mat-divider>
       </mat-list-item>

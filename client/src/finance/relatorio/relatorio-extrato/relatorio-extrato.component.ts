@@ -69,4 +69,11 @@ export class RelatorioExtratoComponent implements OnInit {
         return ''
     }
   }
+
+  protected getStyleSaldoMovimentacao(saldo: number): string {
+    if (saldo < 0)
+      return 'text-red-500';
+    else 
+      return 'text-green-500';
+  }
 }
