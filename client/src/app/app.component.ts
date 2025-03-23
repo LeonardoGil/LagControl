@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { AppService } from './app.service';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -10,6 +11,7 @@ import { commonProviders } from '../share/providers/common.provider';
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
   imports: [RouterOutlet,
     MatSidenavModule,
     MatToolbarModule,
@@ -17,7 +19,14 @@ import { commonProviders } from '../share/providers/common.provider';
     MenuComponent,
     ...commonProviders]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   
+  protected AppService: AppService = inject(AppService)  
+  protected titulo: string = ''
+  protected navegacao: string[] = []
 
+  ngOnInit(): void {
+    this.AppService.titulo$.subscribe(titulo => this.titulo = titulo);
+    this.AppService.navegacao$.subscribe(navegacao => this.navegacao = navegacao);
+  }
 }

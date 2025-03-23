@@ -1,0 +1,15 @@
+.titulo {
+    margin: .75rem !important;
+}
+
+.navegacao {
+    margin: .25rem !important;
+    margin-bottom: 1.25rem !important;
+}
+
+.navegacao span {
+    font-size: smaller;
+    margin-left: .25rem !important;
+    white-space: pre;
+    color: rgba(255, 255, 255, 0.87);
+}

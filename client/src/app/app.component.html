@@ -17,6 +17,11 @@
     </mat-sidenav>
 
     <mat-sidenav-content class="p-5">
+      <h1 class="titulo">{{titulo}}</h1>
+      <mat-divider inset />
+      <div class="navegacao">
+        <span *ngFor="let nav of navegacao">{{nav}} /</span>
+      </div>
       <router-outlet />
     </mat-sidenav-content>
   </mat-sidenav-container>

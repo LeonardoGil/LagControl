@@ -10,3 +10,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 :root {
     --mat-dialog-actions-alignment: end;
 }
+
+.mat-divider.mat-divider-inset  {
+    margin-left: 0px !important;
+}

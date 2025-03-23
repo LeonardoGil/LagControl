@@ -33,11 +33,3 @@
     margin: .75rem 0rem;
     gap: .5rem;
 }
-/* 
-.mat-mdc-list-item-line.mdc-list-item__secondary-text::before {
-    height: 0px;
-} */
-
-.mat-divider.mat-divider-inset  {
-    margin-left: 0px;
-}
