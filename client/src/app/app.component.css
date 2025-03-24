@@ -1,15 +1,17 @@
 .titulo {
-    margin: .75rem !important;
+    margin: 1rem !important;
+    font-size: 2rem;
 }
 
 .navegacao {
-    margin: .25rem !important;
-    margin-bottom: 1.25rem !important;
+    margin: .5rem !important;
+    margin-bottom: 1.5rem !important;
 }
 
 .navegacao span {
-    font-size: smaller;
+    font-size: small;
     margin-left: .25rem !important;
     white-space: pre;
     color: rgba(255, 255, 255, 0.87);
+    font-style: oblique;
 }

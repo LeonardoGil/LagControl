@@ -1,6 +1,14 @@
-<h1 class="text-3xl">Contas</h1>
 <div class="flex flex-col text-center gap-6">
-    
+
+    <div class="flex flex-row-reverse gap-2">
+        <button mat-fab class="!bg-green-500">
+            <mat-icon>add</mat-icon>
+          </button>
+        <button mat-fab class="!bg-slate-500" (click)="clickVisualizar()">
+            <mat-icon>{{this.mostrar ? 'visibility' : 'visibility_off'}}</mat-icon>
+          </button>
+    </div>
+
     <div class="flex justify-between gap-4">
         <mat-card class="w-full">
             <mat-card-header>
@@ -37,15 +45,6 @@
                 <p>{{ultimaMovimentacao()}}</p>
             </mat-card-content>
         </mat-card>
-    </div>
-
-    <div class="flex flex-row-reverse gap-2">
-        <button mat-fab class="!bg-green-500">
-            <mat-icon>add</mat-icon>
-          </button>
-        <button mat-fab class="!bg-slate-500" (click)="clickVisualizar()">
-            <mat-icon>{{this.mostrar ? 'visibility' : 'visibility_off'}}</mat-icon>
-          </button>
     </div>
 
     <mat-accordion multi>

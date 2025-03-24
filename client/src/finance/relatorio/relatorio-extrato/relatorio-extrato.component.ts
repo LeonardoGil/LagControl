@@ -1,3 +1,4 @@
+import { AppService } from './../../../app/app.service';
 import { TipoCategoriaEnum } from './../../categoria/models/enums/tipo-categoria.model';
 import { HttpParams } from '@angular/common/http';
 import { ExtratoModel } from '../models/extrato.model';
@@ -17,10 +18,15 @@ import { TipoMovimentacaoEnum } from '../../movimentacao/models/tipoMovimentacao
 })
 export class RelatorioExtratoComponent implements OnInit {
   
-  private relatorioService: RelatorioService = inject(RelatorioService)
+  private relatorioService: RelatorioService = inject(RelatorioService);
+  private appService: AppService = inject(AppService);
+
   protected extrato!: ExtratoModel
 
   ngOnInit(): void {
+
+    this.appService.definirTitulo('Extrato')
+    this.appService.definirNevagacao(['Relatório', 'Extrato']);
 
     let params: HttpParams = new HttpParams()
 

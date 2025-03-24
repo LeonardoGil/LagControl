@@ -1,3 +1,4 @@
+import { AppService } from './../../../app/app.service';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { commonProviders } from '../../../share/providers/common.provider';
 import { MatExpansionModule, MatAccordion } from '@angular/material/expansion';
@@ -22,10 +23,14 @@ export class ContaListarComponent implements OnInit, OnDestroy, AfterViewInit {
   protected contas: ContaSaldo[] = []
   protected mostrar: boolean = false
   
-  private contaService: ContaService = inject(ContaService)
+  private contaService: ContaService = inject(ContaService);
+  private appService: AppService = inject(AppService);
   private destroy$: Subject<void> = new Subject();
 
   ngOnInit(): void {
+    this.appService.definirTitulo('Contas');
+    this.appService.definirNevagacao(['Contas', 'Listar']);
+
     this.contaService.listarSaldo().pipe(takeUntil(this.destroy$)).subscribe(contas => {
       this.contas = contas
     });
