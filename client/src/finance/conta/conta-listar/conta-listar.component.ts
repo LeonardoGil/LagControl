@@ -27,10 +27,12 @@ export class ContaListarComponent implements OnInit, OnDestroy, AfterViewInit {
   private appService: AppService = inject(AppService);
   private destroy$: Subject<void> = new Subject();
 
-  ngOnInit(): void {
+  constructor() {
     this.appService.definirTitulo('Contas');
     this.appService.definirNevagacao(['Contas', 'Listar']);
+  }
 
+  ngOnInit(): void {
     this.contaService.listarSaldo().pipe(takeUntil(this.destroy$)).subscribe(contas => {
       this.contas = contas
     });
