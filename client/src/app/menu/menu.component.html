@@ -4,7 +4,7 @@
     <mat-expansion-panel-header class="p-2">
       <mat-panel-title class="gap-2"> 
         <mat-icon fontIcon="payment" />
-        Finanças 
+        Financeiro
       </mat-panel-title>
     </mat-expansion-panel-header>
 
@@ -13,11 +13,14 @@
     </button>
 
     <button mat-button routerLink="/Conta">
-      <a>Contas</a>
+      <a>Conta</a>
+    </button>
+
+    <button mat-button routerLink="/Categoria">
+      <a>Categoria</a>
     </button>
 
     <mat-expansion-panel hideToggle>
-      
       <mat-expansion-panel-header class="p-2">
         <mat-panel-title class="gap-2"> 
           <mat-icon fontIcon="description" />
@@ -25,11 +28,9 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
 
-      
       <button mat-button routerLink="/Relatorio/Extrato">
         <a>Extrato</a>
       </button>
     </mat-expansion-panel>
-
   </mat-expansion-panel>
 </mat-accordion>
