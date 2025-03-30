@@ -12,11 +12,15 @@
   border-radius: 0px;
 }
 
+.card-conta.mat-expansion-panel:not([class*=mat-elevation-z]) {
+  box-shadow: none;
+}
+
 .card-conta.mat-expansion-panel-spacing  {
   margin: 0;
 }
 
-.card-conta.mat-expansion-panel-header {
-  font-size: 1rem;
-  justify-content: space-between;
+.card-conta .mat-expansion-panel-header-title {
+  font-size: medium;
+  gap: 1rem;
 }

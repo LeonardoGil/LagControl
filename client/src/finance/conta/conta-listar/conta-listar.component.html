@@ -49,32 +49,35 @@
 
     <mat-accordion multi>
 
-        <mat-expansion-panel *ngFor="let conta of contas" appearance="outlined" class="card-conta">
-            <mat-expansion-panel-header>
-                <mat-panel-title class="!flex items-center gap-2">
-                    <span class="size-10 rounded-full" style="background-color: #212121;"></span>
-                    {{conta.Descricao}}
-                </mat-panel-title>
-                <button mat-icon-button>
-                    <mat-icon>edit</mat-icon>
-                </button>
-            </mat-expansion-panel-header>
+        <div *ngFor="let conta of contas">
+            <mat-expansion-panel appearance="outlined" class="card-conta">
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="!flex items-center gap-2">
+                        <span class="size-10 rounded-full" style="background-color: #212121;"></span>
+                        {{conta.Descricao}}
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+            
+                <div class="p-3 mt-3 flex justify-between items-center gap-4">
+                    <div class="flex flex-col text-center">
+                        <p>Saldo</p>
+                        <p>{{conta.Saldo.toFixed(2)}}</p>
+                    </div>
+                    <div class="flex flex-col text-center">                
+                        <p>Saldo Previsto</p>
+                        <p>{{conta.SaldoPrevisto.toFixed(2)}}</p>
+                    </div>
+                    <div class="flex flex-col text-center">
+                        <p>Ultima Movimentação</p>
+                        <p>{{visualizarUltimaMovimentacao(conta.DataUltimaMovimentacao)}}</p>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+
+            <mat-divider inset></mat-divider>
+        </div>
         
-            <div class="p-3 mt-3 flex justify-between items-center gap-4">
-                <div class="flex flex-col text-center">
-                    <p>Saldo</p>
-                    <p>{{conta.Saldo.toFixed(2)}}</p>
-                </div>
-                <div class="flex flex-col text-center">                
-                    <p>Saldo Previsto</p>
-                    <p>{{conta.SaldoPrevisto.toFixed(2)}}</p>
-                </div>
-                <div class="flex flex-col text-center">
-                    <p>Ultima Movimentação</p>
-                    <p>{{visualizarUltimaMovimentacao(conta.DataUltimaMovimentacao)}}</p>
-                </div>
-            </div>
-        </mat-expansion-panel>
+
     </mat-accordion>
 
 </div>
