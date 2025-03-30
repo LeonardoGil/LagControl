@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 export const commonProviders = [
@@ -24,6 +25,7 @@ export const commonProviders = [
     MatButtonModule,
     MatListModule, 
     MatDividerModule,
+    MatExpansionModule,
 
     FormsModule,
     CommonModule

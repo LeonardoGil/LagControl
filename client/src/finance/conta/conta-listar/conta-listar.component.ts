@@ -1,7 +1,7 @@
 import { AppService } from './../../../app/app.service';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { commonProviders } from '../../../share/providers/common.provider';
-import { MatExpansionModule, MatAccordion } from '@angular/material/expansion';
+import { MatAccordion } from '@angular/material/expansion';
 import { ContaService } from '../services/conta.service';
 import { ContaSaldo } from '../models/conta-saldo.model';
 import { Subject, takeUntil } from 'rxjs';
@@ -10,8 +10,7 @@ import { Subject, takeUntil } from 'rxjs';
   selector: 'app-conta-listar',
   standalone: true,
   imports: [
-    ...commonProviders,
-    MatExpansionModule
+    ...commonProviders
   ],
   templateUrl: './conta-listar.component.html',
   styleUrl: './conta-listar.component.css',
