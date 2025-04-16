@@ -1,3 +1,26 @@
-:host {
-  display: block;
+:root {
+  gap: 2rem;
+}
+
+.card-categoria {
+  display: flex;
+  flex-direction: column;
+  padding: .5rem 0;
+}
+
+.card-categoria.mat-expansion-panel {
+  border-radius: 0px;
+}
+
+.card-categoria.mat-expansion-panel:not([class*=mat-elevation-z]) {
+  box-shadow: none;
+}
+
+.card-categoria.mat-expansion-panel-spacing  {
+  margin: 0;
+}
+
+.card-categoria .mat-expansion-panel-header-title {
+  font-size: medium;
+  gap: 1rem;
 }

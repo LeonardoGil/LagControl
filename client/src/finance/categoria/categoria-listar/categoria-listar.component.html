@@ -1,0 +1,30 @@
+<div class="flex flex-col text-center gap-6">
+
+    <div class="flex flex-row-reverse gap-2">
+        <button mat-fab class="!bg-green-500">
+            <mat-icon>add</mat-icon>
+          </button>
+        <button mat-fab class="!bg-slate-500" (click)="clickVisualizar()">
+            <mat-icon>{{this.mostrar ? 'visibility' : 'visibility_off'}}</mat-icon>
+          </button>
+    </div>
+
+    <mat-accordion multi>
+
+        <div *ngFor="let categoria of categorias">
+            <mat-expansion-panel appearance="outlined" class="card-categoria">
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="!flex items-center gap-2">
+                        <span class="size-10 rounded-full" style="background-color: #212121;"></span>
+                        {{categoria.Descricao}}
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+            </mat-expansion-panel>
+
+            <mat-divider inset></mat-divider>
+        </div>
+        
+
+    </mat-accordion>
+
+</div>
