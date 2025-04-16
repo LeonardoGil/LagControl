@@ -1,5 +1,5 @@
 import { MovimentacaoService } from '../../../services/movimentacao.service';
-import { ChangeDetectionStrategy, Component, inject, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild, OnDestroy } from '@angular/core';
 import { commonProviders } from '../../../../../share/providers/common.provider';
 
 import { MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
@@ -19,24 +19,29 @@ import { Movimentacao } from '../../../models/movimentacao.model';
     MovimentacaoFieldsDialogComponent
   ],
   templateUrl: './movimentacao-adicionar-dialog.component.html',
-  styleUrl: './movimentacao-adicionar-dialog.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrl: './movimentacao-adicionar-dialog.component.css'
 })
-export class MovimentacaoAdicionarDialogComponent {
+export class MovimentacaoAdicionarDialogComponent implements OnDestroy {
   
   @ViewChild(MovimentacaoFieldsDialogComponent) fieldsComponent!: MovimentacaoFieldsDialogComponent;
 
   readonly dialogRef = inject(MatDialogRef<MovimentacaoAdicionarDialogComponent>);
 
-  private movimentacaoService: MovimentacaoService = inject(MovimentacaoService)
+  private movimentacaoService: MovimentacaoService = inject(MovimentacaoService);
   protected movimentacao: Movimentacao = new Movimentacao();
 
-  private snackBar: MatSnackBar = inject(MatSnackBar)
+  private atualizar: boolean = false;
+  private snackBar: MatSnackBar = inject(MatSnackBar);
   private destroy$: Subject<void> = new Subject();
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
+  }
 
   clickAdicionar(): void {
     let actionFechar = () => {
-      this.dialogRef.close(true);
+      this.dialogRef.close(this.atualizar);
     }
 
     this.salvar(actionFechar);
@@ -53,14 +58,17 @@ export class MovimentacaoAdicionarDialogComponent {
   }
   
   clickFechar(): void {
-    this.dialogRef.close(false);
+    this.dialogRef.close(this.atualizar);
   }
 
   private salvar(action: () => void) {
-    if (!this.fieldsComponent.validarCampos()) { return; }
+    if (!this.fieldsComponent.validarCampos()) { 
+      return; 
+    }
 
     this.movimentacaoService.adicionar(this.movimentacao).pipe(takeUntil(this.destroy$)).subscribe(() => {
       this.snackBar.open('Movimentação adicionada!');
+      this.atualizar = true;
       action();
     });
     

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MovimentacaoFieldsDialogComponent } from "../movimentacao-fields-dialog/movimentacao-fields-dialog.component";
 import { commonProviders } from '../../../../../share/providers/common.provider';
 import { dialogProvider } from '../../../../../share/providers/dialog.provider';
@@ -21,29 +21,34 @@ import { Movimentacao } from '../../../models/movimentacao.model';
   styleUrl: './movimentacao-confirmar-pendente-dialog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MovimentacaoConfirmarPendenteDialogComponent implements OnInit {
+export class MovimentacaoConfirmarPendenteDialogComponent implements OnDestroy {
+
   readonly dialogRef = inject(MatDialogRef<MovimentacaoConfirmarPendenteDialogComponent>);
-  protected movimentacaoService: MovimentacaoService = inject(MovimentacaoService)
+  
+  @ViewChild(MovimentacaoFieldsDialogComponent) fieldsComponent!: MovimentacaoFieldsDialogComponent;
+  
+  private movimentacaoService: MovimentacaoService = inject(MovimentacaoService)
   private snackBar: MatSnackBar = inject(MatSnackBar)
   private destroy$: Subject<void> = new Subject();
 
   protected movimentacao: Movimentacao = inject(MAT_DIALOG_DATA);
 
-  @ViewChild(MovimentacaoFieldsDialogComponent) fieldsComponent!: MovimentacaoFieldsDialogComponent;
-
-  ngOnInit(): void {
-  } 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
+  }
 
   clickSalvar(): void {
     
-    if (!this.fieldsComponent.validarCampos()) { return }    
+    if (!this.fieldsComponent.validarCampos()) { 
+      return;
+    }    
 
-    this.movimentacao.Pendente = false
+    this.movimentacao.Pendente = false;
 
     this.movimentacaoService.confirmarPendente(this.movimentacao).pipe(takeUntil(this.destroy$)).subscribe(() => {
       this.snackBar.open('Movimentação confirmada!', 'Ok')
     });
-    
 
     this.dialogRef.close(true);
   }

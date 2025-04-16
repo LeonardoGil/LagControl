@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { commonProviders } from '../../../../../share/providers/common.provider';
 import { Movimentacao } from '../../../models/movimentacao.model';
 import { ContaService } from '../../../../conta/services/conta.service';
@@ -17,9 +17,10 @@ import { NgForm } from '@angular/forms';
   ],
   templateUrl: './movimentacao-fields-dialog.component.html',
   styleUrl: './movimentacao-fields-dialog.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MovimentacaoFieldsDialogComponent implements OnInit {
+
+export class MovimentacaoFieldsDialogComponent implements OnInit, OnDestroy {
+
   @ViewChild(NgForm) form!: NgForm;
   
   @Input() tipoDisable: boolean = false
@@ -40,6 +41,11 @@ export class MovimentacaoFieldsDialogComponent implements OnInit {
     this.carregarConta();
     this.filtrarCategoria();
   } 
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
+  }
 
   private carregarConta(): void {
     this.contaService.contas$
