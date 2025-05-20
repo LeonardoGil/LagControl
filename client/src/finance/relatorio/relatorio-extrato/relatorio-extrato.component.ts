@@ -67,9 +67,10 @@ export class RelatorioExtratoComponent implements OnInit, OnDestroy {
   }
 
   formatarDataString(dateString: string): string {
-    const date = new Date(dateString);
 
-    return new Intl.DateTimeFormat('pt-BR').format(date);
+    const [year, month, day] = dateString.split("-");
+
+    return `${day}/${month}/${year}`
   }
 
   protected trackExtratoDia(index: number, obj: any): string {
