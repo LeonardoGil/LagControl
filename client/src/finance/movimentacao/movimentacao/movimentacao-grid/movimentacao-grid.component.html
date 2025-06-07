@@ -61,13 +61,13 @@
         </button>
 
         <button mat-fab class="!bg-blue-500">
-          <mat-icon fontIcon="edit" />
+          <mat-icon (click)="clickEditar(mov)" fontIcon="edit" />
         </button>
         
         @if (mov.Pendente) {
-        <button mat-fab (click)="clickConfirmarPendente(mov)" class="!bg-yellow-500">
-          <mat-icon fontIcon="edit_calendar" />
-        </button>
+          <button mat-fab (click)="clickConfirmarPendente(mov)" class="!bg-yellow-500">
+            <mat-icon fontIcon="edit_calendar" />
+          </button>
         }
       </td>
     </ng-container>

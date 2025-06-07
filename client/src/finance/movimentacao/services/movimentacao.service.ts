@@ -29,6 +29,10 @@ export class MovimentacaoService {
     return this.httpClient.post('https://localhost:7081/Movimentacao/Adicionar', movimentacao).pipe();
   }
 
+  editar(movimentacao: Movimentacao): Observable<any> {
+    return this.httpClient.put('https://localhost:7081/Movimentacao/Editar', movimentacao).pipe();
+  }
+
   confirmarPendente(movimentacao: Movimentacao): Observable<any> {
     return this.httpClient.post('https://localhost:7081/Movimentacao/Confirmar-Pendente', movimentacao).pipe();
   }
