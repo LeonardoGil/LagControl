@@ -1,3 +1,4 @@
+import { Categoria } from './../../categoria/models/categoria.model';
 import { TipoMovimentacaoEnum } from "./tipoMovimentacao.model"
 
 export interface MovimentacaoGrid {
@@ -17,7 +18,11 @@ export interface MovimentacaoGrid {
 
     Conta: string
 
+    ContaId: string
+
     ContaTransferencia: string
 
     Categoria: string
+
+    CategoriaId: string
   }
