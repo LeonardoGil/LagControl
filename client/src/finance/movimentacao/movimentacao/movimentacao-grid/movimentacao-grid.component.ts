@@ -1,3 +1,4 @@
+import { AcaoMovimentacaoEnum } from './../dialogs/movimentacao-dialog/movimentacao-dialog.component';
 import { ConfirmarDialogModel } from './../../../../share/dialogs/confirmar-dialog.component';
 import { Movimentacao } from './../../models/movimentacao.model';
 import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, ViewChild, inject } from '@angular/core';
@@ -14,9 +15,8 @@ import { MovimentacaoService } from '../../services/movimentacao.service';
 import { MovimentacaoGrid } from '../../models/movimentacao-grid.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { MovimentacaoAdicionarDialogComponent } from '../dialogs/movimentacao-adicionar-dialog/movimentacao-adicionar-dialog.component';
+import { MovimentacaoDialogComponent } from '../dialogs/movimentacao-dialog/movimentacao-dialog.component';
 import { ConfirmarDialogComponent } from '../../../../share/dialogs/confirmar-dialog.component';
-import { MovimentacaoConfirmarPendenteDialogComponent } from '../dialogs/movimentacao-confirmar-pendente-dialog/movimentacao-confirmar-pendente-dialog.component';
 
 @Component({
   selector: 'app-movimentacao-grid',
@@ -67,12 +67,21 @@ export class MovimentacaoGridComponent implements AfterViewInit, OnDestroy {
   }
 
   protected clickAdicionar(): void {
-    
-    this.dialog.open(MovimentacaoAdicionarDialogComponent).afterClosed().subscribe((result) => {
-      if (result) {
-        this.movimentacaoService.listar().subscribe();
-      }
-    });
+    this.dialog.open(MovimentacaoDialogComponent, this.dataMovimentacaoDialog(undefined, AcaoMovimentacaoEnum.Adicionar))
+               .afterClosed()
+               .subscribe((result: boolean) => this.resultMovimentacaoDialog(result));
+  }
+
+  protected clickEditar(movimentacao: Movimentacao): void {
+    this.dialog.open(MovimentacaoDialogComponent, this.dataMovimentacaoDialog(movimentacao, AcaoMovimentacaoEnum.Editar))
+               .afterClosed()
+               .subscribe((result: boolean) => this.resultMovimentacaoDialog(result));
+  }
+
+  protected clickConfirmarPendente(movimentacao: Movimentacao): void {
+    this.dialog.open(MovimentacaoDialogComponent, this.dataMovimentacaoDialog(movimentacao, AcaoMovimentacaoEnum.ConfirmarPendente))
+               .afterClosed()
+               .subscribe((result: boolean) => this.resultMovimentacaoDialog(result));
   }
 
   protected clickExcluir(movimentacao: Movimentacao): void {
@@ -87,13 +96,23 @@ export class MovimentacaoGridComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  protected clickConfirmarPendente(movimentacao: Movimentacao): void {
-    this.dialog.open(MovimentacaoConfirmarPendenteDialogComponent, { data: movimentacao }).afterClosed().subscribe((result) => {
-    });
-  }
-
   protected formatarData(dataString: string): string {
     return (new Date(dataString)).toLocaleDateString('pt-BR');
+  }
+
+  private resultMovimentacaoDialog(result: boolean): void {
+    if (result) {
+      this.movimentacaoService.listar().subscribe();
+    }
+  }
+
+  private dataMovimentacaoDialog(movimentacao: Movimentacao | undefined, acao: AcaoMovimentacaoEnum): any {
+    return {
+      data: {
+        movimentacao: movimentacao, 
+        acao: acao
+      }
+    }
   }
 }
 

@@ -45,7 +45,7 @@ namespace LagFinanceApplication.Models.Contas
 
             return new ExtratoPendenteModel
             {
-                Movimentacoes = movimentacoesPendentes.Select(mov => new MovimentacaoModel
+                Movimentacoes = movimentacoesPendentes.Select(mov => new MovimentacaoGridModel
                 {
                     Id = mov.Id,
                     Conta = mov.Conta.Descricao,
@@ -74,7 +74,7 @@ namespace LagFinanceApplication.Models.Contas
                                                 .Select(x => new ExtratoGroupModel
                                                 {
                                                     Dia = DateOnly.FromDateTime(x.Key),
-                                                    Movimentacoes = x.Select(mov => new MovimentacaoModel
+                                                    Movimentacoes = x.Select(mov => new MovimentacaoGridModel
                                                     {
                                                         Id = mov.Id,
                                                         Conta = mov.Conta.Descricao,
@@ -113,7 +113,7 @@ namespace LagFinanceApplication.Models.Contas
     {
         public DateOnly Dia { get; set; }
 
-        public required IList<MovimentacaoModel> Movimentacoes { get; set; }
+        public required IList<MovimentacaoGridModel> Movimentacoes { get; set; }
 
         public decimal ValorTotal { get; set; }
 
@@ -123,7 +123,7 @@ namespace LagFinanceApplication.Models.Contas
 
     public class ExtratoPendenteModel
     {
-        public required IList<MovimentacaoModel> Movimentacoes { get; set; }
+        public required IList<MovimentacaoGridModel> Movimentacoes { get; set; }
 
         public decimal ValorTotalDespesa { get; set; }
         public decimal ValorTotalReceita { get; set; }

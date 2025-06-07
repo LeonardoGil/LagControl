@@ -5,16 +5,43 @@ using Microsoft.AspNetCore.Mvc;
 namespace LagControlAPI.Controllers.Finance
 {
     [Route("Movimentacao")]
-    public class MovimentacaoController : Controller
+    public class MovimentacaoController(IMovimentacaoService financeService, 
+                                        IMovimentacaoQuery movimentacaoQuery) : Controller
     {
-        private readonly IMovimentacaoService _movimentacaoService;
-        private readonly IMovimentacaoQuery _movimentacaoQuery;
 
-        public MovimentacaoController(IMovimentacaoService financeService, IMovimentacaoQuery movimentacaoQuery)
+        #region GET
+
+        [HttpGet]
+        [Route("Listar")]
+        public IActionResult Listar([FromQuery] ListarMovimentacaoQueryModel query)
         {
-            _movimentacaoService = financeService;
-            _movimentacaoQuery = movimentacaoQuery;
+            try
+            {
+                return Ok(movimentacaoQuery.ListarMovimentacao(query));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
+
+        [HttpGet]
+        [Route("Listar/Ultimas-Movimentacoes")]
+        public IActionResult ListarUltimasMovimentacoes([FromQuery] ListarUltimasMovimentacoesQueryModel query)
+        {
+            try
+            {
+                return Ok(movimentacaoQuery.ListarUltimasMovimentacoes(query));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        #endregion
+
+        #region POST
 
         [HttpPost]
         [Route("Adicionar")]
@@ -22,7 +49,7 @@ namespace LagControlAPI.Controllers.Finance
         {
             try
             {
-                _movimentacaoService.Adicionar(request);
+                financeService.Adicionar(request);
 
                 return Ok();
             }
@@ -38,7 +65,7 @@ namespace LagControlAPI.Controllers.Finance
         {
             try
             {
-                _movimentacaoService.ConfirmarPendente(request);
+                financeService.ConfirmarPendente(request);
                 return Ok();
             }
             catch (Exception ex)
@@ -47,13 +74,15 @@ namespace LagControlAPI.Controllers.Finance
             }
         }
 
+        #endregion
+
         [HttpPut]
         [Route("Editar")]
         public IActionResult Editar([FromBody] EditarMovimentaoModel request)
         {
             try
             {
-                _movimentacaoService.Editar(request);
+                financeService.Editar(request);
 
                 return Ok();
             }
@@ -69,36 +98,8 @@ namespace LagControlAPI.Controllers.Finance
         {
             try
             {
-                _movimentacaoService.Excluir(movimentacaoId);
+                financeService.Excluir(movimentacaoId);
                 return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
-        }
-
-        [HttpGet]
-        [Route("Listar")]
-        public IActionResult Listar([FromQuery] ListarMovimentacaoQueryModel query)
-        {
-            try
-            {
-                return Ok(_movimentacaoQuery.ListarMovimentacao(query));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
-        }
-
-        [HttpGet]
-        [Route("Listar/Ultimas-Movimentacoes")]
-        public IActionResult ListarUltimasMovimentacoes([FromQuery] ListarUltimasMovimentacoesQueryModel query)
-        {
-            try
-            {
-                return Ok(_movimentacaoQuery.ListarUltimasMovimentacoes(query));
             }
             catch (Exception ex)
             {

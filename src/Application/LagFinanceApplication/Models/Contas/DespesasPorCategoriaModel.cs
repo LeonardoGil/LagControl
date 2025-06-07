@@ -22,7 +22,7 @@ namespace LagFinanceApplication.Models.Contas
                                                      {
                                                          Categoria = x.Key.Descricao,
                                                          ValorTotal = x.Sum(x => x.Valor),
-                                                         Movimentacoes = x.Select(mov => new MovimentacaoModel
+                                                         Movimentacoes = x.Select(mov => new MovimentacaoGridModel
                                                          {
                                                              Id = mov.Id,
                                                              Conta = mov.Conta.Descricao,
@@ -45,6 +45,6 @@ namespace LagFinanceApplication.Models.Contas
 
         public decimal ValorTotal { get; set; }
 
-        public IList<MovimentacaoModel> Movimentacoes { get; set; }
+        public IList<MovimentacaoGridModel> Movimentacoes { get; set; }
     }
 }

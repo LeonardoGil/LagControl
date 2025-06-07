@@ -10,7 +10,7 @@ namespace LagFinanceApplication.Queries
     {
         private readonly IMovimentacaoRepository _movimentacaoRepository = movimentacaoRepository;
 
-        public IList<MovimentacaoModel> ListarMovimentacao(ListarMovimentacaoQueryModel query)
+        public IList<MovimentacaoGridModel> ListarMovimentacao(ListarMovimentacaoQueryModel query)
         {
             var movimentacoesQuery = _movimentacaoRepository.Get().AsNoTracking();
 
@@ -39,7 +39,7 @@ namespace LagFinanceApplication.Queries
                                      .ToList();
         }
 
-        public IList<MovimentacaoModel> ListarUltimasMovimentacoes(ListarUltimasMovimentacoesQueryModel query)
+        public IList<MovimentacaoGridModel> ListarUltimasMovimentacoes(ListarUltimasMovimentacoesQueryModel query)
         {
             var movimentacoesQuery = _movimentacaoRepository.Get().AsNoTracking();
 
@@ -57,19 +57,25 @@ namespace LagFinanceApplication.Queries
                                      .ToList();
         }
 
-        private Func<Movimentacao, MovimentacaoModel> MapearMovimentacao = movimentacao =>
-            new MovimentacaoModel
+        private readonly Func<Movimentacao, MovimentacaoGridModel> MapearMovimentacao = movimentacao =>
+            new MovimentacaoGridModel
             {
                 Id = movimentacao.Id,
-                Conta = movimentacao.Conta.Descricao,
-                Categoria = movimentacao.Categoria.Descricao,
-                ContaTransferencia = movimentacao.ContaTransferencia?.Descricao ?? string.Empty,
+
                 Data = movimentacao.Data,
                 Descricao = movimentacao.Descricao,
                 Observacao = movimentacao.Observacao,
                 Pendente = movimentacao.Pendente,
                 Tipo = movimentacao.TipoMovimentacao,
-                Valor = movimentacao.Valor
+                Valor = movimentacao.Valor,
+
+                Conta = movimentacao.Conta.Descricao,
+                ContaId = movimentacao.ContaId.ToString(),
+                
+                Categoria = movimentacao.Categoria.Descricao,
+                CategoriaId = movimentacao.CategoriaId.ToString(),
+                
+                ContaTransferencia = movimentacao.ContaTransferencia?.Descricao ?? string.Empty
             };
     }
 }
