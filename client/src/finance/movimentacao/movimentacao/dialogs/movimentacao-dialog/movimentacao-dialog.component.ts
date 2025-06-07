@@ -98,11 +98,12 @@ export class MovimentacaoDialogComponent implements OnInit, OnDestroy {
       return; 
     }
 
+    this.atualizar = true;
+
     switch (this.acao) {
       case AcaoMovimentacaoEnum.Adicionar:
         this.movimentacaoService.adicionar(this.movimentacao).pipe(takeUntil(this.destroy$)).subscribe(() => {
           this.snackBar.open('Movimentação adicionada!', 'Ok');
-          this.atualizar = true;
           action();          
         });    
         break;
@@ -116,7 +117,6 @@ export class MovimentacaoDialogComponent implements OnInit, OnDestroy {
 
       case AcaoMovimentacaoEnum.ConfirmarPendente:
         this.movimentacaoService.confirmarPendente(this.movimentacao).pipe(takeUntil(this.destroy$)).subscribe(() => {
-          this.movimentacao.Pendente = false;
           this.snackBar.open('Movimentação confirmada!', 'Ok')
           action();
         });
