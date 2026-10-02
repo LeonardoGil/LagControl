@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Base\LagBaseDomain\LagBaseDomain.csproj" />
+    <ProjectReference Include="..\LagBaseDomain\LagBaseDomain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Base\LagBaseInfra\LagBaseInfra\LagBaseInfra.csproj" />
+    <ProjectReference Include="..\LagBaseInfra\LagBaseInfra\LagBaseInfra.csproj" />
     <ProjectReference Include="..\LagDietDomain\LagDietDomain.csproj" />
   </ItemGroup>
 

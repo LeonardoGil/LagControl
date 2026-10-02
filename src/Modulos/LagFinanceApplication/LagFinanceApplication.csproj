@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Utilitarios\LagControlUtil\LagControlUtil.csproj" />
+    <ProjectReference Include="..\..\LagControlUtil\LagControlUtil.csproj" />
     <ProjectReference Include="..\LagFinanceInfra\LagFinanceInfra.csproj" />
   </ItemGroup>
 

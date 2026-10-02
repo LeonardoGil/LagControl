@@ -39,8 +39,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\Modulos\Financeiro\LagFinanceApplication\LagFinanceApplication.csproj" />
-		<ProjectReference Include="..\..\Utilitarios\LagControlUtil\LagControlUtil.csproj" />
+		<ProjectReference Include="..\Modulos\LagFinanceApplication\LagFinanceApplication.csproj" />
+		<ProjectReference Include="..\LagControlUtil\LagControlUtil.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
