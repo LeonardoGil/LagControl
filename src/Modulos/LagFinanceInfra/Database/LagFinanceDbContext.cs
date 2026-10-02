@@ -1,0 +1,25 @@
+﻿using LagFinanceInfra.Database.Configurations;
+using LagFinanceDomain.Entities;
+using Microsoft.EntityFrameworkCore;
+
+namespace LagFinanceInfra.Database
+{
+    public class LagFinanceDbContext(DbContextOptions<LagFinanceDbContext> options) : DbContext(options)
+    {
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.HasDefaultSchema("finance");
+
+            // Configuration
+            modelBuilder.AccountConfig()
+                        .CategoryConfig()
+                        .TransactionConfig();
+        }
+
+        public DbSet<Account> Account { get; set; }
+
+        public DbSet<Transaction> Transaction { get; set; }
+
+        public DbSet<Category> Category { get; set; }
+    }
+}

@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  lagcontrolapi:
+    image: lagcontrolapi:latest
+    container_name: LagControlAPI
+    build:
+      context: ../
+      dockerfile: /src/Apis/LagControlAPI/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__Default=Data Source=host.docker.internal;Initial Catalog=LagControl;Persist Security Info=True;User ID=sa;Password=P@ssw0rd123;Connect Timeout=900;TrustServerCertificate=true
+    ports:
+      - "7081:8080"        
+
+  lagcontrolclient:
+    image: lagcontrolclient:latest
+    container_name: LagControlClient
+    build:
+      context: ../client
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"

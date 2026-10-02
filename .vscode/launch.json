@@ -1,0 +1,30 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Development",
+            "type": "coreclr",
+            "request": "launch",
+            "cwd": "${workspaceFolder}\\src\\Aplicações\\LagControlCLI",
+            "program": ".\\bin\\Debug\\net8.0\\LagControlCLI.dll",
+            "launchSettingsProfile": "Development",
+            "justMyCode": true,
+            "preLaunchTask": "Build CLI",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Production",
+            "type": "coreclr",
+            "request": "launch",
+            "cwd": "${workspaceFolder}\\src\\Aplicações\\LagControlCLI",
+            "program": ".\\bin\\Debug\\net8.0\\LagControlCLI.dll",
+            "launchSettingsProfile": "Production",
+            "justMyCode": true,
+            "preLaunchTask": "Build CLI",
+            "console": "integratedTerminal"
+        }
+    ]
+}

@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddTransaction" xml:space="preserve">
+    <value>Adicionar movimentação</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Voltar</value>
+  </data>
+  <data name="Diet" xml:space="preserve">
+    <value>Dieta</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Sair</value>
+  </data>
+  <data name="Finance" xml:space="preserve">
+    <value>Financeiro</value>
+  </data>
+  <data name="NoTransactionsFound" xml:space="preserve">
+    <value>Nenhuma movimentação encontrada com os filtros atuais.</value>
+  </data>
+  <data name="LoadingTransactions" xml:space="preserve">
+    <value>Carregando movimentações...</value>
+  </data>
+  <data name="ErrorLoadingTransactions" xml:space="preserve">
+    <value>Erro ao carregar movimentações.</value>
+  </data>
+  <data name="RetryPrompt" xml:space="preserve">
+    <value>Tentar novamente?</value>
+  </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Filtros</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Movimentações</value>
+  </data>
+  <data name="Period" xml:space="preserve">
+    <value>Período</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Descrição</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>Pendente</value>
+  </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>Contas</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Categorias</value>
+  </data>
+  <data name="Found" xml:space="preserve">
+    <value>Encontradas</value>
+  </data>
+  <data name="IncomeLabel" xml:space="preserve">
+    <value>Receitas</value>
+  </data>
+  <data name="ExpenseLabel" xml:space="preserve">
+    <value>Despesas</value>
+  </data>
+  <data name="TransferLabel" xml:space="preserve">
+    <value>Transferências</value>
+  </data>
+  <data name="DataColumn" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="ValueColumn" xml:space="preserve">
+    <value>Valor</value>
+  </data>
+  <data name="TypeColumn" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="AccountColumn" xml:space="preserve">
+    <value>Conta</value>
+  </data>
+  <data name="CategoryColumn" xml:space="preserve">
+    <value>Categoria</value>
+  </data>
+  <data name="NoPendingTransactions" xml:space="preserve">
+    <value>Nenhuma movimentação pendente encontrada.</value>
+  </data>
+  <data name="SelectPendingPrompt" xml:space="preserve">
+    <value>Selecione a movimentação pendente:</value>
+  </data>
+  <data name="ConfirmPendingQuestion" xml:space="preserve">
+    <value>Confirmar movimentação {0} no valor {1}?</value>
+  </data>
+  <data name="ConfirmingTransaction" xml:space="preserve">
+    <value>Confirmando movimentação...</value>
+  </data>
+  <data name="TransactionConfirmed" xml:space="preserve">
+    <value>Movimentação confirmada com sucesso.</value>
+  </data>
+  <data name="ErrorConfirmingTransaction" xml:space="preserve">
+    <value>Erro ao confirmar movimentação.</value>
+  </data>
+  <data name="OperationCancelled" xml:space="preserve">
+    <value>Operação cancelada.</value>
+  </data>
+  <data name="PressEnterToReturn" xml:space="preserve">
+    <value>Pressione Enter para voltar...</value>
+  </data>
+  <data name="LoadingData" xml:space="preserve">
+    <value>Carregando dados...</value>
+  </data>
+  <data name="SelectTransactionPrompt" xml:space="preserve">
+    <value>Selecione uma movimentação:</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Detalhes</value>
+  </data>
+  <data name="SelectAction" xml:space="preserve">
+    <value>Selecione a ação</value>
+  </data>
+  <data name="SelectModule" xml:space="preserve">
+    <value>Selecione o módulo</value>
+  </data>
+  <data name="LoadingAccounts" xml:space="preserve">
+    <value>Carregando contas...</value>
+  </data>
+  <data name="AccountDetailsHeader" xml:space="preserve">
+    <value>Detalhes da Conta</value>
+  </data>
+  <data name="PendingTotalIncome" xml:space="preserve">
+    <value>Pendente - Total Entrada</value>
+  </data>
+  <data name="PendingTotalExpense" xml:space="preserve">
+    <value>Pendente - Total Saída</value>
+  </data>
+  <data name="PendingExpectedBalance" xml:space="preserve">
+    <value>Pendente - Saldo Previsto</value>
+  </data>
+  <data name="SelectCategoryPrompt" xml:space="preserve">
+    <value>Selecione a categoria</value>
+  </data>
+  <data name="SelectAccountPrompt" xml:space="preserve">
+    <value>Selecione a conta</value>
+  </data>
+  <data name="LoadingCategories" xml:space="preserve">
+    <value>Carregando dados das categorias...</value>
+  </data>
+  <data name="Balance" xml:space="preserve">
+    <value>Saldo</value>
+  </data>
+  <data name="ExpectedBalance" xml:space="preserve">
+    <value>Saldo Previsto</value>
+  </data>
+  <data name="LastTransaction" xml:space="preserve">
+    <value>Última movimentação</value>
+  </data>
+  <data name="Dash" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="DateFormat" xml:space="preserve">
+    <value>dd/MM/yyyy</value>
+  </data>
+  <data name="InitialBalancePrompt" xml:space="preserve">
+    <value>Saldo inicial:</value>
+  </data>
+  <data name="InitialBalanceValidation" xml:space="preserve">
+    <value>Saldo inicial deve ser maior ou igual a zero</value>
+  </data>
+  <data name="BalanceAfter" xml:space="preserve">
+    <value>Saldo (após)</value>
+  </data>
+  <data name="StartBalance" xml:space="preserve">
+    <value>Saldo inicial</value>
+  </data>
+  <data name="EndBalance" xml:space="preserve">
+    <value>Saldo final</value>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="DescriptionLabel" xml:space="preserve">
+    <value>Descrição</value>
+  </data>
+  <data name="NotesLabel" xml:space="preserve">
+    <value>Observações</value>
+  </data>
+  <data name="DateLabel" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="TypeLabel" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="ValueLabel" xml:space="preserve">
+    <value>Valor</value>
+  </data>
+  <data name="TransferAccountLabel" xml:space="preserve">
+    <value>Conta transferência</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Sim</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Não</value>
+  </data>
+  <data name="RangeConnector" xml:space="preserve">
+    <value>até</value>
+  </data>
+  <data name="DateStartPrompt" xml:space="preserve">
+    <value>Data inicio</value>
+  </data>
+  <data name="DateEndPrompt" xml:space="preserve">
+    <value>Data fim</value>
+  </data>
+  <data name="DateInvalidFormat" xml:space="preserve">
+    <value>Formato inválido. Use: {0}</value>
+  </data>
+  <data name="AccountLabel" xml:space="preserve">
+    <value>Conta</value>
+  </data>
+  <data name="CategoryLabel" xml:space="preserve">
+    <value>Categoria</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Limpar</value>
+  </data>
+</root>

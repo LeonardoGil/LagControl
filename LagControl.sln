@@ -1,0 +1,101 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.11.12224.323 insiders
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aplicação", "", "{0397FC7E-5915-42C3-920D-327B1AC4D49A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modulos", "Modulos", "{8BC6FFAA-21A4-44D2-9031-5E87833842DE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilitario", "", "{D1197F30-C1C3-472A-A427-CCF92891441D}"
+EndProject
+
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LagFinanceInfra", "src\Modulos\LagFinanceInfra\LagFinanceInfra.csproj", "{35ED303D-9B24-4F24-98F2-BC12C88E662E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LagFinanceDomain", "src\Modulos\LagFinanceDomain\LagFinanceDomain.csproj", "{0D70E947-CA59-40F0-8FAC-FF213AD2CC0D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LagFinanceApplication", "src\Modulos\LagFinanceApplication\LagFinanceApplication.csproj", "{147597E6-46B1-428A-BECF-A622B627AA2F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LagBaseDomain", "src\Modulos\LagBaseDomain\LagBaseDomain.csproj", "{D5717BCD-67B3-4430-B8AF-CE4AB598FBBA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LagBaseInfra", "src\Modulos\LagBaseInfra\LagBaseInfra\LagBaseInfra.csproj", "{6248EA4E-CAD4-49C3-8866-2FC5CEA6D441}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LagDietDomain", "src\Modulos\LagDietDomain\LagDietDomain.csproj", "{BD04A1EB-3C13-431C-95D3-054C94AA4530}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LagDietInfra", "src\Modulos\LagDietInfra\LagDietInfra.csproj", "{7CCF93EF-3624-423F-9C47-FD654CFB8656}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LagControlUtil", "src\LagControlUtil\LagControlUtil.csproj", "{4441BBC6-A4FB-433C-9745-C8EA3FC8E914}"
+EndProject
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LagControlCLI", "src\LagControlCLI\LagControlCLI.csproj", "{DC50D0D3-A22A-4767-8A27-3AF80904F55C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35ED303D-9B24-4F24-98F2-BC12C88E662E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35ED303D-9B24-4F24-98F2-BC12C88E662E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35ED303D-9B24-4F24-98F2-BC12C88E662E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35ED303D-9B24-4F24-98F2-BC12C88E662E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D70E947-CA59-40F0-8FAC-FF213AD2CC0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D70E947-CA59-40F0-8FAC-FF213AD2CC0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D70E947-CA59-40F0-8FAC-FF213AD2CC0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D70E947-CA59-40F0-8FAC-FF213AD2CC0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{147597E6-46B1-428A-BECF-A622B627AA2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{147597E6-46B1-428A-BECF-A622B627AA2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{147597E6-46B1-428A-BECF-A622B627AA2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{147597E6-46B1-428A-BECF-A622B627AA2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5717BCD-67B3-4430-B8AF-CE4AB598FBBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5717BCD-67B3-4430-B8AF-CE4AB598FBBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5717BCD-67B3-4430-B8AF-CE4AB598FBBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5717BCD-67B3-4430-B8AF-CE4AB598FBBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4441BBC6-A4FB-433C-9745-C8EA3FC8E914}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4441BBC6-A4FB-433C-9745-C8EA3FC8E914}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4441BBC6-A4FB-433C-9745-C8EA3FC8E914}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4441BBC6-A4FB-433C-9745-C8EA3FC8E914}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6248EA4E-CAD4-49C3-8866-2FC5CEA6D441}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6248EA4E-CAD4-49C3-8866-2FC5CEA6D441}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6248EA4E-CAD4-49C3-8866-2FC5CEA6D441}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6248EA4E-CAD4-49C3-8866-2FC5CEA6D441}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD04A1EB-3C13-431C-95D3-054C94AA4530}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD04A1EB-3C13-431C-95D3-054C94AA4530}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD04A1EB-3C13-431C-95D3-054C94AA4530}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD04A1EB-3C13-431C-95D3-054C94AA4530}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CCF93EF-3624-423F-9C47-FD654CFB8656}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CCF93EF-3624-423F-9C47-FD654CFB8656}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CCF93EF-3624-423F-9C47-FD654CFB8656}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CCF93EF-3624-423F-9C47-FD654CFB8656}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC50D0D3-A22A-4767-8A27-3AF80904F55C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC50D0D3-A22A-4767-8A27-3AF80904F55C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC50D0D3-A22A-4767-8A27-3AF80904F55C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC50D0D3-A22A-4767-8A27-3AF80904F55C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	# Finance Infra
+		{35ED303D-9B24-4F24-98F2-BC12C88E662E} = {8BC6FFAA-21A4-44D2-9031-5E87833842DE} 
+	# Finance Domain
+		{0D70E947-CA59-40F0-8FAC-FF213AD2CC0D} = {8BC6FFAA-21A4-44D2-9031-5E87833842DE} 
+	# Finance Application
+		{147597E6-46B1-428A-BECF-A622B627AA2F} = {8BC6FFAA-21A4-44D2-9031-5E87833842DE} 
+	# Base Domain
+		{D5717BCD-67B3-4430-B8AF-CE4AB598FBBA} = {8BC6FFAA-21A4-44D2-9031-5E87833842DE} 
+	# Base Infra
+		{6248EA4E-CAD4-49C3-8866-2FC5CEA6D441} = {8BC6FFAA-21A4-44D2-9031-5E87833842DE} 
+	# Diet Domain
+		{BD04A1EB-3C13-431C-95D3-054C94AA4530} = {8BC6FFAA-21A4-44D2-9031-5E87833842DE}
+	# Diet Infra 
+		{7CCF93EF-3624-423F-9C47-FD654CFB8656} = {8BC6FFAA-21A4-44D2-9031-5E87833842DE}
+	# Control Util 
+		{4441BBC6-A4FB-433C-9745-C8EA3FC8E914} = {D1197F30-C1C3-472A-A427-CCF92891441D} 
+	# Control CLI
+		{DC50D0D3-A22A-4767-8A27-3AF80904F55C} = {0397FC7E-5915-42C3-920D-327B1AC4D49A} 
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9559EC51-72A2-4F47-82D7-73D37864121E}
+	EndGlobalSection
+EndGlobal
