@@ -1,30 +1,32 @@
 using LagControlCLI.Dialogs.Bases;
 using LagControlCLI.Dialogs.Interfaces.Finances;
 using LagControlCLI.Extensions;
+using LagControlCLI.Options;
 using LagControlCLI.Prompts;
 using LagControlCLI.Resources;
 using LagFinanceApplication.Commands.Accounts;
 using MediatR;
 using Spectre.Console;
+using static LagControlCLI.Options.AddAndContinueDialogOptions;
 
 namespace LagControlCLI.Dialogs.Finances.Accounts
 {
-    internal class AddAccountDialog(IAnsiConsole console, IMediator mediator) : DialogBase(console), IAddAccountDialog
+    internal class AddAccountDialog(IAnsiConsole console, IMediator mediator) : DialogAndReturnBase<object?, bool>(console), IAddAccountDialog
     {
-        protected override Task LoadAsync()
-        {
-            return Task.CompletedTask;
-        }
-
-        protected async override Task ExecuteAsync()
+        protected async override Task<bool> ExecuteAndReturnAsync(object? input)
         {
             var command = Ask();
 
-            Console.WriteLine();
+            var action = SelectionPrompt.Ask(Console, Resource.SelectAction, AddAndContinueDialogOptions.Options1);
 
-            await mediator.Send(command);
-
-            Console.Prompt(new TextPrompt<string>(Resource.PressEnterToReturn.Color(Color.Grey)).AllowEmpty());
+            switch (action)
+            {
+                case AddAndContinueDialogOptionsEnum.Add:
+                    await mediator.Send(command);
+                    return true;
+            }
+            
+            return false;
         }
 
         private AddAccountCommand Ask()

@@ -37,7 +37,10 @@ namespace LagControlCLI.Dialogs.Finances.Accounts
                     break;
 
                 case AccountsDialogOptionEnum.AddAccount:
-                    await addAccountDialog.Show();
+                    if (await addAccountDialog.ShowAndReturn(null))
+                    {
+                        await LoadAsync();
+                    }
                     break;
 
                 case AccountsDialogOptionEnum.Back:
