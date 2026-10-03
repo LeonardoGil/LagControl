@@ -58,7 +58,7 @@ internal abstract class DialogBase : IDialogBase
     }
 
     protected abstract Task ExecuteAsync();
-    protected abstract Task LoadAsync();
+    protected virtual Task LoadAsync() => Task.CompletedTask;
 
     protected void RenderHeader()
     {
