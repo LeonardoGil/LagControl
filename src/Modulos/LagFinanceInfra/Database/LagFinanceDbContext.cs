@@ -21,5 +21,11 @@ namespace LagFinanceInfra.Database
         public DbSet<Transaction> Transaction { get; set; }
 
         public DbSet<Category> Category { get; set; }
+
+        public DbSet<CreditCard> CreditCard { get; set; }
+
+        public DbSet<CreditCardTransaction> CreditCardTransaction { get; set; }
+
+        public DbSet<CreditCardInvoice> CreditCardInvoice { get; set; }
     }
 }
