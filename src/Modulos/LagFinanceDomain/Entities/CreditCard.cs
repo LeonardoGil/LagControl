@@ -6,13 +6,13 @@ namespace LagFinanceDomain.Entities
     {
         public required string HolderName { get; set; }
 
-        public DateTime ExpirationDate { get; set; }
+        public required int ClosingDay { get; set; } = 1;
 
-        public decimal CreditLimit { get; set; }
+        public required decimal CreditLimit { get; set; }
 
         public bool Active { get; set; } = true;
 
-        public Guid? AccountId { get; set; }
+        public Guid AccountId { get; set; }
 
         public virtual Account? Account { get; set; }
 

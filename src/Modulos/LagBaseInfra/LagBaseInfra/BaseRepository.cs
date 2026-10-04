@@ -39,5 +39,10 @@ namespace LagBaseInfra
         {
             _context.SaveChanges();
         }
+
+        public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            await _context.SaveChangesAsync(cancellationToken);
+        }
     }
 }

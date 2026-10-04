@@ -9,6 +9,8 @@ namespace LagFinanceDomain.Entities
 
         public virtual List<Transaction>? Transactions { get; set; }
 
+        public virtual List<CreditCard>? CreditCards { get; set; }
+
         public decimal Balance()
         {
             if (Transactions is null)

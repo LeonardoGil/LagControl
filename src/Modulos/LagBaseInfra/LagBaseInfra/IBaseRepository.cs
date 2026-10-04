@@ -12,5 +12,7 @@
         void Remove(TEntity entity);
 
         void SaveChanges();
+
+        Task SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }
