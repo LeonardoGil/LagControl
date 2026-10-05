@@ -6,8 +6,6 @@ namespace LagFinanceDomain.Enums
 
         Paid = 1,
 
-        Overdue = 2,
-
-        Closed = 3
+        Overdue = 2
     }
 }

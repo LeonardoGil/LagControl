@@ -1,4 +1,5 @@
 using LagBaseDomain;
+using LagFinanceDomain.Enums;
 
 namespace LagFinanceDomain.Entities
 {
@@ -22,7 +23,19 @@ namespace LagFinanceDomain.Entities
 
         public decimal AvailableCredit()
         {
-            var used = Transactions?.Where(t => !t.Pending).Sum(t => t.Amount) ?? decimal.Zero;
+            ArgumentNullException.ThrowIfNull(Invoices, nameof(Invoices));
+
+            var outstandingInvoices = Invoices.Where(i => i.Status != CreditCardInvoiceStatusEnum.Paid);
+
+            var used = decimal.Zero;
+
+            if (outstandingInvoices.Any())
+            {
+                used = outstandingInvoices.SelectMany(x => x.Transactions ?? [])
+                                          .Where(t => !t.Pending)
+                                          .Sum(t => t.Amount);
+            }
+            
             return CreditLimit - used;
         }
     }
