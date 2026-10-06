@@ -7,7 +7,9 @@ namespace LagFinanceDomain.Entities
     {
         public required string HolderName { get; set; }
 
-        public required int ClosingDay { get; set; } = 1;
+        public int ClosingDay { get; set; }
+
+        public int DueDay { get; set; }
 
         public required decimal CreditLimit { get; set; }
 

@@ -17,6 +17,10 @@ namespace LagFinanceDomain.Entities
 
         public virtual List<CreditCardTransaction>? Transactions { get; set; }
 
+        public Guid? PaymentId { get; set; }
+
+        public virtual Transaction? Payment { get; set; }
+
         public decimal TotalAmount()
         {
             return Transactions?.Sum(t => t.Amount) ?? decimal.Zero;

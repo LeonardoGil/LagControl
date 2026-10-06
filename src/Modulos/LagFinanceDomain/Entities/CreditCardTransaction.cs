@@ -12,8 +12,6 @@ namespace LagFinanceDomain.Entities
 
         public bool Pending { get; set; }
 
-        public string? Merchant { get; set; }
-
         public int Installments { get; set; } = 1;
 
         public int? InstallmentNumber { get; set; }
@@ -21,7 +19,7 @@ namespace LagFinanceDomain.Entities
         public Guid CreditCardId { get; set; }
         public virtual CreditCard? CreditCard { get; set; }
 
-        public Guid? InvoiceId { get; set; }
+        public Guid InvoiceId { get; set; }
         public virtual CreditCardInvoice? Invoice { get; set; }
 
         public Guid CategoryId { get; set; }

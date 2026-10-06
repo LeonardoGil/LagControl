@@ -12,9 +12,11 @@ namespace LagFinanceApplication.Handlers.CreditCards
             var card = new CreditCard
             {
                 HolderName = request.HolderName,
-                ClosingDay = request.ClosingDay,
                 CreditLimit = request.CreditLimit,
-                AccountId = request.AccountId
+                AccountId = request.AccountId,
+
+                ClosingDay = request.ClosingDay ?? 1,
+                DueDay = request.DueDay ?? 10
             };
 
             creditCardRepository.Add(card);
