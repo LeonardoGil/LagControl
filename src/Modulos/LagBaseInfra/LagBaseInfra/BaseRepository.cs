@@ -5,24 +5,24 @@ namespace LagBaseInfra
 {
     public abstract class BaseRepository<TContext, TEntity>(TContext context) : IBaseRepository<TEntity>
         where TContext : DbContext
-        where TEntity : class
+        where TEntity : Entity
     {
         protected TContext _context = context;
 
-        public void Add(TEntity entity)
+        public void Add(TEntity entity) => _context.Add(entity);
+        public void Update(TEntity entity) => _context.Update(entity);
+        public void Remove(TEntity entity) => _context.Set<TEntity>().Remove(entity);
+
+        public async Task<TEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default, params string[] includes)
         {
-            if (entity is Entity baseEntity)
-                baseEntity.CreatedAt = DateTime.Now;
+            IQueryable<TEntity> query = _context.Set<TEntity>();
 
-            _context.Add(entity);
-        }
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
 
-        public void Update(TEntity entity)
-        {
-            if (entity is Entity baseEntity)
-                baseEntity.UpdatedAt = DateTime.Now;
-
-            _context.Update(entity);
+            return await query.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
 
         public IQueryable<TEntity> Get()
@@ -30,19 +30,7 @@ namespace LagBaseInfra
             return _context.Set<TEntity>().AsQueryable();
         }
 
-        public void Remove(TEntity entity)
-        {
-            _context.Set<TEntity>().Remove(entity);
-        }
-
-        public void SaveChanges()
-        {
-            _context.SaveChanges();
-        }
-
-        public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
-        {
-            await _context.SaveChangesAsync(cancellationToken);
-        }
+        public void SaveChanges() => _context.SaveChanges();
+        public async Task SaveChangesAsync(CancellationToken cancellationToken = default) => await _context.SaveChangesAsync(cancellationToken);
     }
 }

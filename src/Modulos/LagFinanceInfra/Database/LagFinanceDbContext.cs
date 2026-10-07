@@ -1,10 +1,11 @@
 ﻿using LagFinanceInfra.Database.Configurations;
 using LagFinanceDomain.Entities;
 using Microsoft.EntityFrameworkCore;
+using LagBaseInfra;
 
 namespace LagFinanceInfra.Database
 {
-    public class LagFinanceDbContext(DbContextOptions<LagFinanceDbContext> options) : DbContext(options)
+    public class LagFinanceDbContext(DbContextOptions<LagFinanceDbContext> options) : DbContextBase<LagFinanceDbContext>(options)
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
