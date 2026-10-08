@@ -5,6 +5,10 @@ namespace LagFinanceDomain.Entities
 {
     public class CreditCardInvoice : Entity
     {
+        public int ReferenceMonth { get; set; }
+
+        public int ReferenceYear { get; set; }
+
         public DateTime ClosingDate { get; set; }
 
         public DateTime DueDate { get; set; }
