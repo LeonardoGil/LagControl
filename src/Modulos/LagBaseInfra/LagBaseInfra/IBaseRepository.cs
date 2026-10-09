@@ -18,5 +18,7 @@ namespace LagBaseInfra
         void SaveChanges();
 
         Task SaveChangesAsync(CancellationToken cancellationToken = default);
+
+        Task TransactionAsync(Func<Task> action, CancellationToken cancellationToken = default);
     }
 }

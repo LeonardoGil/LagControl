@@ -9,6 +9,22 @@ namespace LagBaseInfra
     {
         protected TContext _context = context;
 
+        public async Task TransactionAsync(Func<Task> action, CancellationToken cancellationToken = default)
+        {
+            await using var transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
+
+            try
+            {
+                await action();
+                await transaction.CommitAsync(cancellationToken);
+            }
+            catch
+            {
+                await transaction.RollbackAsync(cancellationToken);
+                throw;
+            }
+        }
+
         public void Add(TEntity entity) => _context.Add(entity);
         public void Update(TEntity entity) => _context.Update(entity);
         public void Remove(TEntity entity) => _context.Set<TEntity>().Remove(entity);
