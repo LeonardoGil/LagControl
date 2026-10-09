@@ -5,37 +5,69 @@ using MediatR;
 
 namespace LagFinanceApplication.Handlers.CreditCards
 {
-    public class CreateCreditCardInvoiceHandler(ICreditCardInvoiceRepository invoiceRepository, 
+    public class CreateCreditCardInvoiceHandler(ICreditCardInvoiceRepository invoiceRepository,
                                                 ICreditCardRepository creditCardRepository) : IRequestHandler<CreateCreditCardInvoiceCommand, Guid>
     {
         public async Task<Guid> Handle(CreateCreditCardInvoiceCommand request, CancellationToken cancellationToken)
         {
-            var creditCard = await creditCardRepository.GetByIdAsync(request.CreditCardId, cancellationToken, nameof(CreditCard.Invoices)) 
+            var creditCard = await creditCardRepository.GetByIdAsync(request.CreditCardId, cancellationToken, nameof(CreditCard.Invoices))
                 ?? throw new Exception($"Credit card with ID {request.CreditCardId} not found.");
-            
-            if (creditCard.Invoices!.Any(i => i.ReferenceMonth == request.Month && i.ReferenceYear == request.Year))
-                throw new Exception($"Invoice for credit card with ID {request.CreditCardId} and reference month {request.Month} and reference year {request.Year} already exists.");
 
-            var closingDate = new DateTime(request.Year, request.Month, creditCard.ClosingDay);
-            var dueDate = new DateTime(request.Year, request.Month, creditCard.DueDay);
+            var referenceDate = request.ReferenceDate;
 
-            if (creditCard.DueDay < closingDate.Day)
-                dueDate = new DateTime(request.Year, request.Month, creditCard.DueDay).AddMonths(1);
+            if (creditCard.Invoices!.Any(i => referenceDate >= i.OpeningDate && referenceDate < i.ClosingDate))
+                throw new InvalidOperationException($"An invoice for credit card {request.CreditCardId} already exists for reference date {referenceDate:d}.");
+
+            var closingDate = ProcessClosingDate(creditCard, referenceDate);
+            var dueDate = ProcessDueDate(creditCard, closingDate);
+            var openingDate = ProcessOpeningDate(creditCard, closingDate);
 
             var invoice = new CreditCardInvoice
             {
                 CreditCardId = request.CreditCardId,
-                ReferenceMonth = request.Month,
-                ReferenceYear = request.Year,
+                ReferenceMonth = closingDate.Month,
+                ReferenceYear = closingDate.Year,
                 ClosingDate = closingDate,
+                OpeningDate = openingDate,
                 DueDate = dueDate
             };
 
-            invoiceRepository.Add(invoice);
+            await invoiceRepository.TransactionAsync(async () =>
+            {
+                invoiceRepository.Add(invoice);
 
-            await invoiceRepository.SaveChangesAsync(cancellationToken);
+                await invoiceRepository.SaveChangesAsync(cancellationToken);
+
+            }, cancellationToken);
 
             return invoice.Id;
+        }
+
+        private static DateOnly ProcessClosingDate(CreditCard creditCard, DateOnly referenceDate)
+        {
+            var date = referenceDate;
+
+            if (referenceDate.Day >= creditCard.ClosingDay)
+                date = date.AddMonths(1);
+
+            return new DateOnly(date.Year, date.Month, creditCard.ClosingDay);
+        }
+
+        private static DateOnly ProcessOpeningDate(CreditCard creditCard, DateOnly closingDate)
+        {
+            var date = closingDate.AddMonths(-1);
+
+            return new DateOnly(date.Year,date.Month, creditCard.ClosingDay).AddDays(1);
+        }
+
+        private static DateOnly ProcessDueDate(CreditCard creditCard, DateOnly closingDate)
+        {
+            var dueDate = new DateOnly(closingDate.Year, closingDate.Month, creditCard.DueDay);
+
+            if (dueDate <= closingDate)
+                dueDate = dueDate.AddMonths(1);
+
+            return dueDate;
         }
     }
 }

@@ -9,9 +9,11 @@ namespace LagFinanceDomain.Entities
 
         public int ReferenceYear { get; set; }
 
-        public DateTime ClosingDate { get; set; }
+        public DateOnly OpeningDate { get; set; }
 
-        public DateTime DueDate { get; set; }
+        public DateOnly ClosingDate { get; set; }
+
+        public DateOnly DueDate { get; set; }
 
         public CreditCardInvoiceStatusEnum Status { get; set; } = CreditCardInvoiceStatusEnum.Open;
 
