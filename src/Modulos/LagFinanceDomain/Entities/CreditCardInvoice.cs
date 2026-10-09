@@ -9,6 +9,8 @@ namespace LagFinanceDomain.Entities
 
         public int ReferenceYear { get; set; }
 
+        public DateTime OpeningDate { get; set; }
+
         public DateTime ClosingDate { get; set; }
 
         public DateTime DueDate { get; set; }

@@ -12,7 +12,7 @@ namespace LagFinanceDomain.Entities
 
         public bool Pending { get; set; }
 
-        public int Installments { get; set; } = 1;
+        public int? Installments { get; set; }
 
         public int? InstallmentNumber { get; set; }
 
