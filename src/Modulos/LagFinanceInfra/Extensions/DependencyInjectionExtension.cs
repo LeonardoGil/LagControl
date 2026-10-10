@@ -12,6 +12,8 @@ namespace LagFinanceInfra.Extensions
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
             services.AddScoped<ICreditCardRepository, CreditCardRepository>();
+            services.AddScoped<ICreditCardTransactionRepository, CreditCardTransactionRepository>();
+            services.AddScoped<ICreditCardInvoiceRepository, CreditCardInvoiceRepository>();
             return services;
         }
     }

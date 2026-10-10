@@ -7,14 +7,19 @@ namespace LagFinanceInfra.Database
 {
     public class LagFinanceDbContext(DbContextOptions<LagFinanceDbContext> options) : DbContextBase<LagFinanceDbContext>(options)
     {
+        private readonly string _schema = "finance";
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultSchema("finance");
+            modelBuilder.HasDefaultSchema(_schema);
 
             // Configuration
             modelBuilder.AccountConfig()
                         .CategoryConfig()
-                        .TransactionConfig();
+                        .TransactionConfig()
+                        .CreditCardConfig()
+                        .CreditCardInvoiceConfig()
+                        .CreditCardTransactionConfig();
         }
 
         public DbSet<Account> Account { get; set; }
