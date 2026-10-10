@@ -5,24 +5,26 @@ using MediatR;
 
 namespace LagFinanceApplication.Handlers.CreditCards
 {
-    public class CreateCreditCardInvoiceHandler(ICreditCardInvoiceRepository invoiceRepository,
-                                                ICreditCardRepository creditCardRepository) : IRequestHandler<CreateCreditCardInvoiceCommand, Guid>
+    public class GetOrCreateCreditCardInvoiceHandler(ICreditCardInvoiceRepository invoiceRepository,
+                                                ICreditCardRepository creditCardRepository) : IRequestHandler<GetOrCreateCreditCardInvoiceCommand, CreditCardInvoice>
     {
-        public async Task<Guid> Handle(CreateCreditCardInvoiceCommand request, CancellationToken cancellationToken)
+        public async Task<CreditCardInvoice> Handle(GetOrCreateCreditCardInvoiceCommand request, CancellationToken cancellationToken)
         {
             var creditCard = await creditCardRepository.GetByIdAsync(request.CreditCardId, cancellationToken, nameof(CreditCard.Invoices))
                 ?? throw new Exception($"Credit card with ID {request.CreditCardId} not found.");
 
             var referenceDate = request.ReferenceDate;
 
-            if (creditCard.Invoices!.Any(i => referenceDate >= i.OpeningDate && referenceDate < i.ClosingDate))
-                throw new InvalidOperationException($"An invoice for credit card {request.CreditCardId} already exists for reference date {referenceDate:d}.");
+            var invoice = creditCard.Invoices!.FirstOrDefault(i => referenceDate >= i.OpeningDate && referenceDate < i.ClosingDate);
+
+            if (invoice is not null)
+                return invoice;
 
             var closingDate = ProcessClosingDate(creditCard, referenceDate);
             var dueDate = ProcessDueDate(creditCard, closingDate);
             var openingDate = ProcessOpeningDate(creditCard, closingDate);
 
-            var invoice = new CreditCardInvoice
+            invoice = new CreditCardInvoice
             {
                 CreditCardId = request.CreditCardId,
                 ReferenceMonth = closingDate.Month,
@@ -40,7 +42,7 @@ namespace LagFinanceApplication.Handlers.CreditCards
 
             }, cancellationToken);
 
-            return invoice.Id;
+            return invoice;
         }
 
         private static DateOnly ProcessClosingDate(CreditCard creditCard, DateOnly referenceDate)

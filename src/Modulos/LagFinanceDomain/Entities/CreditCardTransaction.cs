@@ -8,11 +8,11 @@ namespace LagFinanceDomain.Entities
 
         public decimal Amount { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateOnly Date { get; set; }
 
         public bool Pending { get; set; }
 
-        public int Installments { get; set; } = 1;
+        public int? Installments { get; set; }
 
         public int? InstallmentNumber { get; set; }
 
