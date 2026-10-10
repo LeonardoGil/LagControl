@@ -6,10 +6,12 @@ using MediatR;
 
 namespace LagFinanceApplication.Handlers.CreditCards
 {
-    public class AddCreditCardTransactionHandler(ICreditCardTransactionRepository repository, IMediator mediator) : IRequestHandler<AddCreditCardTransactionCommand>
+    public class AddCreditCardTransactionHandler(ICreditCardTransactionRepository repository, ICreditCardRepository creditCardRepository, IMediator mediator) : IRequestHandler<AddCreditCardTransactionCommand>
     {
         public async Task<Unit> Handle(AddCreditCardTransactionCommand request, CancellationToken cancellationToken)
         {
+            await ValidateCreditLimitAsync(request, cancellationToken);
+
             await repository.TransactionAsync(async () => await ProcessAsync(request, cancellationToken), cancellationToken);
 
             return Unit.Value;
@@ -25,6 +27,17 @@ namespace LagFinanceApplication.Handlers.CreditCards
             {
                 await AddTransactionAsync(request, cancellationToken);
             }
+        }
+
+        private async Task ValidateCreditLimitAsync(AddCreditCardTransactionCommand request, CancellationToken cancellationToken)
+        {
+            var creditCard = await creditCardRepository.GetByIdAsync(request.CreditCardId, cancellationToken, nameof(CreditCard.Invoices), "Invoices.Transactions")
+                ?? throw new Exception($"Credit card with ID {request.CreditCardId} not found.");
+
+            var available = creditCard.AvailableCredit();
+
+            if (request.Amount > available)
+                throw new Exception("Credit card limit exceeded");
         }
 
         private async Task AddTransactionAsync(AddCreditCardTransactionCommand request, CancellationToken cancellationToken)
