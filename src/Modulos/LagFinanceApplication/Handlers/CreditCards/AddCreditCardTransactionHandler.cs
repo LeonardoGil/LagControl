@@ -1,3 +1,4 @@
+using LagControlUtil.Extensions;
 using LagFinanceApplication.Commands.CreditCards;
 using LagFinanceDomain.Entities;
 using LagFinanceInfra.Interfaces;
@@ -47,7 +48,30 @@ namespace LagFinanceApplication.Handlers.CreditCards
 
         private async Task AddInstallmentTransactionAsync(AddCreditCardTransactionCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException("Installment transactions are not implemented yet.");
+            var amounts = request.Amount.SplitAmount(request.Installments!.Value);
+
+            for (int i = 1; i <= request.Installments; i++)
+            {
+                var referenceDate = request.Date.AddMonths(i - 1);
+
+                var transaction = new CreditCardTransaction
+                {
+                    Description = request.Description,
+                    Amount = amounts[i - 1],
+                    Date = referenceDate,
+                    Pending = request.Pending,
+                    CreditCardId = request.CreditCardId,
+                    CategoryId = request.CategoryId,
+                    Installments = request.Installments,
+                    InstallmentNumber = i
+                };
+
+                await LinkTransactionToInvoiceAsync(transaction, cancellationToken);
+
+                repository.Add(transaction);
+            }
+
+            await repository.SaveChangesAsync(cancellationToken);
         }
 
         private async Task LinkTransactionToInvoiceAsync(CreditCardTransaction transaction, CancellationToken cancellationToken)
@@ -57,7 +81,7 @@ namespace LagFinanceApplication.Handlers.CreditCards
                 CreditCardId = transaction.CreditCardId,
                 ReferenceDate = transaction.Date
             };
-            
+
             var invoice = await mediator.Send(createInvoice, cancellationToken);
 
             transaction.InvoiceId = invoice.Id;
