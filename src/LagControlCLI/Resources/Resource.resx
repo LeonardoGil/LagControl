@@ -160,6 +160,18 @@
   <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
+  <data name="HolderName" xml:space="preserve">
+    <value>Holder name</value>
+  </data>
+  <data name="CreditLimit" xml:space="preserve">
+    <value>Credit limit</value>
+  </data>
+  <data name="ClosingDay" xml:space="preserve">
+    <value>Closing day</value>
+  </data>
+  <data name="DueDay" xml:space="preserve">
+    <value>Due day</value>
+  </data>
   <data name="Pending" xml:space="preserve">
     <value>Pending</value>
   </data>

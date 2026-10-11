@@ -3,6 +3,7 @@ using LagControlCLI.Dialogs;
 using LagControlCLI.Dialogs.Finances;
 using LagControlCLI.Dialogs.Finances.Accounts;
 using LagControlCLI.Dialogs.Finances.Categories;
+using LagControlCLI.Dialogs.Finances.CreditCards;
 using LagControlCLI.Dialogs.Finances.Reports;
 using LagControlCLI.Dialogs.Finances.Transactions;
 using LagControlCLI.Dialogs.Interfaces;
@@ -56,6 +57,8 @@ namespace LagControlCLI
             services.AddScoped<IAccountsDialog, AccountsDialog>();
             services.AddScoped<IAddAccountDialog, AddAccountDialog>();
             services.AddScoped<IShowAccountDetailsDialog, ShowAccountDetailsDialog>();
+            services.AddScoped<ICreditCardsDialog, CreditCardsDialog>();
+            services.AddScoped<IAddCreditCardDialog, AddCreditCardDialog>();
             services.AddScoped<IConfirmPendingTransactionDialog, ConfirmPendingTransactionDialog>();
             services.AddScoped<IListTransactionDialog, ListTransactionDialog>();
             services.AddScoped<IReportsDialog, ReportsDialog>();

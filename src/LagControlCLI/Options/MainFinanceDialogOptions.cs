@@ -9,6 +9,7 @@ namespace LagControlCLI.Options
             { MainFinanceDialogOptionEnum.Transaction, "Transações"},
             { MainFinanceDialogOptionEnum.Categories, "Categorias"},
             { MainFinanceDialogOptionEnum.Accounts, "Contas" },
+            { MainFinanceDialogOptionEnum.CreditCards, "Cartões de Crédito" },
             { MainFinanceDialogOptionEnum.Reports, "Relatórios" },
             { MainFinanceDialogOptionEnum.Back, Resource.Back },
         };
@@ -18,6 +19,7 @@ namespace LagControlCLI.Options
             Transaction,
             Categories,
             Accounts,
+            CreditCards,
             Reports,
             Back
         }

@@ -12,7 +12,8 @@ namespace LagControlCLI.Dialogs.Finances
                                      ITransactionDialog transactionDialog,
                                      IAccountsDialog accountsDialog,
                                      ICategoryDialog categoryDialog,
-                                     IReportsDialog reportsDialog) : LoopDialogBase(console), IMainFinanceDialog
+                                     IReportsDialog reportsDialog,
+                                     ICreditCardsDialog creditCardsDialog) : LoopDialogBase(console), IMainFinanceDialog
     {
         protected override Task LoadAsync()
         {
@@ -31,6 +32,10 @@ namespace LagControlCLI.Dialogs.Finances
                 
                 case MainFinanceDialogOptionEnum.Accounts:
                     await accountsDialog.Show();
+                    break;
+
+                case MainFinanceDialogOptionEnum.CreditCards:
+                    await creditCardsDialog.Show();
                     break;
 
                 case MainFinanceDialogOptionEnum.Reports:

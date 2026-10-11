@@ -156,6 +156,18 @@
   <data name="Description" xml:space="preserve">
     <value>Descrição</value>
   </data>
+  <data name="HolderName" xml:space="preserve">
+    <value>Nome do Titular</value>
+  </data>
+  <data name="CreditLimit" xml:space="preserve">
+    <value>Limite de Crédito</value>
+  </data>
+  <data name="ClosingDay" xml:space="preserve">
+    <value>Dia de Fechamento</value>
+  </data>
+  <data name="DueDay" xml:space="preserve">
+    <value>Dia de Vencimento</value>
+  </data>
   <data name="Pending" xml:space="preserve">
     <value>Pendente</value>
   </data>

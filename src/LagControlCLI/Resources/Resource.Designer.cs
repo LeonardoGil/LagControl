@@ -163,6 +163,30 @@ namespace LagControlCLI.Resources {
             }
         }
 
+        internal static string HolderName {
+            get {
+                return ResourceManager.GetString("HolderName", resourceCulture);
+            }
+        }
+
+        internal static string CreditLimit {
+            get {
+                return ResourceManager.GetString("CreditLimit", resourceCulture);
+            }
+        }
+
+        internal static string ClosingDay {
+            get {
+                return ResourceManager.GetString("ClosingDay", resourceCulture);
+            }
+        }
+
+        internal static string DueDay {
+            get {
+                return ResourceManager.GetString("DueDay", resourceCulture);
+            }
+        }
+
         internal static string Pending {
             get {
                 return ResourceManager.GetString("Pending", resourceCulture);
